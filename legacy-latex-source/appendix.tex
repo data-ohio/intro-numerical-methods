@@ -1,0 +1,202 @@
+
+\part{Appendices}
+
+\appendix
+
+\renewcommand{\baselinestretch}{1.2}
+\normalsize
+
+\chapter{Glossary of \textsc{Matlab} Commands}
+
+\subsection*{Mathematical Operations}
+\verb&+  & Addition. Type \verb&help plus& for information.\\
+\verb&-  & Subtraction. Type \verb&help minus& for information.\\
+\verb&*  & Scalar or matrix multiplication. Type \verb&help mtimes& for information.\\
+\verb&/  & Scalar or right matrix division. Type \verb&help slash& for information.\\
+\verb&   & For matrices, the command \verb&A/B& is equivalent to \verb&A*inv(B)&.\\
+\verb&^  & Scalar or matrix powers. Type \verb&help mpower& for information.\\
+\verb&.* & Element by element multiplication. Type \verb&help times& for information.\\
+\verb&.^ & Element by element exponentiation. Type \verb&help power& for information.\\
+\verb&./ & Element by element division.\\
+
+
+
+\subsection*{Built-in Mathematical Constants}
+\verb&eps & Machine epsilon, i.e. approximately the computer's floating point
+            roundoff error.\\
+\verb&i   & $\sqrt{-1}$.\\
+\verb&Inf & $\infty$.\\
+\verb&NaN & Not a number. Indicates an invalid operation such as $0/0$.\\
+\verb&pi  & $\pi = 3.14159 \ldots$.\\
+
+
+\subsection*{Built-in Mathematical Functions}
+\verb&abs(x) & Absolute value$|x|$.\\
+\verb&acos(x)& Inverse cosine $\arccos{x}$.\\
+\verb&asin(x)& Inverse sine $\arcsin{x}$.\\
+\verb&atan(x)& Inverse tangent $\arctan{x}$.\\
+\verb&cos(x) & Cosine $\cos{x}$.\\
+\verb&cosh(x)& Hyperbolic cosine $\cosh{x}$.\\
+\verb&cot(x) & Cotangent $\cot{x}$.\\
+\verb&exp(x) & Exponential function $e^x = \exp{x}.$\\
+\verb&log(x) & Natural logarithm $\ln{x} = \log_e{x}$.\\
+\verb&sec(x) & Secant $\sec{x}$.\\
+\verb&sin(x) & Sine $\sin{x}$.\\
+\verb&sinh(x)& Hyperbolic sine $\sinh{x}$.\\
+\verb&sqrt(x)& Square root $\sqrt{x}$.\\
+\verb&tan(x) & Tangent $\tan{x}$.\\
+\verb&tanh(x)& Hyperbolic tangent $\tanh{x}$.\\
+\verb&max    & Computes maximum of the rows of a matrix.\\
+\verb&mean   & Computes the average of the rows of a matrix. \\
+\verb&min    & Computes the minimum of the rows of a matrix.
+
+
+\subsection*{Built-in Numerical Mathematical Operations}
+\verb&fzero  & Tries to find a zero of the specified function near a starting point
+                or on\\
+\verb&       & a specified interval.\\
+\verb&inline & Define a function in the command window.\\
+\verb&ode113 & Numerical multiple step ODE solver.\\
+\verb&ode45  & Runga-Kutta 45 numerical ODE solver.\\
+\verb&quad   & Numerical integration using an adaptive Simpson's rule.\\
+\verb&dblquad & Double integration.\\
+\verb&triplequad & Triple integration.
+
+
+
+
+
+\subsection*{Built-in Symbolic Mathematical Operations}
+\verb&collect & Collects powers of the specified variable is a given symbolic expression.\\
+\verb&compose & Composition of symbolic functions.\\
+\verb&diff    & Symbolic differentiation.\\
+\verb&double  & Displays double-precision representation of a symbolic expression.\\
+\verb&dsolve  & Symbolic ODE solver.\\
+\verb&expand  & Expands an algebraic expression.\\
+\verb&factor  & Factor a polynomial.\\
+\verb&int     & Symbolic integration; either definite or indefinite.\\
+\verb&limit   & Finds two-sided limit, if it exists.\\
+\verb&pretty  & Displays a symbolic expression in a nice format.\\
+\verb&simple  & Simplifies a symbolic expression.\\
+\verb&subs    & Substitutes for parts a a symbolic expression.\\
+\verb&sym& or \verb&syms& Create symbolic variables.\\
+\verb&symsum  & Performs a symbolic summation, possibly with infinitely many entries.\\
+\verb&taylor  & Gives a Taylor polynomial approximation of a given order at a specified point.\\
+
+
+
+
+
+\subsection*{Graphics Commands}
+\verb&contour   & Plots level curves of a function of two variables.\\
+\verb&contourf  & Filled contour plot.\\
+\verb&ezcontour & Easy contour plot.\\
+\verb&loglog    & Creates a log-log plot.\\
+\verb&mesh      & Draws a mesh surface.\\
+\verb&meshgrid  & Creates arrays that can be used as inputs in graphics commands \\
+\verb&          &  such as \verb&contour&, \verb&mesh&, \verb&quiver&, and \verb&surf&.\\
+\verb&ezmesh    & Easy mesh surface plot.\\
+\verb&plot      & Plots data vectors.\\
+\verb&ezplot    & Easy plot for symbolic functions.\\
+\verb&plot3     & Plots curves in 3-D.\\
+\verb&polar     & Plots in polar coordinates.\\
+\verb&quiver    & Plots a vector field.\\
+\verb&semilogy  & Semilog plot, with logarithmic scale along the vertical direction.\\
+\verb&surf      & Solid surface plot.\\
+\verb&trimesh   & Plot based on a triangulation\\
+\verb&trisurf   & Surface plot based on a triangulation
+
+
+
+
+
+\subsection*{Special \textsc{Matlab} Commands}
+\verb&:     & Range operator, used for defining vectors and in loops.\\
+\verb&      & Type \verb& help colon& for information.\\
+\verb&;     & Suppresses output. Also separates rows of a matrix.\\
+\verb&=     & Assigns the variable on the left hand side the value of
+                the right hand side.\\
+\verb&ans   & The value of the most recent unassigned.\\
+\verb&cd    & Change directory.\\
+\verb&clear & Clears all values and definitions of variables and functions. You may
+             also use to clear only specified variables.\\
+\verb&diary & Writes a transcript of a \textsc{Matlab} session to a file.\\
+\verb&dir   & Lists the contents in the current working directory. Same as \verb&ls&.\\
+\verb&help  &\\
+\verb&inline& Define an inline function.\\
+\verb&format& Specifies output format, e.g. \verb&> format long&.\\
+\verb&load  & Load variables from a file.\\
+\verb&save  & Saves workspace variables to a file.\\
+
+
+
+
+\subsection*{\textsc{Matlab} Programming}
+\verb&==      & Is equal?\\
+\verb&~=      & Is not equal?\\
+\verb&<       & Less than?\\
+\verb&>       & Greater than?\\
+\verb&<=      & Less than or equal?\\
+\verb&break   & Breaks out of a \verb&for& or \verb&while& loop.\\
+\verb&end     & Terminates an \verb&if&, \verb&for& or \verb&while& statement.\\
+\verb&else    & Alternative in an \verb&if& statement.\\
+\verb&error   & Displays and error message and ends execution of a program.\\
+\verb&for     & Repeats a block of commands a specified number of times.\\
+\verb&function& First word in a function program.\\
+\verb&if      & Checks a condition before executing a block of statements.\\
+\verb&return  & Terminates execution of a program.\\
+\verb&warning & Displays a warning message.\\
+\verb&while   & Repeats a block of commands as long as a condition is true.\\
+
+
+
+
+
+\subsection*{Commands for Matrices and Linear Algebra}
+
+
+{\bf Matrix arithmetic:}\\
+\verb&A = [ 1  3 -2 5 ;  -1  -1 5 4 ; 0 1 -9  0]& \dotfill Manually enter a matrix. \\
+\verb&u = [ 1  2  3  4]'&\\
+\verb&A*u &\\
+\verb&B = [3 2 1; 7 6 5; 4 3 2]&\\
+\verb&B*A&     \dotfill multiply $B$ times $A$.\\
+\verb&2*A&     \dotfill multiply a matrix by a scalar.\\
+\verb&A + A&   \dotfill add matrices. \\
+\verb&A + 3&   \dotfill add a number to every entry of a matrix. \\
+\verb&B.*B&  \dotfill component-wise multiplication. \\
+\verb&B.^3&  \dotfill component-wise exponentiation.
+
+
+{\bf Special matrices:}\\
+\verb&I = eye(3)& \dotfill identity matrix\\
+\verb&D = ones(5,5)&\\
+\verb&O = zeros(10,10)&\\
+\verb&C = rand(5,5)& \dotfill random matrix with uniform
+         distribution in $[0,1]$.\\
+\verb&C = randn(5,5)& \dotfill random matrix with normal distribution.\\
+\verb&hilb(6)&\\
+\verb&pascal(5)&
+
+
+{\bf General matrix commands:}\\
+\verb&size(C)& \dotfill gives the dimensions ($m \times n$) of $A$.\\
+\verb&norm(C)& \dotfill gives the norm of the matrix.\\
+\verb&det(C)&   \dotfill the determinant of the matrix.\\
+\verb&max(C)&   \dotfill the maximum of each row.\\
+\verb&min(C)&   \dotfill the minimum in each row.\\
+\verb&sum(C)&   \dotfill sums each row.\\
+\verb&mean(C)&   \dotfill the average of each row.\\
+\verb&diag(C)&   \dotfill just the diagonal elements. \\
+\verb&inv(C)&    \dotfill inverse of the matrix.
+
+
+{\bf Matrix decompositions:}\\
+\verb&[L U P] = lu(C)&\\
+\verb&[Q R] = qr(C)&\\
+\verb&[U S V] = svd(C)& \dotfill singular value decomposition.
+
+
+
+
+

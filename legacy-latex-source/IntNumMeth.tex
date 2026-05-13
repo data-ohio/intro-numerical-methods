@@ -1,0 +1,218 @@
+
+\documentclass[11pt]{lectures}
+\usepackage[letterpaper]{geometry}
+%\nofiles
+
+% 
+%\usepackage{times}
+
+
+\usepackage{epsfig}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.5,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\usepackage[headings]{fullpage}
+\usepackage{listings}
+\lstset{ %
+  frame=single,
+  basicstyle=\ttfamily,
+  commentstyle=\color{mygreen},
+  keywordstyle=\color{blue},
+  showstringspaces=false,
+  language=Matlab
+}
+% Hijack line numbering to make matlab prompts
+\renewcommand*\thelstnumber{$\gg$}
+
+\usepackage{hyperref} 
+\newcommand{\programlink}[1]{\href{http://www.ohiouniversityfaculty.com/youngt/IntNumMeth/#1}{\texttt{#1}}}
+
+\usepackage{enumerate}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{.3cm}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+
+\newcommand{\la}{\lambda}
+
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\fb}{\mathbf{f}}
+\newcommand{\rb}{\mathbf{r}}
+\newcommand{\ub}{\mathbf{u}}
+\newcommand{\vb}{\mathbf{v}}
+\newcommand{\wb}{\mathbf{w}}
+\newcommand{\xb}{\mathbf{x}}
+\newcommand{\yb}{\mathbf{y}}
+\newcommand{\zb}{\mathbf{z}}
+
+\newcommand{\Eb}{\mathbf{E}}
+\newcommand{\Ub}{\mathbf{U}}
+
+
+\newcommand{\ew}{\textbf{ew}}
+\newcommand{\ev}{\textbf{ev}}
+
+
+\newcommand{\hide}[1]{}
+\newcommand{\missingfigure}{\center{\fbox{figure yet to be drawn, alas}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Introduction to Numerical Methods \\
+and \textsc{Matlab} Programming for Engineers}
+
+
+\author{Todd Young and Martin J. Mohlenkamp\\
+Department of Mathematics\\
+Ohio University\\
+Athens, OH 45701\\
+{\tt youngt@ohio.edu}}
+
+\frontmatter
+
+\maketitle
+
+\vspace*{4cm}
+\begin{quote}
+  Copyright \copyright{}  2008, 2009, 2011, 2014, 2016, 2017, 2018, 2020, 2021, 2023, 2025 Todd R. Young and Martin J. Mohlenkamp.\\
+  Original edition 2004, by Todd R. Young.
+ \vfill
+ 
+Thanks go to many students who have pointed out typos and mistakes. Thank you to Dr.~Yaqin Feng for suggestions
+to improve the exercises.
+\vfill
+  This work is licensed under the Creative Commons
+  Attribution-NonCommercial-ShareAlike 4.0 International License. To
+  view a copy of this license, visit\\
+  \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+\vfill
+  \centerline{\includegraphics[width=0.2\textwidth]{by-nc-sa}}
+\end{quote}
+\vfill
+%%%%%%%%%%%%%%%%%%%
+\chapter{Preface}
+
+These notes were developed by the first author in the process of teaching
+a course on applied numerical methods for Civil Engineering
+majors during 2002-2004 and was modified to include Mechanical
+Engineering in 2005. The materials have been periodically
+updated since then and underwent a major revision by the second author
+in 2006-2007.
+
+The main goals of these lectures are to introduce concepts of
+numerical methods and introduce \textsc{Matlab} in an Engineering
+framework. By this we do not mean that every problem is a ``real life''
+engineering application, but more that the engineering way of
+thinking is emphasized throughout the discussion.
+
+The philosophy of this book was formed over the course of many years.
+My father was a Civil Engineer and surveyor, and he introduced me to engineering
+ideas from an early age. At the University
+of Kentucky I took most of the basic Engineering courses while
+getting a Bachelor's degree in Mathematics. Immediately afterward,
+I completed a M.S.~degree in Engineering Mechanics at Kentucky.
+
+While working on my Ph.D.~in Mathematics at Georgia Tech I taught
+all of the introductory math courses for engineers. During
+my education, I observed that incorporation of computation
+in coursework had been extremely unfocused and poor. For
+instance during my college career I had to learn 8 different programming
+and markup languages on 4 different platforms plus numerous other software
+applications. There was almost no technical help provided in
+the courses and I wasted innumerable hours figuring out software on
+my own. A typical, but useless, inclusion of software has been (and
+still is in most calculus books) to set up a difficult `applied'
+problem and then add the line ``write a program to solve" or
+``use a computer algebra system to solve".
+
+At Ohio University we have
+tried to take a much more disciplined and focused approach.
+The Russ College of Engineering and Technology decided that \textsc{Matlab}
+should be the primary computational software for undergraduates.
+At about the same time members of the Department of Mathematics 
+proposed an 1804 project to bring \textsc{Matlab} into the
+calculus sequence and provide access to the program at nearly
+all computers on campus, including in the dorm rooms. The
+stated goal of this project was to make \textsc{Matlab} the
+universal language for computation on campus. That project
+was approved and implemented in the 2001-2002 academic year.
+
+
+In these lecture notes, instruction on using \textsc{Matlab} is
+dispersed through the material on numerical methods.
+In these lectures details about how to use \textsc{Matlab} are
+detailed (but not verbose) and explicit. To teach programming,
+students are usually given examples of working programs and are
+asked to make modifications.
+
+
+The lectures are designed to be used in a computer classroom with
+students working \textsc{Matlab} examples during the lecture or 
+with students reading the notes and working the examples after a brief
+introduction.
+At Ohio University we have had good success with this Lecture/Lab
+format. 
+
+The lectures are divided into four Parts with a summary
+provided at the end of each Part. Typically we will given an
+exam covering each of Parts I, II, and III and a comprehensive final exam.
+
+The exercises grow in complexity as the students build their programming
+skills. At Ohio University we ask students to complete the exercises
+in groups of 2-3 students and this accounts for a significant portion of the grade (e.g.\ 30\%.).
+
+% Throughout the text \textsc{Matlab} commands are preceded by
+% the symbol \verb&>&, which is the prompt in the command window.
+% Programs are surrounded by a box.
+
+% \vskip 1cm
+
+Todd Young
+%, \today
+
+\newpage
+
+\subsection*{Dependencies}
+
+Below we give the dependencies between Lectures. Almost everything
+depends on Lectures 1--4, so those links are omitted to reduce
+clutter. Some lectures, marked with * in the table of contents,
+have not yet been developed.
+
+\vfill
+\includegraphics[width=\textwidth]{depend}
+\vfill
+\tableofcontents
+
+
+
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{equation}
+\input{linear}
+\input{function}
+\input{differential}
+\input{appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\backmatter
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,2957 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Differential Equations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Reduction of Higher Order Equations to Systems}
+
+
+\subsection*{The motion of a pendulum}
+
+Consider the motion of an ideal pendulum that consists of a mass $m$
+attached to an arm of length~$\ell$. If we ignore friction,
+then Newton's laws of motion tell us
+$$
+     m \ddot{\theta} = - \frac{mg}{\ell} \sin \theta,
+$$
+where $\theta$ is the angle of displacement.
+\begin{figure}[h]
+\begin{center}
+\setlength{\unitlength}{0.9 mm}
+\begin{picture}(40,40)(0,0)
+	\put(0,38){\line(1,0){40}}
+	\put(0,38){\line(0,1){2}}
+	\put(40,38){\line(0,1){2}}
+	\put(20,38){\circle*{2}}
+	\put(20,38){\line(1,-2){15}}
+	\put(35,8){\circle*{3}}
+	\put(20,36){\line(0,-1){2}}
+	\put(20,32){\line(0,-1){2}}
+	\put(20,28){\line(0,-1){2}}
+	\put(20,24){\line(0,-1){2}}
+	\put(20,20){\line(0,-1){2}}
+	\put(20,16){\line(0,-1){2}}
+	\put(20,12){\line(0,-1){2}}
+	\put(20,8){\line(0,-1){2}}
+	\put(20,4){\line(0,-1){2}}
+%
+	\put(32,22){\mbox{$\ell$}}
+	\put(22,21){\mbox{$\theta$}}
+\end{picture}
+\end{center}
+\caption{A pendulum.}
+\end{figure}
+
+If we also incorporate moving friction and sinusoidal forcing
+then the equation takes the form
+$$
+    m \ddot{\theta} + \gamma \dot{\theta} + \frac{mg}{\ell} \sin \theta = A \sin \Omega t.
+$$
+Here $\gamma$ is the coefficient of friction and $A$ and $\Omega$ are
+the amplitude and frequency of the forcing. Usually, this equation
+would be rewritten by dividing through by $m$ to produce
+\begin{equation}\label{pendulum}
+   \ddot{\theta} + c \dot{\theta} + \omega \sin \theta = a \sin \Omega t,
+\end{equation}
+where $c = \gamma/m$. $\omega = g/\ell$ and $a = A/m$.
+
+
+This is a second order ODE because the second derivative with respect
+to time $t$ is the highest derivative. It is nonlinear because it has
+the term $\sin \theta$ and which is a nonlinear function of the
+dependent variable $\theta$. A solution of the equation would be a
+function $\theta(t)$. To get a specific solution we need side
+conditions.  Because it is second order, 2 conditions are needed, and
+the usual conditions are initial conditions
+\begin{equation}\label{pendulumic}
+\theta(0) = \theta_0 \qquad \text{and} \qquad \dot{\theta}(0) = v_0.
+\end{equation}
+
+%%%%%%%%%%%%%
+
+\subsection*{Converting a general higher order equation}
+
+All of the standard methods for solving ordinary differential equations
+are intended for first order equations. For this reason, it is inconvenient
+to solve higher order equations numerically.
+However, most higher-order differential equations that
+occur in applications can be converted to a {\em system} of
+first order equations and that is what is usually done in practice.
+
+Suppose that an $n$-th order equation can be solved for the
+$n$-th derivative, i.e. it can be written in the form
+\begin{equation*}
+x^{(n)} = f\left(t,x,\dot{x},\ddot{x}, \ldots,
+                   \frac{d^{n-1}x}{dt^{n-1}}\right).
+\end{equation*}
+Then it can be converted to a first-order system by this
+standard change of variables:
+\begin{equation*}
+\begin{split}
+y_1 &= x\\
+y_2 &= \dot{x}\\
+   & \vdots \\
+y_n & = x^{(n-1)} = \frac{d^{n-1}x}{dt^{n-1}}.
+\end{split}
+\end{equation*}
+The resulting first-order system is
+\begin{equation*}
+\begin{split}
+\dot{y}_1 &= \dot{x} = y_2\\
+\dot{y}_2 &= \ddot{x} = y_3\\
+   & \vdots \\
+\dot{y}_n &= x^{(n)} = f(t,y_1,y_2,\ldots,y_n).
+\end{split}
+\end{equation*}
+In vector form this is simply $\dot{\yb}=\fb(t,\yb)$ with
+$f_i(t,\yb)=y_{i+1}$ for $i<n$ and
+$f_n(t,\yb)=f(t,y_1,y_2,\ldots,y_n)$.
+
+
+
+For the example of the pendulum (\ref{pendulum}) the change of variables
+has the form
+\begin{equation*}
+\begin{split}
+y_1 &= \theta\\
+y_2 &= \dot{\theta},
+\end{split}
+\end{equation*}
+and the resulting equations are
+\begin{equation}\label{pendsys}
+\begin{split}
+\dot{y}_1 &= y_2\\
+\dot{y}_2 &= -c y_2 - \omega \sin(y_1) + a \sin(\Omega t).
+\end{split}
+\end{equation}
+In vector form this is
+\[
+\dot{\yb}=\left(\begin{array}{c}y_2  \\
+		 -c y_2 - \omega \sin(y_1) + a \sin(\Omega t) \end{array} \right).
+\]
+The initial conditions are converted to
+\begin{equation}
+\yb(0) = \left(\begin{array}{c} y_1(0) \\ y_2(0) \end{array} \right)
+       = \left(\begin{array}{c} \theta_0 \\ v_0 \end{array} \right).
+\end{equation}
+
+As stated above, the main reason we wish to change a higher order equation
+into a system of equations is that this form is convenient for solving the
+equation numerically. Most general software for solving
+ODEs (including \textsc{Matlab}) requires that the ODE be input in the form
+of a first-order system. In addition, there is a conceptual reason to
+make the change. In a system described by a higher order equation, knowing
+the position is not enough to know what the system is doing. In the case
+of a second order equation, such as the pendulum, one must know both the
+angle and the angular velocity to know what the pendulum is really doing.
+We call the pair $(\theta, \dot{\theta})$ the
+{\em state} of the system. Generally in applications the vector $\yb$ is
+the state of the system described by the differential equation.
+
+
+%%%%%%%%%%%%
+
+\subsection*{Using \textsc{Matlab} to solve a system of ODE's}
+
+In \textsc{Matlab} there are several commands that can be used to
+solve an initial value problem for a system of differential equations.
+Each of these correspond to different solving methods. The standard
+one is \verb&ode45&, which uses the algorithm ``Runge-Kutta 4
+5''. We will learn about this algorithm later.
+
+To use \verb&ode45& for a system, we have to input the vector function
+$f$ that defines the system, the time span we want to consider and the
+initial value of the vector \verb&y&.
+%
+Suppose we want to solve the pendulum system with \(\omega=a=\Omega=1\)
+and $c = .1$ for \(t\in [0,20]\)
+with initial condition \((\theta(0),\theta'(0))=(1,-1.5)\).
+One way to use \verb&ode45& is to enter
+\begin{lstlisting}[frame=none,numbers=left]
+dy = @(t,y)[y(2);-.1*y(2)-sin(y(1))+sin(t)]
+[T Y] = ode45(dy,[0 20],[1;-1.5]);
+\end{lstlisting}
+Alternatively, we could create a function program
+\begin{lstlisting}
+function dy = mypendulum(t,y)
+    dy = [y(2);-.1*y(2)-sin(y(1))+sin(t)]
+end
+\end{lstlisting}
+and then enter
+\begin{lstlisting}[frame=none,numbers=left]
+[T Y] = ode45(@mypendulum,[0 20],[1;-1.5]);
+\end{lstlisting}
+
+
+The output \verb&T& contains times and \verb&Y& contains values of the
+vector $\yb$ at those times. Try
+\begin{lstlisting}[frame=none,numbers=left]
+size(T)
+T(1:10)
+size(Y)
+Y(1:10,:)
+\end{lstlisting}
+Since the first coordinate of the vector is the position (angle), we
+are
+mainly interested in its values:
+\begin{lstlisting}[frame=none,numbers=left]
+theta = Y(:,1)
+plot(T,theta)
+\end{lstlisting}
+
+In the next two sections we will learn enough about numerical methods
+for initial value problems to understand roughly how \textsc{Matlab}
+produces this approximate solution.
+
+%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Consider the pendulum system  but with no friction or forcing,
+i.e. $\gamma = A = 0$. What would equation (\ref{pendsys}) become in this case?
+Use the last example to solve the system
+with the initial condition $[\theta_0,0]'$ for $\theta_0 = .1\pi$.
+Use the plot of the solution to find the frequency of the pendulum
+with this initial condition. Do the same for $\theta_0 = .5\pi$ and $.9 \pi$.
+How does the frequency depend on the amplitude of a pendulum?
+
+
+
+\item Transform the ODE
+$$
+       \dddot{x} + \ddot{x}^2 - 3\dot{x}^3 + \cos^2{x} = e^{-t} \sin(3t)
+$$
+ into a first order system.
+Suppose the initial conditions for the ODE are
+$x(1) = 1$, $\dot{x}(1) = 2$, and $\ddot{x}(1) = 0$.
+%What would be the initial condition of the system?
+Find a numerical solution of this IVP using \verb&ode45&
+and plot the first coordinate ($x$). Try time intervals
+%\verb&[1 1.5]&, \verb&[1 1.9]&,
+\verb&[1 2]& and \verb&[1 2.1]& and explain
+what you observe. 
+%(Remember to use entry-wise operations, \verb&.*& and \verb&.^&, in the definition of the vector function.)
+
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Euler Methods}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Numerical Solution of an IVP}
+
+Suppose we wish to numerically solve the initial value problem
+\begin{equation}\label{IVP}
+\dot{\yb} = \fb(t,\yb), \qquad \yb(a) = \yb_0,
+\end{equation}
+on an interval of time $[a,b]$.
+
+By a numerical solution, we must mean an approximation of the solution
+at a finite number of points, i.e.
+$$
+(t_0,\yb_0), (t_1,\yb_1), (t_2,\yb_2), \ldots, (t_n,\yb_n),
+$$
+where $t_0 = a$ and $t_n = b$.
+The first of these points is exactly the initial value. If we take
+$n$ steps as above, and the steps are evenly spaced, then the time
+change in each step is
+\begin{equation}\label{hdef}
+   h = \frac{b-a}{n},
+\end{equation}
+and the times $t_i$ are given simply by $t_i = a + ih$.
+This leaves the most important part of finding a numerical solution:
+determining $\yb_1, \yb_2, \ldots, \yb_n$ in a way that is as consistent
+as possible with (\ref{IVP}). To do this, first write the differential
+equation in the indexed notation
+\begin{equation}\label{DIVP}
+    \dot{\yb}_i \approx \fb(t_i,\yb_i),
+\end{equation}
+and then replace the derivative $\dot{\yb}$ by a
+difference. There are many ways we might carry this out and in the
+next section we study the simplest.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The Euler Method}
+
+The most straight forward approach is to replace $\dot{\yb}_i$
+in (\ref{DIVP}) by its forward difference approximation. This gives
+$$
+   \frac{\yb_{i+1} - \yb_i}{h} = \fb(t_i,\yb_i).
+$$
+Rearranging this gives us a way to obtain $\yb_{i+1}$ from $\yb_i$ known
+as Euler's method:
+\begin{equation}\label{Euler}
+\yb_{i+1} = \yb_i + h \fb(t_i,\yb_i).
+\end{equation}
+With this formula, we can start from $(t_0,\yb_0)$ and compute all the
+subsequent approximations $(t_i,\yb_i)$. This is very easy to implement,
+as you can see from the following program (which can be downloaded as \programlink{myeuler.m}).
+\lstinputlisting{../programs/myeuler.m}
+
+To use this program we need a function, such as the vector function for
+the pendulum:
+\begin{lstlisting}[frame=none,numbers=left]
+dy = @(t,y)[y(2);-.1*y(2)-sin(y(1))+sin(t)]
+\end{lstlisting}
+Save this  and then type
+\begin{lstlisting}[frame=none,numbers=left]
+[T Y] = myeuler(dy,[0 20],[1;-1.5],5);
+\end{lstlisting}
+Here \verb&[0 20]& is the time span you want to consider, \verb&[1;-1.5]& is
+the initial value of the vector \verb&y& and \verb&5& is the number of steps.
+The output \verb&T& contains times
+and \verb&Y& contains values of the vector at the times. Try
+\begin{lstlisting}[frame=none,numbers=left]
+size(T)
+size(Y)
+\end{lstlisting}
+Since the first coordinate of the vector is the angle, we only plot its values:
+\begin{lstlisting}[frame=none,numbers=left]
+theta = Y(:,1);
+plot(T,theta)
+\end{lstlisting}
+In this plot it is clear that $n=5$ is not adequate to represent the function.
+Type
+\begin{lstlisting}[frame=none,numbers=left]
+hold on
+\end{lstlisting}
+then redo the above with 5 replaced by 10. Next try 20, 40, 80, and 200.
+As you can see the graph becomes increasingly better as $n$ increases.
+We can compare these calculations with \textsc{Matlab}'s built-in function
+with the commands
+\begin{lstlisting}[frame=none,numbers=left]
+[T Y]= ode45(dy,[0 20],[1;-1.5]);
+theta = Y(:,1);
+plot(T,theta,'r')
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The problem with the Euler method}
+
+You can think of the Euler method as finding a linear approximate
+solution to the initial value problem on each time interval.
+An obvious shortcoming of the method is that it makes the
+approximation based on information at the beginning of the
+time interval only. This problem is illustrated well by the
+following IVP:
+\begin{equation}
+   \ddot{x} + x = 0\quad\text{with}\quad 
+   x(0)=1\quad\text{and}\quad \dot{x}(0) = 0
+\,.
+\end{equation}
+You can easily check that the exact solution of this IVP is
+$$
+    x(t) = \cos(t).
+$$
+If we make the standard change of variables
+$$
+      y_1 = x \quad\text{and}\quad y_2 = \dot{x},
+$$
+then we get
+$$
+       \dot{y}_1 = y_2 \quad\text{and}\quad \dot{y}_2 = - y_1.
+$$
+Then the solution should be $y_1(t) = \cos(t)$ and $y_2(t) = \sin(t)$.
+If we then plot the solution in the $(y_1,y_2)$ plane, we should
+get exactly a unit circle. We can solve this IVP with Euler's method:
+\begin{lstlisting}[frame=none,numbers=left]
+dy = @(t,y)[y(2);-y(1)]
+[T Y] = myeuler(dy,[0 4*pi],[1;0],20)
+y1 = Y(:,1);
+y2 = Y(:,2);
+plot(y1,y2)
+\end{lstlisting}
+As you can see the approximate solution goes far from the true solution.
+Even if you increase the number of steps, the Euler solution will
+eventually drift outward away from the circle because it does not
+take into account the curvature of the solution.
+
+%%%%%%%%%%%%
+
+\subsection*{The Modified Euler Method}
+
+An idea which is similar to the idea behind the trapezoid method
+would be to consider $f$ at both the beginning and end of the
+time step and take the average of the two. Doing this produces
+the Modified (or Improved) Euler method represented by the following
+equations:
+\begin{equation}
+\begin{split}
+\mathbf{k}_1 &= h \fb(t_i,\yb_i)\\
+\mathbf{k}_2 &= h \fb(t_i+h, \yb_i + \mathbf{k}_1)\\
+\yb_{i+1} &= \yb_i +  \frac{1}{2} \left(\mathbf{k}_1 + \mathbf{k}_2 \right)
+\,.
+\end{split}
+\end{equation}
+Here $\mathbf{k}_1$ captures the information at the beginning of the
+time step (same as Euler), while $\mathbf{k}_2$ is the information at
+the end of the time step.
+
+A program that implements the Modified method can be downloaded as
+\programlink{mymodeuler.m}.
+
+%\lstinputlisting{../programs/mymodeuler.m}
+Test this program on the IVP above:
+\begin{lstlisting}[frame=none,numbers=left]
+[T Ym] = mymodeuler(dy,[0 4*pi],[1;0],20)
+ym1 = Ym(:,1);
+ym2 = Ym(:,2);
+plot(ym1,ym2)
+\end{lstlisting}
+You will find that the results are much better than for the plain Euler method.
+
+
+
+%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item
+%Convergence of Euler Methods
+Download \programlink{myeuler.m} and  \programlink{mymodeuler.m}.
+\begin{enumerate}[(a)]
+%\item Create the function:\\ \verb& > dy = @(t,y) sin(t)*cos(y)&\\
+\item 
+Type the following commands:
+\begin{lstlisting}[frame=none,numbers=left]
+dy = @(t,y) sin(t)*cos(y);
+hold on
+[T Y] = myeuler(dy,[0,12],.1,20);
+plot(T,Y)
+\end{lstlisting}
+Position the plot window so that it can always be seen and type
+\begin{lstlisting}[frame=none,numbers=left]
+[T Y] = myeuler(dy,[0,12],.1,30);
+plot(T,Y)
+\end{lstlisting}
+(You can use the up button to reduce typing.)
+Continue to increase the last number in the above until the graph
+stops changing (as far as you can see). Record this number and print
+the final graph. Type \verb&hold off& and kill the plot window.
+\item Follow the same procedure using \programlink{mymodeuler.m} .
+\item
+Describe what you observed. In particular compare how fast the two
+methods converge as $n$ is increased ($h$ is decreased).
+\end{enumerate}
+
+\item The equation of motion of a damped, unforced pendulum is
+$$   
+     \ddot{\theta} + \frac{\gamma}{m} \dot{\theta} + \frac{g}{\ell} \sin \theta = 0.
+$$
+The total energy of the pendulum is $E = m \ell^2 \dot{\theta}^2/2 + m g \ell (1-\cos(\theta))$.
+Suppose a pendulum has $m = 2$, $g = 9.81$, $l = 3$, and coefficient of friction $\gamma = 0.5$, all in SI units.
+Write a well-commented {\bf script} program that uses the Modified Euler's method with $h = 0.01$ to simulate the movement of the pendulum from a starting position of
+$(\theta(0),\dot{\theta}(0)) = (.9 \pi, 0)$ until the energy falls below 0.01 Joules (use a \verb&while& loop).  
+Record the steps in matrices Y and T and plot the motion. Turn in your program and plot.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Higher Order Methods}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The order of a method}
+
+For numerical solutions of an initial value problem
+there are two ways to measure the error. The first
+is the error of each step. This is called the Local
+Truncation Error or LTE. The other is the total error
+for the whole interval $[a,b]$. We call this the
+Global Truncation Error or GTE.
+
+For the Euler method the LTE is of order $O(h^2)$, i.e.~the
+error is comparable to $h^2$. We can show this directly
+using Taylor's Theorem:
+$$
+    \yb(t+h) = \yb(t) + h \dot{\yb}(t) + \frac{h^2}{2} \ddot{\yb}(c)
+$$
+for some $c$ between $t$ and $t+h$. In this equation we can replace
+$\dot{\yb}(t)$ by $f(t,\yb(t))$, which makes the first two terms
+of the right hand side be exactly the Euler method. The error
+is then $\frac{h^2}{2} \ddot{\yb}(c)$ or $O(h^2)$.
+It would be slightly more difficult to show that the LTE of the
+modified Euler method is $O(h^3)$, an improvement of one power of $h$.
+
+We can roughly get the GTE from the LTE by considering the number of steps
+times the LTE. For any method, if $[a,b]$ is the interval and $h$ is
+the step size, then $n = (b-a)/h$ is the number of steps. Thus for any method,
+the GTE is one power lower in $h$ than the LTE. Thus the GTE for Euler
+is $O(h)$ and for modified Euler it is $O(h^2)$.
+
+By the {\bf order} of a method, we mean the power of $h$ in the GTE. Thus
+the Euler method is a 1st order method and modified Euler is a 2nd order
+method.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Fourth Order Runge-Kutta}
+
+The most famous of all IVP methods is the classic Runge-Kutta method
+of order 4:
+\begin{equation}
+\begin{split}
+\mathbf{k}_1 &= h \fb(t_i,\yb)\\
+\mathbf{k}_2 &= h \fb(t_i+h/2, \yb_i + \mathbf{k}_1/2)\\
+\mathbf{k}_3 &= h \fb(t_i+h/2, \yb_i + \mathbf{k}_2/2)\\
+\mathbf{k}_4 &= h \fb(t_i+h, \yb_i + \mathbf{k}_3)\\
+\yb_{i+1} &= \yb_i + \frac{1}{6} \left(\mathbf{k}_1 + 2 \mathbf{k}_2
+                    + 2 \mathbf{k}_3 + \mathbf{k}_4\right).
+\end{split}
+\end{equation}
+Notice that this method uses values of $\fb(t,\yb)$ at $4$ different points.
+In general a method needs $n$ values of $\fb$ to achieve order $n$.
+The constants used in this method and other methods are obtained
+from Taylor's Theorem. They are precisely the values needed to make
+all error terms cancel up to $h^{n+1}\fb^{(n+1)}(c)/(n+1)!$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Variable Step Size and RK45}
+
+If the order of a method is $n$, then the GTE is
+comparable to $h^n$, which means it is approximately $C h^n$,
+where $C$ is some constant. However, for different differential
+equations, the values of $C$ may be very different. Thus it is
+not easy beforehand to tell how small $h$ should be to get
+the error within a given tolerence. For instance, if the true
+solution oscillates very rapidly, we will obviously need
+a smaller step size than for a solution that is nearly constant.
+
+How can a program then choose $h$ small enough to produce
+the required accuracy? We also do not wish to make $h$
+much smaller than necessary, since that would increase
+the number of steps. To accomplish this a program tries
+an $h$ and tests to see if that $h$ is small enough.
+If not it tries again with a smaller $h$. If it is too
+small, it accepts that step, but on the next step it
+tries a larger $h$. This process is called {\bf variable step
+size}.
+
+Deciding if a single step is accurate enough could be accomplished in
+several ways, but the most common are called {\bf embedded methods}.
+The Runge-Kutta 45 method, which is used in \verb&ode45&, is an embedded
+method. In the RK45, the function
+$f$ is evaluated at $5$ different points. These are used to make
+a 5th order estimate $\yb_{i+1}$. At the same time, 4 of the 5 values
+are used to also get a 4th order estimate. If the 4th order and 5th order
+estimates are close, then we can conclude that they are accurate. If
+there is a large discrepency, then we can conclude that they are not
+accurate and a smaller $h$ should be used.
+
+To see variable step size in action, we will define and solve two different
+ODEs and solve them on the same interval.
+Create this script and run it:
+\begin{lstlisting}
+% illustrates variable step size in RK45
+dy1 = @(t,y) [-y(2);y(1)];          % create two ODE IVPs
+dy2 = @(t,y) [-5*y(2);5*y(1)];
+[T1 Y1] = ode45(dy1,[0 20],[1;0]);  % solve with ode45
+[T2 Y2] = ode45(dy2,[0 20],[1;0]);
+y1 = Y1(:,1);                       % extract position variables
+y2 = Y2(:,1);
+plot(T1,y1,'bx-')                   % plot both together
+hold on
+plot(T2,y2,'ro-')
+size(T1)                            % print number of steps used
+size(T2)
+hold off
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Why order matters}
+
+Many people would conclude on first encounter that the advantage
+of a higher order method would be that you can get a more accurate
+answer than for a lower order method. In reality, this is not quite
+how things work. In engineering problems, the accuracy needed is
+usually a given and it is usually not extremely high.
+Thus getting more and more accurate solutions is
+not very useful. So where is the advantage? Consider the following example.
+
+Suppose that you need to solve an IVP with an error of less than $10^{-4}$.
+If you use the Euler method, which has GTE of order $O(h)$,
+then you would need $h \approx 10^{-4}$. So you would need about
+$n \approx (b-a) \times 10^4$ steps to find the solution.
+
+Suppose you use the second order, modified Euler method. In that
+case the GTE is $O(h^2)$, so you would need to use $h^2 \approx 10^{-4}$, or
+$h \approx 10^{-2}$. This would require about $n \approx (b-a) \times 10^2$
+steps. That is a hundred times fewer steps than you would need to get
+the same accuracy with the Euler method.
+
+If you use the RK4 method, then $h^4$ needs to be approximately $10^{-4}$,
+and so $h \approx 10^{-1}$. This means you need only about $n \approx (b-a)\times 10$
+steps to solve the problem, i.e. a thousand times fewer steps than for the
+Euler method.
+
+Thus the real advantage of higher order methods is that they can run a lot
+faster at the same accuracy. This can be especially important in applications
+where one is trying to make real-time adjustments based on the calculations.
+Such is often the case in robots and other applications with dynamic controls.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+
+\item There is a Runge-Kutta 2 method, which is also known as the
+  midpoint method.  It is summarized by the following equations:
+\begin{equation}
+\begin{split}
+\mathbf{k}_1 &= h \fb(t_i,\yb_i) \\
+\mathbf{k}_2 &= h \fb(t_i+h/2, \yb_i + \mathbf{k}_1/2) \\
+\yb_{i+1} &= \yb_i + \mathbf{k}_2.
+\end{split}
+\end{equation}
+\begin{enumerate}[(a)]
+\item Modify the program \verb&mymodeuler& into a program \verb&myRK2& that
+does the RK2 method. 
+\item
+Test \verb&myRK2& and \verb&mymodeuler& on the
+following IVP with time span $[0, 4\pi]$:
+$$
+     \ddot{x} + x = 0
+     \quad\text{with}\quad x(0) = 1\quad\text{and}\quad \dot{x}(0) = 0.
+$$
+Using \verb&format long&, make a table with \(\yb_{n+1}\) for each of the two programs for
+$n = 10$, 100, and 1000. Compute the difference between \(\yb_{n+1}\) and the true solution
+$\yb(4\pi)=(1,0)$.
+\end{enumerate}
+Turn in the modified program and a summary of the results.
+
+\item Consider the initial value problem
+\[
+  \frac{dy}{dt} = y(t^2-1), \quad y(0)=1.
+\]
+\begin{enumerate}[(a)]
+\item Find the exact solution by hand using Separation of Variables.
+\item Solve it by hand using Euler's method  with $h = 0.5$ on the interval $[0,2]$.
+\item Solve it using \verb&ode45& on the interval $[0, 2]$.
+\item Plot all three solutions on $[0,2]$ in a single plot. Use a continuous curve for the exact solution and symbols at 
+the data points for the approximate solutions (e.g.\ '*' for Euler, 'd' for \verb&ode45&).
+\item Rank steps (a) - (d) from easiest to hardest.
+\end{enumerate}
+Turn in your hand work, the plot and your answer to (e). 
+
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Multi-step Methods*}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item
+
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{ODE Boundary Value Problems and Finite Differences}
+
+%%%%%%%%%%%%
+
+\subsection*{Steady State Heat and Diffusion}
+
+If we consider the movement of heat in a long thin object (like a metal bar),
+it is known that the temperature, $u(x,t)$, at a location $x$
+and  time $t$ satisfies the partial differential equation
+\begin{equation}\label{heat}
+u_t - u_{xx} = g(x,t),
+\end{equation}
+where $g(x,t)$ is the effect of any external heat source.
+The same equation also describes the diffusion of a chemical
+in a one-dimensional environment. For example the environment
+might be a canal, and then $g(x,t)$ would represent
+how a chemical is introduced.
+
+Sometimes we are interested only in the steady
+state of the system, supposing $g(x,t) = g(x)$ and $u(x,t) = u(x)$.
+In this case
+$$
+     u_{xx} = -g(x).
+$$
+This is a linear second-order ordinary differential equation.
+We could find its solution exactly if $g(x)$ is not too
+complicated. If the environment or object we consider has length
+$L$, then typically one would have conditions on each end of
+the object, such as $u(0) = 0$, $u(L) = 0$. Thus instead of
+an initial value problem, we have a {\bf boundary value problem} or {\bf BVP}.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Beam With Tension}
+
+Consider a simply supported beam with modulus of elasticity $E$,
+moment of inertia $I$, a uniform load $w$, and
+end tension $T$ (see Figure~\ref{fig:beam}). If $y(x)$ denotes
+the deflection at each point $x$ in the beam, then $y(x)$
+satisfies the differential equation
+\begin{equation}\label{beam_non}
+\frac{y''}{(1 + (y')^2)^{3/2}} - \frac{T}{EI} y = \frac{wx(L-x)}{2EI},
+\end{equation}
+with boundary conditions $y(0) = y(L) = 0$.  This equation is
+nonlinear and there is no hope to solve it exactly.  If the deflection
+is small then $(y')^2$ is negligible compared to 1 and the equation
+approximately simplifies to
+\begin{equation}\label{beam_lin}
+   y'' - \frac{T}{EI} y = \frac{wx(L-x)}{2EI}.
+\end{equation}
+This is a linear equation and we can find the exact solution.
+We can rewrite the equation as
+\begin{equation}\label{beam_ab}
+ y'' - \alpha y = \beta x(L-x),
+\end{equation}
+where
+\begin{equation}\label{eqn_ab}
+\alpha = \frac{T}{EI}  \quad \text{ and } \quad \beta= \frac{w}{2EI},
+\end{equation}
+and then the exact solution is
+\begin{equation}\label{beam_exact}
+y(x) = \frac{2\beta}{\alpha^2}
+	\frac{e^{\sqrt{\alpha}L}}{e^{\sqrt{\alpha}L}+1} e^{-\sqrt{\alpha}x}
++ \frac{2\beta}{\alpha^2} \frac{1}{e^{\sqrt{\alpha}L}+1} e^{\sqrt{\alpha}x}
+          + \frac{\beta}{\alpha} x^2 - \frac{\beta L}{\alpha} x
+	+ \frac{2\beta}{\alpha^2}.
+\end{equation}
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{0.9 mm}
+\begin{picture}(60,30)(0,0)
+	\put(0,5){\line(1,0){10}}
+	\put(10,0){\line(0,1){5}}
+	\put(50,5){\line(1,0){10}}
+	\put(50,0){\line(0,1){5}}
+	\put(8,6){\line(1,0){44}}
+	\put(8,16){\line(1,0){44}}
+	\put(8,6){\line(0,1){10}}
+	\put(52,6){\line(0,1){10}}
+	\put(8,11){\circle*{2}}
+	\put(52,11){\circle*{2}}
+	\put(8,11){\vector(-1,0){5}}
+	\put(52,11){\vector(1,0){5}}
+%
+	\put(0,12){\mbox{$T$}}
+	\put(57,12){\mbox{$T$}}
+%
+	\put(10,23){\line(1,0){40}}
+	\put(10,23){\vector(0,-1){5}}
+	\put(20,23){\vector(0,-1){5}}
+	\put(30,23){\vector(0,-1){5}}
+	\put(40,23){\vector(0,-1){5}}
+	\put(50,23){\vector(0,-1){5}}
+	\put(30,25){\mbox{$w$}}
+\end{picture}
+\end{center}
+\caption{A simply supported beam with a uniform load $w$ and
+end tension $T$.}
+\label{fig:beam}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Finite Difference Method -- Linear ODE}
+
+A finite difference equation is an equation
+obtained from a differential equation by replacing
+the variables by their discrete versions and
+derivatives by difference formulas.
+
+First we will consider equation (\ref{beam_lin}). Suppose that the
+beam is a W12x22 structural steel I-beam.  Then $L = 120$ in., $E = 29
+\times 10^6 \textrm{lb.}/\textrm{in.}^2$ and $I = 121
+\textrm{in.}^4$. Suppose that the beam is carrying a uniform load of $100,000$
+lb.\ so that $w = 120,000/120 = 10,000$ and a tension of $T = 10,000$
+lb.. We calculate from (\ref{eqn_ab}) $\alpha = 2.850
+\times 10^{-6}$ and $\beta = 1.425 \times 10^{-6}$.  Thus we have the
+following BVP:
+\begin{equation}\label{beam_sim}
+  y'' = 2.850 \times 10^{-6} y + 1.425 \times 10^{-6}x(120-x), \qquad y(0) = y(120) = 0.
+\end{equation}
+First subdivide the interval $[0,120]$ into four equal
+subintervals. The nodes of this subdivion
+are $x_0 = 0$, $x_1 = 30$, $x_2 = 60$, \ldots, $x_4 = 120$.
+We will then let $y_0, y_1, \ldots, y_4$ denote the deflections
+at the nodes. From the boundary conditions we have immediately:
+$$
+   y_0 = y_4 = 0.
+$$
+To determine the deflections at the interior points we will rely
+on the differential equation. Recall the central difference formula
+$$
+   y''(x_i) \approx \frac{y_{i+1} - 2 y_i + y_{i-1}}{h^2}.
+$$
+In this case we have $h = (b-a)/n =(120-0)/4= 30$. Replacing all the variables
+in the equation (\ref{beam_ab}) by their discrete versions we get
+$$
+     y_{i+1} - 2 y_i + y_{i-1} = h^2 \alpha y_i + h^2 \beta x_i (L-x_i).
+$$
+Substituting in for $\alpha$, $\beta$ and $h$ we obtain:
+\begin{equation*}
+ \begin{split}
+     y_{i+1} - 2 y_i + y_{i-1} 
+     &= 900 \times 2.850 \times 10^{-6} y_i
+     + 900 \times 1.425 \times 10^{-6} x_i(120 - x_i) \\
+     &= 2.565 \times 10^{-3} y_i + 1.2825 \times 10^{-3} x_i(120 - x_i).
+  \end{split}
+\end{equation*}
+This equation makes sense for $i = 1,2,3$. At $x_1 = 30$, the equation
+becomes:
+\begin{equation}
+\begin{split}
+  y_2 - 2y_1 + y_0
+  &= 2.565 \times 10^{-3} y_1+ 1.2825 \times 10^{-3} \times 30(90)\\
+  \Leftrightarrow      y_2 -  2.002565 y_1 & = 3.46275.
+\end{split}
+\end{equation}
+Note that this equation is linear in the unknowns $y_1$ and $y_2$.
+At $x_2 = 60$ we have:
+\begin{equation}
+  \begin{split}
+    y_3 - 2 y_2 + y_1 
+    &= .002565 y_2 + 1.2825 \times 10^{-3} \times 60^2\\
+    \Leftrightarrow       y_3 - 2.002565 y_2 + y_1 & = 4.617.
+  \end{split}
+\end{equation}
+At $x_3 = 90$ we have (since $y_4=0$)
+\begin{equation}
+  \begin{split} % y_4=0
+    - 2.002565 y_3 + y_2 &= 3.46275.
+  \end{split}
+\end{equation}
+Thus $(y_1,y_2,y_3)$ is the solution of the linear system:
+$$
+\left( \begin{array}{ccc|c}
+          -2.002565 & 1 & 0 & 3.46275 \\
+          1 & -2.002565 & 1 & 4.617 \\
+          0 & 1 & -2.002565 & 3.46275
+       \end{array}
+\right).
+$$
+We can easily find the solution of this system in \textsc{Matlab}:
+\begin{lstlisting}[frame=none,numbers=left]
+A = [ -2.002565 1 0 ; 1 -2.002565 1 ; 0 1 -2.002565]
+b = [ 3.46275 4.617 3.46275 ]'
+y = A\b
+\end{lstlisting}
+To graph the solution, we need
+define the $x$ values and add on the values at the endpoints:
+\begin{lstlisting}[frame=none,numbers=left]
+x = 0:30:120
+y = [0 ; y ; 0]
+plot(x,y,'d')
+\end{lstlisting}
+Adding a spline will result in an excellent graph.
+
+The exact solution of this BVP is given in (\ref{beam_exact}).
+That equation, with the parameter values for the W12x22 I-beam
+as in the example, is in the program \programlink{myexactbeam.m}.
+We can plot the true solution on the same graph:
+\begin{lstlisting}[frame=none,numbers=left]
+hold on
+myexactbeam
+\end{lstlisting}
+Thus our numerical solution is extremely good considering how
+few subintervals we used and how very large the deflection is.
+
+An amusing exercise is to set $T=0$ in the program \programlink{myexactbeam.m};
+the program fails because the exact solution is no longer valid. Also
+try $T=.1$ for which you will observe loss of precision. On the other hand
+the finite difference method still works when we set $T=0$.
+
+%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Derive the finite difference equations for the BVP
+  (\ref{beam_sim}) on the same domain ($[0,120]$), but with eight
+  subintervals and solve (using \textsc{Matlab}) as in the example.
+  Plot your result, together on the same plot with the exact solution
+  (\ref{beam_exact}) from the program \programlink{myexactbeam.m}.
+
+
+\item By replacing $y''$ and $y'$ with central differences, derive the
+  finite difference equation for the boundary value problem
+  $$
+  y'' + y' - y = x\quad\text{on $[0,1]$}  \quad\text{with}\quad y(0) = y(1) = 0
+  $$
+  using 5 subintervals. Solve them and plot the solution using \textsc{Matlab}.
+  
+  
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Finite Difference Method -- Nonlinear ODE}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Heat conduction with radiation}
+
+If we again consider the heat in a metal bar of length $L$, but
+this time consider the effect of radiation as well
+as conduction, then the steady state equation has the form
+\begin{equation}
+    u_{xx} - d (u^4 - u_b^4) = - g(x),
+\end{equation}
+where $u_b$ is the temperature of the background, $d$ incorporates a
+coefficient of radiation and $g(x)$ is the heat source.
+
+If we again replace the continuous problem by its discrete approximation
+then we get
+\begin{equation}\label{condrad}
+ \frac{u_{i+1} - 2 u_i + u_{i-1}}{h^2} - d(u_i^4 - u_b^4) = - g_i = -g(x_i).
+\end{equation}
+This equation is nonlinear in the unknowns, thus we no longer have
+a system of linear equations to solve, but a system of nonlinear
+equations. One way to solve these equations would be by
+the multivariable Newton method in Lecture~\ref{lec:multnewton}. Instead, we introduce another iterative
+method.
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Relaxation Method for Nonlinear
+                           Finite Differences}
+
+We can rewrite equation (\ref{condrad}) as
+$$
+u_{i+1} - 2 u_i + u_{i-1} = h^2 d(u_i^4 - u_b^4) - h^2 g_i.
+$$
+From this we can solve for $u_i$ in terms of the other quantities:
+$$
+ 2 u_i  = u_{i+1} + u_{i-1} - h^2 d(u_i^4 - u_b^4) + h^2 g_i.
+$$
+Next we add $u_i$ to both sides of the
+equation to obtain
+$$
+ 3 u_i  = u_{i+1} + u_i + u_{i-1} - h^2 d(u_i^4 - u_b^4) + h^2 g_i,
+$$
+and then divide by 3 to get
+$$
+u_i = \frac{1}{3} \left( u_{i+1} + u_i +  u_{i-1} \right)
+     - \frac{h^2}{3} \left( d(u_i^4 - u_b^4) -  g_i \right).
+$$
+
+Now for the main idea, we will begin with an initial guess for the
+value of $u_i$ for each $i$, which we can represent as a vector
+$\ub^0$. Then we will use the above equation to get better
+estimates, $\ub^1$, $\ub^2$, \ldots, and hope that they converge
+to the correct answer.
+
+If we let
+$$
+\ub^j = (u_0^j, u_1^j, u_2^j, \ldots, u_{n-1}^j, u_n^j)
+$$
+denote the $j$th approximation, then we can obtain that $j+1$st estimate
+from the formula
+$$
+ u^{j+1}_i = \frac{1}{3} \left( u^j_{i+1} + u^j_i + u^j_{i-1} \right)
+    - \frac{h^2}{3} \left( d((u^j_i)^4 - u_b^4) -  g_i \right).
+$$
+Notice that $g_i$ and $u_b$ do not change.
+In the  resulting equation, we have $u_i$ at each successive step depending
+on its previous value and the equation itself.
+
+%%%%%%%%%%%%%%
+
+\subsection*{Implementing the Relaxation Method}
+
+In the following program we solve the finite difference equations
+(\ref{condrad}) with the boundary conditions $u(0) = 0$ and $u(L) = 0$.
+We let $L = 4$, $n=4$, $d = 1$, and $g(x) = \sin(\pi x/4)$.
+Notice that the vector \verb&u& always contains the current estimate of
+the values of $\ub$.
+\lstinputlisting{../programs/mynonlinheat.m}
+If you run this program with the given \verb&n& and \verb&steps& the
+result will not seem reasonable.
+
+We can plot the initial guess by adding the command \verb&plot(x,u)&
+right before the \verb&for& loop. We can also plot successive
+iterations by moving the last \verb&plot(x,u)& before the
+\verb&end&. Now we can experiment and see if the iteration is
+converging. Try various values of $steps$ and $n$ to produce a good
+plot. You will notice that this method converges quite slowly. In
+particular, as we increase $n$, we need to increase $steps$ like
+$n^2$, i.e.~if $n$ is large then steps needs to be {\em really} large.
+
+
+\newpage % avoid break in problem
+
+%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Modify the script program \verb&mynonlinheat& to plot
+    the initial guess and all intermediate approximations. Add
+    complete comments to the program.  Print the program
+    and a plot using $n = 12$ and \verb&steps& large enough to see
+    convergence.
+    
+\item Modify your improved \verb&mynonlinheat& to
+    \verb&mynonlinheattwo& that has the boundary conditions
+    $$
+    u(0) = 5 \quad\text{and}\quad u(L) = 10.
+    $$
+    Fix the comments to reflect the new boundary conditions. 
+    Print the program and a plot using $n= 50$ and large enough
+     \verb&steps& to see convergence.
+\end{list}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Parabolic PDEs - Explicit Method}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Heat Flow and Diffusion}
+
+In the previous sections we studied PDE that represent {\em steady-state} heat problem.
+There was no time variable in the equation. In this section we begin to study how
+to solve equations that involve time, i.e.\ we calculate temperature profiles that are
+changing.
+
+The conduction of heat and diffusion of a chemical happen to be modeled
+by the same differential equation. The reason for this is that
+they both involve similar processes. Heat conduction occurs when
+hot, fast moving molecules bump into slower molecules and transfer
+some of their energy. In a solid this involves moles of molecules
+all moving in different, nearly random ways, but the net effect
+is that the energy
+eventually spreads itself out over a larger region. The diffusion
+of a chemical in a gas or liquid simliarly involves large numbers
+of molecules moving in different, nearly random ways. These
+molecules eventually spread out over a larger region.
+
+In three dimensions, the equation that governs both of these processes
+is the heat/diffusion equation
+$$
+   u_t = c \Delta u
+\,,
+$$
+where $c$ is the coefficient of conduction or diffusion, and $
+     \Delta u(x,y,z) = u_{xx} + u_{yy} + u_{zz}$.
+The symbol $\Delta$ in this context is called the {\em Laplacian}.
+If there is also a heat/chemical source, then it is incorporated
+a function $g(x,y,z,t)$ in the equation as
+$$
+    u_t = c \Delta u + g.
+$$
+
+In some problems the $z$ dimension is irrelevant, either because the
+object in question is very thin, or $u$ does not change in the $z$
+direction. In this case the equation is
+$$
+   u_t = c \Delta u = c ( u_{xx} + u_{yy}).
+$$
+Finally, in some cases only the $x$ direction matters. In this case
+the equation is just
+\begin{equation}\label{1dhd}
+    u_t = c u_{xx},
+\end{equation}
+or
+\begin{equation}\label{1dhdn}
+    u_t = c u_{xx} + g(x,t).
+\end{equation}
+
+In this lecture we will learn a straight-forward technique
+for solving (\ref{1dhd}) and (\ref{1dhdn}). It is very
+similar to the finite difference method we used for nonlinear
+boundary value problems.
+
+It is worth mentioning a related equation
+$$
+    u_t = c \Delta (u^\gamma)\quad\text{for}\quad\gamma >1
+\,,
+$$
+which is called the porous-media equation.
+This equation models diffusion in a solid, but porous, material,
+such as sandstone or an earthen structure. We will
+not solve this equation numerically, but the methods introduced
+here would work. Many equations that involve 1 time derivative
+and 2 spatial derivatives are {\bf parabolic} and
+the methods introduced here will work for most of
+them.
+
+%%%%%%%%%%%%%%
+
+\subsection*{Explicit Method Finite Differences}
+
+The one dimensional heat/diffusion equation $u_t = c u_{xx}$, has two
+independent variables, $t$ and $x$, and so we have to discretize both.
+Since we are considering $0 \le x \le L$, we subdivide $[0,L]$ into
+$m$ equal subintervals, i.e.~let $$ h = L/m $$ and $$ (x_0, x_1, x_2,
+\ldots, x_{m-1}, x_m) = (0, h, 2h, \ldots, L-h, L).  $$ Similarly, if
+we are interested in solving the equation on an interval of time
+$[0,T]$, let $$ k = T/n $$ and $$ (t_0, t_1, t_2, \ldots, t_{n-1},
+t_n) = (0, k, 2k, \ldots, T - k, T).  $$ We will then denote the
+approximate solution at the grid points by $$ u_{ij} \approx
+u(x_i,t_j).  $$
+
+The equation $u_t = c u_{xx}$ can then be replaced by the difference equations
+\begin{equation}
+\frac{u_{i,j+1} - u_{i,j}}{k} = \frac{c}{h^2} ( u_{i-1,j} - 2 u_{i,j} + u_{i+1,j} ).
+\end{equation}
+Here we have used the forward difference for $u_t$ and the central
+difference for $u_{xx}$.
+This equation can be solved for $u_{i,j+1}$ to produce
+\begin{equation}\label{expheat}
+u_{i,j+1} = r u_{i-1,j} + (1 - 2r) u_{i,j} + r u_{i+1,j}
+\end{equation}
+for $1 \le i \le m-1$, $0 \le j \le n-1$, where
+\begin{equation}
+   r = \frac{ck}{h^2}.
+\end{equation}
+The formula (\ref{expheat}) allows us to calculate all the values
+of $u$ at step $j+1$ using the values at step $j$.
+
+Notice that $u_{i,j+1}$ depends on $u_{i,j}$, $u_{i-1,j}$ and
+$u_{i+1,j}$. That is $u$ at grid point $i$  depends
+on its previous value and the values of its two nearest neighbors
+at the previous step (see Figure~\ref{fig:expheat}).
+
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{1.5 mm}
+\begin{picture}(55,45)(0,0)
+	\put(10,10){\circle*{2}}
+	\put(20,10){\circle*{2}}
+	\put(30,10){\circle*{2}}
+	\put(40,10){\circle*{2}}
+	\put(50,10){\circle*{2}}
+	\put(10,20){\circle*{2}}
+	\put(20,20){\circle*{3}}
+	\put(30,20){\circle*{3}}
+	\put(40,20){\circle*{3}}
+	\put(50,20){\circle*{2}}
+	\put(10,30){\circle*{2}}
+	\put(20,30){\circle*{2}}
+%	\put(30,30){\circle{3}}
+	\put(27,29){\mbox{$u_{i,j+1}$}}
+	\put(40,30){\circle*{2}}
+	\put(50,30){\circle*{2}}
+	\put(10,40){\circle*{2}}
+	\put(20,40){\circle*{2}}
+	\put(30,40){\circle*{2}}
+	\put(40,40){\circle*{2}}
+	\put(50,40){\circle*{2}}
+	\put(20,20){\line(1,0){20}}
+	\put(30,20){\vector(0,1){7}}
+%
+	\put(0,18){\mbox{$t_j$}}
+	\put(0,28){\mbox{$t_{j+1}$}}
+	\put(18,0){\mbox{$x_{i-1}$}}
+	\put(28,0){\mbox{$x_i$}}
+	\put(38,0){\mbox{$x_{i+1}$}}
+\end{picture}
+\end{center}
+\caption{The value at grid point $(i,j+1)$ depends on its previous value
+and the previous values of its nearest neighbors.}
+\label{fig:expheat}
+\end{figure}
+
+%%%%%%%%%%%%
+
+\subsection*{Initial Condition}
+
+To solve the partial differential equation (\ref{1dhd}) or (\ref{1dhdn})
+we need an initial condition. This represents the state of the system when
+we begin, i.e. the initial temperature distribution or initial
+concentration profile. This is represented by
+$$
+  u(x,0) = f(x).
+$$
+To implement this in a program we let
+$$
+    u_{i,0} = f(x_i).
+$$
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Boundary Conditions}
+
+To solve the partial differential equation (\ref{1dhd}) or
+(\ref{1dhdn}) we also need boundary conditions. Just as in the
+previous section we will have to specify something about the ends of
+the domain, i.e. at $x = 0$ and $x = L$. One possibility is fixed
+boundary conditions, which we can implement just as we did for the ODE
+boundary value problem.
+
+A second possibility is called {\bf variable boundary conditions}.
+This is represented by time-dependent functions,
+$$
+u(0,t) = g_1(t)  \quad\text{and}\quad u(L,t) = g_2(t).
+$$
+In a heat problem, $g_1$ and $g_2$ would represent heating or cooling
+applied to the ends.
+These are easily implemented in a program by letting
+$u_{0,j} = g_1(t_j)$ and $u_{m,j} = g_2(t_j)$.
+
+%%%%%%%%%%%%
+
+\subsection*{Implementation}
+
+The following program (available to download as \programlink{myheat.m}) implements the
+explicit method.  It incorporates variable boundary conditions at both
+ends. To run it you must define functions $f$, $g_1$ and $g_2$.
+Notice that the main loop has only one line. The values of $u$ are
+kept as a matrix. It is often convenient to define a
+matrix of the right dimension containing all zeros, and then fill in
+the calculated values as the program runs.
+
+Run the following program using $L = 2$, $T=20$, $f(x) = .5 x$, $g_1(t) = 0$,
+and $g_2(t) = \cos(t)$. You will find that simply \verb&g1 = @(t) 0& will not
+work, because it will only produce a single number $0$. Instead use \verb&g1 = @(t) 0*t&,
+which will produce the needed vector of zeros.
+\newpage
+\lstinputlisting{../programs/myheat.m}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+
+\item Run the program \programlink{myheat.m} with $L = 2\pi$, $T=20$, $c =
+  .5$, $g_1(t) = \sin(t)$, $g_2(t) =0$ and $f(x) = -\sin(x/4)$.  Set
+  $m=20$ and experiment with $n$. Get a plot when the program is
+  stable and one when it isn't. Turn in the plots. Hint: The function $g_2(t)$ will need
+  to be input using the formula \verb&g2 = @(t) 0*t&.
+  
+
+\item Make a version of the program \programlink{myheat.m} that does not
+  input $n$ or $T$ but instead has inputs:
+\begin{lstlisting}
+%   k -- size of the time steps
+%   temp -- keeps stepping in time until the maximum current 
+%                 temperature in the bar is less than temp
+\end{lstlisting}
+For $L = 2\pi$, $c = .01$, $g_1(t) = 0$, $g_2(t) = 10$, $f(x) = 100$
+and $m = 10$, set $k$ so that the method will be stable.  Run it with
+\verb&temp = 20&.  (Hint: see your Exercise 30.2 as a model.)
+{\it When}  does the 
+temperature in the bar drop below 20? Turn in your program and the plot.
+
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Solution Instability for the Explicit Method}
+
+As we saw in experiments using \programlink{myheat.m}, the solution
+can become unbounded unless the time steps are small. In this lecture
+we consider why.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Writing the Difference Equations in Matrix Form}
+
+If we use the boundary conditions $u(0) = u(L) = 0$ then
+the explicit method of the previous section has the
+form
+\begin{equation*}
+u_{i,j+1} = r u_{i-1,j} + (1 - 2r) u_{i,j} + r u_{i+1,j}
+\quad\text{for}\quad 1 \le i \le m-1\quad\text{and}\quad 0 \le j \le n-1
+\,,
+\end{equation*}
+where $u_{0,j} = 0$ and $u_{m,j} =0$.  This is equivalent to the
+matrix equation
+\begin{equation}\label{heatev}
+     \ub_{j+1} = A \ub_j
+\,,
+\end{equation}
+where $\ub_j$ is the column vector $(u_{1,j}, u_{2,j}, \ldots, u_{m,j})'$
+representing the state at the $j$th time step and
+$A$ is the matrix
+\begin{equation}\label{heatmat}
+A = \left( \begin{array}{ccccc}
+          1-2r & r      &   0     & \cdots   &  0 \\
+            r  & 1-2r   & r      &  \ddots   &  \vdots \\
+            0   & \ddots & \ddots & \ddots & 0  \\
+            \vdots   &  \ddots &   r    & 1-2r   & r \\
+            0   & \cdots       &  0      &   r    & 1-2r
+            \end{array}
+     \right).
+\end{equation}
+Unfortunately, this matrix can have a property which is very bad in
+this context. Namely, it can cause exponential growth of error
+unless $r$ is small. To see how this happens, suppose that
+$\Ub_j$ is the vector of correct values of $u$ at
+time step $t_j$ and $\Eb_j$ is the error of the approximation
+$\ub_j$, then
+$$
+      \ub_j = \Ub_j + \Eb_j.
+$$
+From (\ref{heatev}), the approximation at the next time step will be
+$$
+    \ub_{j+1} = A \Ub_j + A \Eb_j,
+$$
+and if we continue for $k$ steps,
+$$
+    \ub_{j+k} = A^k \Ub_j + A^k \Eb_j.
+$$
+The problem with this is the term $A^k \Eb_j$. This term
+is exactly what we would do in the power method for finding
+the eigenvalue of $A$ with the largest absolute value. If the
+matrix $A$ has eigenvalues with absolute value greater than $1$,
+then this term will grow exponentially. Figure~\ref{heatspec}
+shows the largest absolute value of an eigenvalue of $A$ as a function
+of the parameter $r$ for various sizes of the matrix $A$.
+As you can see, for $r> 1/2$ the largest absolute eigenvalue grows rapidly
+for any $m$ and quickly becomes greater than $1$.
+
+
+\begin{figure}
+\centerline{
+\includegraphics[width=0.6\textwidth]{heatspec}}
+\caption{Maximum absolute eigenvalue as a function of $r$ for the
+matrix $A$ from the explicit method for the heat equation
+calculated for matrices $A$ of sizes $m = 2 \ldots 10$.
+Whenever the maximum absolute eigenvalue is greater than 1 the method is unstable, i.e.\ errors grow exponentially with
+each step. When using the explicit method $r < 1/2$ is a safe choice.}
+\label{heatspec}
+\end{figure}
+
+%%%%%%%%%%%
+
+\subsection*{Consequences}
+
+Recall that $r = ck/h^2$. Since this must be less than 1/2, we have
+$$
+        k < \frac{h^2}{2c}.
+$$
+The first consequence is obvious: $k$ must be relatively small.
+%
+The second is that $h$ cannot be too small. Since $h^2$ appears
+in the formula, making $h$ small would force $k$ to be extremely
+small!
+%
+A third consequence is that we have a converse of this
+analysis. Suppose $r < .5$.
+Then all the eigenvalues will be less than one. Recall that
+the error terms satisfy
+$$
+    \ub_{j+k} = A^k \Ub_j + A^k \Eb_j.
+$$
+If all the eigenvalues of $A$ are less than $1$ in absolute value then
+$A^k \Eb_j$ grows smaller and smaller as $k$ increases. This
+is really good. Rather than building up, the effect of any
+error diminishes as time passes! From this we arrive at the following
+principle: {\bf If the explicit numerical solution for a parabolic
+equation does not blow up, then errors from previous steps fade away!}
+
+Finally, we note that if we have non-zero boundary conditions
+then instead of equation (\ref{heatev}) we have
+\begin{equation}\label{heatev2}
+     \ub_{j+1} = A \ub_j + r \bb_j,
+\end{equation}
+where the first and last entries of $\bb_j$ contain the boundary
+conditions and all the other entries are zero. In this case the
+errors behave just as before, if
+$r> 1/2$ then the errors grow and if $r<1/2$ the errors
+fade away.
+
+
+We can write a function program \programlink{myexpmatrix.m} that produces the matrix
+$A$ in (\ref{heatmat}), for given inputs $m$ and $r$.  Without using loops
+we can use the \verb&diag& command to
+set up the matrix:
+\lstinputlisting{../programs/myexpmatrix.m}
+Test this using $m=6$ and $r=.4, .6$. Check the eigenvalues and
+eigenvectors of the resulting matirices:
+\begin{lstlisting}[frame=none,numbers=left]
+A = myexpmatrix(6,.6)
+[v e] = eig(A)
+\end{lstlisting}
+What is the ``mode'' represented by the eigenvector with the largest absolute
+eigenvalue? How is that reflected in the unstable solutions?
+
+%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Let $L=\pi$, $T = 20$, $f(x) = .1\sin(x)$, $g_1(t) = 0$, $g_2(t)
+  = 0$, $c = .5$, and $m = 20$, as used in the program
+  \programlink{myheat.m}.  What value of $n$ corresponds to $r =
+  1/2$?  Try different $n$ in \programlink{myheat.m} to find precisely when
+  the method works and when it fails. Is $r = 1/2$ the boundary
+  between failure and success?  Hand in a plot of the last success and
+  the first failure. Include the values of $n$ and $r$ in each.
+
+\item Write a well-commented \textsc{Matlab} {\bf script}
+  program that produces the graph in
+  Figure~\ref{heatspec} for $m = 4$. Your program should: 
+  \begin{itemize}
+  \item define $r$ values from $0$ to $1$,
+  \item for each $r$ 
+    \begin{itemize}
+    \item create the matrix $A$ by calling \verb&myexpmatrix&,
+    \item calculate the eigenvalues of $A$,
+    \item find the max of the absolute values, and
+    \end{itemize}
+  \item plot these numbers versus $r$.
+  \end{itemize}
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Implicit Methods}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The Implicit Difference Equations}
+
+By approximating $u_{xx}$ and $u_t$ at $t_{j+1}$ rather than $t_j$,
+and using a backwards difference for $u_t$, the equation $u_t = c
+u_{xx}$ is approximated by
+\begin{equation*}
+\frac{u_{i,j+1} - u_{i,j}}{k} 
+= \frac{c}{h^2} ( u_{i-1,j+1} - 2 u_{i,j+1} + u_{i+1,j+1} ).
+\end{equation*}
+Note that all the terms have index $j+1$ except one and isolating this term
+leads to
+\begin{equation}
+\label{eqn:impheatstencil}
+u_{i,j} = -r u_{i-1,j+1} + (1+2r) u_{i,j+1} - r u_{i+1,j+1}
+\quad\text{for}\quad 1 \le i \le m-1,
+\end{equation}
+where $r = ck/h^2$ as before.
+The entries involved in (\ref{eqn:impheatstencil}) are illustrated in Figure~\ref{fig:impheat}.
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{1.5 mm}
+\begin{picture}(55,45)(0,0)
+	\put(10,10){\circle*{2}}
+	\put(20,10){\circle*{2}}
+	\put(30,10){\circle*{2}}
+	\put(40,10){\circle*{2}}
+	\put(50,10){\circle*{2}}
+	\put(10,20){\circle*{2}}
+	\put(20,20){\circle*{2}}
+	%\put(30,20){\circle*{2}}
+	\put(27,19){\mbox{$u_{i,j}$}}
+	\put(40,20){\circle*{2}}
+	\put(50,20){\circle*{2}}
+	\put(10,30){\circle*{2}}
+	\put(20,30){\circle*{3}}
+	\put(30,30){\circle*{3}}
+	\put(40,30){\circle*{3}}
+	\put(50,30){\circle*{2}}
+	\put(10,40){\circle*{2}}
+	\put(20,40){\circle*{2}}
+	\put(30,40){\circle*{2}}
+	\put(40,40){\circle*{2}}
+	\put(50,40){\circle*{2}}
+	\put(20,30){\line(1,0){20}}
+	\put(30,30){\vector(0,-1){7}}
+%
+	\put(0,18){\mbox{$t_j$}}
+	\put(0,28){\mbox{$t_{j+1}$}}
+	\put(18,0){\mbox{$x_{i-1}$}}
+	\put(28,0){\mbox{$x_i$}}
+	\put(38,0){\mbox{$x_{i+1}$}}
+\end{picture}
+\end{center}
+\caption{The value at grid point $(i,j)$ depends on its future value
+and the future values of its nearest neighbors.}
+\label{fig:impheat}
+\end{figure}
+
+
+
+
+Now we have $\ub_j$ given in terms of $\ub_{j+1}$.  This seems like a
+problem, since $\ub_{j+1}$ is the solution at a later time than
+$\ub_j$, so we could never know $\ub_{j+1}$ before we knew $\ub_j$.
+However, the relationship between $\ub_{j+1}$ and $\ub_j$
+is linear.
+Using matrix notation, we have
+$$
+     \ub_j = B \ub_{j+1} - r \bb_{j+1},
+$$
+where $\bb_{j+1}$ represents the boundary conditions. Thus to
+find $\ub_{j+1}$ from $\ub_j$, we need only solve the linear system
+\begin{equation}\label{impheatev}
+      B \ub_{j+1} = \ub_j + r \bb_{j+1}
+\,,
+\end{equation}
+where $\ub_j$ and $\bb_{j+1}$ are given and
+\begin{equation}\label{impheatmat}
+B = \left( \begin{array}{ccccc}
+          1+2r &  -r    &        &        &   \\
+           -r  &  1+2r  &  -r    &        &   \\
+               & \ddots & \ddots & \ddots &   \\
+               &        &  -r    & 1+2r   & -r\\
+               &        &        &   -r   & 1+2r
+            \end{array}
+     \right).
+\end{equation}
+ (This is an example of
+how a sparse matrix occurs in applications.)
+Using this scheme is called the {\bf implicit method} since
+$\ub_{j+1}$ is defined implicitly. 
+Since we have to solve a linear
+system at each step, the implicit method requires more work per step than the explicit method. 
+
+Since we are solving (\ref{impheatspec}), the most important
+quantity is the maximum absolute eigenvalue of $B^{-1}$, which
+is 1 divided by the smallest eigenvalue of $B$.
+Figure~\ref{impheatspec} shows the maximum absolute eigenvalues of
+$B^{-1}$ as a function of $r$ for various size matrices.
+\begin{figure}
+%\centerline{\hbox{\psfig{figure=impheatspec.eps,height=3in,width=3.2in}}}
+\centerline{\includegraphics[width=0.65\textwidth]{impheatspec}}
+\caption{Maximum absolute eigenvalue as a function of $r$ for the
+matrix $B^{-1}$ from the implicit method for the heat equation
+calculated for matrices $B$ of sizes $m = 2 \ldots 10$.
+Whenever the maximum absolute eigenvalue is less than 1 the method is stable, i.e. it is always stable.}
+\label{impheatspec}
+\end{figure}
+Notice that this absolute maximum is always less than $1$.
+Thus errors are always diminished over time and so this
+method is always stable. For the same reason it is also
+always as accurate as the individual steps.
+
+Both this implicit method and the explicit method in the previous
+lecture make $O(h^2)$ error in approximating $u_{xx}$ and $O(k)$ error
+in approximating $u_t$, so they have total error $O(h^2+k)$. Thus
+although the stability condition allows the implicit method to use
+arbitrarily large $k$, to maintain accuracy we still need $k\sim h^2$.
+
+%%%%%%%%%%%%%
+
+\subsection*{Crank-Nicholson Method}
+
+Now that we have two different methods for solving parabolic
+equation, it is natural to ask, ``can we improve by taking
+an average of the two methods?'' The answer is yes.
+
+We implement a weighted average of the two methods by considering
+an average of the approximations of $u_{xx}$ at $j$ and $j+1$.
+This leads to the equations
+\begin{equation}
+\frac{u_{i,j+1} - u_{i,j}}{k}
+= \frac{\lambda c}{h^2} ( u_{i-1,j+1} - 2 u_{i,j+1} + u_{i+1,j+1} )
++  \frac{(1-\lambda) c}{h^2} ( u_{i-1,j} - 2 u_{i,j} + u_{i+1,j} ).
+\end{equation}
+The implicit method contained in these equations is called the
+{\bf Crank-Nicholson method}.
+Gathering terms yields the equations
+$$
+  -r \la u_{i-1,j+1} + (1+2r\la) u_{i,j+1} - r\la u_{i+1,j+1}
+       = r(1-\la) u_{i-1,j} + (1 - 2r(1-\la)) u_{i,j} + r(1-\la) u_{i+1,j}.
+$$
+In matrix notation this is
+$$
+   B_\la \ub_{j+1} = A_\la \ub_j + r\bb_{j+1},
+$$
+where
+\begin{equation*}
+A_\la = \left( \begin{array}{ccccc}
+          1-2(1-\la)r & (1-\la)r &        &        &   \\
+            (1-\la)r  & 1-2(1-\la)r & (1-\la)r &        &   \\
+                      & \ddots      & \ddots & \ddots &   \\
+                      &             & (1-\la)r & 1-2(1-\la)r   & (1-\la)r \\
+                      &             &          &   (1-\la)r    & 1-2(1-\la)r
+            \end{array}
+     \right)
+\end{equation*}
+and
+\begin{equation*}
+B_\la = \left( \begin{array}{ccccc}
+          1+2r\la &  -r\la    &        &        &   \\
+           -r\la  &  1+2r\la  &  -r\la    &        &   \\
+               & \ddots & \ddots & \ddots &   \\
+               &        &  -r\la    & 1+2r\la   & -r\la\\
+               &        &        &   -r\la   & 1+2r\la
+            \end{array}
+     \right).
+\end{equation*}
+In this equation $\ub_j$ and $\bb_{j+1}$ are known, $A \ub_j$ can be
+calculated directly, and then the equation is solved for $\ub_{j+1}$.
+
+If we choose $\lambda=1/2$, then we are in effect doing a central
+difference for $u_t$, which has error $O(k^2)$. Our total error is
+then $O(h^2+k^2)$.  With a bit of work, we can show that the method is
+always stable, and so we can use $k\sim h$ without a problem.
+
+To get optimal accuracy with a weighted average, it is always
+necessary to use the right weights. For the Crank-Nicholson
+method with a given $r$, we need to choose
+$$
+    \lambda = \frac{r - 1/6}{2r}.
+$$
+This choice will make the method have truncation error of order
+$O(h^4 + k^2)$, which is really good considering that the implicit and
+explicit methods each have truncation errors of order $O(h^2 + k)$.
+Surprisingly, we can do even better if we also require
+$$
+    r = \frac{\sqrt{5}}{10} \approx 0.22361,
+$$
+and, consequently,
+$$
+    \la = \frac{3 - \sqrt{5}}{6} \approx  0.12732.
+$$
+With these choices, the method has truncation error of order $O(h^6)$,
+which is absolutely amazing.
+
+To appreciate the implications, suppose that we need to solve
+a problem with 4 significant digits. If we use the explicit or
+implicit method alone then we will need $h^2 \approx k \approx 10^{-4}$.
+If $L=1$ and $T\approx 1$, then we need
+$m \approx 100$ and $n \approx 10,000$. Thus we would have a total
+of $1,000,000$ grid points, almost all in the interior. This is a lot.
+
+Next suppose we solve the same problem using the optimal
+Crank-Nicholson method. We would need $h^6 \approx 10^{-4}$ which
+would require us to take $m \approx 4.64$, so we would take $m = 5$
+and have $h=1/5$. For $k$ we need $k = (\sqrt{5}/10) h^2/c$. If $c=1$,
+this gives $k = \sqrt{5}/250\approx 0.0089442$ so we would need
+$n\approx 112$ to get $T\approx 1$. This gives us a total of $560$
+interior grid points, or, a factor of $1785$ fewer than the explicit or
+implicit method alone.
+
+
+%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item
+Modify the program \programlink{myexpmatrix.m} from exercise 36.2 into a
+function program \verb&myimpmatrix.m& that produces the matrix $B$ 
+in (\ref{impheatmat})
+for given inputs $m$ and $r$. Modify your script from exercise
+36.2 to use $B^{-1}$ and to plot for \(r\in[0,2]\); keep $m = 4$. It should produce a
+graph similar to that in Figure~\ref{impheatspec} for $m = 4$. Turn in the
+programs and the plot.
+
+\item
+Modify the program \verb&myheat& into a new program \verb&myimplicitheat&
+that uses the implicit method to solve the boundary value problem
+$$
+    u_t = c u_{xx}, \quad u(t,0) = u(t,L) = 0, \quad u(0,x) = f(x)
+$$
+by repeatedly solving the system $B \ub_{j+1} = \ub_j$ for each time step.
+
+(Hints: Delete \verb&g1& and \verb&g2& from the program
+since they are always zero. Call $B$ using \verb&myimpmatrix& before the
+loop and solve $B \ub_{j+1} = \ub_j$ inside the loop.)
+%Once the program is working, change  it to calculate the LU decomposition of $B$ before the loop and use the LU to solve $B \ub_{j+1} = \ub_j$ inside the loop. 
+
+Run the program with $L=5$, $T=50$, $c=.1$ and $f(x) = \sin( \pi x/5)$ and at least 10 pairs
+of values of $m$ and $n$. Turn in the program and a list of the $m,n$ you tried
+and whether the simulation was stable or unstable. Are you convinced that it is 
+always stable?
+
+
+    
+
+
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Insulated Boundary Conditions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Insulation}
+
+In many of the previous sections we have considered fixed boundary
+conditions, i.e.~$u(0) = a$, $u(L) = b$.  We implemented these simply
+by assigning $u_0^j =a$ and $u_n^j = b$ for all $j$.
+
+We also considered variable boundary conditions, such as $u(0,t) =
+g_1( t)$.  For example, we might have $u(0,t) = \sin( t)$ which could
+represent periodic heating and cooling of the end at $x=0$.
+
+A third important type of boundary condition is called the {\em
+  insulated} boundary condition. It is so named because it mimics an
+insulator at the boundary.  Physically, the effect of insulation is
+that no heat flows across the boundary.  This means that the
+temperature gradient is zero, which implies that we should require the
+mathematical boundary condition $u'(L) = 0$.
+
+To use it in a program, we must replace $u'(L) = 0$ by a discrete
+version.  Recall that in our discrete equations we usually have $L =
+x_n$. Recall from the section on numerical derivatives, that there are
+three different ways to replace a derivative by a difference equation,
+left, right and central differences. The three of them at $x_n$ would
+be
+$$
+  u'(x_n) \approx \frac{u_n - u_{n-1}}{h} \approx \frac{u_{n+1} - u_n}{h} \approx \frac{u_{n+1} - u_{n-1}}{2
+  h}.
+$$ 
+If $x_n$ is the last node of our grid, then it is clear that we cannot
+use the right or central difference, but are stuck with the first of
+these. Setting that expression to zero implies
+$$
+    u_n = u_{n-1}.
+$$
+This restriction can be easily implemented in a program simply by
+putting a statement \verb&u(n+1)=u(n)& inside the loop that updates
+values of the profile. However, since this method replaces $u'(L) =0$
+by an expression that is only accurate to first order, it is not very
+accurate and is usually avoided.
+
+Instead we want to use the most accurate version, the central
+difference. For that we should have
+$$
+     u'(L) =  u'(x_n) = \frac{u_{n+1} - u_{n-1}}{2h} = 0.
+$$
+or simply
+$$
+       u_{n+1} = u_{n-1}.
+$$
+However, $u_{n+1}$ would represent $u(x_{n+1})$ and $x_{n+1}$ would be
+$L+h$, which is outside the domain. This, however, is not an obstacle in
+a program. We can simply extend the grid to one more node, $x_{n+1}$,
+and let $u_{n+1}$ always equal $u_{n-1}$ by copying $u_{n-1}$ into
+$u_{n+1}$ whenever $u_{n-1}$ changes. The point $x_{n+1}$ is
+``fictional'', but a computer does not know the difference between
+fiction and reality!  This idea is carried out in the calculations of
+the next section and illustrated in Figure~\ref{fig:insulated}.
+\begin{figure}[h]
+  \centering
+  \setlength{\unitlength}{1mm}
+  \begin{picture}(55,30)(-12,-10)
+    \put(-5,0){\vector(0,1){20}}    
+    \put(-10,15){$u$}
+    \put(10,0){\circle*{2}}
+    \put(20,0){\circle*{2}}
+    \put(30,0){\circle*{2}}
+    \put(40,0){\circle{2}}
+    \put(0,0){\line(1,0){30}}
+    \put(10,20){\circle*{2}}
+    \put(20,15){\circle*{2}}
+    \put(30,10){\circle*{2}}
+    \put(40,15){\circle{2}}
+    \put(24,15){\vector(1,0){12}}
+    \put(24,17){\mbox{set equal}}
+    \put(5,-5){$x_{n-2}$}
+    \put(16,-5){$x_{n-1}$}
+    \put(27,-5){$x_{n}$}
+    \put(37,-5){$x_{n+1}$}
+  \end{picture}
+  \caption{Illustation of an insulated boundary condition using a
+    fictional point $x_{n+1}$ with $u_{n+1}=u_{n-1}$.}
+  \label{fig:insulated}
+\end{figure}
+
+A way to think of an insulated boundary that makes sense of
+the point $L+h$ is to think of two bars joined end to
+end, where you let the second bar be mirror image of the first bar. 
+If you do this, then no heat will flow across
+the joint, which is exactly the same effect as insulating.
+
+
+Another practical way to implement an insulated boundary is
+to let the grid points straddle the boundary. For example
+suppose we want to impose insulated boundary at the left end of a
+bar, i.e.\ $u'(0) =0$, then you could let the first two grid
+points be at $x_0 = -h/2$ and $x_1 = h/2$. Then you can let
+$$
+u_0 = u_1.
+$$
+This will again force the central difference at $x=0$ to be $0$.
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Implementation in a linear equation by elimination}
+
+Consider the BVP
+\begin{equation}\label{linear_insulated}
+     u_{xx} = -1\quad\text{with}\quad u(0) = 5\quad\text{and}\quad u'(1) = 0.
+ \end{equation}
+This represents the steady state temperature of a bar with a uniformly applied
+heat source, with one end held at a fixed temperature and the other end insulated.
+
+If we use 4 equally spaced intervals, then
+$$
+    m=4\quad\text{and}\quad L=1 \quad \Rightarrow \quad h = \frac{L}{m} = \frac{1}{4},
+ $$
+and
+$$
+   x_0 = 0,\, x_1 = .25,\, x_2 = .5,\, x_3 = .75,\, x_4 = 1,\,
+   \text{ and } x_5 = 1.25.
+$$
+The point $x_5 = 1.25$ is outside the region and thus fictional.
+The boundary condition at $x_0 = 0$ is implemented as
+$$
+   u_0 = 5.
+$$
+For the insulated condition, we will require
+$$
+        u_5 = u_3.
+$$
+This makes the central difference for $u'(x_4)$ be zero.
+We can write the differential equation as a difference equation
+$$
+     \frac{u_{i-1} -2 u_i + u_{i+1}}{h^2} = -1
+$$
+or
+$$
+     u_{i-1} -2 u_i + u_{i+1} = -0.0625,   \quad i = 1,2,3,4.
+$$
+For $i = 1$, recalling that $u_0 = 5$, we have
+$$
+5 - 2 u_1 + u_2 = -.0625   \quad \textrm{ or } \quad - 2 u_1 + u_2 = -5.0625. 
+$$
+For $i=2$ and $i=3$ we have
+$$
+u_1 - 2 u_2 + u_3 = -.0625 \quad \textrm{ and } \quad  u_2 -2 u_3 + u_4 
+= -.0625. 
+$$
+For $i=4$ we have
+$$
+      u_3 - 2 u_4 + u_5 = -.0625\,.
+$$
+Note that we now have 5 unknowns in our problem: $u_1, \ldots, u_5$.
+However, from the boundary condition $u_5 = u_3$ and so we can eliminate $u_5$ 
+from our \(i=4\) equation and write
+$$
+   2 u_3 - 2 u_4 = -.0625\,.
+$$
+Summarizing, we can put the unknown quantities in a vector $\ub =
+(u_1,u_2,u_3,u_4)'$ and write the equations as a matrix equation $A
+\ub = \bb$ where
+$$
+A = \left( \begin{array}{cccc}
+          -2 & 1   & 0  &   0    \\
+            1 & -2 & 1  &  0       \\
+           0  &  1  & -2   & 1 \\
+           0 &  0   & 2   & -2
+            \end{array}
+     \right)
+$$
+and $\bb = (-5.0625, -.0625, -.0625, -.0625)'$.
+Solve this system and plot the results:
+\begin{lstlisting}[frame=none,numbers=left]
+u = A\b
+u = [5 ; u]
+x = 0:.25:1
+plot(x,u,'d')
+\end{lstlisting}
+Then interpolate with a spline.
+
+The exact solution of this BVP is:
+$$
+   U(x) = 5 +  x - .5 x^2.
+$$
+Use \verb& hold on & and plot this function on the same graph to compare:
+\begin{lstlisting}[frame=none,numbers=left]
+xx = 0:.01:1;
+uu = 5 + xx - .5*xx.^2;
+hold on
+plot(xx,uu,'r')
+\end{lstlisting}
+You should see that our approximate solution is almost perfect!
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Insulated boundary conditions in time-dependent problems}
+
+To implement the insulated boundary condition in an explicit
+difference equation with time, we need to copy values from inside the
+region to fictional points just outside the region. Note that you
+copy the {\em new} value from inside the region to the false point during each time step, i.e.\ inside
+the loop, but after the values are updated at the real points.  See Figure~\ref{fig:expheatinsulation} for an
+illustration.
+\begin{figure}[p]
+\begin{center}
+\setlength{\unitlength}{1.7 mm}
+%%%%%%%%% fixed boundary
+\begin{picture}(65,45)(-10,0)
+	\put(10,10){\circle*{2}}
+	\put(20,10){\circle*{2}}
+	\put(30,10){\circle*{2}}
+	\put(40,10){\circle*{2}}
+	\put(10,20){\circle*{2}}
+	\put(20,20){\circle*{2}}
+	\put(30,20){\circle*{2}}
+	\put(40,20){\circle*{2}}
+	\put(10,30){\circle*{2}}
+	\put(20,30){\circle*{2}}
+	\put(30,30){\circle*{2}}
+%	\put(27,29){\mbox{$u_{i,j+1}$}}
+	\put(40,30){\circle*{2}}
+	\put(10,40){\circle*{2}}
+	\put(20,40){\circle*{2}}
+	\put(30,40){\circle*{2}}
+	\put(40,40){\circle*{2}}
+% straight up
+	\put(10,10){\vector(0,1){7}}
+	\put(20,10){\vector(0,1){7}}
+	\put(30,10){\vector(0,1){7}}
+	\put(40,10){\vector(0,1){7}}
+	\put(10,20){\vector(0,1){7}}
+	\put(20,20){\vector(0,1){7}}
+	\put(30,20){\vector(0,1){7}}
+	\put(40,20){\vector(0,1){7}}
+	\put(10,30){\vector(0,1){7}}
+	\put(20,30){\vector(0,1){7}}
+	\put(30,30){\vector(0,1){7}}
+	\put(40,30){\vector(0,1){7}}
+% slant right
+	\put(0,10){\vector(1,1){7}}
+	\put(10,10){\vector(1,1){7}}
+	\put(20,10){\vector(1,1){7}}
+	\put(0,20){\vector(1,1){7}}
+	\put(10,20){\vector(1,1){7}}
+	\put(20,20){\vector(1,1){7}}
+	\put(0,30){\vector(1,1){7}}
+	\put(10,30){\vector(1,1){7}}
+	\put(20,30){\vector(1,1){7}}
+% slant left
+	\put(10,10){\vector(-1,1){7}}
+	\put(20,10){\vector(-1,1){7}}
+	\put(30,10){\vector(-1,1){7}}
+	\put(40,10){\vector(-1,1){7}}
+	\put(10,20){\vector(-1,1){7}}
+	\put(20,20){\vector(-1,1){7}}
+	\put(30,20){\vector(-1,1){7}}
+	\put(40,20){\vector(-1,1){7}}
+	\put(10,30){\vector(-1,1){7}}
+	\put(20,30){\vector(-1,1){7}}
+	\put(30,30){\vector(-1,1){7}}
+	\put(40,30){\vector(-1,1){7}}
+% to boundary
+	\put(50,2){\vector(-1,1){8}}
+	\put(50,2){\vector(-1,2){8}}
+	\put(50,2){\vector(-1,3){8}}
+	\put(50,2){\vector(-1,4){9}}
+%
+	\put(-10,19){\mbox{$t_j$}}
+	\put(-10,29){\mbox{$t_{j+1}$}}
+	\put(17,0){\mbox{$x_{m-2}$}}
+	\put(28,0){\mbox{$x_{m-1}$}}
+	\put(37,0){\mbox{$x_{m}=L$}}
+	\put(50,0){\mbox{$g_2$}}
+\end{picture}
+
+%%%%%%%%%%%%%%% insulated
+\begin{picture}(65,55)(-10,0)
+	\put(10,10){\circle*{2}}
+	\put(20,10){\circle*{2}}
+	\put(30,10){\circle*{2}}
+	\put(40,10){\circle*{2}}
+	\put(50,10){\circle{2}}
+	\put(10,20){\circle*{2}}
+	\put(20,20){\circle*{2}}
+	\put(30,20){\circle*{2}}
+	\put(40,20){\circle*{2}}
+	\put(50,20){\circle{2}}
+	\put(10,30){\circle*{2}}
+	\put(20,30){\circle*{2}}
+	\put(30,30){\circle*{2}}
+%	\put(27,29){\mbox{$u_{i,j+1}$}}
+	\put(40,30){\circle*{2}}
+	\put(50,30){\circle{2}}
+	\put(10,40){\circle*{2}}
+	\put(20,40){\circle*{2}}
+	\put(30,40){\circle*{2}}
+	\put(40,40){\circle*{2}}
+	\put(50,40){\circle{2}}
+% straight up
+	\put(10,10){\vector(0,1){7}}
+	\put(20,10){\vector(0,1){7}}
+	\put(30,10){\vector(0,1){7}}
+	\put(40,10){\vector(0,1){7}}
+	\put(10,20){\vector(0,1){7}}
+	\put(20,20){\vector(0,1){7}}
+	\put(30,20){\vector(0,1){7}}
+	\put(40,20){\vector(0,1){7}}
+	\put(10,30){\vector(0,1){7}}
+	\put(20,30){\vector(0,1){7}}
+	\put(30,30){\vector(0,1){7}}
+	\put(40,30){\vector(0,1){7}}
+% slant right
+	\put(0,10){\vector(1,1){7}}
+	\put(10,10){\vector(1,1){7}}
+	\put(20,10){\vector(1,1){7}}
+	\put(30,10){\vector(1,1){7}}
+	\put(0,20){\vector(1,1){7}}
+	\put(10,20){\vector(1,1){7}}
+	\put(20,20){\vector(1,1){7}}
+	\put(30,20){\vector(1,1){7}}
+	\put(0,30){\vector(1,1){7}}
+	\put(10,30){\vector(1,1){7}}
+	\put(20,30){\vector(1,1){7}}
+	\put(30,30){\vector(1,1){7}}
+% slant left
+	\put(10,10){\vector(-1,1){7}}
+	\put(20,10){\vector(-1,1){7}}
+	\put(30,10){\vector(-1,1){7}}
+	\put(40,10){\vector(-1,1){7}}
+	\put(50,10){\vector(-1,1){7}}
+	\put(10,20){\vector(-1,1){7}}
+	\put(20,20){\vector(-1,1){7}}
+	\put(30,20){\vector(-1,1){7}}
+	\put(40,20){\vector(-1,1){7}}
+	\put(50,20){\vector(-1,1){7}}
+	\put(10,30){\vector(-1,1){7}}
+	\put(20,30){\vector(-1,1){7}}
+	\put(30,30){\vector(-1,1){7}}
+	\put(40,30){\vector(-1,1){7}}
+	\put(50,30){\vector(-1,1){7}}
+% copy
+       \qbezier(30,10)(40,17)(46,12)
+	\put(46,12){\vector(1,-1){0}}
+        \qbezier(30,20)(40,27)(46,22)
+	\put(46,22){\vector(1,-1){0}}
+        \qbezier(30,30)(40,37)(46,32)
+	\put(46,32){\vector(1,-1){0}}
+        \qbezier(30,40)(40,47)(46,42)
+	\put(46,42){\vector(1,-1){0}}
+%
+	\put(-10,19){\mbox{$t_j$}}
+	\put(-10,29){\mbox{$t_{j+1}$}}
+	\put(17,0){\mbox{$x_{m-2}$}}
+	\put(28,0){\mbox{$x_{m-1}$}}
+	\put(37,0){\mbox{$x_{m}=L$}}
+	\put(47,3){\mbox{fictional}}
+\end{picture}
+\end{center}
+\caption{Illustration of information flow for the explicit method near
+  the right boundary at $x=L$.  The top figure shows a fixed boundary
+  condition, where $u_{m,j}$ is set to be $g_2(t_j)$. 
+  The bottom figure shows an insulating boundary condition. Now
+  $u_{m,j}$ is updated in the same way as the general  $u_{i,j}$ and
+  an additional entry $u_{m+1,j}$ is used with its value set by
+  copying $u_{m-1,j}$.}
+%
+%  with an insulated boundary condition. The open circles are the
+%  fictional points and the curved arrows represent copying the value.}
+\label{fig:expheatinsulation}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{An example}
+
+The steady state temperature $u(r)$ (given in polar coordinates)
+of a disk subjected to a radially symmetric heat load
+$g(r)$ and cooled by conduction to the rim of the disk and radiation
+to  its environment is determined
+by the boundary value problem
+\begin{equation}\label{heatdiskeqn}
+\frac{\partial^2 u}{\partial r^2}+ \frac{1}{r} \frac{\partial u}{\partial r}
+= d (u^4 - u_b^4) - g(r)
+\quad\text{with}\quad u(R) = u_R
+\quad\text{and}\quad u'(0) = 0.
+\end{equation}
+Here $u_b$ is the (fixed) background temperature and  $u_R$ is the (fixed) temperature
+at the rim of the disk.
+
+
+The program \programlink{myheatdisk.m} implements
+these equations for parameter values $R = 5$, $d = .1$, $u_R = u_b = 10$ and
+$g(r) = (r-5)^2$. Notice that the equations have a singularity (discontinuity) at $r=0$.
+How does the program avoid this problem? How does the program implement $u_R=10$ and
+$u'(0) = 0$? Run the program.
+
+
+
+
+%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Redo the calculations for the BVP (\ref{linear_insulated}) except do not include
+the fictional point $x_5$.  Instead, let $x_4$ be the last point and impose the insulated
+boundary by requiring $u_4 = u_3$. (Keep $m=4$ and $h=1/4$. Your system of equations should be $3 \times 3$.)
+Compare this solution with the true solution and the better approximation in the lecture.
+Illustrate this comparison on a single plot.
+
+\item Modify the program \programlink{myheat.m} to have an insulated boundary
+  at $x=L$ (rather than $u(L,t) = g_2(t)$). You will need to change the domain to:
+  \verb&x = 0:h:L+h&, change the dimensions of all the other objects to
+  fit this domain and implement the insulation (copy) step inside the loop 
+  (see the section `Insulated boundary conditions in time-dependent problems' and the
+  figure). 
+  
+  Run the program with $L =
+  2\pi$, $T=20$, $c = .6$, $g_1(t) = \sin(t)$ and $f(x) = -\sin(x/4)$.
+  Set $m=20$ and experiment with $n$. Get a plot when the program is
+  stable. Turn in your program and plot.
+
+%
+%\item Starting from (\ref{heatdiskeqn}), derive the finite difference
+%  equations for this example. Then solve for $u_i$ and get the relaxation
+%  update formula used in program \programlink{myheatdisk.m}. In the program
+%  change the radiation coefficient $d$ to $.01$. How does this affect
+%  the final temperature at $r=0$? How does it affect the rate of
+%  convergence of the method? Turn in your derivation, the plots for
+%  both $d=0.1$ and $d=0.01$, and
+%  answers to the questions. 
+
+\end{list}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Finite Difference Method for Elliptic PDEs}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Examples of Elliptic PDEs}
+
+{\bf Elliptic} PDE's are equations with second derivatives in space and
+no time derivative. The most important examples are Laplace's
+equation
+$$ \Delta u = u_{xx} + u_{yy} + u_{zz} = 0 $$
+and the Poisson equation
+$$ \Delta u = f(x,y,z).  $$
+These equations are used in a large variety of steady-state physical situations
+such as: steady state heat problems, steady state chemical
+distributions, electrostatic potentials, elastic deformation and
+steady state fluid flows.
+
+For the sake of clarity we will only consider the two dimensional
+problem. A good model problem in this dimension is the elastic
+deflection of a membrane. Suppose that a  membrane such as
+a sheet of rubber is stretched across a rectangular frame.
+If some of the edges of the frame are bent, or if forces are applied to
+the sheet then it will deflect by an amount $u(x,y)$ at each
+point $(x,y)$. This $u$ will satisfy the boundary value problem:
+\begin{equation}\label{poissonbvp}
+\begin{split}
+u_{xx} + u_{yy} &= f(x,y) \quad\text{for}\quad (x,y) \text{ in } R, \\
+u(x,y) &= g(x,y) \quad\text{for}\quad (x,y) \text{ on }  \partial R,
+\end{split}
+\end{equation}
+where $R$ is the rectangle, $\partial R$ is the edge of the rectangle,
+$f(x,y)$ is the force density (pressure) applied at each point and
+$g(x,y)$ is the deflection at the edge.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{The Finite Difference Equations}
+
+Suppose the rectangle is described by
+$$
+ R = \{ a\le x \le b, c \le y \le d\}.
+$$
+We will divide $R$ in sub-rectangles. If we have $m$ subdivisions
+in the $x$ direction and $n$ subdivisions in the $y$ direction,
+then the step size in the $x$ and $y$ directions respectively are
+$$
+    h = \frac{b-a}{m} \quad \text{and} \quad k = \frac{d-c}{n}.
+$$
+We obtain the finite difference equations for (\ref{poissonbvp})
+by replacing $u_{xx}$ and $u_{yy}$ by their central differences
+to obtain
+\begin{equation}\label{poissonfd}
+  \frac{u_{i+1,j} - 2u_{ij} + u_{i-1,j}}{h^2}
+    +    \frac{u_{i,j+1} - 2u_{ij} + u_{i,j-1}}{k^2}
+       = f(x_i,y_j) = f_{ij}
+\end{equation}
+for $1 \le i \le m-1$ and $1 \le j \le n-1$.
+See Figure~\ref{fig:elliptic} for an illustration.
+The boundary conditions are introduced by
+\begin{equation}\label{poissonbv}
+    u_{0,j} = g(a,y_j), \quad u_{m,j} = g(b,y_j), \quad
+        u_{i,0} = g(x_i,c), \quad\text{and}\quad u_{i,n} = g(x_i,d).
+\end{equation}
+
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{1.5 mm}
+\begin{picture}(55,55)(0,0)
+	\put(10,10){\circle*{2}}
+	\put(20,10){\circle*{2}}
+	\put(30,10){\circle*{2}}
+	\put(40,10){\circle*{2}}
+	\put(50,10){\circle*{2}}
+	\put(10,20){\circle*{2}}
+	\put(20,20){\circle*{2}}
+	\put(30,20){\circle*{3}}
+	\put(40,20){\circle*{2}}
+	\put(50,20){\circle*{2}}
+	\put(10,30){\circle*{2}}
+	\put(20,30){\circle*{3}}
+	\put(30,30){\circle*{3}}
+	\put(40,30){\circle*{3}}
+	\put(50,30){\circle*{2}}
+	\put(10,40){\circle*{2}}
+	\put(20,40){\circle*{2}}
+	\put(30,40){\circle*{3}}
+	\put(40,40){\circle*{2}}
+	\put(50,40){\circle*{2}}
+	\put(10,50){\circle*{2}}
+	\put(20,50){\circle*{2}}
+	\put(30,50){\circle*{2}}
+	\put(40,50){\circle*{2}}
+	\put(50,50){\circle*{2}}
+% line
+	\put(20,30){\line(1,0){20}}
+	\put(30,20){\line(0,1){20}}
+%
+	\put(0,18){\mbox{$y_{j-1}$}}
+	\put(0,28){\mbox{$y_{j}$}}
+	\put(0,38){\mbox{$y_{j+1}$}}
+	\put(18,0){\mbox{$x_{i-1}$}}
+	\put(28,0){\mbox{$x_i$}}
+	\put(38,0){\mbox{$x_{i+1}$}}
+\end{picture}
+\end{center}
+\caption{The finite difference equation relates five neighboring
+  values in a $+$ pattern.}
+\label{fig:elliptic}
+\end{figure}
+
+%%%%%%%%%%%%%
+
+\subsection*{Direct Solution of the Equations}
+
+Notice that since the edge values are prescribed, there are
+$(m-1) \times (n-1)$ grid points where we need to determine
+the solution. Note also that there are exactly $(m-1) \times (n-1)$
+equations in (\ref{poissonfd}). Finally, notice that the
+equations are all linear. Thus we could solve the equations
+exactly using matrix methods. To do this we would first need
+to express the $u_{ij}$'s as a vector, rather then a matrix.
+To do this there is a standard procedure: let $\ub$
+be the column vector we get by placing one column after another
+from the columns of $(u_{ij})$. Thus we would list $u_{:,1}$ first
+then $u_{:,2}$, etc..  Next we would need to write the matrix $A$
+that contains the coefficients of the equations (\ref{poissonfd})
+and incorporate the boundary conditions in a vector $\bb$. Then we
+could solve an equation of the form
+\begin{equation}\label{poissondirect}
+    A \ub = \bb.
+\end{equation}
+Setting up and solving this equation is called the direct method.
+
+An advantage of the direct method is that solving (\ref{poissondirect})
+can be done relatively quickly and accurately.
+The drawback of the direct method is that one must set up $\ub$,
+$A$ and $\bb$, which is confusing. Further, the matrix $A$ has dimensions
+$(m-1)(n-1) \times (m-1)(n-1)$, which can be rather large.
+Although $A$ is large, many of its elements are zero. Such a matrix
+is called {\em sparse} and there are special methods intended for
+efficiently working with sparse matrices.
+
+%%%%%%%%%%%
+
+\subsection*{Iterative Solution}
+
+A usually preferred alternative to the direct method described above is
+to solve the finite difference equations iteratively. To do this,
+first solve (\ref{poissonfd}) for $u_{ij}$, which yields
+\begin{equation}\label{poissonit}
+ u_{ij} = \frac{1}{2(h^2+k^2)} \left( k^2 (u_{i+1,j} + u_{i-1,j})
+          + h^2 (u_{i,j+1} + u_{i,j-1})
+          - h^2 k^2 f_{ij} \right) .
+\end{equation}
+
+This method is another example of a {\em relaxation method}.
+Using this formula, along with (\ref{poissonbv}), we can update
+$u_{ij}$ from its neighbors, just as we did in the relaxation method
+for the nonlinear boundary value problem.  If this method converges,
+then the result is an approximate solution.
+
+Download and read the script \programlink{mypoisson.m}, which implements the iterative solution.
+You
+will notice that \verb&maxit& is set to $0$. Thus the program will not
+do any iteration, but will plot the initial guess. The initial guess
+in this case consists of the proper boundary values at the edges, and
+zero everywhere in the interior.  To see the solution evolve,
+gradually increase \verb&maxit&.
+
+%\newpage % don't want the excercise split across pages
+%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Modify the script \programlink{mypoisson.m} to change the force $f(x,y)$ to a negative constant $-p$.
+   
+  Obtain plots for $p=5$ and $p=50$. You will need to adjust \verb&maxit& to obtain convergence. 
+  Tell how many iterations are needed for convergence in each. Turn in your plots and the modified program.
+  
+\item Further modify \programlink{mypoisson.m}  to change the edge of the rectangle at $x = b \ (= 10)$ 
+     to be an insulated boundary,  i.e.  $u_x(b,y) =0$. 
+     
+     You will need to expand both the grid and the matrix \verb&u& to include a row of fictional points. 
+     Then you will need to adjust a lot of indices and enforce insulation inside the loop.
+     Run it with $p = 20$. 
+     If it is working correctly, the plot will be smooth and the derivative $u_x$ on the edge $x = 10$ 
+     will appear to be zero. Turn in your plots and the modified program.
+  
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Convection-Diffusion Equations*}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item
+
+\end{list}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Finite Elements}
+\label{sec:finiteelements}
+%%%%%%%%%%%%%%%%%%%%%
+
+{\bf \large Triangulating a Region}
+
+A disadvantage of finite difference methods is that they require
+a very regular grid, and thus a very regular region, either
+rectangular or a regular part of a rectangle. Finite elements
+is a method that works for any shape region because it is
+not built on a grid, but on triangulation of the region, i.e.~cutting
+the region up into triangles as we did in a previous lecture.
+The following figure shows a triangularization of a region.
+\begin{figure}[h]
+\centerline{\includegraphics[width=0.6\textwidth]{washer}}
+\caption{An annular region with a triangulation. Notice that
+the nodes and triangles are very evenly spaced.  }
+\label{whasher}
+\end{figure}
+
+This figure was produced by the script program \programlink{mywasher.m}.
+Notice that the nodes are evenly distributed. This is good
+for the finite element process where we will use it.
+
+Open the program \programlink{mywasher.m}. This program defines a
+triangulation by defining the vertices in a matrix \verb&V&
+in which each row contains the $x$ and $y$ coordinates of a vertex.
+Notice that we list the interior nodes first, then the
+boundary nodes.
+
+Triangles are defined in the matrix \verb&T&. Each row of
+\verb&T& has three integer numbers indicating the indices
+of the nodes that form a triangle. For instance the first row
+is \verb&43 42 25&, so $T_1$ is the triangle with vertices
+$\vb_{43}$, $\vb_{42}$ and $\vb_{25}$. The matrix $T$ in this
+case was produced by the \textsc{Matlab} command \verb&delaunay&.
+The command produced more triangles than desired and the unwanted
+ones were deleted.
+
+A three dimensional plot of the region and triangles
+is produced by having the last line be \verb&trimesh(T,x,y,z)&.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{What is a finite element?}
+
+The finite element method is a mathematically complicated process.
+However, a finite element is actually a very simple object.  To each
+node $\vb_j$ we associate a function $\Phi_j$ that has the properties
+$\Phi_j(\vb_j)=1$ and $\Phi_j(\vb_i)=0$ for $i\not=j$.  Between nodes,
+$\Phi_j$ is a linear function. This function is the finite element.
+(There are fancier types of finite elements that we will not discuss.)
+
+If we consider one dimension, then a triangulation is just a
+subdivision into subintervals. In Figure~\ref{1dfe} we show an uneven
+subdivision of an interval and the finite elements corresponding to
+each node.
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{0.9 mm}
+\begin{picture}(60,35)(-2,-2)
+	\put(0,0){\line(1,0){56}}
+	\put(0,0){\circle*{2}}
+	\put(0,30){\line(1,-5){6}}
+	\put(0,0){\line(1,5){6}}
+	\put(6,0){\circle*{2}}
+	\put(6,30){\line(1,-3){10}}
+	\put(6,0){\line(1,3){10}}
+	\put(16,0){\circle*{2}}
+	\put(16,30){\line(1,-2){15}}
+	\put(16,0){\line(1,2){15}}
+	\put(31,0){\circle*{2}}
+	\put(31,30){\line(1,-2){15}}
+	\put(31,0){\line(1,2){15}}
+	\put(46,0){\circle*{2}}
+	\put(46,30){\line(1,-3){10}}
+	\put(46,0){\line(1,3){10}}
+	\put(56,0){\circle*{2}}
+%
+%	\put(38,0){\mbox{$x_{i+1}$}}
+\end{picture}
+\end{center}
+\caption{The finite elements for the ``triangulation'' of a one
+dimensional object.}
+\label{1dfe}
+\end{figure}
+
+In two dimensions, $\Phi_j$ is composed of triangular piece
+of planes.  Thus $\Phi_j$ is a function whose graph is a pyramid with
+its peak over node $\vb_j$.
+For an example, try:
+\begin{lstlisting}[frame=none,numbers=left]
+mywasher
+z = 0*z;
+z(1) =1 
+trimesh(T,x,y,z)
+\end{lstlisting}
+%%%%%%%%%%%%%%
+
+\subsection*{What is a finite element solution?}
+
+A finite element (approximate) solution is a linear combination of the
+elements:
+\begin{equation}
+      U(\xb) = \sum_{j=1}^n C_j \Phi_j(\xb).
+\end{equation}
+Thus finding a finite element solution amounts to finding the best
+values for the constants $\{ C_j \}_{j=1}^n$.
+
+In the program \programlink{mywasher.m}, the vector \verb&z&
+contains the node values $C_j$.
+These values give the height at each node in the graph.
+For instance if we set all equal to $0$ except one equal to
+$1$, then the function is a finite element. Do this for
+one boundary node, then for one interior node.
+
+Notice that a sum of linear functions is a linear function. Thus the
+solution using linear elements is a piecewise linear function.
+Also notice that if we denote the $j$-th vertex by $\vb_j$, then
+\begin{equation}
+      U(\vb_j) = C_j.
+\end{equation}
+Thus we see that {\bf the constants $C_j$ are just the values at the nodes.}
+
+Take the one-dimensional case. Since we know that the solution
+is linear on each subinterval, knowing the values at the endpoints
+of the subintervals, i.e.\ the nodes, gives us complete knowledge
+of the solution. Figure~\ref{1dfesol} could be a finite
+element solution since it is piecewise linear.
+\begin{figure}[h]
+\begin{center}
+\setlength{\unitlength}{0.9 mm}
+\begin{picture}(60,37)(-2,-2)
+	\put(0,0){\line(1,0){56}}
+	\put(0,0){\circle*{2}}
+	\put(0,0){\line(1,5){6}}
+	\put(6,0){\circle*{2}}
+	\put(6,30){\line(1,-1){10}}
+	\put(16,0){\circle*{2}}
+	\put(16,20){\line(1,1){15}}
+	\put(31,0){\circle*{2}}
+	\put(31,35){\line(1,0){15}}
+	\put(46,0){\circle*{2}}
+	\put(46,35){\line(1,-2){10}}
+	\put(56,0){\circle*{2}}
+%
+%	\put(38,0){\mbox{$x_{i+1}$}}
+\end{picture}
+\end{center}
+\caption{A possible finite element solution for a one
+dimensional object. Values are assigned at each node and
+a linear interpolant is used in between.}
+\label{1dfesol}
+\end{figure}
+
+In the two-dimensional case, the solution is linear
+on each triangle, and so again, if we know the values
+$\{C_j\}_{j=1}^n$ at the nodes then we know everything.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Experiment with finite elements}
+
+By changing the values in \verb&z& in the program we can produce
+different three dimensional shapes based on the triangles. The point then
+of a finite element solution is to find the values at the
+nodes that best approximate the true solution. This task
+can be subdivided into two parts: (1) assigning the values at
+the boundary nodes and (2) assigning the values at the interior
+nodes.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Values at boundary nodes}
+
+Once a triangulation and a set of finite elements is set up, the next
+step is to incorporate the boundary conditions of the problem. Suppose
+that we have fixed boundary conditions, i.e. of the form
+$$
+u(\xb) = g(\xb) \quad  \text{for} \quad \xb \in \partial D,
+$$
+where $D$ is the object (domain) and $\partial D$ is its boundary.
+Then the boundary condition directly determines the
+values on the boundary nodes.
+
+In particular, suppose that $\vb_\ell$
+is a boundary node. Since $\Phi_\ell(\vb_\ell) = 1$ and all the other elements
+are zero at node $\vb_\ell$, then to make
+$$
+U(\vb_\ell) = \sum_{j=1}^n C_j \Phi_j(\vb_\ell) = g(\vb_\ell),
+$$
+we must choose
+$$
+  C_\ell = g(\vb_\ell).
+$$
+Thus {\bf the constants $C_j$ for the boundary nodes are set at exactly the value of the
+boundary condition at the nodes.}
+
+Thus, if there are $m$ interior nodes, then
+$$
+    C_j = g(\vb_j), \qquad \text{for all} \quad m+1 \le j \le n.
+$$
+
+In the program \programlink{mywasher.m} the first 32 vertices
+correspond to interior nodes and the last 32 correspond to boundary
+nodes. By setting the last 32 values of \verb&z&, we achieve the
+boundary conditions. We could do this by adding the following
+commands to the program:
+\begin{lstlisting}
+z(33:64) = .5;
+\end{lstlisting}
+or more elaborately we might use functions:
+\begin{lstlisting}
+z(33:48) = x(33:48).^2 - .5*y(33:48).^2;
+z(49:64) = .2*cos(y(49:64));
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item \label{exr:ownFEregion}
+Generate an interesting or useful 2-d object and a
+well-distributed triangulation of it. 
+Make it have at least 2 interior nodes and have it list the interior nodes before the boundary nodes.
+\begin{itemize}
+\item Plot the region.
+\item Plot one interior finite element.
+\item Plot one boundary finite element.
+\item Assign values to the boundary using a function (or functions)
+  and plot the region with the boundary values.
+\end{itemize}
+Turn in your code and the four plots.
+
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Determining Internal Node Values}
+
+As seen in the previous section, a finite element solution of a
+boundary value problem boils down to finding the best values of the
+constants $\{C_j\}_{j=1}^n$, which are the values of the solution at
+the nodes. The interior nodes values are determined by {\em
+variational principles}. Variational principles usually amount to {\bf
+minimizing internal energy}. It is a physical principle that systems
+seek to be in a state of minimal energy and this principle is used to
+find the internal node values.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Variational Principles}
+
+For the differential equations that describe many physical systems, the
+internal energy of the system is an integral. For instance, for the steady
+state heat equation
+\begin{equation}\label{ssheat}
+      u_{xx}(x,y) + u_{yy}(x,y) = g(x,y)
+\end{equation}
+the internal energy is the integral
+\begin{equation}\label{varheat}
+     I[u] =  \iint_R u_x^2(x,y) + u_y^2(x,y) + 2g(x,y) u(x,y) \,dA,
+\end{equation}
+where $R$ is the region on which we are working.
+It can be shown that $u(x,u)$ is a solution of (\ref{ssheat}) if and only if
+it is minimizer of $I[u]$ in (\ref{varheat}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The finite element solution}
+
+Recall that a finite element solution is a linear combination of
+finite element functions:
+$$
+U(x,y) = \sum_{j=1}^n C_j \Phi_j(x,y),
+$$
+where  $n$ is the number of nodes. To obtain the values at the
+internal nodes, we will plug $U(x,y)$ into the energy integral and
+minimize. That is, we find the minimum of
+$$
+    I[U]
+$$
+for all choices of $\{C_j\}_{j=1}^m$, where $m$ is the number of internal
+nodes. In this as with any other minimization problem, the way to
+find a possible minimum is to differentiate the quantity with respect to
+the variables and set the results to zero. In this case the free variables are
+$\{C_j\}_{j=1}^m$. Thus to find the minimizer we should try to solve
+\begin{equation}\label{IC}
+      \frac{\partial I[U]}{\partial C_j} = 0 \qquad \textrm{for} \quad 1 \le j \le m.
+\end{equation}
+
+We call this set of equations the {\bf internal node equations}. At this
+point we should ask whether the internal node equations can be solved, and
+if so, is the solution actually a minimizer (and not a maximizer). The following
+two facts answer these questions. These facts make the finite element method
+practical:
+\begin{itemize}
+\item For most applications the internal node equations are linear.
+\item For most applications the internal node equations give a minimizer.
+\end{itemize}
+We can demonstrate the first fact using an example.
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Application to the steady state heat equation}
+
+If we plug the candidate finite element solution $U(x,y)$ into the
+energy integral for the heat equation (\ref{varheat}), we obtain
+\begin{equation}\label{varheatU}
+     I[U] =  \iint_R U_x(x,y)^2 + U_y(x,y)^2 + 2g(x,y) U(x,y) \,dA.
+\end{equation}
+Differentiating with respect to~$C_j$ we obtain the internal node equations
+\begin{equation}\label{inheat}
+     0 = \iint_R 2  U_x \frac{\partial U_x}{\partial C_j}
+                        + 2 U_y \frac{\partial U_y}{\partial C_j}
+                             + 2 g(x,y) \frac{\partial U}{\partial C_j} \,dA
+\quad\text{for}\quad 1 \le j \le m.
+\end{equation}
+Now we have several simplifications. First note that since
+$$
+U(x,y) = \sum_{j=1}^n C_j \Phi_j(x,y),
+$$
+we have
+$$
+\frac{\partial U}{\partial C_j} = \Phi_j(x,y)
+\,.
+$$
+Also note that
+$$
+U_x(x,y) = \sum_{j=1}^n C_j \frac{\partial}{\partial x} \Phi_j(x,y),
+$$
+and so
+$$
+\frac{\partial U_x}{\partial C_j}  = (\Phi_j)_x.
+$$
+Similarly, $\frac{\partial U_y}{\partial C_j} = (\Phi_j)_y$. The integral (\ref{inheat})
+then becomes
+$$
+   0 =  2 \iint   U_x  (\Phi_j)_x
+                        +  U_y (\Phi_j)_y
+                             +  g(x,y) \Phi_j(x,y) \,dA
+\quad\text{for}\quad 1 \le j \le m.
+$$
+
+Next we use the fact that the region $R$ is subdivided into triangles $\{T_i\}_{i=1}^p$
+and the functions in question have different definitions on each triangle.
+The integral then is a sum of the integrals:
+$$
+ 0 = 2 \sum_{i=1}^p \iint_{T_i}   U_x  (\Phi_j)_x
+                                     +  U_y (\Phi_j)_y
+                                     +  g(x,y) \Phi_j(x,y) \,dA
+\quad\text{for}\quad 1 \le j \le m.
+$$
+
+Now note that the function $\Phi_j(x,y)$ is linear on triangle $T_i$ and
+so
+$$
+     \Phi_{ij}(x,y) = \Phi_j|_{T_i}(x,y) = a_{ij} + b_{ij} x + c_{ij} y.
+$$
+This gives us the simplifications
+$$
+     (\Phi_{ij})_x(x,y) = b_{ij} \quad \textrm{ and } \quad
+  (\Phi_{ij})_y(x,y) = c_{ij}.
+$$
+Also, $U_x$ and $U_y$ restricted to $T_i$ have the form
+$$
+    U_x = \sum_{k=1}^n C_k b_{ik} \quad \textrm{ and } \quad
+     U_y = \sum_{k=1}^n C_k c_{ik}.
+$$
+The internal node equations then reduce to
+$$
+ 0 =  \sum_{i=1}^p \iint_{T_i}
+                   \left( \sum_{k=1}^n C_k  b_{ik} \right) b_{ij}
+                 + \left( \sum_{k=1}^n C_k c_{ik} \right)  c_{ij}
+                                     +  g(x,y) \Phi_{ij}(x,y) \,dA
+\quad\text{for}\quad 1 \le j \le m.
+$$
+Now notice that $ \left( \sum_{k=1}^n C_k  b_{ik} \right) b_{ij}$
+is just a constant on $T_i$, and, thus, we have
+$$
+\iint_{T_i} \left( \sum_{k=1}^n C_k  b_{ik} \right) b_{ij}
+           + \left( \sum_{k=1}^n C_k c_{ik} \right)  c_{ij}
+=  \left[ \left( \sum_{k=1}^n C_k  b_{ik} \right) b_{ij}
+           + \left( \sum_{k=1}^n C_k c_{ik} \right)  c_{ij} \right] A_i,
+$$
+where $A_i$ is just the area of $T_i$.
+Finally, we apply the Three Corners rule to make an approximation to the integral
+$$
+   \iint_{T_i} g(x,y) \Phi_{ij}(x,y) \,dA\,.
+$$
+Since $\Phi_{ij}(x_k,y_k)=0$ if $k\not=j$ and
+even $\Phi_{ij}(x_j,y_j)=0$ if $T_i$ does not have a corner at
+$(x_j,y_j)$, we get the approximation
+$$
+	 \Phi_{ij}(x_j,y_j)g(x_j,y_j){A_i}/{3}.
+$$
+If $T_i$ does have a corner at $(x_j,y_j)$ then $\Phi_{ij}(x_j,y_j)=1$.
+
+Summarizing, the internal node equations are
+$$
+ 0 = \sum_{i=1}^p \left[ \left( \sum_{k=1}^n C_k  b_{ik} \right) b_{ij}
+           + \left( \sum_{k=1}^n C_k c_{ik} \right)  c_{ij}
+           + \frac{1}{3} g(x_j,y_j)\Phi_{ij}(x_j,y_j) \right] A_i
+\quad\text{for}\quad 1 \le j \le m.
+$$
+While not pretty, these equations are in fact linear in the unknowns $\{C_j\}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Experiment}
+
+Download the program \programlink{myfiniteelem.m}.
+This program produces a finite element solution for the steady
+state heat equation without source term:
+$$
+   u_{xx} + u_{yy} = 0
+\,.
+$$
+To use it, you first need to set up the region and boundary values by
+running a script such as \programlink{mywasher.m} or \programlink{mywedge.m}.
+Try different settings for the boundary values \verb&z&. You will see that the
+program works no matter what you choose.
+
+
+%%%%%%%%%%%
+
+\subsection*{Exercises}
+
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item 
+%Study for the final!
+For this exercise, use the region that you made in Exercise \ref{sec:finiteelements}.\ref{exr:ownFEregion}.
+\begin{itemize}
+	\item Set non-constant boundary values and plot.
+	\item Then run \programlink{myfiniteelem.m} and plot.
+\end{itemize}
+Does the second plot look like it satisfies a variational principle? Why or why not?
+Turn in the two plots and your answers to the questions.
+
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Review of Part IV}
+\addcontentsline{toc}{chapter}{Review of Part IV}
+\markboth{REVIEW OF PART IV}{}
+\section*{Methods and Formulas}
+
+
+\subsection*{Initial Value Problems}
+
+\subsubsection*{Reduction to First order system:}
+For an $n$-th order equation that can be solved for the
+$n$-th derivative
+\begin{equation}
+x^{(n)} = f\left(t,x,\dot{x},\ddot{x}, \ldots,
+                   \frac{d^{n-1}x}{dt^{n-1}}\right)
+\end{equation}
+use the standard change of variables:
+\begin{equation}
+\begin{split}
+y_1 &= x\\
+y_2 &= \dot{x}\\
+   & \vdots \\
+y_n & = x^{(n-1)} = \frac{d^{n-1}x}{dt^{n-1}}.
+\end{split}
+\end{equation}
+Differentiating results in a first-order system:
+\begin{equation}
+\begin{split}
+\dot{y}_1 &= \dot{x} = y_2\\
+\dot{y}_2 &= \ddot{x} = y_3\\
+   & \vdots \\
+\dot{y}_n &= x^{(n)} = f(t,y_1,y_2,\ldots,y_n).
+\end{split}
+\end{equation}
+
+\subsubsection*{Euler's method:}
+\begin{equation*}
+\yb_{i+1} = \yb_i + h f(t_i,\yb_i).
+\end{equation*}
+
+\subsubsection*{Modified (or Improved) Euler method:}
+\begin{equation*}
+\begin{split}
+\mathbf{k}_1 &= h f(t_i,\yb_i)\\
+\mathbf{k}_2 &= h f(t_i+h, \yb_i + \mathbf{k}_1)\\
+\yb_{i+1} &= \yb_i +  \frac{1}{2} \left(\mathbf{k}_1 + \mathbf{k}_2 \right)
+\end{split}
+\end{equation*}
+
+
+\subsection*{Boundary Value Probems}
+
+\subsubsection*{Finite Differences:}
+Replace the Differential Equation by Difference Equations on a grid.\\
+Review the lecture on Numerical Differentiation.
+
+
+\subsubsection*{Explicit Method Finite Differences for Parabolic PDE (heat):}
+\begin{equation}
+u_t \mapsto \frac{u_{i,j+1} - u_{ij}}{k}
+\quad\text{and}
+\quad u_{xx} \mapsto  \frac{u_{i-1,j} - 2 u_{ij} + u_{i+1,j} }{h^2}
+\end{equation}
+leads to
+\begin{equation*}
+u_{i,j+1} = r u_{i-1,j} + (1 - 2r) u_{i,j} + r u_{i+1,j},
+\end{equation*}
+where $h = L/m$, $k = T/n$, and $r = {ck}/{h^2}$. The stability
+condition is $r<1/2$.
+
+\subsubsection*{Implicit Method Finite Differences for Parabolic PDE (heat):}
+\begin{equation}
+u_t \mapsto \frac{u_{i,j+1} - u_{ij}}{k} 
+\quad\text{and}
+\quad u_{xx} \mapsto  \frac{u_{i+1,j+1} - 2 u_{i,j+1} + u_{i-1,j+1} }{h^2}
+\end{equation}
+leads to
+\begin{equation*}
+u_{i,j} = -r u_{i-1,j+1} + (1+2r) u_{i,j+1} - r u_{i+1,j+1},
+\end{equation*}
+which is always stable and has truncation error $O(h^2+k)$.
+
+\subsubsection*{Crank-Nicholson Method Finite Differences for Parabolic PDE (heat):}
+$$
+  -r u_{i-1,j+1} + 2(1+r) u_{i,j+1} - r u_{i+1,j+1}
+       = r u_{i-1,j} + 2(1-r) u_{i,j} + r u_{i+1,j},
+$$
+which is always stable and has truncation error $O(h^2+k^2)$. 
+%or better if $r$ and $\lambda$ are chosen optimally.
+
+\subsubsection*{Finite Difference Method for Elliptic PDEs:}
+\begin{equation*}
+u_{xx} + u_{yy} = f(x,y) \mapsto  \frac{u_{i+1,j} - 2u_{ij} + u_{i-1,j}}{h^2}
+    +    \frac{u_{i,j+1} - 2u_{ij} + u_{i,j-1}}{k^2}
+       = f(x_i,y_j) = f_{ij},
+\end{equation*}
+
+
+\subsubsection*{Finite Elements:}
+Based on triangles instead of rectangles.\\
+Can be used for irregularly shaped objects.\\
+An element: Pyramid shaped function at a node.\\
+A finite element solution is a linear combination of
+finite element functions:
+$$
+U(x,y) = \sum_{j=1}^n C_j \Phi_j(x,y),
+$$
+where  $n$ is the number of nodes, and where $U$ is
+an approximation of the true solution. \\
+$C_j$ is the value of the solution at node $j$. \\
+$C_j$ at the boundary nodes are given by boundary conditions.\\
+$C_j$ at interior nodes are determined by variation principles.\\
+The last step in determining $C_j$'s is solving a linear system of equations.\\
+
+\subsection*{\sc Matlab}
+
+Initial value problem solver that uses the Runge-Kutta 45 method,
+which has error $O(h^5)$ . The input $y0$
+is the initial vector and \verb&tspan& is the time span.  
+You can either make $f$ a vector valued anonymous function and do
+\begin{lstlisting}[frame=none,numbers=left]
+df = @(t,y)[-y(2);y(1)]  
+[T Y ] = ode45(dy,tspan,y0)
+\end{lstlisting}
+or make
+a function program that outputs a vector
+\begin{lstlisting}
+function dy = myf(t,y)
+    dy = [-y(2);y(1)];
+end
+\end{lstlisting}
+and then do
+\begin{lstlisting}[frame=none,numbers=left]
+[T Y ] = ode45(@myf,tspan,y0)
+\end{lstlisting}
+
+The program \verb&ode45& and other \textsc{Matlab} IVP solvers use 
+adaptive step size to achieve
+a desired local and global accuracy, with a default of \verb&tol& $=10^{-6}$ for the global error.
+
+The chief benefit of higher order methods and variable step size is that they allow a program to 
+take only as few steps as necessary.
+
+

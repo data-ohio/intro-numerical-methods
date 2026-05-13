@@ -1,0 +1,2935 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Linear Algebra}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Matrices and Matrix Operations in Matlab}
+
+%%%%%%%%%%%%%%%%
+
+You should review the vector operations in Lecture~\ref{lec:vectors}.
+
+\subsection*{Matrix operations}
+
+Recall how to multiply a matrix $A$ times a vector $\vb$:
+$$
+   A \vb = \left( \begin{array}{cc}
+                    1 & 2  \\
+                    3 & 4  \\
+                   \end{array} \right)
+                    \left( \begin{array}{c}
+                    -1  \\
+                    2 \\
+                   \end{array} \right)
+=
+\left( \begin{array}{c}
+                    1 \cdot (-1) + 2 \cdot 2  \\
+                    3 \cdot (-1) + 4 \cdot 2 \\
+                   \end{array} \right)
+=
+\left( \begin{array}{c}
+                   3  \\
+                   5 \\
+                   \end{array} \right).
+$$
+This is a special case of matrix multiplication. To
+multiply two matrices, $A$ and $B$ you proceed as follows:
+$$
+   A B = \left( \begin{array}{cc}
+                    1 & 2  \\
+                    3 & 4  \\
+                   \end{array} \right)
+\left( \begin{array}{cc}
+                    -1 & -2 \\
+                    2 &  1\\
+                   \end{array} \right)
+=
+\left( \begin{array}{cc}
+                    -1 + 4 & -2 + 2  \\
+                    -3 + 8 & -6 + 4 \\
+                   \end{array} \right)
+=
+\left( \begin{array}{cc}
+                   3 & 0 \\
+                   5 & -2 \\
+                   \end{array} \right).
+$$
+Here both $A$ and $B$ are $2 \times 2$ matrices.
+Matrices can be multiplied together in this way provided
+that the number of columns of $A$ match the number of rows
+of $B$. We always list the size of a matrix by rows, then
+columns, so a $3 \times 5$ matrix would have 3 rows and 5 columns.
+So, if $A$ is $m \times n$ and $B$ is $p \times q$, then
+we can multiply $AB$ if and only if $n = p$.
+A column vector can be thought of as a $p \times 1$ matrix
+and a row vector as a $1 \times q$ matrix. Unless otherwise specified
+we will assume a vector $\vb$ to be a column vector and
+so $A\vb $ makes sense as long as the number of columns of $A$
+matches the number of entries in $\vb$.
+
+Printing matrices on the screen takes up a lot of space, so you may
+want to use
+\begin{lstlisting}[frame=none,numbers=left]
+format compact
+\end{lstlisting}
+Enter a matrix into Matlab either as
+\begin{lstlisting}[frame=none,numbers=left]
+A = [ 1  3 -2 5 ;  -1  -1 5 4 ; 0 1 -9  0]
+\end{lstlisting}
+or
+\begin{lstlisting}[frame=none,numbers=left]
+A = [1,3,-2,5; -1,-1,5,4; 0,1,-9,0]
+\end{lstlisting}
+Also enter a vector $\ub$:
+\begin{lstlisting}[frame=none,numbers=left]
+u = [ 1  2  3  4]'
+\end{lstlisting}
+To multiply a matrix times a vector $A\mathbf{u}$ use \verb&*&:
+\begin{lstlisting}[frame=none,numbers=left]
+A*u
+\end{lstlisting}
+Since $A$ is 3 by 4 and $\ub$ is 4 by 1 this multiplication is
+valid and the result is a 3 by 1 vector.
+
+Now enter another matrix $B$ using
+\begin{lstlisting}[frame=none,numbers=left]
+B = [3 2 1; 7 6 5; 4 3 2]
+\end{lstlisting}
+You can multiply $B$ times $A$ with
+\begin{lstlisting}[frame=none,numbers=left]
+B*A
+\end{lstlisting}
+but $A$ times $B$ is not defined and
+\begin{lstlisting}[frame=none,numbers=left]
+A*B
+\end{lstlisting}
+will result in an error message.
+
+
+You can multiply a matrix by a scalar:
+\begin{lstlisting}[frame=none,numbers=left]
+2*A
+\end{lstlisting}
+Adding matrices $A + A$ will give the same result:
+\begin{lstlisting}[frame=none,numbers=left]
+A + A
+\end{lstlisting}
+You can even add a number to  a matrix:
+\begin{lstlisting}[frame=none,numbers=left]
+A + 3    % add 3 to every entry of A
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Component-wise operations}
+
+Just as for vectors, adding a `\verb&.&' before `\verb&*&',
+`\verb&/&', or `\verb&^&' produces entry-wise multiplication,
+division and exponentiation.
+If you enter
+\begin{lstlisting}[frame=none,numbers=left]
+B*B
+\end{lstlisting}
+the result will be $BB$, i.e.\ matrix multiplication of $B$ times itself. But,
+if you enter
+\begin{lstlisting}[frame=none,numbers=left]
+B.*B
+\end{lstlisting}
+the entries of the resulting matrix will contain the squares
+of the same entries of $B$. Similarly if you want $B$  multiplied
+by itself 3 times then enter
+\begin{lstlisting}[frame=none,numbers=left]
+B^3
+\end{lstlisting}
+but, if you want to cube all the entries of B then enter
+\begin{lstlisting}[frame=none,numbers=left]
+B.^3
+\end{lstlisting}
+Note that \verb&B*B& and \verb&B^3& only make sense if $B$ is
+square, but \verb&B.*B& and \verb&B.^3& make sense for any size
+matrix.
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{The identity matrix and the inverse
+of a matrix}
+
+The $n \times n$ {\em identity matrix} is a square matrix with
+ones on the diagonal and zeros everywhere else. It is
+called the identity because it plays the same role that $1$
+plays in multiplication, i.e.
+$$
+      A I = A,   \qquad I A = A, \qquad I \vb = \vb
+$$
+for any matrix $A$ or vector $\vb$ where the sizes match.
+An identity matrix in \textsc{Matlab} is produced by the command
+\begin{lstlisting}[frame=none,numbers=left]
+I = eye(3)
+\end{lstlisting}
+
+A square matrix $A$ can have an {\em inverse} which is denoted
+by $A^{-1}$. The definition of the inverse is that
+$$
+       A A^{-1} = I  \qquad \text{and} \qquad A^{-1} A = I.
+$$
+In theory an inverse is very important, because if you
+have an equation
+$$
+     A \xb = \bb
+$$
+where $A$ and $\bb$ are known and $\xb$ is unknown (as
+we will see, such problems are very common and important)
+then the theoretical solution is
+$$
+      \xb = A^{-1} \bb.
+$$
+We will see later that this is not a practical way to solve
+an equation, and $A^{-1}$ is only important for the purpose
+of derivations.
+%
+In \textsc{Matlab} we can calculate a matrix's inverse
+very conveniently:
+\begin{lstlisting}[frame=none,numbers=left]
+C = randn(5,5)
+inv(C)
+\end{lstlisting}
+%
+However, not all square matrices have inverses:
+\begin{lstlisting}[frame=none,numbers=left]
+D = ones(5,5)
+inv(D)
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%
+
+
+\subsection*{The ``Norm'' of a matrix}
+
+For a vector, the ``norm'' means the same thing as the length (geometrically, not the number of entries).
+Another way to think of it is how far the vector is from being
+the zero vector.
+We want to measure a matrix in much the same way and the {\em
+norm} is such a quantity. The usual definition of the norm of
+a matrix is
+\begin{defn}
+Suppose $A$ is a $m \times n$ matrix. The norm of $A$ is
+$$
+  \|A\| \equiv  \max_{\|\vb\|=1} \|A\vb\|.
+$$
+\end{defn}
+The maximum in the definition is taken over all vectors with
+length $1$ (unit vectors), so the definition means the largest
+factor that the matrix stretches (or shrinks) a unit vector.
+This definition seems cumbersome at first, but it
+turns out to be the best one. For example, with this definition
+we have the following inequality for any vector $\vb$:
+$$
+    \|A\vb\| \le \|A\| \|\vb\|.
+$$
+In \textsc{Matlab} the norm of a matrix is obtained by the
+command
+\begin{lstlisting}[frame=none,numbers=left]
+norm(A)
+\end{lstlisting}
+For instance the norm of an identity matrix is $1$:
+\begin{lstlisting}[frame=none,numbers=left]
+norm(eye(100))
+\end{lstlisting}
+and the norm of a zero matrix is $0$:
+\begin{lstlisting}[frame=none,numbers=left]
+norm(zeros(50,50))
+\end{lstlisting}
+
+For a matrix the norm defined above and calculated by
+\textsc{Matlab} is not the square root of the sum
+of the square of its entries. That quantity is called the
+{\em Froebenius norm}, which is also sometimes useful,
+but we will not need it.
+
+%%%%%%%%%%%%%%%%%
+
+\subsection*{Some other useful commands}
+
+% Try out the following:
+% \begin{lstlisting}[frame=none,numbers=left]
+% C = rand(5,5)    % random matrix with uniform distribution in [0,1]
+% size(C)          % gives the dimensions (m x n) of C
+% det(C)           % the determinant of the matrix
+% max(C)           % the maximum of each column
+% min(C)           % the minimum in each column
+% sum(C)           % sums each column
+% mean(C)          % the average of each column
+% diag(C)          % just the diagonal elements
+% C'               % tranpose the matrix
+% \end{lstlisting}
+\verb&C = rand(5,5)& \dotfill random matrix with uniform
+         distribution in $[0,1]$.\\
+\verb&size(C)& \dotfill gives the dimensions ($m\times n$) of $C$.\\
+\verb&det(C)&   \dotfill the determinant of the matrix.\\
+\verb&max(C)&   \dotfill the maximum of each column.\\
+\verb&min(C)&   \dotfill the minimum in each column.\\
+\verb&sum(C)&   \dotfill sums each column.\\
+\verb&mean(C)&   \dotfill the average of each column.\\
+\verb&diag(C)&   \dotfill just the diagonal elements.\\
+\verb&C'&   \dotfill tranpose the matrix.
+
+In addition to \verb&ones&, \verb&eye&, \verb&zeros&, \verb&rand& and
+\verb&randn&,  \textsc{Matlab} has several other commands that
+automatically produce special matrices:
+%\begin{lstlisting}[frame=none,numbers=left]
+%hilb(6)
+%pascal(5)
+%\end{lstlisting}
+\\
+\verb&hilb(6)&\\
+\verb&pascal(5)&
+
+
+%%%%%%%%%%%%
+\newpage
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+
+\item Enter the matrix $A$ by
+\begin{lstlisting}[frame=none,numbers=left]
+A = [3 2 1; 6 5 4; 9 8 7]
+\end{lstlisting}
+and also the matrix
+$$
+B = \left[
+{\begin{array}{rrr}
+7 & 8 & 9 \\
+4 & 5 & 6 \\
+1 & 2 & 3 
+\end{array}}
+\right]\,.  $$
+Find  (a) \verb&A*A&, (b) \verb&A^2&, (c) \verb&A.^2&, (d) \verb&A.*B&, (e) \verb&A*B&. Turn in the output.
+
+\item By hand, calculate $A \vb$, $AB$, and $BA$ for:
+      $$
+        A = \left( \begin{array}{ccc}
+                    2 & 4 & -1 \\
+                    -2 & 1 & 9 \\
+                    -1 & -1 & 0 \\
+                   \end{array} \right),
+        \quad
+        B = \left( \begin{array}{ccc}
+                    0 & -1 & -1 \\
+                    1 & 0 & 2 \\
+                    -1 & -2 & 0 \\
+                   \end{array} \right),
+        \quad
+        \vb = \left( \begin{array}{c}
+                    3  \\
+                    1  \\
+                    -1 \\
+                   \end{array} \right).
+     $$
+     Check the results using \textsc{Matlab}. Think about how
+     fast computers are. Turn in your hand work.
+
+\item  Write a well-commented \textsc{Matlab} {\bf function} program
+    \verb&myinvcheck& that
+    \begin{itemize}
+    \item makes a $n \times n$ random matrix (normally distributed,
+      \verb&A = randn(n,n)&),
+    \item calculates its inverse (\verb&B = inv(A)&),
+    \item multiplies the two back together,
+    \item calculates the residual (difference between $AB$ and \verb&eye(n)&), and
+    \item returns the scalar residual (norm of the difference).
+    \end{itemize}
+    Turn in your program.
+  
+ \item Write a well-commented \textsc{Matlab} {\bf script} program \verb&myinvcheckplot& that calls
+    \verb&myinvcheck& for $n=10,20,40,\ldots,2^i10$ for $i$ as large as possible, 
+    records the
+    results of each trial, and plots the scalar residual versus \verb&n& 
+    using a log plot. (See \verb&help loglog&.)
+ 
+   What happens to the scalar residual as \(n\)
+  gets big? Turn in the program, the plot, and a very brief report on
+  the results of your experiments.  (Do not print any large random matrices.) 
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction to Linear Systems}
+\label{chp:intro_linsys}
+%%%%%%%%%%%%%%%%
+
+\subsection*{How linear systems occur}
+
+
+Linear systems of equations naturally occur in many places
+in engineering, such as structural analysis, dynamics and
+electric circuits. Computers have made it possible to
+quickly and accurately solve larger and larger systems
+of equations. Not only has this allowed engineers to handle
+more and more complex problems where linear systems naturally
+occur, but has also prompted engineers to use linear systems
+to solve problems where they do not naturally occur such
+as thermodynamics, internal stress-strain analysis, fluids and
+chemical processes. It has become standard practice in
+many areas to analyze a problem by transforming it into a linear
+systems of equations and then solving those equation by computer.
+In this way, computers have made linear systems of equations
+the most frequently used tool in modern engineering.
+
+
+In Figure~\ref{equilateral_truss} we show a truss with equilateral
+triangles. In Statics you may use the ``method of joints'' to write
+equations for each node of the truss\footnote{See
+  http://en.wikipedia.org/wiki/Truss or
+  http://en.wikibooks.org/wiki/Statics for reference.}.  This set of
+equations is an example of a linear system.  Making the approximation
+$\sqrt{3}/2 \approx .8660$, the equations for this truss are
+\begin{equation}
+\label{truss_equilateral_eqns}
+\begin{split}
+  .5 \, T_1 + T_2 & = R_1 = f_1 \\
+  .866 \, T_1 & = - R_2 = -.433 \, f_1 - .5 \, f_2 \\
+  -.5 \, T_1 + .5 \, T_3 + T_4 &= - f_1 \\
+  .866 \, T_1 + .866 \, T_3 &= 0 \\
+  -T_2 - .5 \, T_3 + .5 \, T_5 + T_6 &= 0 \\
+  .866 \, T_3 + .866 \, T_5 &= f_2 \\
+  -T_4 - .5 \, T_5 + .5 \, T_7 &=0, \\
+\end{split}
+\end{equation}
+where $T_i$ represents the tension in the $i$-th member of the truss.
+%
+% \begin{figure}
+% \setlength{\unitlength}{1 mm}
+% \LARGE
+% \begin{center}
+% \begin{picture}(64,17)(0,-1)
+% 	\put(0,0){\line(1,0){64}}
+% 	\put(16,16){\line(1,0){32}}
+% 	\put(0,0){\line(1,1){16}}
+% 	\put(16,0){\line(1,1){16}}
+% 	\put(64,0){\line(-1,1){16}}
+% 	\put(48,0){\line(-1,1){16}}
+% 	\put(16,0){\line(0,1){16}}
+% 	\put(48,0){\line(0,1){16}}
+% 	\put(0,0){\circle*{2}}
+% 	\put(16,0){\circle*{1}}
+% 	\put(48,0){\circle*{1}}
+% 	\put(64,0){\circle*{2}}
+% 	\put(16,16){\circle*{1}}
+% 	\put(32,16){\circle*{1}}
+% 	\put(48,16){\circle*{1}}
+% \end{picture}
+% \end{center}
+% \caption{A truss.}
+% \label{truss}
+% \end{figure}
+
+
+
+\begin{figure}[ht]
+\setlength{\unitlength}{1 mm}
+% \LARGE
+ \begin{center}
+ \begin{picture}(64,40)(0,-10)
+% nodes
+ 	\put(0,0){\circle*{2}}
+ 	\put(32,0){\circle*{1}}
+ 	\put(64,0){\circle*{2}}
+ 	\put(16,27.7){\circle*{1}}
+ 	\put(48,27.7){\circle*{1}}
+	\put(3,1){A}
+	\put(14,21){B}
+	\put(31,4){C}
+	\put(47,22){D}
+	\put(59,1){E}
+% edges
+ 	\put(0,0){\line(1,0){64}}
+ 	\put(16,27.7){\line(1,0){32}}
+	\qbezier(0,0)(8,13.85)(16,27.7)
+	\qbezier(32,0)(40,13.85)(48,27.7)
+	\qbezier(16,27.7)(24,13.85)(32,0)
+	\qbezier(48,27.7)(56,13.85)(64,0)
+	\put(4,12){1}
+	\put(15,1){2}
+	\put(26,12){3}
+	\put(31,24){4}
+	\put(41,12){5}
+	\put(47,1){6}
+	\put(57,13){7}
+% forces
+ 	\put(6,27.7){\vector(1,0){6}}
+	\put(2,27){$f_1$}
+ 	\put(32,-1){\vector(0,-1){6}}
+	\put(31,-10){$f_2$}
+ 	\put(0,-7){\vector(0,1){5}}
+	\put(-1,-10){$R_2$}
+ 	\put(64,-7){\vector(0,1){5}}
+	\put(62,-10){$R_3$}
+ 	\put(-2,0){\vector(-1,0){6}}
+	\put(-13,-1){$R_1$}
+% 	\put(16,0){\line(1,1){16}}
+% 	\put(64,0){\line(-1,1){16}}
+% 	\put(48,0){\line(-1,1){16}}
+% 	\put(16,0){\line(0,1){16}}
+% 	\put(48,0){\line(0,1){16}}
+ \end{picture}
+\end{center}
+%\centerline{\hbox{\psfig{figure=equilateral_truss3.eps,height=1.5in,width=2.5in}}}
+\caption{An equilateral truss. Joints or nodes are labeled alphabetically, $A$, $B$, \ldots
+and Members (edges) are labeled numerically: $1$, $2$, \ldots. The forces $f_1$ and $f_2$
+are applied loads and $R_1$, $R_2$ and $R_3$ are reaction forces applied by the supports.}
+\label{equilateral_truss}
+\end{figure}
+
+
+
+You could solve
+this system by hand with a little time and patience; systematically
+eliminating variables and substituting.
+Obviously, it would be a lot better to put the equations
+on a computer and let the computer solve it. In the next few lectures
+we will learn how to use a computer effectively to solve linear systems.
+The first key to dealing with linear systems is to realize that
+they are equivalent to matrices, which contain numbers, not variables.
+
+As we discuss various aspects of matrices, we wish to keep in
+mind that the matrices that come up in engineering systems are
+{\em really  large}. It is not unusual in real engineering
+to use matrices whose dimensions are in the thousands!
+It is frequently the case that a method that is fine for
+a $2 \times 2$ or $3 \times 3$ matrix is totally inappropriate
+for a $2000 \times 2000$ matrix. We thus want to emphasize methods
+that work for large matrices.
+
+
+%%%%%%%%%%%%%%%
+
+\subsection*{Linear systems are equivalent to matrix equations}
+\label{lec:LSME}
+
+The system of linear equations
+\begin{equation*}
+\begin{split}
+     x_1 - 2 x_2 + 3 x_3 & = 4 \\
+     2 x_1 - 5x_2 + 12 x_3 & = 15 \\
+           2 x_2 -  10 x_3 & = -10 
+\end{split}
+\end{equation*}
+is equivalent to the matrix equation
+$$
+\left(\begin{array}{ccc}
+        1 & -2 & 3  \\
+        2 & -5 & 12 \\
+        0 & 2 & -10
+      \end{array}\right)
+\left(\begin{array}{c}
+       x_1 \\ x_2 \\ x_3
+      \end{array} \right)
+=
+\left(\begin{array}{c}
+       4\\ 15 \\ -10
+      \end{array} \right),
+$$
+which is equivalent to the {\em augmented matrix}
+$$
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 & 4 \\
+        2 & -5 & 12 & 15 \\
+        0 & 2 & -10 & -10
+      \end{array}\right).
+$$
+The advantage of the augmented matrix, is that it contains only
+numbers, not variables. The reason this is better is because computers
+are much better in dealing with numbers than variables. To solve
+this system, the main steps are called {\em Gaussian elimination} and
+{\em back substitution}.
+
+The augmented matrix for the equilateral truss equations
+(\ref{truss_equilateral_eqns}) is given by
+\begin{equation}\label{truss_equilateral_matrix}
+\left(\begin{array}{ccccccc|c}
+        .5    & 1 & 0 & 0 & 0 & 0 & 0 & f_1 \\
+        .866  & 0 & 0  & 0 & 0 & 0 &  0 & -.433  f_1 - .5 \, f_2  \\
+         -.5  & 0 & .5 &  1 & 0 & 0 & 0  & - f_1 \\
+        .866  & 0 & .866  & 0 & 0 & 0 & 0 & 0 \\
+         0    & -1 & - .5  & 0 & .5 & 1 &  0 & 0 \\
+         0    & 0  & .866  & 0 & .866 & 0 & 0 &  f_2 \\
+         0 &  0 &  0  & -1  & - .5  &0 & .5 & 0 \\
+      \end{array}\right).
+\end{equation}
+Notice that a lot of the entries are $0$. Matrices like this, called
+{\em sparse}, are common in applications and there are methods
+specifically designed to efficiently handle sparse matrices.
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Triangular matrices and back substitution}
+
+Consider a linear system whose augmented matrix happens to be
+\begin{equation}\label{upper}
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 & 4 \\
+        0 & -1 & 6 & 7 \\
+        0 & 0 & 2 & 4
+      \end{array}\right).
+\end{equation}
+Recall that each row represents an equation and each column a variable.
+The last row represents the equation $2 x_3 = 4$. The equation is
+easily solved, i.e. $x_3 = 2$. The second row represents the equation
+$- x_2 + 6 x_3 = 7$, but since we know $x_3 = 2$, this simplifies to:
+$ - x_2 + 12 = 7$. This is easily solved, giving $x_2 = 5$. Finally,
+since we know $x_2$ and $x_3$, the first row simplifies to:
+$x_1 - 10 + 6 = 4$. Thus we have $x_1 = 8$ and so we know the
+whole solution vector: $\xb = \langle 8 , 5, 2 \rangle$. The process
+we just did is called {\em back substitution}, which is both efficient
+and easily programmed. The property that made it possible
+to solve the system so easily is that $A$ in this case is {\em upper
+triangular}. In the next section we show an efficient way to
+transform an augmented matrix into an upper triangular matrix.
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Gaussian Elimination}
+
+Consider the matrix
+$$
+ A = \left(\begin{array}{ccc|c}
+        1 & -2 & 3  &  4 \\
+        2 & -5 & 12 & 15 \\
+        0 & 2 & -10 & -10
+      \end{array}\right).
+$$
+The first step of Gaussian elimination is to get rid of the 2 in
+the (2,1) position by subtracting $2$ times the first row
+from the second row, i.e. {\sf (new 2nd = old 2nd - (2) 1st)}.
+We can do this because it is essentially the
+same as adding equations, which is a valid
+algebraic operation.  This leads to
+$$
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 & 4 \\
+        0 & -1 & 6 & 7 \\
+        0 & 2 & -10 & -10
+      \end{array}\right).
+$$
+There is already a zero in the lower left corner, so we don't need to
+eliminate anything there. To eliminate the third row, second column,
+we need to subtract $-2$ times the second row from the third row, {\sf
+  (new 3rd = old 3rd - (-2) 2nd)}, to obtain
+$$
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 &  4 \\
+        0 & -1 & 6 &  7 \\
+        0 &  0 & 2 &  4
+      \end{array}\right).
+$$
+This is now just exactly the matrix in equation (\ref{upper}), which
+we can now solve by back substitution.
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{\textsc{Matlab}'s matrix solve command}
+
+In \textsc{Matlab} the standard way to solve a system $A \xb = \bb$
+is by the command
+\begin{lstlisting}[frame=none,numbers=left]
+x = A \ b
+\end{lstlisting}
+This syntax is meant to suggest dividing by \(A\) from the left as in
+\[A \xb = \bb \quad \Leftrightarrow\quad A\backslash A \xb = A\backslash \bb 
+\quad \Leftrightarrow\quad  \xb = A\backslash \bb
+\,.\]
+Such division is not meaningful mathematically, but it helps for remembering the syntax.
+
+This command carries out Gaussian elimination and back substitution.
+We can do the above computations as follows:
+\begin{lstlisting}[frame=none,numbers=left]
+A = [1 -2 3 ; 2 -5 12 ; 0 2 -10]
+b = [4 15 -10]'
+x = A \ b
+\end{lstlisting}
+
+Next, use the \textsc{Matlab} commands above to solve $A \xb = \bb$ when
+the augmented matrix for the system is
+ $$
+\left(\begin{array}{ccc|c}
+        1 & 2 & 3 &  4 \\
+        5 & 6 & 7 &  8 \\
+        9 &  10 & 11 &  12
+      \end{array}\right),
+$$
+by entering
+\begin{lstlisting}[frame=none,numbers=left]
+x1 = A \ b
+\end{lstlisting}
+Check the result by entering
+\begin{lstlisting}[frame=none,numbers=left]
+A*x1 - b
+\end{lstlisting}
+You will see that the resulting answer satisfies the equation exactly.
+Next try solving using the inverse of $A$:
+\begin{lstlisting}[frame=none,numbers=left]
+x2 = inv(A)*b
+\end{lstlisting}
+This answer can be seen to be inaccurate by checking
+\begin{lstlisting}[frame=none,numbers=left]
+A*x2 - b
+\end{lstlisting}
+Thus we see one of the reasons why the inverse is never used for actual
+computations, only for theory.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\nobreak
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item  Set $f_1 = 1000N$ and $f_2 = 5000N$ in
+the equations (\ref{truss_equilateral_eqns}) for the equailateral truss.
+Input the coefficient matrix $A$ and the right hand side vector $b$ in
+(\ref{truss_equilateral_matrix}) into \textsc{Matlab}.
+Solve the system using the command \verb&\& to find the tension in each member of the
+truss. Save the matrix $A$ as \verb&A_equil_truss& and keep it for later use.
+(Enter \verb& save A_equil_truss A&.)
+Print out and turn in $A$, $\bb$ and the solution $\xb$.
+\label{exr:truss}
+
+\item Write each system of equations as an augmented matrix. By hand, find
+the solutions using {\em Gaussian elimination and back substitution} (i.e.\ the exact
+algorithm in this chapter). Check
+your solutions using \textsc{Matlab}.
+
+\begin{enumerate}[(a)]
+\item 
+\begin{equation*}
+\begin{split}
+     x_1 +  x_2   & = 2 \\
+   4 x_1 + 5 x_2  & = 10
+\end{split}
+\end{equation*}
+\item
+\begin{equation*}
+\begin{split}
+     x_1 + 2 x_2 + 3 x_3 & = -1 \\
+   4 x_1 + 7 x_2 + 14 x_3 & = 3 \\
+    x_1 +  4 x_2 + 4 x_3 & =  1
+\end{split}
+\end{equation*}
+\end{enumerate}
+
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Some Facts About Linear Systems}
+\label{sec:lineartheory}
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Some inconvenient truths}
+
+
+In the last lecture we learned how to solve a linear system
+using \text{Matlab}.
+Input the following:
+\begin{lstlisting}[frame=none,numbers=left]
+A = ones(4,4)
+b = randn(4,1)
+x = A \ b
+\end{lstlisting}
+
+As you will find, there is no solution to the equation $A \xb = \bb$.
+This unfortunate circumstance is mostly the fault of the matrix, $A$,
+which is too simple, its columns (and rows) are all the same.
+Now try
+\begin{lstlisting}[frame=none,numbers=left]
+b = ones(4,1)
+x = [ 1 0 0 0]'
+A*x
+\end{lstlisting}
+So the system $A \xb = \bb$ does have a solution. Still unfortunately,
+that is not the only solution. Try
+\begin{lstlisting}[frame=none,numbers=left]
+x = [ 0 1 0 0]'
+A*x
+\end{lstlisting}
+We see that this $x$ is also a solution. Next try
+\begin{lstlisting}[frame=none,numbers=left]
+x = [ -4  5  2.27 -2.27]'
+A*x
+\end{lstlisting}
+This $x$ is a solution! It is not hard to see that
+there are endless possibilities for solutions of this
+equation.
+
+%%%%%%%%%%%%%%%
+
+\subsection*{Basic theory}
+
+
+The most basic theoretical fact about linear systems is
+\begin{thm}
+A linear system $A\xb = \bb$ may have 0, 1, or infinitely many solutions.
+\end{thm}
+In most (but not all!) engineering applications we would want to
+have exactly one solution. The following two theorems tell us
+exactly when we can and cannot expect this.
+\begin{thm}
+Suppose $A$ is a square ($n \times n $) matrix.
+The following are all equivalent:
+\begin{enumerate}
+\item The equation $A\xb = \bb$ has exactly one solution for any $\bb$.
+\item $det(A) \ne 0$.
+\item $A$ has an inverse.
+\item The only solution of $A\xb = \mathbf{0}$ is $\xb = \mathbf{0}$.
+\item The columns of $A$ are linearly independent (as vectors).
+\item The rows of $A$ are linearly independent.
+\end{enumerate}
+If $A$ has these properties then it is called {\bf non-singular}.
+\end{thm}
+
+On the other hand, a matrix that does not have these properties
+is called {\bf singular}.
+\begin{thm}\label{def:singular}
+Suppose $A$ is a square  matrix.
+The following are all equivalent:
+\begin{enumerate}
+\item The equation $A\xb = \bb$ has 0 or $\infty$ many solutions
+  depending on $\bb$.
+\item $\det(A) = 0$.
+\item $A$ does not have an inverse.
+\item The equation $A\xb = \mathbf{0}$ has solutions other than $\xb =
+  \mathbf{0}$.
+\item The columns of $A$ are linearly dependent as vectors.
+\item The rows of $A$ are linearly dependent.
+\end{enumerate}
+\end{thm}
+
+
+To see how the two theorems work, define two matrices (type in
+\verb&A1& then scroll
+up and modify to make \verb&A2&) :
+$$
+\verb&A1& = \left(\begin{array}{ccc}
+        1 & 2 & 3  \\
+        4 & 5 & 6 \\
+        7 & 8 & 9
+      \end{array}\right),
+\qquad
+\verb&A2& = \left(\begin{array}{ccc}
+        1 & 2 & 3  \\
+        4 & 5 & 6 \\
+        7 & 8 & 8
+      \end{array}\right),
+$$
+and two vectors:
+$$
+\verb&b1&  = \left(\begin{array}{c}
+        0 \\ 3 \\ 6
+             \end{array}\right),
+\qquad
+\verb&b2&  = \left(\begin{array}{c}
+        1 \\ 3 \\ 6
+             \end{array}\right).
+$$
+First calculate the determinants of the matrices:
+\begin{lstlisting}[frame=none,numbers=left]
+det(A1)
+det(A2)
+\end{lstlisting}
+Then attempt to find the inverses:
+\begin{lstlisting}[frame=none,numbers=left]
+inv(A1)
+inv(A2)
+\end{lstlisting}
+Which matrix is singular and which is non-singular?
+Finally, attempt to solve all the possible equations $A \xb = \bb$:
+\begin{lstlisting}[frame=none,numbers=left]
+x = A1 \ b1
+x = A1 \ b2
+x = A2 \ b1
+x = A2 \ b2
+\end{lstlisting}
+As you can see, equations involving the non-singular matrix have one
+and only one solution, but equation involving a singular matrix
+are more complicated.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{The Residual}
+
+Recall that the residual for an approximate solution $x$
+of an equation $f(x) =0$ is defined as $r = \|f(x)\|$.
+It is a measure of how close the equation is to being satisfied.
+For a linear system of equations we define the residual vector
+of an approximate solution $\xb$ by
+\begin{equation*}
+%\label{lsres}
+\rb = A \xb - \bb.
+\end{equation*}
+If the solution vector $\xb$ were exactly correct, then $\rb$ would be 
+exactly the zero vector.  The size (norm)  of $\rb$ is
+an indication of how close we have come to solving
+$A \xb = \bb$. We will refer to this number as the {\bf scalar residual} or just  the {\bf residual} of the
+approximation solution:
+\begin{equation}
+   r = \| A \xb - \bb \|.
+\end{equation}
+
+
+%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\nobreak
+\begin{list}
+  {\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+
+\item By hand, find all the solutions (if any) of the following linear
+  system using the augmented matrix and Gaussian elimination (following exactly
+  the algorithm in the notes):
+  \begin{equation*}
+    \begin{split}
+      x_1 + 2 x_2 + 3 x_3 & = 4, \\
+      4 x_1 + 5 x_2 + 6 x_3 & = 10, \\
+      7 x_1 + 8 x_2 + 9 x_3 & = 14 \,.
+    \end{split}
+  \end{equation*}
+Try solving this system in \textsc{Matlab} using the command \verb&x = A \ b&. What happens?
+Turn in your hand work.
+
+\item
+  \begin{enumerate}
+  \item[(a)] Write a well-commented \textsc{Matlab} {\bf function}
+    program \verb&mysolvecheck& with input a number \verb&n& that
+    makes a random $n \times n$ matrix $A$ and a random vector $\bb$,
+    solves the linear system $A \xb = \bb$, calculates the scalar
+    residual $r = \|A \xb - \bb\|$, and outputs that number as  $r$.
+  \item[(b)] Write a well-commented \textsc{Matlab} {\bf script}
+    program that calls \verb&mysolvecheck& 10 times each for $n = $
+    5, 10, 20, 40, 80, and 160, then records and averages the
+    results and makes a log-log plot of the average $r$ vs.\ $n$. 
+    Once your program is running correctly, increase the maximum $n$ (by factors of $2$) until the program stops running 
+    within 5 minutes.
+  \end{enumerate}
+  Turn in the plot and the two programs. (Do not print any large random matrices.)
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Accuracy, Condition Numbers and Pivoting}
+
+In this lecture we will discuss two separate issues
+of accuracy in solving linear systems. The first,
+{\em pivoting}, is a method that ensures that Gaussian
+elimination proceeds as accurately as possible.
+The second, {\em condition number}, is a measure
+of how bad a matrix is. We will see that if a matrix has
+a bad condition number, the solutions are unstable with
+respect to small changes in data.
+
+%%%%%%%%%%%%%
+
+\subsection*{The effect of rounding}
+
+All computers store numbers as  finite strings of binary
+floating point digits (bits). This limits numbers to a fixed
+number of significant digits and implies that after even
+the most basic calculations, rounding must happen.
+
+Consider the following exaggerated example. Suppose
+that our computer can only store 2 significant digits
+and it is asked to do Gaussian elimination on
+\begin{equation*}
+\left(\begin{array}{cc|c}
+        .001 & 1 & 3  \\
+          1 &  2 & 5
+      \end{array}\right).
+\end{equation*}
+Doing the elimination exactly would produce
+\begin{equation*}
+\left(\begin{array}{cc|c}
+        .001 & 1 & 3  \\
+          0 & -998 & -2995
+      \end{array}\right),
+\end{equation*}
+but rounding to 2 digits, our computer would store this as
+\begin{equation*}
+\left(\begin{array}{cc|c}
+        .001 & 1 & 3  \\
+          0 &  -1000 & -3000
+      \end{array}\right).
+\end{equation*}
+Backsolving this reduced system gives
+$$
+     x_1 = 0 \quad\text{and}\quad x_2 = 3.
+$$
+This seems fine until you realize that backsolving the unrounded
+system gives
+$$
+    x_1 = -1 \quad\text{and}\quad x_2 = 3.001.
+$$
+
+%%%%%%%%%%%%%%%
+
+\subsection*{Row Pivoting}
+
+
+A way to fix the problem is to use pivoting, which means to switch rows of
+the matrix. Since switching rows of the augmented matrix
+just corresponds to switching the order of the equations, no harm
+is done:
+\begin{equation*}
+\left(\begin{array}{cc|c}
+          1 &  2 & 5  \\
+        .001 & 1 & 3
+      \end{array}\right).
+\end{equation*}
+Exact elimination would produce
+\begin{equation*}
+\left(\begin{array}{cc|c}
+          1 &  2 & 5  \\
+          0 & .998 & 2.995
+      \end{array}\right).
+\end{equation*}
+Storing this result with only 2 significant digits gives
+\begin{equation*}
+\left(\begin{array}{cc|c}
+          1 &  2 & 5  \\
+          0 & 1 & 3
+      \end{array}\right).
+\end{equation*}
+Now backsolving produces
+$$
+      x_1 = -1 \quad\text{and}\quad x_2 = 3,
+$$
+which is the true solution (rounded to 2 significant digits).
+
+The reason this worked is because $1$ is bigger than $0.001$. To pivot
+we switch rows so that the largest entry in a column is the one used
+to eliminate the others. In bigger matrices, after each column is completed,
+compare the diagonal element of the next column with all the entries below
+it. Switch it (and the entire row) with the one with greatest absolute value.
+For example in the following matrix, the first column is finished and before
+doing the second column, pivoting should occur since $|-2|>|1|$:
+$$
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 & 4 \\
+        0 &  1 & 6 & 7 \\
+        0 & -2 & -10 & -10
+      \end{array}\right).
+$$
+Pivoting the 2nd and 3rd rows would produce
+$$
+\left(\begin{array}{ccc|c}
+        1 & -2 & 3 & 4 \\
+        0 & -2 & -10 & -10\\
+        0 &  1 & 6 & 7
+      \end{array}\right).
+$$
+
+%%%%%%%%%%
+
+\subsection*{Condition number}
+
+In some systems, problems occur even without rounding.
+Consider the following augmented matrices:
+$$
+\left(\begin{array}{cc|c}
+        1   & 1/2 & 3/2  \\
+        1/2 & 1/3 &  1  \\
+      \end{array}\right)
+     \quad \text{and} \quad
+\left(\begin{array}{cc|c}
+        1   & 1/2  & 3/2 \\
+        1/2 & 1/3  & 5/6\\
+      \end{array}\right).
+$$
+Here we have the same $A$, but two different input vectors:
+$$  \bb_1 = (3/2,1)' \quad \textrm{and} \quad \bb_2 = (3/2,5/6)'
+$$
+which are pretty close to one another. You would
+expect then that the solutions $\xb_1$ and $\xb_2$ would also be close.
+Notice that this matrix does not need pivoting. Eliminating exactly
+we get
+$$
+\left(\begin{array}{cc|c}
+        1 & 1/2  & 3/2  \\
+        0 & 1/12 & 1/4 \\
+      \end{array}\right)
+     \quad \text{and} \quad
+\left(\begin{array}{cc|c}
+        1 & 1/2  & 3/2 \\
+        0 & 1/12 & 1/12\\
+      \end{array}\right).
+$$
+Now solving we find
+$$
+   \xb_1 = (0,3)' \quad \textrm{and} \quad \xb_2 = (1,1)'
+$$
+which are {\em not close at all} despite the fact that we did the
+calculations exactly. This poses a new problem: some matrices
+are very sensitive to small changes in input data. The extent of
+this sensitivity is measured by the {\bf condition number}.
+The definition of condition number is: consider all small changes
+$\delta A$ and $\delta \bb$ in $A$ and $\bb$  and the resulting
+change, $\delta \xb$, in the solution $\xb$. Then
+$$
+      \textrm{cond}(A) \equiv \max \left( \frac{ \|\delta \xb\|/\|\xb\|}
+         { \frac{\|\delta A\|}{\|A\|} + \frac{\|\delta \bb\|}{\|\bb\|} } \right) =
+     \max \left( \frac{\text{Relative error of output}}
+                      {\text{Relative error of inputs}} \right).
+$$
+Put another way, changes in the input data get multiplied by the condition number
+to produce changes in the outputs.
+Thus a high condition number is bad. It implies that small errors
+in the input can cause large errors  in the output.
+%
+It is not obvious from our definition above, but one can prove that the condition number of a matrix is at least 1.
+
+
+In \textsc{Matlab} enter
+\begin{lstlisting}[frame=none,numbers=left]
+H = hilb(2)
+\end{lstlisting}
+which should result in the matrix above. \textsc{Matlab} produces the
+condition number of a matrix with the command
+\begin{lstlisting}[frame=none,numbers=left]
+cond(H)
+\end{lstlisting}
+Thus for this matrix small errors in the input can get magnified
+by 19 in the output.
+Next try the matrix
+\begin{lstlisting}[frame=none,numbers=left]
+A = [ 1.2969 0.8648 ; .2161  .1441]
+cond(A)
+\end{lstlisting}
+For this matrix small errors in the input can get magnified
+by $2.5 \times 10^8$ in the output! (We will see this happen in the exercise.)
+This is obviously not very good for engineering
+where all measurements, constants and inputs are approximate.
+
+Is there a solution to the problem of bad condition numbers?
+Usually, bad condition numbers in engineering contexts result
+from poor design. So, the engineering solution to bad conditioning
+is {\bf redesign}.
+
+Finally, find the determinant of the matrix $A$ above:
+\begin{lstlisting}[frame=none,numbers=left]
+det(A)
+\end{lstlisting}
+which will be small. If $\det(A) = 0$ then the matrix is singular,
+which is bad because it implies there will not be a unique solution.
+The case here, $\det(A) \approx 0$, is also bad, because it means the
+matrix is almost singular. Although $\det(A) \approx 0$ generally
+indicates that the condition number will be large, they are actually
+independent things. To see this, find the determinant and condition
+number of the matrix \verb&[1e-10,0;0,1e-10]& and
+the matrix \verb&[1e+10,0;0,1e-10]&.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+%%%
+\item Let $$
+A = \left[
+{\begin{array}{cc}
+1.2969 & .8648 \\
+.2161 & .1441
+\end{array}}
+ \right]\,.
+$$
+\begin{enumerate}
+\item[(a)] Find the condition number, determinant and inverse of $A$ (using \textsc{Matlab}).
+\item[(b)] Let $B$ be the matrix obtained from $A$ by rounding off to three
+  decimal places ($1.2969\mapsto 1.297$).  Find the inverse of $B$.  
+  How do $A^{-1}$ and $B^{-1}$ differ? Explain how
+  this happened.
+\item[(c)] Set \verb&b1 = [1.2969; 0.2161] & and do \verb&x = A \ b1 &.
+  Repeat the process but with a vector \verb&b2& obtained from
+  \verb&b1& by rounding off to three decimal places. Explain exactly
+  what happened.  Why was the first answer so simple?  Why do the two
+  answers differ by so much?
+\end{enumerate}
+
+%%%%%%%%%%
+\item To see how to solve linear systems symbolically, try
+\begin{lstlisting}[frame=none,numbers=left]
+B = [sin(sym(1)) sin(sym(2)); sin(sym(3)) sin(sym(4))]
+c = [1; 2]
+x = B \ c
+pretty(x)
+\end{lstlisting}
+
+Now input the matrix
+\[
+\textsf{Cs = }\left[
+\begin{array}{rr}
+1 & 2 \\
+2 & 4
+\end{array}
+\right]
+\]
+symbolically as above by wrapping each number in \verb&sym&. Create a numerical version via
+\verb&Cn = double(Cs)& and define the two vectors \verb$ d1 = [4; 8] $ and
+\verb$ d2 = [1; 1]$.
+Solve the systems (as in the third line of code above) \verb&Cs*x = d1&, \verb&Cn*x = d1&,
+\verb&Cs*x = d2&, and \verb&Cn*x = d2&.
+Explain the results.  Does the symbolic or
+non-symbolic way give more information?
+%
+%\item Recall the matrix $A$ that you saved using \verb&A_equil_truss&
+%  in exercise \ref{lec:LSME}.\ref{exr:truss}.  (Enter
+%  \verb&> load A_equil_truss& or click on the file
+%  \verb&A_equil_truss.mat& in the folder where you saved it; this
+%  should reproduce the matrix $A$.)
+
+%  Find the condition number and determinant of this matrix.  
+  
+%  Write a well-commented
+%  {\bf script} program to calculate the mean and median condition
+%  number of 1000 randomly generated 7 by 7 matrices.  How does the
+%  condition number of the truss matrix compare to randomly generated
+%  matrices? Turn in your script with the answers to these questions.
+
+%\textsf{The matrix in 1.\ is nearly singular, causing the linear system to be
+%very sensitive to perturbations.  Students are exposed to both
+%symbolic and numerical solutions.  The ideas of no solutions or
+%infinitely many solutions are reinforced.}
+
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{LU Decomposition}
+
+In many applications where linear systems appear, one needs to solve
+$A \xb = \bb$ for many different vectors $\bb$. For instance, a
+structure must be tested under several different loads, not just one.
+As in the example of a truss (\ref{truss_equilateral_matrix}),
+the loading in such a problem is usually
+represented by the vector $\bb$.  Gaussian elimination with pivoting
+is the most efficient and accurate way to solve a linear system.  Most
+of the work in this method is spent on the matrix $A$ itself.  If we
+need to solve several different systems with the same $A$, and $A$ is
+big, then we would like to avoid repeating the steps of Gaussian
+elimination on $A$ for every different $\bb$. This can be accomplished
+by the {\em LU decomposition}, which in effect records the steps of
+Gaussian elimination.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{LU decomposition}
+
+The main idea of the LU decomposition
+is to record the steps used in Gaussian elimination on A
+in the places where the zero is produced.
+Consider the matrix
+$$
+ A = \left(\begin{array}{ccc}
+        1 & -2 & 3 \\
+        2 & -5 & 12  \\
+        0 & 2 & -10
+      \end{array}\right).
+$$
+The first step of Gaussian elimination is to subtract $2$ times the
+first row from the second row. In order to record what we have done,
+we will put the multiplier, $2$, into the place it was used to make a
+zero, i.e. the second row, first column. In order to make it clear
+that it is a record of the step and not an element of $A$, we will put
+it in parentheses. This leads to
+$$
+\left(\begin{array}{ccc}
+        1 & -2 & 3 \\
+        (2) & -1 & 6  \\
+        0 & 2 & -10
+      \end{array}\right).
+$$
+There is already a zero in the lower left corner, so we don't need to eliminate
+anything there. We record this fact with a $(0)$. To eliminate the third row,
+second column, we need to subtract
+$-2$ times the second row from the third row. Recording the $-2$ in the spot
+it was used we have
+$$
+\left(\begin{array}{ccc}
+        1 & -2 & 3 \\
+        (2) & -1 & 6  \\
+        (0) & (-2) & 2
+      \end{array}\right).
+$$
+Let $U$ be the upper triangular matrix produced, and let $L$ be the lower
+triangular matrix with the records and ones on the diagonal, i.e.
+$$
+L = \left(\begin{array}{ccc}
+        1 & 0 & 0 \\
+        2 & 1 & 0  \\
+        0 & -2 & 1
+      \end{array}\right)
+\quad\text{and}\quad
+U = \left(\begin{array}{ccc}
+         1 & -2 & 3 \\
+         0 & -1 & 6  \\
+         0 &  0 & 2
+      \end{array}\right),
+$$
+then we have the following wonderful property:
+$$
+  LU = \left(\begin{array}{ccc}
+        1 & 0 & 0 \\
+        2 & 1 & 0  \\
+        0 & -2 & 1
+      \end{array}\right)
+      \left(\begin{array}{ccc}
+        1 & -2 & 3 \\
+        0 & -1 & 6  \\
+        0 & 0 & 2
+      \end{array}\right)
+=   \left(\begin{array}{ccc}
+        1 & -2 & 3 \\
+        2 & -5 & 12  \\
+        0 & 2 & -10
+      \end{array}\right)
+= A.
+$$
+Thus we see that $A$ is actually the product of $L$ and $U$.
+Here $L$ is lower triangular and $U$ is upper triangular.
+When a matrix can be written as a product of simpler
+matrices, we call that a {\em decomposition} of $A$ and
+this one we call the LU decomposition.
+
+%%%%%%%%%%%%%%%%%%
+
+\subsection*{Using LU to solve equations}
+
+If we also include pivoting, then an LU decomposition for $A$
+consists of three matrices $P$, $L$ and $U$ such that
+\begin{equation}\label{LUP}
+   PA = LU.
+\end{equation}
+The pivot matrix $P$ is the identity matrix, with the same rows switched
+as the rows of $A$ are switched in the pivoting. For instance,
+$$
+P = \left(\begin{array}{ccc}
+        1 & 0 & 0 \\
+        0 & 0 & 1  \\
+        0 & 1 & 0
+      \end{array}\right),
+$$
+would be the pivot matrix if the second and third rows of $A$ are
+switched by pivoting.  \textsc{Matlab} will produce an $LU$
+decomposition with pivoting for a matrix $A$
+with the command\\
+\verb& > [L U P] = lu(A)&\\
+where \verb&P& is the pivot matrix. To use this information to solve
+$A \xb = \bb$ we first pivot both sides by multiplying by the pivot
+matrix:
+$$
+     PA \xb = P \bb \equiv \mathbf{d}.
+$$
+Substituting $LU$ for $PA$ we get
+$$
+     LU \xb = \mathbf{d} .
+$$
+Then we define $\yb=U \xb$, which is unknown since \(\xb\) is unknown. 
+Using forward-substitution, we can (easily) solve
+$$
+     L \yb = \mathbf{d}
+$$
+for \(\yb\) and then using back-substitution we can (easily) solve 
+$$
+     U \xb = \yb
+$$
+for \(\xb\).
+In \textsc{Matlab} this would work as follows:
+\begin{lstlisting}[frame=none,numbers=left]
+A = rand(5,5)
+[L U P] = lu(A)
+b = rand(5,1)
+d = P*b
+y = L\d
+x = U\y
+rnorm = norm(A*x - b)  % Check the result
+\end{lstlisting}
+We can then solve for any other $\bb$ without redoing the LU step.
+Repeat the sequence for a new right hand side: \verb&c = randn(5,1)&;
+you can start at the third line.
+While this may not seem like a big savings, it would be if $A$ were a large
+matrix from an actual application.
+
+
+The LU decomposition is an example of {\em Matrix Decomposition} which
+means taking a general matrix $A$ and breaking it down into components
+with simpler properties.  Here $L$ and $U$ are simpler because they
+are lower and upper triangular. There are many other matrix
+decompositions that are useful in various contexts. Some of the most
+useful of these are the QR decomposition, the Singular Value
+decomposition and Cholesky decomposition. Often a decomposition
+is associated with an algorithm, e.g., finding the LU decomposition is equivalent
+to completing Gaussian Elimination.
+
+
+%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Solve the systems below by hand using Gaussian elimination  and
+back substitution (exactly as above) on the augmented matrix. 
+As a by-product, give the LU decomposition
+of A. Pivot wherever appropriate (the number being eliminated should be smaller than the 
+number eliminating it). Check by hand that
+$LU=PA$ and $A\xb = \bb$ and compare with \textsc{Matlab}.
+\begin{enumerate}
+\item[(a)] $\displaystyle{ A =
+      \left(\begin{array}{cc} 0.5 & 4 \\
+                               2 & 4
+           \end{array} \right), \qquad \bb = \left(\begin{array}{c} 0 \\
+                                                                -3 \end{array} \right)}
+$
+\item[(b)] $\displaystyle{ A =
+      \left(\begin{array}{ccc} 1 & 2 & 3 \\
+                             4 & 1 & 1 \\
+                             2 & 3 & 9
+           \end{array} \right), \qquad \bb = \left(\begin{array}{c} 2 \\
+                                                                                                1 \\
+                                                                                                1  \end{array} \right)}
+$
+\end{enumerate}
+
+
+\item
+Finish the following \textsc{Matlab} function program:
+\begin{lstlisting}
+function [x1, r1, x2, r2] = mysolve(A,b)
+    % Solves linear systems using the LU decomposition with pivoting
+    % and also with the built-in solve function A\b.
+    % Inputs: A -- the matrix
+    %         b -- the right-hand vector
+    % Outputs: x1 -- the solution using the LU method
+    %          r1 -- the scalar residual using the LU method
+    %          x2 -- the solution using the built-in method
+    %          r2 -- the scalar residual using the 
+    %                built-in method
+\end{lstlisting}
+
+Using \verb&format long&, test the program on both random matrices
+(\verb&randn(n,n)&) and Hilbert matrices (\verb&hilb(n)&) with $n$
+large (as big as you can make it and the program still run). Print
+your program and summarize your observations.  (Do not print any
+random matrices or vectors.)
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Nonlinear Systems - Newton's Method}
+\label{lec:multnewton}
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{An Example}
+
+The LORAN (LOng RAnge Navigation) system calculates the position
+of a boat at sea using signals from fixed transmitters. From
+the time differences of the incoming signals, the boat obtains
+differences of distances to the transmitters. This leads
+to two equations each representing hyperbolas defined
+by the differences of distance of two points (foci). An example
+of such equations\footnote{E.~Johnston, J.~Mathews, {\em Calculus}, Addison-Wesley, 2001} are
+\begin{equation}\label{eqn:loran}
+\begin{split}
+   \frac{x^2}{186^2} - \frac{y^2}{300^2 - 186^2} &= 1
+\quad\text{and}\\
+  \frac{(y-500)^2}{279^2} - \frac{(x-300)^2}{500^2 - 279^2} &= 1
+\,.
+\end{split}
+\end{equation}
+
+
+Solving two quadratic equations with two unknowns would require
+solving a 4 degree polynomial equation. We could do this by hand, but
+for a navigational system to work well, it must do the calculations
+automatically and numerically. We note that the Global Positioning
+System (GPS) works on similar principles and must do similar
+computations.
+
+%%%%%%%%%%%%
+
+\subsection*{Vector Notation}
+
+In general, we can usually find solutions to a system of equations
+when the number of unknowns matches the number of equations.
+Thus, we wish to find solutions to systems that have the form
+\begin{equation}\label{nlsys}
+\begin{split}
+f_1(x_1, x_2, x_3, \ldots , x_n) & = 0 \\
+f_2(x_1, x_2, x_3, \ldots , x_n) & = 0 \\
+f_3(x_1, x_2, x_3, \ldots , x_n) & = 0 \\
+      \vdots \hspace*{1.4cm}      &  \\
+f_n(x_1, x_2, x_3, \ldots , x_n) & = 0. \\
+\end{split}
+\end{equation}
+
+For convenience we can think of $(x_1, x_2, x_3, \ldots , x_n)$ as
+a vector $\xb$ and $(f_1, f_2, \ldots, f_n)$ as a vector-valued function
+$\fb$. With this notation, we can write the system of equations (\ref{nlsys})
+simply as
+$$
+   \fb(\xb) = \mathbf{0},
+$$
+i.e.\ we wish to find a vector that makes the vector function equal to
+the zero vector.
+
+As in Newton's method for one variable, we need to start with an
+initial guess $\xb_0$. In theory, the more variables one has, the
+harder it is to find a good initial guess. In practice, this must
+be overcome by using physically reasonable assumptions about
+the possible values of a solution, i.e.~take advantage of engineering
+knowledge of the problem.
+
+%%%%%%%%%%%%
+
+\subsection*{Linear Approximation for Vector Functions}
+
+In the single variable case, Newton's method was derived
+by considering the linear approximation of the function $f$ at
+the initial guess $\xb_0$.
+From Calculus, the following is the linear approximation of
+$\fb$ at $\xb_0$, for vectors and vector-valued functions:
+$$
+\fb(\xb) \approx \fb(\xb_0) + D\fb(\xb_0) (\xb - \xb_0).
+$$
+Here $D\fb(\xb_0)$ is an $n \times n$ matrix whose entries are the
+various partial derivative of the components of $\fb$, evaluated at
+\(\xb_0\). Specifically,
+\begin{equation}
+  \label{eq:Df}
+   D\fb(\xb_0) = \left( \begin{array}{ccccc}
+     \frac{\partial f_1}{\partial x_1}(\xb_0) & \frac{\partial f_1}{\partial x_2}(\xb_0) &
+              \frac{\partial f_1}{\partial x_3}(\xb_0) & \ldots & \frac{\partial f_1}{\partial x_n}(\xb_0) \vspace*{.3cm} \\
+
+     \frac{\partial f_2}{\partial x_1}(\xb_0) & \frac{\partial f_2}{\partial x_2}(\xb_0) &
+              \frac{\partial f_2}{\partial x_3}(\xb_0) & \ldots & \frac{\partial f_2}{\partial x_n}(\xb_0) \vspace*{.15cm}\\
+        \vdots & \vdots  & \vdots & \ddots & \vdots \vspace*{.15cm}\\
+     \frac{\partial f_n}{\partial x_1}(\xb_0) & \frac{\partial f_n}{\partial x_2}(\xb_0) &
+              \frac{\partial f_n}{\partial x_3}(\xb_0) & \ldots & \frac{\partial f_n}{\partial x_n}(\xb_0)
+                       \end{array} \right).  
+\end{equation}
+
+%%%%%%%%%%%%
+
+\subsection*{Newton's Method}
+
+We wish to find $\xb$ that makes $\fb$ equal to the zero vectors, so
+let's choose $\xb_1$ so that
+$$
+  \fb(\xb_0) + D\fb(\xb_0) (\xb_1 -\xb_0) = \mathbf{0}.
+$$
+Since $D\fb(\xb_0)$ is a square matrix, we can solve this equation
+by
+$$
+\xb_1 = \xb_0 - (D\fb(\xb_0))^{-1} \fb(\xb_0),
+$$
+provided that the inverse exists. The formula is the vector equivalent
+of the Newton's method formula we learned before.
+However, in practice we never use the inverse of a matrix for
+computations, so we cannot use this formula directly. Rather,
+we can do the following. First solve the equation
+\begin{equation}
+D\fb(\xb_0) \Delta \xb = -\fb(\xb_0)\,,
+\end{equation}
+where we want to have
+$$
+\Delta \xb = \xb_1 - \xb_0.
+$$
+Since $D\fb(\xb_0)$ is a known matrix and $-\fb(\xb_0)$ is a known
+vector, this equation is just a system of linear equations,
+which can be solved efficiently and accurately. Once we have the
+solution vector $\Delta \xb$, we can obtain our improved estimate
+$\xb_1$ by
+$$
+   \xb_1 = \xb_0 + \Delta \xb.
+$$
+
+For subsequent steps, we have the following process:
+\begin{itemize}
+\item Solve $D\fb(\xb_i) \Delta \xb = -\fb(\xb_i)$ for $\Delta \xb$.
+\item Let $\xb_{i+1} = \xb_i + \Delta \xb$
+\end{itemize}
+
+%%%%%%%%%%%%%%
+
+\subsection*{An Experiment}
+
+We will solve the following set of equations:
+\begin{equation}
+\begin{split}
+x^3 + y &= 1 \\
+y^3 - x & = -1.
+\end{split}
+\end{equation}
+You can easily check that $(x,y) = (1,0)$ is a solution of this system.
+By graphing both of the equations you can also see that $(1,0)$ is the
+only solution (Figure~\ref{fig:nlsys}).
+\begin{figure}
+\centerline{\includegraphics[width=0.6\textwidth]{nlsys}}
+\caption{Graphs of the equations $x^3 + y = 1$ and  $y^3 - x  = -1$.
+There is one and only one intersection; at $(x,y) = (1,0)$.}
+\label{fig:nlsys}
+\end{figure}
+
+We can put these equations into vector-function form (\ref{nlsys})
+by letting $x_1 = x$,
+$x_2 = y$ and
+\begin{equation*}
+\begin{split}
+f_1(x_1,x_2) &= x_1^3 + x_2 - 1 \\
+f_2(x_1,x_2) &= x_2^3 - x_1 + 1\,,
+\end{split}
+\end{equation*}
+or, equivalently,
+\begin{equation*}
+\fb(\xb) = \left(\begin{array}{c}
+                   x_1^3 + x_2 - 1 \\
+                   x_2^3 - x_1 + 1
+                  \end{array} \right).
+\end{equation*}
+The partial derivatives are
+\begin{equation}
+\label{eqn:partials}
+\frac{\partial f_1}{\partial x_1} = 3 x_1^2, 
+\quad \frac{\partial f_1}{\partial x_2} = 1, 
+\quad \frac{\partial f_2}{\partial x_1} = -1,  
+\quad\text{and}\quad \frac{\partial f_2}{\partial x_2} = 3 x_2^2.
+\end{equation}
+Thus,
+\begin{equation}
+\label{eqn:Dfexample}
+D \mathbf{f} =  \left(\begin{array}{cc}
+                   3x_1^2 & 1 \\
+                    -1 & 3x_2^2 
+                  \end{array} \right).
+\end{equation}
+Now that we have the equations in  vector-function form,
+we can write the following script program:
+\begin{lstlisting}
+format long;
+f = @(x)[ x(1)^3+x(2)-1 ; x(2)^3-x(1)+1 ]
+x = [.5;.5]
+x = fsolve(f,x)
+\end{lstlisting}
+Save this program as \verb&myfsolve.m& and run it.
+You will see that the internal \textsc{Matlab} solving
+command \verb&fsolve& approximates the solution, but
+only to about 7 decimal places. While that would be close enough
+for most applications, one would expect that we could do
+better on such a simple problem.
+
+Next we will implement Newton's method for this problem.
+Modify your \verb&myfsolve& program to:
+\begin{lstlisting}
+% mymultnewton - solve an example nonlinear system
+format long;
+n=8  % set some number of iterations, may need adjusting
+f = @(x)[x(1)^3+x(2)-1 ; x(2)^3-x(1)+1] % the vector function
+% the matrix of partial derivatives
+Df = @(x)[3*x(1)^2,  1 ; -1,  3*x(2)^2] 
+x = [.5;.5]             % starting guess
+for i = 1:n
+      Dx = -Df(x)\f(x); % solve for increment
+      x = x + Dx        % add on to get new guess
+      f(x)              % see if f(x) is really zero
+end
+\end{lstlisting}
+
+Save and run this program (as \verb&mymultnewton&) and you will see that it
+finds the root exactly (to machine precision)
+in only 6 iterations. Why is this simple program able to do better
+than \textsc{Matlab}'s built-in program?
+
+%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item 
+  \begin{enumerate}[(a)]
+  \item Put the LORAN equations (\ref{eqn:loran}) into the
+    function form (\ref{nlsys}).
+  \item  Calculate (by hand) the partial derivatives of $\mathbf{f}$
+  and construct the matrix $D\fb$  (see (\ref{eqn:partials}) and (\ref{eqn:Dfexample})).
+  \item Adapt the \verb&mymultnewton& program to find a solution
+    for these equations.  By trying different starting vectors, find
+    at least three different solutions. (There are actually four
+    solutions.)  
+   \item Think of at least one way that the navigational
+    system could determine the correct solution.
+  \end{enumerate}
+
+\end{list}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Eigenvalues and Eigenvectors}
+
+Suppose that $A$ is a square ($n \times n$) matrix.
+We say that a  nonzero vector $\vb$ is an eigenvector
+and a number $\lambda$ is its eigenvalue if
+\begin{equation}\label{def:eig}
+   A \vb = \lambda \vb.
+\end{equation}
+
+Geometrically this means that $A\vb$ is in the same direction
+as $\vb$, since multiplying a vector by a number changes
+its length, but not its direction.\\
+
+\textsc{Matlab} has a built-in routine for finding eigenvalues and eigenvectors:
+\begin{lstlisting}[frame=none,numbers=left]
+A = pascal(4)
+[v e] = eig(A)
+\end{lstlisting}
+The results are a matrix \verb&v& that contains eigenvectors as
+columns and a diagonal matrix \verb&e& that contains eigenvalues on
+the diagonal. We can check this by
+\begin{lstlisting}[frame=none,numbers=left]
+v1 = v(:,1)
+A*v1
+e(1,1)*v1
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Finding Eigenvalues for $2\times 2$ and $3\times3$}
+
+
+If $A$ is $2\times 2$ or $3\times3$ then we can find its eigenvalues
+and eigenvectors by hand. Notice that Equation (\ref{def:eig})
+can be rewritten as
+\begin{equation*}
+     A \vb - \lambda \vb = \mathbf{0}.
+\end{equation*}
+It would be nice to factor out the $\vb$ from the right-hand side of this
+equation, but we can't because $A$ is a matrix and $\lambda$ is a number.
+However, since $I \vb = \vb$, we can do the following:
+\begin{equation*}
+\begin{split}
+A\vb - \lambda \vb &=    A \vb - \lambda I \vb \\
+                   &= (A  - \lambda I) \vb \\
+                   &= \mathbf{0}
+\end{split}
+\end{equation*}
+If $\vb$ is nonzero, then by Theorem~\ref{def:singular} in
+Lecture~\ref{sec:lineartheory} the matrix $(A - \lambda I)$ must be
+singular. By the same theorem, we must have
+\begin{equation*}%\label{charac}
+         \det(A - \lambda I) = 0.
+\end{equation*}
+This is called the {\em characteristic equation}.
+
+For a $2 \times 2$ matrix, $A - \lambda I$ is calculated as in the following example:
+\begin{equation*}
+\begin{split}
+ A - \lambda I &=  \left(\begin{array}{cc} 1 & 4 \\
+                             3 & 5
+                         \end{array} \right)
+                  - \lambda  \left(\begin{array}{cc} 1 & 0 \\
+                                                    0 & 1
+                                   \end{array} \right) \\
+               &=  \left(\begin{array}{cc} 1 & 4 \\
+                                           3 & 5
+                         \end{array} \right)
+                  - \left(\begin{array}{cc} \lambda & 0 \\
+                                           0 & \lambda
+                         \end{array} \right) \\
+               &= \left(\begin{array}{cc} 1 -\lambda & 4 \\
+                                          3 & 5 - \lambda
+                        \end{array} \right)
+\,.
+\end{split}
+\end{equation*}
+The determinant of $A - \lambda I$ is then
+\begin{equation*}
+\begin{split}
+\det(A - \lambda I) &= (1 - \lambda)(5 - \lambda) - 4 \cdot 3 \\
+                   &= -7 - 6 \lambda + \lambda^2 .
+\end{split}
+\end{equation*}
+The characteristic equation $\det(A - \lambda I) = 0$ is simply a quadratic
+equation:
+\begin{equation*}
+           \lambda^2 - 6 \lambda - 7 = 0.
+\end{equation*}
+The roots of this equation are $\lambda_1 = 7$ and $\lambda_2 = -1$.
+These are the eigenvalues of the matrix $A$. Now to find the corresponding
+eigenvectors we return to the equation $(A - \lambda I) \vb = \mathbf{0}$.
+For $\lambda_1 = 7$, the equation for the eigenvector
+$(A - \lambda I) \vb = \mathbf{0}$ is equivalent
+to the augmented matrix
+\begin{equation}\label{eveqn}
+\left(\begin{array}{cc|c} -6 & 4 & 0\\
+                             3 & -2 & 0
+                    \end{array} \right) .
+\end{equation}
+Notice that the first and second rows of this matrix are multiples of
+one another. Thus Gaussian elimination would produce all zeros on the bottom row.
+Thus this equation has infinitely many solutions, i.e.~infinitely
+many eigenvectors. Since only the direction of the eigenvector matters, this is okay,
+we only need to find one of the eigenvectors. Since the second row of the augmented
+matrix represents the equation
+$$
+               3 x - 2 y = 0,
+$$
+we can let
+$$
+     \vb_1 = \left(\begin{array}{c} 2 \\
+                             3
+                    \end{array} \right).
+$$
+This comes from noticing that $(x,y) = (2,3)$ is a solution of
+$ 3x -2y =0 $.
+
+For $\lambda_2 = -1$, $(A - \lambda I) \vb = \mathbf{0}$ is equivalent
+to the augmented matrix
+$$
+\left(\begin{array}{cc|c} 2 & 4 & 0\\
+                             3 & 6 & 0
+                    \end{array} \right)
+.
+$$
+Once again the first and second rows of this matrix are multiples of
+one another. For simplicity we can
+let
+$$
+     \vb_2 = \left(\begin{array}{c} -2 \\
+                             1
+                    \end{array} \right).
+$$
+
+One can always check an eigenvector and eigenvalue by multiplying:
+\begin{align*}
+A \vb_1 &= \left(\begin{array}{cc} 1 & 4 \\
+                             3 & 5
+                    \end{array} \right)
+          \left(\begin{array}{c} 2 \\
+                                 3
+                    \end{array} \right)
+         = \left(\begin{array}{c} 14 \\
+                                   21
+                    \end{array} \right)
+         = 7 \left(\begin{array}{c} 2 \\
+                                     3
+                    \end{array} \right)
+	=7 \vb_1
+\quad\text{and}\\
+A \vb_2 &= \left(\begin{array}{cc} 1 & 4 \\
+                             3 & 5
+                    \end{array} \right)
+          \left(\begin{array}{c} -2 \\
+                                 1
+                    \end{array} \right)
+         = \left(\begin{array}{c} 2 \\
+                                   -1
+                    \end{array} \right)
+         = -1 \left(\begin{array}{c} -2 \\
+                                      1
+                    \end{array} \right)
+	= -1 \vb_2
+\,.
+\end{align*}
+
+For a $3 \times 3$ matrix we could complete the same process.
+The $\det(A -\lambda I)=0$ would be a cubic polynomial and we
+would expect to usually get 3 roots, which are the eigenvalues.
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Larger Matrices}
+
+For a $n \times n$ matrix with $n \ge 4$ this process is too
+long and cumbersome to complete by hand. Further, this process
+is not well suited even to implementation on a computer program
+since it involves determinants and solving a $n$-degree polynomial.
+For $n \ge 4$ we need more ingenious methods. These methods rely
+on the geometric meaning of eigenvectors and eigenvalues rather than solving
+algebraic equations. We will overview these methods in Lecture~\ref{EWmeth}.
+
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Complex Eigenvalues}
+
+It turns out that the eigenvalues of some matrices are complex
+numbers, even when the matrix only contains real numbers.
+When this happens the complex eigenvalues must occur
+in conjugate pairs, i.e.
+$$
+    \lambda_{1,2} = \alpha \pm i \beta.
+$$
+The corresponding eigenvectors must also come
+in conjugate pairs:
+$$
+     \wb = \ub \pm i \vb.
+$$
+In applications, the imaginary part of the eigenvalue, $\beta$,
+often is related to the frequency of an oscillation.
+This is because of Euler's formula
+$$
+    e^{\alpha + i \beta} = e^\alpha(\cos \beta + i \sin \beta).
+$$
+
+Certain kinds of matrices that arise in applications can only
+have real eigenvalues and eigenvectors. The most common such type of matrix
+is the symmetric matrix. A matrix is symmetric if it is equal
+to its own transpose, i.e.~it is symmetric across the diagonal.
+For example,
+$$
+\left(\begin{array}{cc} 1 & 3 \\
+                        3 & -5
+                    \end{array} \right)
+$$
+is symmetric and so we know beforehand that its eigenvalues will be real,
+not complex.
+
+
+%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Find the eigenvalues and eigenvectors of the following
+      matrix by hand:
+$$
+A = \left(\begin{array}{cc} 2 & 1 \\
+                            1 & 2
+                    \end{array} \right).
+$$
+
+
+\item Find the eigenvalues and eigenvectors of the following
+      matrix by hand:
+$$
+B = \left(\begin{array}{cc} 1 & -3 \\
+                            3 &  1
+                    \end{array} \right).
+$$
+Can you guess the eigenvalues of the matrix
+$$
+C = \left(\begin{array}{cc} a & -b \\
+                            b &  a
+                    \end{array} \right)?
+$$
+\end{list}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter[Vibrational Modes and Frequencies]{An Application of Eigenvectors: Vibrational Modes and Frequencies}
+
+One application of eigenvalues and eigenvectors is in the analysis of vibration
+problems. A simple nontrivial vibration problem is the motion of two
+objects with equal masses $m$ attached to each other and fixed outer
+walls by equal springs with spring constants $k$, as shown in
+Figure~\ref{fig:twosprings}.
+\begin{figure}
+\setlength{\unitlength}{1 mm}
+%\LARGE
+\begin{center}
+\begin{picture}(64,10)(0,-5)
+	%left wall
+	\put(0,-5){\line(1,0){2}}
+	\put(0,5){\line(1,0){2}}
+	\put(2,-5){\line(0,1){10}}
+	% spring
+	\put(2,0){\line(1,0){3}}
+	\qbezier(5,0)(9,5)(9,-1)
+	\qbezier(9,-1)(9,-3)(8,-3)
+	\qbezier(8,-3)(7,-3)(8,0)
+	\qbezier(8,0)(12,5)(12,-1)
+	\qbezier(12,-1)(12,-3)(11,-3)
+	\qbezier(11,-3)(10,-3)(11,0)
+	\qbezier(11,0)(15,5)(15,-1)
+	\qbezier(15,-1)(15,-3)(14,-3)
+	\qbezier(14,-3)(13,-3)(14,0)
+	\qbezier(14,0)(18,5)(18,-1)
+	\qbezier(18,-1)(18,-3)(17,-3)
+	\qbezier(17,-3)(16,-3)(17,0)
+	\qbezier(17,0)(19,4)(19,0)
+	% weight
+	\put(19,0){\line(1,0){6}}
+	\put(22,0){\circle*{2}}
+	% spring
+	\qbezier(25,0)(29,5)(29,-1)
+	\qbezier(29,-1)(29,-3)(28,-3)
+	\qbezier(28,-3)(27,-3)(28,0)
+	\qbezier(28,0)(32,5)(32,-1)
+	\qbezier(32,-1)(32,-3)(31,-3)
+	\qbezier(31,-3)(30,-3)(31,0)
+	\qbezier(31,0)(35,5)(35,-1)
+	\qbezier(35,-1)(35,-3)(34,-3)
+	\qbezier(34,-3)(33,-3)(34,0)
+	\qbezier(34,0)(38,5)(38,-1)
+	\qbezier(38,-1)(38,-3)(37,-3)
+	\qbezier(37,-3)(36,-3)(37,0)
+	\qbezier(37,0)(39,4)(39,0)
+	%weight
+	\put(39,0){\line(1,0){6}}
+	\put(42,0){\circle*{2}}
+	% spring
+	\qbezier(45,0)(49,5)(49,-1)
+	\qbezier(49,-1)(49,-3)(48,-3)
+	\qbezier(48,-3)(47,-3)(48,0)
+	\qbezier(48,0)(52,5)(52,-1)
+	\qbezier(52,-1)(52,-3)(51,-3)
+	\qbezier(51,-3)(50,-3)(51,0)
+	\qbezier(51,0)(55,5)(55,-1)
+	\qbezier(55,-1)(55,-3)(54,-3)
+	\qbezier(54,-3)(53,-3)(54,0)
+	\qbezier(54,0)(58,5)(58,-1)
+	\qbezier(58,-1)(58,-3)(57,-3)
+	\qbezier(57,-3)(56,-3)(57,0)
+	\qbezier(57,0)(59,4)(59,0)
+	\put(59,0){\line(1,0){3}}
+	% right wall
+	\put(62,-5){\line(0,1){10}}
+	\put(62,-5){\line(1,0){2}}
+	\put(62,5){\line(1,0){2}}
+	% displacements
+	\put(22,-5){\line(0,1){2}}
+	\put(22,-4){\vector(1,0){4}}
+	\put(23,-7){\mbox{$x_1$}}
+	\put(42,-5){\line(0,1){2}}
+	\put(42,-4){\vector(1,0){4}}
+	\put(43,-7){\mbox{$x_2$}}
+\end{picture}
+\end{center}
+\caption{Two equal masses attached to each other and fixed walls by
+equal springs.}
+		\label{fig:twosprings}
+\end{figure}
+
+
+Let $x_1$ denote the displacement of the first mass and $x_2$ the displacement
+of the second, and note the displacement of the walls is zero. Each
+mass experiences forces from the adjacent springs proportional to the
+stretch or compression of the spring.
+Ignoring any friction, Newton's law of motion $ma = F$, leads to
+\begin{equation}
+\begin{array}{rlcclrrl}
+m \ddot{x}_1 &= -k(x_1-0)&+k(x_2-x_1)&	       &=& -2k x_1 &+ k x_2 &\text{and}\\
+m \ddot{x}_2 &=		 &-k(x_2-x_1)&+k(0-x_2) &=& k x_1 &- 2 k x_2&.\\
+\end{array}
+\end{equation}
+%\begin{equation}
+%\begin{split}
+%m \ddot{x}_1 & = -k x_1 + k(x_2 - x_1) = -2k x_1 + k x_2 \\
+%m \ddot{x}_2 & = -k x_2 - k(x_2 - x_1) = k x_1 - 2 k x_2.
+%\end{split}
+%\end{equation}
+Dividing both sides by $m$ we can write these equations in matrix form
+\begin{equation} \label{linearde}
+\ddot{\xb} = - A \xb,
+\end{equation}
+where
+\begin{equation}
+A   = \left(\begin{array}{cc} 2 \frac{k}{m} & -1 \frac{k}{m} \\
+                                                        -1 \frac{k}{m} & 2  \frac{k}{m}
+                                       \end{array} \right).
+\end{equation}
+For this type of equation, the general solution is
+\begin{equation}
+\xb(t)
+= c_1 \vb_1 \sin\left(\sqrt{\lambda_1}\; t + \phi_1\right)
++ c_2 \vb_2 \sin\left(\sqrt{\lambda_2}\; t + \phi_2\right)
+\end{equation}
+where $\lambda_1$ and $\lambda_2$ are eigenvalues of $A$ with corresponding eigenvectors
+$\vb_1$ and $\vb_2$. One can check that this is a solution by substituting it into
+the equation (\ref{linearde}).
+
+The eigenvalues of $A$ are the squares of the
+frequencies of oscillation. Let's set $m =1$ and $k=1$ in $A$.
+We can find the eigenvalues and eigenvectors of $A$ using Matlab:
+\begin{lstlisting}[frame=none,numbers=left]
+A = [2 -1 ; -1 2]
+[v e] = eig(A)
+\end{lstlisting}
+This should produce a matrix \verb&v& whose columns are the eigenvectors of $A$
+and a diagonal matrix $e$ whose entries are the eigenvalues of $A$.
+In the first eigenvector, $\vb_1$, the two entries are equal. This represents
+the mode of oscillation where the two masses move in sync with each other.
+The second eigenvector, $\vb_2$, has the same entries but opposite signs. This represents
+the mode where the two masses oscillate in anti-synchronization.
+See Figure~\ref{fig:twospringvectors}.
+Notice that the frequency for anti-sync motion is $\sqrt{3}$ times that of
+synchronous motion.
+
+\begin{figure}
+\setlength{\unitlength}{1 mm}
+\begin{picture}(64,70)(0,-5)
+%% neutral
+	%left wall
+	\put(0,-5){\line(1,0){2}}
+	\put(0,5){\line(1,0){2}}
+	\put(2,-5){\line(0,1){10}}
+	% spring
+	\put(2,0){\line(1,0){3}}
+	% weight
+	\put(19,0){\line(1,0){6}}
+	\put(22,0){\circle*{2}}
+	% spring
+	%weight
+	\put(39,0){\line(1,0){6}}
+	\put(42,0){\circle*{2}}
+	% spring
+	\put(59,0){\line(1,0){3}}
+	% right wall
+	\put(62,-5){\line(0,1){10}}
+	\put(62,-5){\line(1,0){2}}
+	\put(62,5){\line(1,0){2}}
+%%%%% shift right
+	%left wall
+	\put(0,10){\line(1,0){2}}
+	\put(0,20){\line(1,0){2}}
+	\put(2,10){\line(0,1){10}}
+	% spring
+	\put(2,15){\line(1,0){3}}
+	% weight
+	\put(23,15){\line(1,0){6}}
+	\put(26,15){\circle*{2}}
+	% spring
+	%weight
+	\put(43,15){\line(1,0){6}}
+	\put(46,15){\circle*{2}}
+	% spring
+	\put(59,15){\line(1,0){3}}
+	% right wall
+	\put(62,10){\line(0,1){10}}
+	\put(62,10){\line(1,0){2}}
+	\put(62,20){\line(1,0){2}}
+%%%%% neutral
+	%left wall
+	\put(0,25){\line(1,0){2}}
+	\put(0,35){\line(1,0){2}}
+	\put(2,25){\line(0,1){10}}
+	% spring
+	\put(2,30){\line(1,0){3}}
+	% weight
+	\put(19,30){\line(1,0){6}}
+	\put(22,30){\circle*{2}}
+	% spring
+	%weight
+	\put(39,30){\line(1,0){6}}
+	\put(42,30){\circle*{2}}
+	% spring
+	\put(59,30){\line(1,0){3}}
+	% right wall
+	\put(62,25){\line(0,1){10}}
+	\put(62,25){\line(1,0){2}}
+	\put(62,35){\line(1,0){2}}
+%%%%% shift left
+	%left wall
+	\put(0,40){\line(1,0){2}}
+	\put(0,50){\line(1,0){2}}
+	\put(2,40){\line(0,1){10}}
+	% spring
+	\put(2,45){\line(1,0){3}}
+	% weight
+	\put(15,45){\line(1,0){6}}
+	\put(18,45){\circle*{2}}
+	% spring
+	%weight
+	\put(35,45){\line(1,0){6}}
+	\put(38,45){\circle*{2}}
+	% spring
+	\put(59,45){\line(1,0){3}}
+	% right wall
+	\put(62,40){\line(0,1){10}}
+	\put(62,40){\line(1,0){2}}
+	\put(62,50){\line(1,0){2}}
+%% neutral
+	%left wall
+	\put(0,55){\line(1,0){2}}
+	\put(0,65){\line(1,0){2}}
+	\put(2,55){\line(0,1){10}}
+	% spring
+	\put(2,60){\line(1,0){3}}
+	% weight
+	\put(19,60){\line(1,0){6}}
+	\put(22,60){\circle*{2}}
+	% spring
+	%weight
+	\put(39,60){\line(1,0){6}}
+	\put(42,60){\circle*{2}}
+	% spring
+	\put(59,60){\line(1,0){3}}
+	% right wall
+	\put(62,55){\line(0,1){10}}
+	\put(62,55){\line(1,0){2}}
+	\put(62,65){\line(1,0){2}}
+\end{picture}
+\hfill
+\begin{picture}(64,70)(0,-5)
+% neutral
+	%left wall
+	\put(0,-5){\line(1,0){2}}
+	\put(0,5){\line(1,0){2}}
+	\put(2,-5){\line(0,1){10}}
+	% spring
+	\put(2,0){\line(1,0){3}}
+	% weight
+	\put(19,0){\line(1,0){6}}
+	\put(22,0){\circle*{2}}
+	% spring
+	%weight
+	\put(39,0){\line(1,0){6}}
+	\put(42,0){\circle*{2}}
+	% spring
+	\put(59,0){\line(1,0){3}}
+	% right wall
+	\put(62,-5){\line(0,1){10}}
+	\put(62,-5){\line(1,0){2}}
+	\put(62,5){\line(1,0){2}}
+%%%%% together
+	%left wall
+	\put(0,10){\line(1,0){2}}
+	\put(0,20){\line(1,0){2}}
+	\put(2,10){\line(0,1){10}}
+	% spring
+	\put(2,15){\line(1,0){3}}
+	% weight
+	\put(23,15){\line(1,0){6}}
+	\put(26,15){\circle*{2}}
+	% spring
+	%weight
+	\put(35,15){\line(1,0){6}}
+	\put(38,15){\circle*{2}}
+	% spring
+	\put(59,15){\line(1,0){3}}
+	% right wall
+	\put(62,10){\line(0,1){10}}
+	\put(62,10){\line(1,0){2}}
+	\put(62,20){\line(1,0){2}}
+%%%%% neutral
+	%left wall
+	\put(0,25){\line(1,0){2}}
+	\put(0,35){\line(1,0){2}}
+	\put(2,25){\line(0,1){10}}
+	% spring
+	\put(2,30){\line(1,0){3}}
+	% weight
+	\put(19,30){\line(1,0){6}}
+	\put(22,30){\circle*{2}}
+	% spring
+	%weight
+	\put(39,30){\line(1,0){6}}
+	\put(42,30){\circle*{2}}
+	% spring
+	\put(59,30){\line(1,0){3}}
+	% right wall
+	\put(62,25){\line(0,1){10}}
+	\put(62,25){\line(1,0){2}}
+	\put(62,35){\line(1,0){2}}
+%%%%% apart
+	%left wall
+	\put(0,40){\line(1,0){2}}
+	\put(0,50){\line(1,0){2}}
+	\put(2,40){\line(0,1){10}}
+	% spring
+	\put(2,45){\line(1,0){3}}
+	% weight
+	\put(15,45){\line(1,0){6}}
+	\put(18,45){\circle*{2}}
+	% spring
+	%weight
+	\put(43,45){\line(1,0){6}}
+	\put(46,45){\circle*{2}}
+	% spring
+	\put(59,45){\line(1,0){3}}
+	% right wall
+	\put(62,40){\line(0,1){10}}
+	\put(62,40){\line(1,0){2}}
+	\put(62,50){\line(1,0){2}}
+%% neutral
+	%left wall
+	\put(0,55){\line(1,0){2}}
+	\put(0,65){\line(1,0){2}}
+	\put(2,55){\line(0,1){10}}
+	% spring
+	\put(2,60){\line(1,0){3}}
+	% weight
+	\put(19,60){\line(1,0){6}}
+	\put(22,60){\circle*{2}}
+	% spring
+	%weight
+	\put(39,60){\line(1,0){6}}
+	\put(42,60){\circle*{2}}
+	% spring
+	\put(59,60){\line(1,0){3}}
+	% right wall
+	\put(62,55){\line(0,1){10}}
+	\put(62,55){\line(1,0){2}}
+	\put(62,65){\line(1,0){2}}
+\end{picture}
+\caption{
+Two vibrational modes of a simple oscillating system. In the left mode
+the weights move together and in the right mode they move
+opposite. Note that the two modes actually move at different speeds.}
+\label{fig:twospringvectors}
+\end{figure}
+
+
+Which of the two modes is the most dangerous for a structure or machine?
+It is the one with the {\em lowest frequency} because that mode
+can have the largest displacement. Sometimes this mode is called
+the {\em fundamental mode}.
+
+We can do the same for three equal masses. With $m=1$, $k=1$ the corresponding matrix $A$
+would be
+$$
+A =  \left(\begin{array}{ccc} 2 & -1 & 0 \\
+                              -1& 2 & -1 \\
+                              0& -1 & 2
+                                       \end{array} \right).
+$$
+Find the eigenvectors and eigenvalues as above.
+There are three different modes. Interpret them from the eigenvectors.
+
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Find the modes and their frequencies for 4 equal masses with $m=3$ kg and equal springs with $k=10$ N/m.
+Describe the modes (a sketch will suffice).
+%\newpage % so doesn't break problem
+\item
+Find the modes and their frequencies for  three unequal masses $m_1 = 2$ kg, $m_2 = 3$ kg and $m_3 = 4$ kg
+connected by 4 equal springs with $k = 5$ N/m.
+How do unequal masses affect the modes? (You must start with the equations of motion to
+do this correctly.)
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Numerical Methods for Eigenvalues}
+\label{EWmeth}
+
+As mentioned above, the eigenvalues and eigenvectors of an $n \times n$ matrix
+where $n \ge 4$ must be found numerically instead of by hand.
+The numerical methods that are used in practice depend on
+the geometric meaning of eigenvalues and eigenvectors which is equation
+(\ref{def:eig}). The essence of all these methods is captured
+in the Power method, which we now introduce.
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{The Power Method}
+
+
+In the command window of \textsc{Matlab} enter
+\begin{lstlisting}[frame=none,numbers=left]
+A = hilb(5)
+x = ones(5,1)
+x = A*x
+el = max(x)
+x = x/el
+\end{lstlisting}
+
+Compare the new value of \verb&x& with the original.
+Repeat the last three lines (you can use the scroll up button).
+Compare the newest value of \verb&x& with the previous one and
+the original. Notice that there is less change between the second two.
+Repeat the last three commands over and over until the values
+stop changing. You have completed what is known as the {\em Power Method}.
+Now try the command
+\begin{lstlisting}[frame=none,numbers=left]
+[v e] = eig(A)
+\end{lstlisting}
+The last entry in \verb&e& should be the final \verb&el& we
+computed. The last column in \verb&v& is \verb&x/norm(x)&.
+Below we explain why our commands gave this eigenvalue and eigenvector.
+
+
+For illustration consider a $2 \times 2$ matrix whose
+eigenvalues are $1/3$ and $-2$ and whose corresponding eigenvectors
+are $\vb_1$ and $\vb_2$.
+Let $\xb_0$ be any vector which is a combination of
+$\vb_1$ and $\vb_2$, e.g.,
+$$
+     \xb_0 = \vb_1 + \vb_2.
+$$
+Now let $\xb_1$ be  $A$ times  $\xb_0$. It follows from (\ref{def:eig}) that
+\begin{equation}
+\begin{split}
+     \xb_1 &= A \vb_1 + A \vb_2 \\
+           &= \frac{1}{3} \vb_1 +  -2 \vb_2.
+\end{split}
+\end{equation}
+Thus the $\vb_1$ part is shrunk while the $\vb_2$ is stretched.
+If we repeat this process $k$ times then
+\begin{equation}
+\begin{split}
+     \xb_k &= A \xb_{k-1} \\
+           &= A^k \xb_0 \\
+           &= \left(\frac{1}{3}\right)^k \vb_1 + (-2)^k \vb_2.
+\end{split}
+\end{equation}
+Clearly, $\xb_k$ grows in the direction of $\vb_2$ and
+shrinks in the direction of $\vb_1$. This is the principle
+of the Power Method, vectors multiplied by $A$
+are stretched most in the direction of the eigenvector  whose
+eigenvalue has the largest absolute value.
+
+The eigenvalue with the largest absolute value is called the {\em dominant}
+eigenvalue. In many applications this quantity will necessarily be positive
+for physical reasons. When this is the case, the \textsc{Matlab} code
+above will work since \verb&max(v)& will be the element with the
+largest absolute value. In applications where the dominant eigenvalue may be
+negative, the program must use flow control to determine the correct
+number.
+
+Summarizing the Power Method:
+\begin{itemize}
+\item Repeatedly multiply $\xb$ by $A$ and
+  divide by the element with the largest absolute value.
+\item The element of largest absolute value converges to largest absolute eigenvalue.
+\item The vector converges to the corresponding eigenvector.
+\end{itemize}
+Note that this logic only works when the eigenvalue largest in
+magnitude is real. If the matrix and starting vector are real then the
+power method can never give a result with an imaginary part.
+Eigenvalues with imaginary part mean the matrix has a rotational
+component, so the eigenvector would not settle down either.
+
+Try
+\begin{lstlisting}[frame=none,numbers=left]
+A = randn(15,15);
+e = eig(A)
+\end{lstlisting}
+You can see that for a random square matrix, many of the eigenvalues are complex.
+
+However, matrices in applications are not just random. They have structure, 
+and this can lead to real eigenvalues as seen in the next section.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Symmetric, Positive-Definite Matrices}
+
+As noted in the previous paragraph, the power method can fail
+if $A$ has complex eigenvalues. One class of matrices that appear often
+in applications and for which the eigenvalues are always real are called
+the symmetric matrices. A matrix is {\em symmetric} if
+$$
+     A' = A,
+$$
+i.e.~$A$ is symmetric with respect to reflections about its diagonal.
+
+
+Try\begin{lstlisting}[frame=none,numbers=left]
+A = rand(5,5)
+C = A'*A
+e = eig(C)
+\end{lstlisting}
+You can see that  the eigenvalues of these symmetric matrices are real.
+
+
+Next we consider an even more specialized class for which the
+eigenvalues are not only real, but positive. A symmetric matrix is
+called {\em positive definite} if for all vectors $\vb \neq
+\mathbf{0}$ the following holds:
+$$
+     A \vb \cdot \vb > 0.
+$$
+Geometrically, $A$ does not rotate any vector by more than $\pi/2$.
+In summary:
+\begin{itemize}
+\item If $A$ is symmetric then its eigenvalues are real.
+\item If $A$ is symmetric positive definite, then its eigenvalues are positive numbers.
+\end{itemize}
+
+Notice that the $B$ matrices in the previous section were symmetric
+and the eigenvalues were all real. Notice that the Hilbert and Pascal matrices
+are symmetric.
+
+%The matrix $H$ also is positive definite, as are the matrices $B$ in the previous section.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection*{The residual of an approximate eigenvector-eigenvalue pair}
+
+If $\vb$ and $\lambda$ are an eigenvector-eigenvalue pair for $A$, then they are supposed to 
+satisfy the equations: $A \vb = \lambda \vb$. Thus a scalar residual for approximate
+ $\vb$ and $\lambda$ would be
+$$
+        r  = \| A \vb  - \lambda \vb \|.
+$$
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The Inverse Power Method}
+
+In the application of vibration analysis,  the mode (eigenvector) with
+the lowest frequency (eigenvalue) is the most dangerous for
+the machine or structure. The Power Method gives us instead
+the largest eigenvalue, which is the least important frequency.
+In this section we introduce a method, the {\em Inverse
+Power Method} which produces exactly what is needed.
+
+
+The following facts are at the heart of the Inverse Power Method:
+\begin{itemize}
+\item  If $\lambda$ is an eigenvalue  of $A$ then $1/\lambda$ is an eigenvalue
+for $A^{-1}$.
+\item The eigenvectors for $A$ and $A^{-1}$ are the same.
+\end{itemize}
+
+
+Thus if we apply the Power Method to $A^{-1}$ we will obtain the largest
+absolute eigenvalue of $A^{-1}$, which is exactly the reciprocal of the smallest
+absolute eigenvalue of $A$. We will also obtain the corresponding eigenvector, which is
+an eigenvector  for both $A^{-1}$ and $A$. Recall that in the application of
+vibration mode analysis, the smallest eigenvalue and its eigenvector correspond exactly to
+the frequency and mode that we are most interested in, i.e. the one
+that can do the most damage.
+
+Here as always, we do not really want to calculate the
+inverse of $A$ directly if we can help it. Fortunately, multiplying
+$\xb_i$ by $A^{-1}$ to get $\xb_{i+1}$ is equivalent to solving the system
+$    A \xb_{i+1} = \xb_i\, $,
+which can be done efficiently and accurately. Since iterating this process involves
+solving a linear system with the same $A$ but many different right hand
+sides, it is a perfect time to use the LU decomposition to save computations.
+The following function program does $n$ steps of the Inverse Power Method.
+%\newpage
+\begin{lstlisting}
+function [x e] = myipm(A,n)
+    % Performs the inverse power method.
+    % Inputs: A -- a square matrix   
+    %         n --  number of iterations.
+    % Outputs: x -- estimated eigenvector
+    %          e -- estimated smallest eigenvalue. 
+    [L U P] = lu(A);  % LU decomposition of A with pivoting
+    m = size(A,1); % determine the size of A
+    x = ones(m,1); % make an initial vector with ones
+    for i = 1:n
+        px = P*x;  % Apply pivot
+        y = L\px;  % solve via LU
+        x = U\y;
+        % find the maximum entry in absolute value, retaining its sign
+        M = max(x);  
+        m = min(x);
+        if abs(M) >= abs(m)
+           el = M;
+        else
+           el = m;
+        end
+        x = x/el; % divide by the estimated eigenvalue of the inverse of A
+    end
+    e = 1/el; % reciprocate to get an eigenvalue of A
+end
+\end{lstlisting}
+Create a $5 \times 5$ Hilbert matrix $H$ and use the program to find its smallest eigenvalue and corresponding eigenvector.
+Also do \verb& [V, E] = eig(H) & and compare. 
+
+%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item For each of the matrices
+$$
+  A =\left[\begin{array}{cc}
+      1&2\\
+      3&4
+    \end{array}\right]    \quad \text{and} \quad
+  B =\left[\begin{array}{ccc}
+      -2&1&0\\
+      1&-2&1\\
+      0&1&-3
+    \end{array}\right]
+ \,,
+$$
+ perform two iterations of
+  the power method by hand starting with a vector of all ones.
+  State the resulting approximations of the eigenvalue and
+  eigenvector.
+\item 
+  \begin{enumerate}
+  \item[(a)] Write a well-commented \textsc{Matlab} {\bf function} program
+    \verb&mypm.m& that inputs a matrix and a tolerance, applies the
+    power method until the scalar residual is less than the
+    tolerance, and outputs  the estimated
+    eigenvalue and eigenvector, the number of steps, and the scalar residual.
+%Use a \verb&while& loop to make it
+%    continue until the vector stops changing (up to some \verb&tol&).
+%    Put a counter in the loop to count the number of steps.
+ \item[(b)] 
+   Test your program on the matrices $A$ and $B$ in the previous exercise and check
+   that you get the same results as your hand calculations for the first 2 iterations. 
+   Turn in your program only.
+\end{enumerate}
+%Try your program on some
+%  random symmetric matrices of various sizes (Hint: use
+%  \verb&A=randn(n)& then \verb&A=A+A'&). Check that your program
+%  worked by making sure \verb&norm(A*v-e*v)& is small.  Is there a
+%  relationship between the size and the number of steps needed or
+%  between the size and the eigenvalue? Turn your program and
+%  a brief report on the trials.
+
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{The QR Method*}
+
+The Power Method and Inverse Power Method each give us
+only one eigenvalue-eigenvector pair. While both of these methods can
+be modified to give more eigenvalues and eigenvectors, there is
+a better method for obtaining all the eigenvalues called
+the {\em QR method}. This is the basis of all modern
+eigenvalue software, including \textsc{Matlab}, so we summarize
+it briefly here.
+
+The QR method uses the fact that any square matrix has a
+{\em QR decomposition}. That is, for any $A$ there are
+matrices $Q$ and $R$ such the $A = QR$ where $Q$ has the property
+$$
+     Q^{-1} = Q'
+$$
+and $R$ is upper triangular. A matrix $Q$ with the property that its
+transpose equals its inverse is called an {\em orthogonal} matrix,
+because its column vectors are mutually orthogonal.
+
+The QR method consists of iterating following steps:
+\begin{itemize}
+\item Transform $A$ into a tridiagonal matrix $H$.
+\item Decompose $H$ in $QR$.
+\item Multiply $Q$ and $R$ together in reverse order to form a new $H$.   
+\end{itemize}
+The diagonal of $H$ will converge to the eigenvalues.
+
+The details of what makes this method converge are beyond the scope of the this book.
+However, we note the following theory behind it for those with more familiarity with
+linear algebra. First the Hessian matrix $H$ is
+obtained from $A$ by a series of similarity transformation, thus it has the
+same eigenvalues as $A$. Secondly, if we denote by $H_0$, $H_1$, $H_2$, $\ldots$, the
+sequence of matrices produced by the iteration, then
+$$
+   H_{i+1} = R_i Q_i = Q_i^{-1} Q_i R_i Q_i = Q'_i H_i Q_i.
+$$
+Thus each $H_{i+1}$ is a related to $H_i$ by an (orthogonal) similarity transformation and
+so they have the same eigenvalues as $A$.
+
+There is a built-in QR decomposition in \textsc{Matlab} which
+is called with the command: \verb&[Q R] = qr(A)&.
+Thus the following program implements QR method until it
+converges:
+\newpage
+\begin{lstlisting}
+function [E,steps] = myqrmethod(A)
+    % Computes all the eigenvalues of a matrix using the QR method.
+    % Input: A -- square matrix
+    % Outputs: E -- vector of eigenvalues 
+    %          steps -- the number of iterations it took
+    [m n] = size(A);
+    if m ~= n
+       warning('The input matrix is not square.')
+       return
+    end
+    % Set up initial estimate
+    H = hess(A);
+    E = diag(H);
+    change = 1;
+    steps = 0;
+    % loop while estimate changes
+    while change > 0
+        Eold = E;
+        % apply QR method
+        [Q R] = qr(H);
+        H = R*Q;
+        E = diag(H);
+        % test change
+        change = norm(E - Eold);
+        steps = steps +1;
+    end
+end
+\end{lstlisting}
+As you can see the main steps of the program are very simple.
+The really hard calculations are contained in the built-in commands
+\verb&hess(A)& and \verb&qr(H)&.
+
+Run this program and compare the results with \textsc{Matlab}'s built in command:
+\begin{lstlisting}[frame=none,numbers=left]
+format long
+format compact
+A = hilb(5)
+[Eqr,steps] = myqrmethod(A)
+Eml = eig(A)
+diff = norm(Eml - flipud(Eqr))
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Exercises}
+\begin{list}
+{\arabic{chapter}.\arabic{exercise}}{\usecounter{exercise}}
+
+\item Modify \verb&myqrmethod& to stop after 1000
+      iterations. Use the modified program
+      on the matrix \verb&A = hilb(n)& with \verb&n& equal to
+      10, 50, and 200. Use the norm to compare the results to
+      the eigenvalues obtained from \textsc{Matlab}'s built-in program
+      \verb&eig&. Turn in your program and a brief
+      report on the experiment.
+
+
+\end{list}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Iterative solution of linear systems*}
+
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Newton refinement}
+
+%%%%%%%%%%%%%%%%
+
+\subsection*{Conjugate gradient method}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Review of Part II}
+\addcontentsline{toc}{chapter}{Review of Part II}
+\markboth{REVIEW OF PART II}{}
+\subsection*{Methods and Formulas}
+
+%%%%%%%%%%%%%%%%
+
+\subsubsection*{Basic Matrix Theory:}
+Identity matrix: $ A I = A$, $I A = A$, and $I \vb = \vb$ \\
+Inverse matrix: $ A A^{-1} = I$ and $ A^{-1} A = I$\\
+Norm of a matrix: $ \|A\| \equiv \max_{\|\vb\|=1} \|A\vb\|$\\
+A matrix may be singular or nonsingular. See Lecture 10.
+
+\subsubsection*{Solving Process:}
+Learn the exact Gaussian Elimination algorithm:\\
+   Row $j$  $\mapsto$ Row $j$ - (ratio) Row $i$ \\
+Gaussian Elimination this way produces LU decomposition\\
+Row Pivoting (bigger absolute number on top) \\
+Back Substitution
+
+
+\subsubsection*{Condition number:}
+$$
+      \textrm{cond}(A) \equiv \max \left( \frac{ \|\delta \xb\|/\|\xb\|}
+         { \frac{\|\delta A\|}{\|A\|} + \frac{\|\delta \bb\|}{\|\bb\|} } \right)
+          = \max \left( \frac{\text{Relative error of output}}
+                             {\text{Relative error of inputs}} \right).
+$$
+A big condition number is bad; in engineering it usually results from poor design.
+
+
+\subsubsection*{LU factorization:}
+The LU factorization is a by-product of Gaussian Elimination (if done with
+the correct algorithm).
+$$
+   PA = LU.
+$$
+Solving steps:\\
+Multiply by P: $\mathbf{d}= P \bb$ \\
+Forwardsolve: $  L \yb = \mathbf{d} $ \\
+Backsolve: $  U \xb = \yb $
+
+
+\subsubsection*{Eigenvalues and eigenvectors:}
+A  nonzero vector $\vb$ is an eigenvector
+and a number $\lambda$ is its eigenvalue if
+$$
+   A \vb = \lambda \vb.
+$$
+Characteristic equation: $ \det(A - \lambda I) = 0 $  \\
+Equation of the eigenvector: $(A - \lambda I) \vb = \mathbf{0}$\\
+Residual for an approximate eigenvector-eigenvalue pair: $ r  = \| A \vb  - \lambda \vb \|$
+
+
+\subsubsection*{Complex eigenvalues:}
+Occur in conjugate pairs: $ \lambda_{1,2} = \alpha \pm i \beta $\\
+and  eigenvectors must also come
+in conjugate pairs: $\wb = \ub \pm i \vb$.
+
+\subsubsection*{Vibrational modes:}
+Eigenvalues are frequencies squared. Eigenvectors represent modes.
+
+\subsubsection*{Power Method:}
+- Repeatedly multiply $\xb$ by $A$ and
+  divide by the element with the largest absolute value.\\
+- The element of largest absolute value converges to largest absolute eigenvalue.\\
+- The vector converges to the corresponding eigenvector.\\
+- Convergence assured for a real symmetric matrix, but not for an arbitrary
+matrix, which may not have real eigenvalues at all.
+
+
+\subsubsection*{Inverse Power Method:}
+- Apply power method to $A^{-1}$.\\
+- Use solving rather than the inverse.\\
+- If $\lambda$ is an eigenvalue  of $A$ then $1/\lambda$ is an eigenvalue  for $A^{-1}$.\\
+- The eigenvectors for $A$ and $A^{-1}$ are the same.
+
+\subsubsection*{Symmetric and Positive definite:}
+- Symmetric: $A = A'$.\\
+- If $A$ is symmetric its eigenvalues are real.\\
+- Positive definite: $A\xb \cdot \xb >0$.\\
+- If $A$ is positive definite, then its eigenvalues are positive.
+
+
+\subsubsection*{QR method (Not covered in MATH 3600 at Ohio):}
+- Transform $A$ into $H$ the Hessian form of $A$.\\
+- Decompose $H$ in $QR$.\\
+- Multiply $Q$ and $R$ together in reverse order to form a new $H$.\\
+- Repeat\\
+- The diagonal of $H$ will converge to the eigenvalues of $A$.
+
+
+\subsection*{Matlab}
+
+\subsubsection*{Matrix arithmetic:}
+
+% \begin{lstlisting}[frame=none,numbers=left]
+% A = [ 1  3 -2 5 ;  -1  -1 5 4 ; 0 1 -9  0]  % Manually enter a matrix 
+% u = [ 1  2  3  4]' 
+% A*u  
+% B = [3 2 1; 7 6 5; 4 3 2] 
+% B*A      % multiply $B$ times $A$
+% 2*A      % multiply a matrix by a scalar
+% A + A    % add matrices 
+% A + 3    % add 3 to every entry of a matrix 
+% B.*B     % component-wise multiplication
+% B.^3     % component-wise exponentiation
+%\end{lstlisting}
+\verb&A = [ 1  3 -2 5 ;  -1  -1 5 4 ; 0 1 -9  0]& \dotfill Manually enter a matrix. \\
+\verb&u = [ 1  2  3  4]'&\\
+\verb&A*u &\\
+\verb&B = [3 2 1; 7 6 5; 4 3 2]&\\
+\verb&B*A&     \dotfill multiply $B$ times $A$.\\
+\verb&2*A&     \dotfill multiply a matrix by a scalar.\\
+\verb&A + A&   \dotfill add matrices. \\
+\verb&A + 3&   \dotfill add 3 to every entry of a matrix. \\
+\verb&B.*B&  \dotfill component-wise multiplication. \\
+\verb&B.^3&  \dotfill component-wise exponentiation.
+
+\subsubsection*{Special matrices:}
+
+% \begin{lstlisting}[frame=none,numbers=left]
+% I = eye(3)        % identity matrix
+% D = ones(5,5) 
+% O = zeros(10,10) 
+% C = rand(5,5)     % random matrix with uniform distribution in [0,1]
+% C = randn(5,5)    % random matrix with normal distribution.
+% hilb(6) 
+% pascal(5) 
+% \end{lstlisting}
+\verb&I = eye(3)& \dotfill identity matrix\\
+\verb&D = ones(5,5)&\\
+\verb&O = zeros(10,10)&\\
+\verb&C = rand(5,5)& \dotfill random matrix with uniform
+         distribution in $[0,1]$.\\
+\verb&C = randn(5,5)& \dotfill random matrix with normal distribution.\\
+\verb&hilb(6)&\\
+\verb&pascal(5)&
+
+\subsubsection*{General matrix commands:}
+
+% \begin{lstlisting}[frame=none,numbers=left]
+% size(C)   % gives the dimensions (m x n) of A
+% norm(C)   % gives the norm of the matrix
+% det(C)    % the determinant of the matrix
+% max(C)    % the maximum of each row
+% min(C)    % the minimum in each row
+% sum(C)    % sums each row
+% mean(C)   % the average of each row
+% diag(C)   % just the diagonal elements 
+% inv(C)    % inverse of the matrix
+% C'        % transpose of the matrix
+% \end{lstlisting}
+\verb&size(C)& \dotfill gives the dimensions ($m \times n$) of $A$.\\
+\verb&norm(C)& \dotfill gives the norm of the matrix.\\
+\verb&det(C)&   \dotfill the determinant of the matrix.\\
+\verb&max(C)&   \dotfill the maximum of each row.\\
+\verb&min(C)&   \dotfill the minimum in each row.\\
+\verb&sum(C)&   \dotfill sums each row.\\
+\verb&mean(C)&   \dotfill the average of each row.\\
+\verb&diag(C)&   \dotfill just the diagonal elements. \\
+\verb&inv(C)&    \dotfill inverse of the matrix.\\
+\verb&C'&    \dotfill transpose of the matrix.
+
+\subsubsection*{Matrix decompositions:}
+
+%\begin{lstlisting}[frame=none,numbers=left]
+%[L U P] = lu(C) 
+%[Q R] = qr(C) 
+%H = hess(C)     % transform into a Hessian tri-diagonal matrix
+%\end{lstlisting}
+\verb&[L U P] = lu(C)&\\
+\verb&[Q R] = qr(C)&\\
+\verb&H = hess(C)& \dotfill transform into a Hessian tri-diagonal matrix, which has the same eigenvalues as $A$.
+
+%[U S V] = svd(C)   % singular value decomposition (important, but we did not use it)
+%R = chol(A)   % Cholesky decomposition of a symmetric, positive definite matrix, A = R' R.
+%[U T] = schur(C)   % Schur Decomposition A=U'T U.
+%H = hess(C)     % transform into a Hessian tri-diagonal matrix, which has the same eigenvalues as A.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
