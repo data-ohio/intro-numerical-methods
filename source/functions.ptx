@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="chapter-functions" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Functions and Data</title>
+
+  <introduction>
+    <p> Text before the first section. </p>
+  </introduction>
+
+  <!-- include sections 
+  <xi:include href="sec-section-name.ptx" /> -->
+
+</chapter>

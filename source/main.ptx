@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- we first include a file which contains the docinfo element: -->
+  <xi:include href="./docinfo.ptx" />
+
+  <book xml:id="intro-numerical-methods">
+    <title>Introduction to Numerical Methods and Matlab Programming for Engineers</title>
+  
+
+    <!-- Include frontmatter -->
+    <xi:include href="./frontmatter.ptx" />
+
+    <!-- Include chapters -->
+    <xi:include href="./equations.ptx" />
+    <xi:include href="./linear.ptx" />
+    <xi:include href="./functions.ptx" />
+    <xi:include href="./differential.ptx" />
+    
+    <!-- Include backmatter -->
+    <xi:include href="./backmatter.ptx" />
+    <!-- \input{appendix}-->
+
+  </book>
+</pretext>
