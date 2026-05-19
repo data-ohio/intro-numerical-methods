@@ -1,13 +1,655 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <chapter xml:id="chapter-equations" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Matlab and Solving Equations</title>
+  <title>MATLAB and Solving Equations</title>
 
   <introduction>
-    <p> Text before the first section. </p>
+    <p> In these notes 
+    <console prompt=">> " lang="matlab">
+    <input>
+    
+    </input>
+    </console>
+    will indicate commands to be entered at the <url href="https://www.mathworks.com/products/matlab.html">MATLAB</url> prompt &gt;&gt; in the command window.
+    You do not type the symbol &gt;&gt;.
+    </p>
   </introduction>
 
   <!-- include sections 
   <xi:include href="sec-section-name.ptx" /> -->
+  <section xml:id="sec-vectors">
+    <title>Vectors, Functions, and Plots in MATLAB</title>
 
+    <subsection>
+      <title>Entering vectors</title>
+
+      <p>
+        In MATLAB, the basic objects are matrices, i.e.<nbsp />arrays of numbers. Vectors can be thought of as special matrices. A row vector is recorded as a <m>1 \times n</m> matrix and a column vector is recorded as a <m>m \times 1</m> matrix. To enter a row vector in MATLAB, type the following in the command window:
+        <console prompt=">> " lang="matlab">
+          <input>
+            v = [0 1 2 3]
+          </input>
+        </console>
+        and press enter. MATLAB will print out the row vector. To enter a column vector type       
+        <console prompt=">> " lang="matlab">
+          <input>
+            u = [9; 10; 11; 12; 13]
+          </input>
+        </console>
+         You can access an entry in a vector with
+         <console prompt=">> " lang="matlab">
+          <input>
+            u(2)
+          </input>
+        </console>
+        and change the value of that entry with
+        <console prompt=">> " lang="matlab">
+          <input>
+            u(2)=47
+          </input>
+        </console>
+        You can extract a  slice out of a vector with 
+        <console prompt=">> " lang="matlab">
+          <input>
+            u(2:4)
+          </input>
+        </console>
+        You can change a row vector into a column vector, and vice versa, easily in MATLAB using 
+        <console prompt=">> " lang="matlab">
+          <input>
+            w = v'
+          </input>
+        </console>
+        (This is called  transposing the vector and we call <c>'</c> the transpose operator.) There are also useful shortcuts to make vectors such as
+        <console prompt=">> " lang="matlab">
+          <input>
+            x = -1:.1:1
+          </input>
+          <input>
+            y = linspace(0,1,11)
+          </input>
+        </console>
+      </p>
+    
+    </subsection>
+    <subsection>
+      <title>Basic Formatting</title>
+
+      <p>
+        To make MATLAB put fewer blank lines in its output, enter
+        <console prompt=">> " lang="matlab">
+          <input>
+            format compact
+          </input>
+          <input>
+            pi
+          </input>
+          <input>
+            x
+          </input>
+        </console>
+        To make MATLAB display more digits, enter
+        <console prompt=">> " lang="matlab">
+          <input>
+            format long
+          </input>
+          <input>
+            pi
+          </input>
+        </console>
+        Note that this does not change the number of digits MATLAB is using in its calculations; it only changes what is displayed.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Plotting Data</title>
+      <p>
+        Consider the data in Table<nbsp /><xref ref="tab-viscosity" /> (Adapted from Ayyup &#x26;McCuen 1996, p.174.)
+      </p>
+      <table xml:id="tab-viscosity">
+        <tabular>
+          <col halign="center" right="minor" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" />
+          <row />
+          <row bottom="minor">
+            <cell>T (C<degree />)</cell>
+            <cell>5</cell>
+            <cell>20</cell>
+            <cell>30</cell>
+            <cell>50</cell>
+            <cell>55</cell>
+          </row>
+          <row>
+            <cell><m>\mu</m></cell>
+            <cell>0.08</cell>
+            <cell>0.015</cell>
+            <cell>0.009</cell>
+            <cell>0.006</cell>
+            <cell>0.0055</cell>
+          </row>
+          <row>
+            <cell />
+          </row>
+        </tabular>
+        <title>Viscosity of a liquid as a function of temperature.</title>
+      </table>
+      <p>
+        We can enter this data into Matlab with the following commands entered in the command window:
+        <console prompt=">> " lang="matlab">
+          <input>
+            x = [ 5  20  30  50  55 ]
+          </input>
+          <input>
+            y = [ 0.08  0.015  0.009  0.006  0.0055]
+          </input>
+        </console>
+        Entering the name of the variable retrieves its current values. For instance
+        <console prompt=">> " lang="matlab">
+          <input>
+            x 
+          </input>
+          <input>
+            y
+          </input>
+        </console>
+        We can plot data in the form of vectors using the plot command:
+        <console prompt=">> " lang="matlab">
+          <input>
+            plot(x,y)
+          </input>
+        </console>
+        This will produce a graph with the data points connected by lines. If you would prefer that the data points be represented by symbols you can do so. For instance
+        <console prompt=">> " lang="matlab">
+          <input>
+            plot(x,y,'*')
+          </input>
+          <input> 
+            plot(x,y,'o')
+          </input>
+          <input>
+           plot(x,y,'.')
+          </input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Data as a Representation of a Function</title>
+      <p>
+        A major theme in this course is that often we are interested in a certain function <m>y = f(x)</m>, but the only information we have about this function is a discrete set of data <m>\{(x_{i},y_{i})\}</m>. Plotting the data, as we did above, can be thought of envisioning the function using just the data. We will find later that we can also do other things with the function, like differentiating and integrating, just using the available data. Numerical methods, the topic of this course, means doing mathematics by computer. Since a computer can only store a finite amount of information, we will almost always be working with a finite, discrete set of values of the function (data), rather than a formula for the function.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Built-in Functions</title>
+      <p>
+        If we wish to deal with formulas for functions, Matlab contains a number of built-in functions, including all the usual functions, such as <c>sin( )</c>, <c>exp( )</c>, etc.. The meaning of most of these is clear. The dependent variable (input) always goes in parentheses in MATLAB. For instance
+        <console prompt=">> " lang="matlab">
+          <input>
+            sin(pi)
+          </input>
+        </console>
+        should return the value of <m>\sin \pi</m>, which is of course <m>0</m> and
+        <console prompt=">> " lang="matlab">
+          <input>
+            exp(0)
+          </input>
+        </console>
+        will return <m>e^{0}</m>, which is <m>1</m>. More importantly, the built-in functions can operate not only on single numbers but on vectors. For example
+        <console prompt=">> " lang="matlab">
+          <input>
+            x = linspace(0,2*pi,41) 
+          </input>
+          <input> 
+            y = sin(x) 
+          </input>
+          <input> 
+            plot(x,y)
+          </input>
+        </console>
+        will return a plot of <m>\sin x</m> on the interval <m>[0,2 \pi]</m>.
+      </p>
+
+      <p>
+        Some of the built-in functions in MATLAB include: <c>cos( )</c>, <c>tan( )</c>, <c>sinh( )</c>, <c>cosh( )</c>, <c>log( )</c> (natural logarithm), <c>log10( )</c> (log base 10), <c>asin( )</c> (inverse sine), <c>acos( )</c>, <c>atan( )</c>. To find out more about a function, use the <c>help</c> command; try
+        <console prompt=">> " lang="matlab">
+          <input>
+            help plot
+          </input>
+        </console>
+      </p>
+    </subsection>
+
+
+    <subsection>
+      <title>User-Defined Anonymous Functions</title>
+
+      <p>
+        If we wish to deal with a function that is a combination of the built-in functions, Matlab has a couple of ways for the user to define functions. One that we will use a lot is the anonymous function, which is a way to define a function in the command window. The following is a typical anonymous function:
+        <console prompt=">> " lang="matlab">
+          <input>
+            f = @(x) 2*x.^2 - 3*x + 1
+          </input>
+        </console>
+        This produces the function <m>f(x) = 2 x^{2} -3x+1</m>. To obtain a single value of this function enter
+        <console prompt=">> " lang="matlab">
+          <input>
+            y = f(2.23572)
+          </input>
+        </console>
+        Just as for built-in functions, the function <m>f</m> as we defined it can operate not only on single numbers but on vectors. Try the following:
+        <console prompt=">> " lang="matlab">
+          <input>
+            x = -2:.2:2
+          </input>
+          <input> 
+            y = f(x)
+          </input>
+        </console>
+        This is an example of  vectorization, i.e. putting several numbers into a vector and treating the vector all at once, rather than one component at a time, and is one of the strengths of MATLAB. The reason <m>f(x)</m> works when <m>x</m> is a vector is because we represented <m>x^{2}</m> by <c>x.^2</c>. The <c>.</c> turns the exponent operator <c>^</c> into entry-wise exponentiation, so that <c>[-2 -1.8 -1.6].^2</c> means <m>[(-2)^{2}, (-1.8)^{2}, (-1.6)^{2}]</m> and yields <c>[4 3.24 2.56]</c>. In contrast, <c>[-2 -1.8 -1.6]^2</c> means the matrix product <m>[-2, -1.8,-1.6][-2, -1.8,-1.6]</m> and yields only an error. The <c>.</c> is needed in <c>.^</c>, <c>.*</c>, and <c>./</c>. It is not needed when you <c>*</c> or <c>/</c> by a scalar or for <c>+</c>.
+      </p>
+      <p>
+        The results can be plotted using the <c>plot</c> command, just as for data:
+        <console prompt=">> " lang="matlab">
+          <input>
+            plot(x,y)
+          </input>
+        </console>
+        Notice that before plotting the function, we in effect converted it into data. Plotting on any machine always requires this step.
+      </p>
+    </subsection>
+    <exercises>
+      <exercise>
+        <p>
+           Recall that <c>.*</c>, <c>./</c>, <c>.^</c> are component-wise operations. Make row vectors <c>a= 0:1:3</c> and <c>b= [-1  0  1  2]</c>. 
+           Try the following commands and report the answer (or error) they produce. Are any of the results surprising?
+           <ol cols="4"> 
+           <li> <c>a.*b</c></li> 
+           <li><c>a*b</c></li> 
+           <li><c>a*b'</c></li> 
+           <li><c>a+3*b</c></li> 
+           <li><c>a./b</c></li> 
+           <li><c>2*b./a</c></li> 
+           <li><c>a.^3</c></li> 
+           <li><c>a.^b</c></li>
+           </ol>
+        </p>
+      </exercise> 
+      <exercise>
+        <p>
+          Find a table of data in an engineering or science textbook or website. Input it as vectors and plot it, <em>using symbols at the data points</em>. Use the insert icon to label the axes and add a title to your graph. Turn in the graph. Indicate what the data is and properly reference where it came from.
+        </p>
+      </exercise> 
+      <exercise>
+        <p>
+          Find a <em>non-linear</em> function formula in an engineering or science textbook or website. Make an anonymous function that produces that function. Plot it with a <em>smooth curve</em> on a physically relevant domain.
+        </p>
+        <p>
+        	Label the axes and add a title to your graph. Turn in the graph and include the MATLAB command for the anonymous function. Indicate what the function means and properly reference where it came from.
+        </p>
+      </exercise> 
+    </exercises>
+  </section>
+  <section xml:id="sec-programs">
+    <title>Matlab Programs</title>
+    <p>
+      In Matlab, programs may be written and saved in files with a suffix <c>.m</c> called  M-files. There are two types of M-file programs:  functions and  scripts.
+    </p>
+    <subsection>
+      <title>Function Programs</title>
+      <p>
+        Begin by clicking on the new document icon in the top left of the MATLAB window (it looks like an empty sheet of paper).
+      </p>
+      <p>
+        In the document window type the following:
+        <program language="matlab">
+          <code>
+            function y = myfunc(x) 
+              y = 2*x.^2 - 3*x + 1; 
+            end
+          </code>
+        </program>
+        Save this file as: <c>myfunc.m</c> in your working directory. This file can now be used in the command window just like any predefined MATLAB function; in the command window enter:
+        <console prompt=">> " lang="matlab">
+          <input>
+            x = -2:.1:2;     % Produces a vector of x values
+          </input>
+          <input> y = myfunc(x);   % Produces a vector of y values</input>
+          <input> plot(x,y)</input>
+        </console>
+        Note that the fact we used <c>x</c> and <c>y</c> in both the function program and in the command window was just a coincidence. In fact, it is the name of the file <c>myfunc.m</c> that actually mattered, not what anything in it was called. We could just as well have made the function
+        <program language="matlab">
+          <code>
+            function nonsense = yourfunc(inputvector) 
+              nonsense = 2*inputvector.^2 - 3*inputvector + 1; 
+            end
+          </code>
+        </program>
+        Look back at the program. All function programs are like this one, the essential elements are:
+        <ul>
+          <li>
+            <p>
+              Begin with the word <c>function</c>.
+            </p>
+          </li>
+          <li>
+            <p>
+              There is an input and an output.
+            </p>
+          </li>
+          <li>
+            <p>
+              The output, name of the function and the input must appear in the first line.
+            </p>
+          </li>
+          <li>
+            <p>
+              The body of the program must assign a value to the output variable(s).
+            </p>
+          </li>
+          <li>
+            <p>
+              The program cannot access variables in the current workspace unless they are input.
+            </p>
+          </li>
+          <li>
+            <p>
+              Internal variables inside a function do not appear in the current workspace.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        Functions can have multiple inputs, which are separated by commas. For example:
+        <program language="matlab">
+          <code>
+            function y = myfunc2d(x,p) 
+              y = 2*x.^p - 3*x + 1; 
+            end
+          </code>
+        </program>
+        Functions can have multiple outputs, which are collected into a vector. Open a new document and type:
+        <program language="matlab">
+          <code>
+            function [x2 x3 x4] = mypowers(x) 
+              x2 = x.^2; 
+              x3 = x.^3; 
+              x4 = x.^4; 
+            end
+          </code>
+        </program>
+        Save this file as <c>mypowers.m</c>. In the command window, we can use the results of the program to make graphs:
+        <console prompt=">> " lang="matlab">
+          <input>x = -1:.1:1</input>
+          <input> [x2 x3 x4] = mypowers(x);</input>
+          <input> plot(x,x,'black',x,x2,'blue',x,x3,'green',x,x4,'red')</input>
+        </console>
+      </p>
+      <subsubsection>
+        <title>Printing, Returning, Capturing, and Printing</title>
+        <p>
+          Notice that in the examples above, lines ending with a semicolon <c>;</c> did not print their results.
+        </p>
+        <p>
+          Try the following:
+          <console prompt=">> " lang="matlab">
+            <input>myfunc(3)</input>
+            <input> ans^2</input>
+          </console>
+          Although <c>myfunc</c> returned a value, we did not capture it. By default MATLAB captured it as <c>ans</c> so we can use it in our next computation. However, MATLAB always uses <c>ans</c> (for answer), so the result is likely to get overwritten.
+        </p>
+        <p>
+          Then try:
+          <console prompt=">> " lang="matlab">
+            <input>z = 0</input>
+            <input> z = myfunc(2)</input>
+            <input> z^2</input>
+          </console>
+          <c>myfunc</c> returned a value that it internally called <c>y</c> and we captured the result in <c>z</c>. We can now use <c>z</c> for other calculations.
+        </p>
+        <p>
+          Now make a program
+          <program language="matlab">
+            <code>
+              function myfuncnoreturn(x) 
+                y = 2*x.^2 - 3*x + 1 
+              end
+            </code>
+          </program>
+          and try:
+          <console prompt=">> " lang="matlab">
+            <input>myfuncnoreturn(4)</input>
+            <input> ans^2</input>
+            <input> y^2</input>
+          </console>
+          Although the value of <c>y</c> was printed within the function, it was not returned, so neither the value of <c>y</c> nor the value of <c>ans</c> was changed. Thus we cannot use the result from the function.
+        </p>
+        <p>
+          In general, the best way to use a function is to capture the result it returns and then use or print this result. Printing within functions is bad form; however, for understanding what is happening within a function it is useful to print, so many functions in this book do print.
+        </p>
+      </subsubsection>
+    </subsection>
+    <subsection>
+      <title>Script Programs</title>
+      <p>
+        MATLAB uses a second type of program that differs from a function program in several ways, namely:
+        <ul>
+          <li>
+            <p>
+              There are no inputs and outputs.
+            </p>
+          </li>
+          <li>
+            <p>
+              A script program may use, create and change variables in the current workspace (the variables used by the command window).
+            </p>
+          </li>
+        </ul>
+        Below is a script program that accomplishes the same thing as the function program plus the commands in the previous section:
+        <program language="matlab">
+          <code>
+            x2 = x.^2; 
+            x3 = x.^3; 
+            x4 = x.^4; 
+            plot(x,x,'black',x,x2,'blue',x,x3,'green',x,x4,'red')
+          </code>
+        </program>
+        Type this program into a new document and save it as <c>mygraphs.m</c>. In the command window enter:
+        <console prompt=">> " lang="matlab">
+            <input>x = -1:.1:1;</input>
+            <input> mygraphs</input>
+        </console>
+        Note that the program used the variable <c>x</c> in its calculations, even though <c>x</c> was defined in the command window, not in the program.
+      </p>
+      <p>
+        Many people use script programs for routine calculations that would require typing more than one command in the command window. They do this because correcting mistakes is easier in a program than in the command window.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Program Comments</title>
+      <p>
+        For programs that have more than a couple of lines it is important to include comments. Comments allow other people to know what your program does and they also remind yourself what your program does if you set it aside and come back to it later. It is best to include comments not only at the top of a program, but also with each section. In MATLAB anything that comes in a line after a <c>%</c> is a comment.
+      </p>
+      <p>
+        For a function program, the comments should at least give the purpose, inputs, and outputs. A properly commented version of the function with which we started this section is:
+        <program language="matlab">
+          <code>
+            function y = myfunc(x) 
+              % Computes the function 2x^2 -3x +1 
+              % Input: x -- a number or vector; 
+              %             for a vector the computation is elementwise 
+              % Output: y -- a number or vector of the same size as x 
+              y = 2*x.^2 - 3*x + 1; 
+            end
+          </code>
+        </program>
+        For a script program, there should be an initial comment stating the purpose of the script. It is also helpful to include the name of the program at the beginning. For example:
+        <program language="matlab">
+          <code>
+            % mygraphs 
+            % plots the graphs of x, x^2, x^3, and x^4 
+            % on the interval [-1,1]
+            
+            % fix the domain and evaluation points 
+            x = -1:.1:1; 
+            
+            % calculate powers 
+            % x1 is just x 
+            x2 = x.^2; 
+            x3 = x.^3; 
+            x4 = x.^4;
+             
+            % plot each of the graphs 
+            plot(x,x,'+-',x,x2,'x-',x,x3,'o-',x,x4,'--')
+          </code>
+        </program>
+        The MATLAB command <c>help</c> prints the first block of comments from a file. If we save the above as <c>mygraphs.m</c> and then do
+        <console prompt=">> " lang="matlab">
+          <input>help mygraphs</input>
+        </console>
+        it will print the first block of comments into the command window:
+        <console prompt=">> " lang="matlab">
+          <input>
+            help mygraphs
+          </input>
+            <output>
+              mygraphs 
+              plots the graphs of x, x^2, x^3, and x^4 
+              on the interval [-1,1]
+            </output>
+        </console>
+      </p>
+    </subsection>
+    <exercises>
+      <exercise>
+        <p>
+          Write a well-commented <alert>function</alert> program for the function <m>x^{2} e^{-x^2}</m>, using component-wise operations (such as <c>.*</c> and <c>.^</c>). To get <m>e^{x}</m> use <c>exp(x)</c>. Plot the function on <m>[-5,5]</m> using enough points to make the graph smooth. Turn in the program and the graph. 
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Write a well-commented <alert>script</alert> program that graphs the functions <m>\sin x</m>, <m>\sin 2x</m>, <m>\sin 3x</m>, <m>\sin 4x</m>, <m>\sin 5x</m> and <m>\sin 6x</m> on the interval <m>[0, 2\pi]</m> on one plot. (<m>\pi</m> is <c>pi</c> in MATLAB.) Use a sufficiently small step size to make all the graphs smooth. Turn in the program and the graph.  
+        </p>      
+      </exercise>
+    </exercises>
+  </section>  
+  <section xml:id="sec-newton">
+    <title>Newton's Method and Loops</title>
+    <subsection>
+      <title>Solving equations numerically</title>
+      <p>
+        For the next few lectures we will focus on the problem of solving an equation:
+        <md xml:id="eqn-fzero" number="yes">
+          f(x) = 0
+        </md>.
+        As you learned in calculus, the final step in many optimization problems is to solve an equation of this form where <m>f</m> is the derivative of a function, <m>F</m>, that you want to maximize or minimize. In real engineering problems the functions, <m>f</m>, you wish to find roots for can come from a large variety of sources, including formulas, solutions of differential equations, experiments, or simulations.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Newton iterations</title>
+      <p>
+        We will denote an actual solution of <xref ref="eqn-fzero" /> by <m>x^{*}</m>. There are three methods that you may have discussed in Calculus: the bisection method, the secant method and Newton's method. All three depend on beginning close (in some sense) to an actual solution <m>x^{*}</m>.
+      </p>
+      <p>
+        Recall Newton's method. You should know that the basis for Newton's method is approximation of a function by its linearization at a point, i.e.
+        <md xml:id="eqn-linapp" number="yes">
+          f(x) \approx f(x_{0}) + f'(x_{0})(x-x_{0})
+        </md>.
+        Since we wish to find <m>x</m> so that <m>f(x) =0</m>, set the left hand side (<m>f(x)</m>) of this approximation equal to <m>0</m> and solve for <m>x</m> to obtain:
+        <md xml:id="eqn-newtona" number="yes">
+          x \approx x_{0} - \frac{f(x_{0})}{f'(x_{0})}
+        </md>.
+        We begin the method with the initial guess <m>x_{0}</m>, which we hope is fairly close to <m>x^{*}</m>. Then we define a sequence of points <m>\{x_{0}, x_{1}, x_{2}, x_{3}, \ldots \}</m> from the formula:
+        <md xml:id="eqn-newton" number="yes">
+          x_{i+1}= x_{i} - \frac{f(x_{i})}{f'(x_{i})}
+        </md>,
+        which comes from <xref ref="eqn-newtona" />. If <m>f(x)</m> is reasonably well-behaved near <m>x^{*}</m> and <m>x_{0}</m> is close enough to <m>x^{*}</m>, then it is a fact that the sequence will converge to <m>x^{*}</m> and will do it very quickly.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The loop: <c>for ... end</c></title>
+      <p>
+        In order to do Newton's method, we need to repeat the calculation in <xref ref="eqn-newton" /> a number of times. This is accomplished in a program using a  loop, which means a section of a program which is repeated. The simplest way to accomplish this is to count the number of times through. In MATLAB, a <c>for ... end</c> statement makes a loop as in the following simple function program:
+        <program language="matlab">
+          <code>
+            % mysum 
+            % Gives the sum of the first n integers 
+            % 
+            n = 100 
+            S = 0;            % start at zero 
+            % The loop: 
+            for i = 1:n       % do n times 
+              S = S + i;    % add the current integer 
+            end               % end of the loop 
+            S
+          </code>
+        </program>
+        Save this program as a <alert>script</alert> named <c> mysum </c> and run it by typing <c> mysum </c> in the command window. The result will be the sum of the first 100 integers. Next change <m>n</m> to 1,000,000 and run the program again.
+      </p>
+      <p>
+        All <c>for ... end</c> loops have the same format, it begins with <c>for</c>, followed by an index (<c>i</c>) and a range of numbers (<c>1:n</c>). Then come the commands that are to be repeated. Last comes the <c>end</c> command.
+      </p>
+      <p>
+        Loops are one of the main ways that computers are made to do calculations that humans cannot. Any calculation that involves a repeated process is easily done by a loop.
+      </p>
+      <p>
+        Now let's do a program that does n steps (iterations) of Newton's method. We will need to input the function, its derivative, the initial guess, and the number of steps. The output will be the final value of <m>x</m>, i.e.<nbsp /><m>x_{n}</m>. If we are only interested in the final approximation, not the intermediate steps, which is usually the case in the real world, then we can use a single variable <c>x</c> in the program mynewton.m and change it at each step: ../programs/mynewton.m
+      </p>
+      <p>
+        In the command window set to print more digits via
+        <console prompt=">> " lang="matlab">
+          <input>format long</input>
+        </console>
+        and to not print blank lines via
+        <console prompt=">> " lang="matlab">
+          <input>format compact</input>
+        </console>
+        Then define a function: <m>f(x) = x^{3} - 5</m> i.e.
+        <console prompt=">> " lang="matlab">
+          <input>f = @(x) x^3 - 5</input>
+        </console>
+        and define <m>f1</m> to be its derivative, i.e.
+        <console prompt=">> " lang="matlab">
+          <input>f1 = @(x) 3*x^2</input>
+        </console>
+        Then run <c>mynewton</c> on this function. By trial and error, what is the lowest value of <c>n</c> for which the program converges (stops changing). By simple algebra, the true root of this function is <m>\sqrt[3]{5}</m>. How close is the program's answer to the true value?
+      </p>
+    </subsection>
+    <subsection>
+      <title>Convergence</title>
+      <p>
+        Newton's method converges rapidly when <m>f'(x^{*})</m> is nonzero and finite, and <m>x_{0}</m> is close enough to <m>x^{*}</m> that the linear approximation <xref ref="eqn-linapp" /> is valid. Let us take a look at what can go wrong.
+      </p>
+      <p>
+        For <m>f(x)=x^{1/3}</m> we have <m>x^{*}=0</m> but <m>f'(x^{*})=\infty</m>. If you try
+        <console prompt=">> " lang="matlab">
+          <input>f = @(x) x^(1/3)</input>
+          <input> f1 = @(x) (1/3)*x^(-2/3)</input>
+          <input> x = mynewton(f,f1,0.1,10)</input>
+        </console>
+        then <m>x</m> explodes.
+      </p>
+      <p>
+        For <m>f(x)=x^{2}</m> we have <m>x^{*}=0</m> but <m>f'(x^{*})=0</m>. If you try
+        <console prompt=">> " lang="matlab">
+          <input>f = @(x) x^2 </input>
+          <input>f1 = @(x) 2*x </input>
+          <input>x = mynewton(f,f1,1,10)</input>
+        </console>
+        then <m>x</m> does converge to <m>0</m>, but not that rapidly.
+      </p>
+      <p>
+        If <m>x_{0}</m> is not close enough to <m>x^{*}</m> that the linear approximation <xref ref="eqn-linapp" /> is valid, then the iteration <xref ref="eqn-newton" /> gives some <m>x_{1}</m> that may or may not be any better than <m>x_{0}</m>. If we keep iterating, then either
+        <ul>
+          <li>
+            <p>
+              <m>x_{n}</m> will eventually get close to <m>x^{*}</m> and the method will then converge (rapidly), or
+            </p>
+          </li>
+          <li>
+            <p>
+              the iterations will not approach <m>x^{*}</m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+      </subsection>
+
+    </section>
 </chapter>

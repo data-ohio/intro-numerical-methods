@@ -19,11 +19,11 @@
     <date>
       <today />
     </date>
-
+    <!--
     <website>
       <url href="https://data-ohio.github.io/intro-numerical-methods/index.html">Book Website</url>
     </website>
-
+    -->
     <copyright>
       <year>2020<ndash />2026</year>
       <holder>Todd R. Young and Martin J. Mohlenkamp</holder>
@@ -47,7 +47,7 @@
       </p>
 
       <p>
-        The main goals of these lectures are to introduce concepts of numerical methods and introduce Matlab in an Engineering framework. By this we do not mean that every problem is a <q>real life</q> engineering application, but more that the engineering way of thinking is emphasized throughout the discussion.
+        The main goals of these lectures are to introduce concepts of numerical methods and introduce MATLAB in an Engineering framework. By this we do not mean that every problem is a <q>real life</q> engineering application, but more that the engineering way of thinking is emphasized throughout the discussion.
       </p>
 
       <p>
@@ -59,15 +59,15 @@
       </p>
 
       <p>
-        At Ohio University we have tried to take a much more disciplined and focused approach. The Russ College of Engineering and Technology decided that Matlab should be the primary computational software for undergraduates. At about the same time members of the Department of Mathematics proposed an 1804 project to bring Matlab into the calculus sequence and provide access to the program at nearly all computers on campus, including in the dorm rooms. The stated goal of this project was to make Matlab the universal language for computation on campus. That project was approved and implemented in the 2001-2002 academic year.
+        At Ohio University we have tried to take a much more disciplined and focused approach. The Russ College of Engineering and Technology decided that MATLAB should be the primary computational software for undergraduates. At about the same time members of the Department of Mathematics proposed an 1804 project to bring MATLAB into the calculus sequence and provide access to the program at nearly all computers on campus, including in the dorm rooms. The stated goal of this project was to make MATLAB the universal language for computation on campus. That project was approved and implemented in the 2001-2002 academic year.
       </p>
 
       <p>
-        In these lecture notes, instruction on using Matlab is dispersed through the material on numerical methods. In these lectures details about how to use Matlab are detailed (but not verbose) and explicit. To teach programming, students are usually given examples of working programs and are asked to make modifications.
+        In these lecture notes, instruction on using MATLAB is dispersed through the material on numerical methods. In these lectures details about how to use MATLAB are detailed (but not verbose) and explicit. To teach programming, students are usually given examples of working programs and are asked to make modifications.
       </p>
 
       <p>
-        The lectures are designed to be used in a computer classroom with students working Matlab examples during the lecture or with students reading the notes and working the examples after a brief introduction. At Ohio University we have had good success with this Lecture/Lab format.
+        The lectures are designed to be used in a computer classroom with students working MATLAB examples during the lecture or with students reading the notes and working the examples after a brief introduction. At Ohio University we have had good success with this Lecture/Lab format.
       </p>
 
       <p>

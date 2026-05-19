@@ -1,4 +1,4 @@
-# 
+# Introduction to Numerical Methods and MATLAB Programming for Engineers
 
 ... a textbook
 
@@ -16,10 +16,11 @@ To force removal of the previous build first, run
 
     pretext build web --clean    
 
-To check the result, either open `output/web/index.html` or run
+To check the result, run
 
     pretext view web
 
+(If you open `output/web/index.html` directly, knowls will not work.) 
 
 ### Publishing to GitHub Pages
 
