@@ -288,99 +288,103 @@
   </section>
   <section xml:id="sec-programs">
     <title>Matlab Programs</title>
-    <p>
-      In Matlab, programs may be written and saved in files with a suffix <c>.m</c> called  M-files. There are two types of M-file programs:  functions and  scripts.
-    </p>
+    <introduction>
+      <p>
+        In Matlab, programs may be written and saved in files with a suffix <c>.m</c> called  M-files. There are two types of M-file programs:  functions and  scripts.  
+      </p>
+    </introduction>
     <subsection>
       <title>Function Programs</title>
-      <p>
-        Begin by clicking on the new document icon in the top left of the MATLAB window (it looks like an empty sheet of paper).
-      </p>
-      <p>
-        In the document window type the following:
-        <program language="matlab">
-          <code>
-            function y = myfunc(x) 
-              y = 2*x.^2 - 3*x + 1; 
-            end
-          </code>
-        </program>
-        Save this file as: <c>myfunc.m</c> in your working directory. This file can now be used in the command window just like any predefined MATLAB function; in the command window enter:
-        <console prompt=">> " lang="matlab">
-          <input>
-            x = -2:.1:2;     % Produces a vector of x values
-          </input>
-          <input> y = myfunc(x);   % Produces a vector of y values</input>
-          <input> plot(x,y)</input>
-        </console>
-        Note that the fact we used <c>x</c> and <c>y</c> in both the function program and in the command window was just a coincidence. In fact, it is the name of the file <c>myfunc.m</c> that actually mattered, not what anything in it was called. We could just as well have made the function
-        <program language="matlab">
-          <code>
-            function nonsense = yourfunc(inputvector) 
-              nonsense = 2*inputvector.^2 - 3*inputvector + 1; 
-            end
-          </code>
-        </program>
-        Look back at the program. All function programs are like this one, the essential elements are:
-        <ul>
-          <li>
-            <p>
-              Begin with the word <c>function</c>.
-            </p>
-          </li>
-          <li>
-            <p>
-              There is an input and an output.
-            </p>
-          </li>
-          <li>
-            <p>
-              The output, name of the function and the input must appear in the first line.
-            </p>
-          </li>
-          <li>
-            <p>
-              The body of the program must assign a value to the output variable(s).
-            </p>
-          </li>
-          <li>
-            <p>
-              The program cannot access variables in the current workspace unless they are input.
-            </p>
-          </li>
-          <li>
-            <p>
-              Internal variables inside a function do not appear in the current workspace.
-            </p>
-          </li>
-        </ul>
-      </p>
-      <p>
-        Functions can have multiple inputs, which are separated by commas. For example:
-        <program language="matlab">
-          <code>
-            function y = myfunc2d(x,p) 
-              y = 2*x.^p - 3*x + 1; 
-            end
-          </code>
-        </program>
-        Functions can have multiple outputs, which are collected into a vector. Open a new document and type:
-        <program language="matlab">
-          <code>
-            function [x2 x3 x4] = mypowers(x) 
-              x2 = x.^2; 
-              x3 = x.^3; 
-              x4 = x.^4; 
-            end
-          </code>
-        </program>
-        Save this file as <c>mypowers.m</c>. In the command window, we can use the results of the program to make graphs:
-        <console prompt=">> " lang="matlab">
-          <input>x = -1:.1:1</input>
-          <input> [x2 x3 x4] = mypowers(x);</input>
-          <input> plot(x,x,'black',x,x2,'blue',x,x3,'green',x,x4,'red')</input>
-        </console>
-      </p>
+      <introduction>
+        <p>
+          Begin by clicking on the new document icon in the top left of the MATLAB window (it looks like an empty sheet of paper).
+        </p>
+        <p>
+          In the document window type the following:
+          <program language="matlab">
+            <code>
+              function y = myfunc(x) 
+                y = 2*x.^2 - 3*x + 1; 
+              end
+            </code>
+          </program>
+          Save this file as: <c>myfunc.m</c> in your working directory. This file can now be used in the command window just like any predefined MATLAB function; in the command window enter:
+          <console prompt=">> " lang="matlab">
+            <input>
+              x = -2:.1:2;     % Produces a vector of x values
+            </input>
+            <input> y = myfunc(x);   % Produces a vector of y values</input>
+            <input> plot(x,y)</input>
+          </console>
+          Note that the fact we used <c>x</c> and <c>y</c> in both the function program and in the command window was just a coincidence. In fact, it is the name of the file <c>myfunc.m</c> that actually mattered, not what anything in it was called. We could just as well have made the function
+          <program language="matlab">
+            <code>
+              function nonsense = yourfunc(inputvector) 
+                nonsense = 2*inputvector.^2 - 3*inputvector + 1; 
+              end
+            </code>
+          </program>
+          Look back at the program. All function programs are like this one, the essential elements are:
+          <ul>
+            <li>
+              <p>
+                Begin with the word <c>function</c>.
+              </p>
+            </li>
+            <li>
+              <p>
+                There is an input and an output.
+              </p>
+            </li>
+            <li>
+              <p>
+                The output, name of the function and the input must appear in the first line.
+              </p>
+            </li>
+            <li>
+              <p>
+                The body of the program must assign a value to the output variable(s).
+              </p>
+            </li>
+            <li>
+              <p>
+                The program cannot access variables in the current workspace unless they are input.
+              </p>
+            </li>
+            <li>
+              <p>
+                Internal variables inside a function do not appear in the current workspace.
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p>
+          Functions can have multiple inputs, which are separated by commas. For example:
+          <program language="matlab">
+            <code>
+              function y = myfunc2d(x,p) 
+                y = 2*x.^p - 3*x + 1; 
+              end
+            </code>
+          </program>
+          Functions can have multiple outputs, which are collected into a vector. Open a new document and type:
+          <program language="matlab">
+            <code>
+              function [x2 x3 x4] = mypowers(x) 
+                x2 = x.^2; 
+                x3 = x.^3; 
+                x4 = x.^4; 
+              end
+            </code>
+          </program>
+          Save this file as <c>mypowers.m</c>. In the command window, we can use the results of the program to make graphs:
+          <console prompt=">> " lang="matlab">
+            <input>x = -1:.1:1</input>
+            <input> [x2 x3 x4] = mypowers(x);</input>
+            <input> plot(x,x,'black',x,x2,'blue',x,x3,'green',x,x4,'red')</input>
+          </console>
+        </p>
+      </introduction>
       <subsubsection>
         <title>Printing, Returning, Capturing, and Printing</title>
         <p>
@@ -589,7 +593,13 @@
         Loops are one of the main ways that computers are made to do calculations that humans cannot. Any calculation that involves a repeated process is easily done by a loop.
       </p>
       <p>
-        Now let's do a program that does n steps (iterations) of Newton's method. We will need to input the function, its derivative, the initial guess, and the number of steps. The output will be the final value of <m>x</m>, i.e.<nbsp /><m>x_{n}</m>. If we are only interested in the final approximation, not the intermediate steps, which is usually the case in the real world, then we can use a single variable <c>x</c> in the program mynewton.m and change it at each step: ../programs/mynewton.m
+        Now let's do a program that does n steps (iterations) of Newton's method. We will need to input the function, its derivative, the initial guess, and the number of steps. The output will be the final value of <m>x</m>, i.e.<nbsp /><m>x_{n}</m>. If we are only interested in the final approximation, not the intermediate steps, which is usually the case in the real world, then we can use a single variable <c>x</c> in the program <c>mynewton.m</c> and change it at each step:
+        <listing xml:id="prg-mynewton">
+          <title>mynewton</title>          
+          <program language="matlab">
+            <code><xi:include parse="text" href="../assets/programs/mynewton.m"/></code>
+          </program>
+        </listing>
       </p>
       <p>
         In the command window set to print more digits via
@@ -649,7 +659,873 @@
           </li>
         </ul>
       </p>
-      </subsection>
+    </subsection>
+    <exercises xml:id="exercises-newton">
+      <exercise>
+        <p>
+            Enter: <c>format long</c>. Use <c>mynewton.m</c> (<xref ref="prg-mynewton"/>) on the function <m>f(x) = x^{5}- 2</m>, with <m>x_{0}= 1</m>. By trial and error, what is the lowest value of <c>n</c> for which the program converges (stops changing). Compute the error, which is how close the program's answer is to the true value. Compute the residual, which is the program's answer plugged into <m>f</m>. (See the next section for discussion.) Are the error and residual zero?
+        </p>
+      </exercise>
+      <exercise  xml:id="exr-newtonbyhand">
+        <p>
+          For <m>f(x) = x^{2}- 5</m>, perform 3 iterations of Newton's method with starting point <m>x_{0}= 2</m>. (By hand, but use a calculator.) Show all steps. Calculate the solution (<m>x^{*}= \sqrt{5}</m>) on a calculator and find the errors and percentage errors of <m>x_{0}</m>, <m>x_{1}</m>, <m>x_{2}</m> and <m>x_{3}</m>. Use enough digits so that you do not falsely conclude the error is zero.
+        </p>
+      </exercise>
+      <exercise xml:id="exr-bounce">
+        <p>
+          Suppose a ball is dropped from a height of 3 meters onto a hard surface and the coefficient of restitution of the collision is .91 (see Wikipedia for an explanation). Write a well-commented <alert>script</alert> program to calculate the total distance the ball has traveled when it hits the surface for the <c>n</c>-th time. Enter: <c>format long</c>. By trial and error approximate how large <c>n</c> must be so that total distance stops changing. Turn in the program and a brief summary of the results. (This program does not use Newton's method. It should be modeled on <c>mysum.m</c>.)
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-conditional">
+    <title>Controlling Error and Conditional Statements</title>
+    <subsection>
+      <title>Measuring error and the Residual</title>
+      <p>
+        If we are trying to find a numerical solution of an equation <m>f(x) = 0</m>, then there are a few different ways we can measure the error of our approximation. The most direct way to measure the error would be as
+        <md>
+          \{ \text{Error at step }n\} = e_{n} = x_{n} - x^{*}
+        </md>
+        where <m>x_{n}</m> is the <m>n</m>-th approximation and <m>x^{*}</m> is the true value. However, we usually do not know the value of <m>x^{*}</m>, or we wouldn't be trying to approximate it. This makes it impossible to know the error directly, and so we must be more clever.
+      </p>
+      <p>
+        One possible strategy, which often works, is to run a program until the approximation <m>x_{n}</m> stops changing. The problem with this is that it sometimes doesn't work. Just because the program stop changing does not necessarily mean that <m>x_{n}</m> is close to the true solution.
+      </p>
+      <p>
+        For Newton's method we have the following principle: <alert>At each step the number of significant digits roughly doubles.</alert> While this is an important statement about the error (since it means Newton's method converges really quickly), it is somewhat hard to use in a program.
+      </p>
+      <p>
+        Rather than measure how close <m>x_{n}</m> is to <m>x^{*}</m>, in this and many other situations it is much more practical to measure how close the equation is to being satisfied, in other words, how close <m>y_{n} = f(x_{n})</m> is to <m>0</m>. We will use the quantity <m>r_{n} = f(x_{n})-0</m>, called the  residual, in many different situations. Most of the time we only care about the size of <m>r_{n}</m>, so we use the absolute value of the residual as a measure of how close the solution is to solving the problem:
+        <md>
+          |r_{n}|=|f(x_{n})|.
+        </md>
+      </p>
+    </subsection>
+    <subsection>
+      <title>The <c>if ... end</c> statement</title>
+      <p>
+        If we have a certain tolerance for <m>|r_{n}| = |f(x_{n})|</m>, then we can incorporate that into our Newton method program using an <c>if ... end</c> statement:
+        <program language="matlab">
+          <code>
+            function x = mynewton(f,f1,x0,n,tol) 
+              % Solves f(x) = 0 by doing n steps of Newton's method starting at x0. 
+              % Inputs: f -- the function 
+              %         f1 -- it's derivative 
+              %         x0 -- starting guess, a number 
+              %         tol -- desired tolerance, prints a warning if |f(x)|>tol 
+              % Output: x -- the approximate solution 
+              x = x0;                   % set x equal to the initial guess x0 
+              for i = 1:n               % Do n times 
+                x = x - f(x)/f1(x)  % Newton's formula 
+              end 
+              r = abs(f(x)) 
+              if r > tol 
+                warning('The desired accuracy was not attained') 
+              end 
+            end
+          </code>
+        </program>
+        In this program <c>if</c> checks if <c>abs(y) > tol</c> is true or not. If it is true then it does everything between there and <c>end</c>. If not true, then it skips ahead to <c>end</c>.
+      </p>
+      <p>
+        In the command window define a function and its derivative:
+        <console prompt=">> " lang="matlab">
+          <input>f = @(x) x^3-5</input>
+          <input> f1 = @(x) 3*x^2</input>
+        </console>
+        Then use the program with <m>n=3</m>, <m>tol = .01</m>, and <m>x_{0}=2</m>. Next, change <m>tol</m> to <m>10^{-10}</m> and repeat.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The loop: <c>while ... end</c></title>
+      <p>
+        While the previous program will tell us if it worked or not, we still have to input <c>n</c>, the number of steps to take. Even for a well-behaved problem, if we make <c>n</c> too small then the tolerance will not be attained and we will have to go back and increase it, or, if we make <c>n</c> too big, then the program will take more steps than necessary.
+      </p>
+      <p>
+        One way to control the number of steps taken is to iterate until the residual <m>|r_{n}| = |f(x)| = |y|</m> is small enough. In MATLAB this is easily accomplished with a <c>while ... end</c> loop.
+        <program language="matlab">
+          <code>
+            function x = mynewtontol(f,f1,x0,tol) 
+              % Solves f(x) = 0 using Newton's method until |f(x)| &#x3C; tol. 
+              % Inputs: f -- the function 
+              %         f1 -- it's derivative 
+              %         x0 -- starting guess, a number 
+              %         tol -- desired tolerance, runs until |f(x)|&#x3C;tol 
+              % Output: x -- the approximate solution 
+              x = x0;                   % set x equal to the initial guess x0 
+              y = f(x); 
+              while abs(y) > tol     % Do until the tolerence is reached. 
+                x = x - y/f1(x)    % Newton's formula 
+                y = f(x) 
+              end 
+            end
+          </code>
+        </program>
+        The statement <c>while ... end</c> is a loop, similar to <c>for ... end</c>, but instead of going through the loop a fixed number of times it keeps going as long as the statement <c>abs(y) > tol</c> is true.
+      </p>
+      <p>
+        One obvious drawback of the program is that <c>abs(y)</c> might never get smaller than <c>tol</c>. If this happens, the program would continue to run over and over until we stop it. Try this by setting the tolerance to a really small number:
+        <console prompt=">> " lang="matlab">
+          <input>tol = 10^(-100)</input>
+        </console>
+        then run the program again for <m>f(x) = x^{3} - 5</m>. (You can use <c>Ctrl-c</c> to stop a program when it is stuck.)
+      </p>
+      <p>
+        One way to avoid an infinite loop is add a counter variable, say <c>i</c> and a maximum number of iterations to the programs. Using the <c>while</c> statement, this can be accomplished as:
+        <program language="matlab">
+          <code>
+            function x = mynewtontol(f,f1,x0,tol) 
+              % Solves f(x) = 0 using Newton's method until |f(x)| &#x3C; tol. 
+              %     Safety stop after 1000 iterations 
+              % Inputs: f -- the function 
+              %         f1 -- it's derivative 
+              %         x0 -- starting guess, a number 
+              %         tol -- desired tolerance, runs until |f(x)|&#x3C;tol 
+              % Output: x -- the approximate solution 
+              x = x0;    % set x equal to the initial guess x0. 
+              i=0;       % set counter to zero 
+              y = f(x); 
+              while abs(y) > tol &amp; i &#x3C; 1000 
+                % Do until the tolerence is reached or max iter. 
+                x = x - y/f1(x)    % Newton's formula 
+                y = f(x) 
+                i = i+1;           % increment counter 
+              end 
+            end 
+          </code>
+        </program>
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-conditional">
+      <exercise>
+        <p>
+          In Calculus we learn that a geometric series has an exact sum
+          <md>
+            \sum_{i=0}^{\infty}r^{i}= \frac{1}{1-r}\,,
+          </md>
+          provided that <m>|r|&#x3C;1</m>. For instance, if <m>r = .5</m> then the sum is exactly <m>2</m>. Below is a script program that lacks one line as written. Put in the missing command and then use the program to verify the result above. How many steps does it take? How close is the answer to <m>2</m>?
+          <program language="matlab">
+            <code>
+              % Computes a geometric series until it seems to converge 
+              format long 
+              format compact 
+              r = .5; 
+              Snew = 0;           % start sum at 0 
+              Sold = -1;          % set Sold to trick while the first time 
+              i = 0;              % count iterations 
+              while Snew > Sold   % is the sum still changing? 
+                Sold = Snew;     % save previous value to compare to 
+                Snew = Snew + r^i; 
+                i=i+1; 
+              Snew                % prints the final value. 
+              i                   % prints the # of iterations.
+            </code>
+          </program>
+            Add a line at the end of the program to compute the error of <c>Snew</c> (with respect to the exact value from the formula above). Run the script for <m>r=0.9</m>, 0.99, 0.999, 0.9999, 0.99999, and 0.999999. Turn in your program and a table showing the approximate sum, number of iterations needed and the error for each <m>r</m>.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Modify your program from exercise <xref ref="exr-bounce" /> to compute the total distance traveled by the ball while its bounces are at least 0.01 millimeter high. Use a <c>while</c> loop (instead of <c>for</c>) to decide when to stop summing (do not use a <c>for</c> loop or trial and error). Turn in your modified program and a brief summary of the results.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-bisection">
+    <title>The Bisection Method and Locating Roots</title>
+    <subsection>
+      <title>Bisecting and the <c>if ... else ... end</c> statement</title>
+      <p>
+        Recall the bisection method. Suppose that <m>c = f(a) &#x3C; 0</m> and <m>d = f(b) > 0</m>. If <m>f</m> is continuous, then obviously it must be zero at some <m>x^{*}</m> between <m>a</m> and <m>b</m>. The bisection method then consists of looking half way between <m>a</m> and <m>b</m> for the zero of <m>f</m>, i.e. let <m>x = (a+b)/2</m> and evaluate <m>y = f(x)</m>. Unless this is zero, then from the signs of <m>c</m>, <m>d</m> and <m>y</m> we can decide which new interval to subdivide. In particular, if <m>c</m> and <m>y</m> have the same sign, then <m>[x,b]</m> should be the new interval, but if <m>c</m> and <m>y</m> have different signs, then <m>[a,x]</m> should be the new interval. (See Figure<nbsp /><xref ref="fig-bisecfig" />.)
+      </p>
+      <figure xml:id="fig-bisecfig">
+        <image width="100%">
+          <description><p>Schematic of the bisection method.</p></description>
+          <latex-image>
+           FILL
+          </latex-image>
+        </image>
+        <caption>The bisection method.</caption>
+      </figure>
+      <p>
+        Deciding to do different things in different situations in a program is called  flow control. The most common way to do this is the <c>if ... else ... end</c> statement which is an extension of the <c>if ... end</c> statement we have used already.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Bounding the Error</title>
+      <p>
+        One good thing about the bisection method, which we do not have with Newton's method, is that we always know that the actual solution <m>x^{*}</m> is inside the current interval <m>[a,b]</m>, since <m>f(a)</m> and <m>f(b)</m> have different signs. This allows us to be sure about what the maximum error can be. Precisely, the error is always less than half of the length of the current interval <m>[a,b]</m>, i.e.
+        <md>
+          \{ \text{Absolute Error}\} = | x - x^{*} | &#x3C; (b - a)/2,
+        </md>
+        where <m>x</m> is the center point between the current <m>a</m> and <m>b</m>.
+      </p>
+      <p>
+        The following function program does <m>n</m> iterations of the bisection method and returns not only the final value, but also the maximum possible error: 
+        <listing xml:id="prg-mybisect">
+          <title>mybisect</title>
+          <program language="matlab">
+            <code><xi:include parse="text" href="../assets/programs/mybisect.m"/></code>
+          </program>
+        </listing>
+      </p>
+      <p>
+        Another important aspect of bisection is that it always works. We saw that Newton's method can fail to converge to <m>x^{*}</m> if <m>x_{0}</m> is not close enough to <m>x^{*}</m>. In contrast, the current interval <m>[a,b]</m> will always be decreased by a factor of 2 at each step and so it will always eventually shrink down as small as you wish.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Locating the roots (if any)</title>
+      <p>
+        The bisection method and Newton's method are both used to obtain closer and closer approximations of a solution, but both require starting places. The bisection method requires two points <m>a</m> and <m>b</m> that have a root between them, and Newton's method requires one point <m>x_{0}</m> which is reasonably close to a root. How do you come up with these starting points? It depends. If you are solving an equation once, then the best thing to do first is to just graph it. From an accurate graph you can see approximately where the graph crosses zero.
+      </p>
+      <p>
+        There are other situations where you are not just solving an equation once, but have to solve the same equation many times, but with different coefficients. This happens often when you are developing software for a specific application. In this situation the first thing you want to take advantage of is the natural domain of the problem, i.e.<nbsp />on what interval is a solution physically reasonable. If that is known, then it is easy to get close to the root by simply checking the sign of the function at a fixed number of points inside the interval. Whenever the sign changes from one point to the next, there is a root between those points. The following program will look for the roots of a function <m>f</m> on a specified interval <m>[a_{0},b_{0}]</m>.
+        <program language="matlab">
+          <code>
+            function [a,b] = myrootfind(f,a0,b0) 
+              % function [a,b] = myrootfind(f,a0,b0) 
+              % Looks for subintervals where the function changes sign 
+              % Inputs: f -- a function 
+              %         a0 -- the left edge of the domain 
+              %         b0 -- the right edge of the domain 
+              % Outputs: a -- an array, giving the left edges of subintervals 
+              %               on which f changes sign 
+              %          b -- an array, giving the right edges of the subintervals 
+              n = 1001;   % number of test points to use 
+              a = [];     % start empty array 
+              b = []; % split the interval into n-1 intervals and evaluate at the break points 
+              x = linspace(a0,b0,n); 
+              y = f(x); 
+              % loop through the intervals 
+              for i = 1:(n-1) 
+                if y(i)*y(i+1) &#x3C;= 0  % The sign changed, record it 
+                  a = [a x(i)]; 
+                  b = [b x(i+1)]; 
+                end 
+              end 
+              if size(a,1) == 0 
+                warning('no roots were found') 
+              end 
+            end
+          </code>
+        </program>
+        To see this program in action try the following:
+        <console prompt=">> " lang="matlab">
+          <input>f = @(x) sin(x)-2*x.^4+0.5</input>
+          <input> x = -1:.01:1; </input>
+          <input>y = f(x);</input>
+          <input> plot(x,y)     % see that there are two roots</input>
+          <input> [a,b] = myrootfind(f,-1,1)  % observe that it finds two roots</input>
+        </console>
+      </p>
+      <p>
+        The final situation is writing a program that will look for roots with no given information. This is a difficult problem and one that is not often encountered in actual applications.
+      </p>
+      <p>
+        Once a root has been located on an interval <m>[a,b]</m>, these <m>a</m> and <m>b</m> can serve as the beginning points for the bisection and secant methods (see the next section). For Newton's method one would want to choose <m>x_{0}</m> between <m>a</m> and <m>b</m>. One obvious choice would be to let <m>x_{0}</m> be the bisector of <m>a</m> and <m>b</m>, i.e.<nbsp /><m>x_{0} = (a+b)/2</m>. An even better choice would be to use the secant method to choose <m>x_{0}</m>.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-bisection">
+      <exercise>
+        <p>
+          Modify <c>mybisect</c> (<xref ref="prg-mybisect"/>) to solve until the absolute error is bounded by a given tolerance. Use a <c>while</c> loop to do this. Run your program on the function <m>f(x) = 2x^{3}+ 3x -1</m> with starting interval <m>[0,1]</m> and a tolerance of <m>10^{-8}</m>. How many steps does the program use to achieve this tolerance? (You can count the steps by adding 1 to a counting variable <c>i</c> in the loop of the program.) How big is the final residual <m>f(x)</m>? Turn in your program and a brief summary of the results.
 
-    </section>
+        </p>
+      </exercise>
+      <exercise xml:id="exr-bisectionbyhand">
+        <p>
+          Perform 3 iterations of the bisection method on the function <m>f(x) = x^{2}-5</m>, with starting interval <m>[1,3]</m>. (By hand, but use a calculator.) Calculate the errors and percentage errors of <m>x_{0}</m>, <m>x_{1}</m>, <m>x_{2}</m>, and <m>x_{3}</m>. Compare the errors with those in <xref ref="exr-newtonbyhand" />.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-secant">
+    <title>Secant Methods</title>
+    <introduction>
+      <p>
+        In this lecture we introduce two additional methods to find numerical solutions of the equation <m>f(x) = 0</m>. Both of these methods are based on approximating the function by secant lines just as Newton's method was based on approximating the function by tangent lines.
+      </p>
+    </introduction>
+    <subsection>
+      <title>The Secant Method</title>
+      <p>
+        The secant method requires two initial approximations <m>x_{0}</m> and <m>x_{1}</m>, preferably both reasonably close to the solution <m>x^{*}</m>. From <m>x_{0}</m> and <m>x_{1}</m> we can determine that the points <m>(x_{0},y_{0}=f(x_{0}))</m> and <m>(x_{1},y_{1}=f(x_{1}))</m> both lie on the graph of <m>f</m>. Connecting these points gives the (secant) line
+        <md>
+          y - y_{1} = \frac{y_{1} - y_{0}}{x_{1} - x_{0}}(x-x_{1}) \,.
+        </md>
+        Since we want <m>f(x)=0</m>, we set <m>y=0</m>, solve for <m>x</m>, and use that as our next approximation. Repeating this process gives us the iteration
+        <md xml:id="eqn-secant" number="yes">
+          x_{i+1}= x_{i} - \frac{x_{i} - x_{i-1}}{y_{i} - y_{i-1}}y_{i}
+        </md>
+        with <m>y_{i}=f(x_{i})</m>. See <xref ref="fig-secant" /> for an illustration.
+      </p>
+      <figure xml:id="fig-secant">
+        <image width="100%">
+          <description><p>Schematic of the secant method.</p></description>
+          <latex-image>
+           FILL
+          </latex-image>
+        </image>
+        <caption>The secant method in the case where the root is bracketed.</caption>
+      </figure>
+      <p>
+        For example, suppose <m>f(x) = x^{4}-5</m>, which has a solution <m>x^{*} = \sqrt[4]{5}\approx 1.5</m>. Choose <m>x_{0}=1</m> and <m>x_{1} = 2</m> as initial approximations. Next we have that <m>y_{0} = f(1) = -4</m> and <m>y_{1} = f(2) = 11</m>. We may then calculate <m>x_{2}</m> from the formula <xref ref="eqn-secant" />:
+        <md>
+          x_{2} = 2 - \frac{2-1}{11-(-4)}\, 11 = \frac{19}{15}\approx 1.2666... .
+        </md>
+        Pluggin <m>x_{2} = 19/15</m> into <m>f(x)</m> we obtain <m>y_{2} = f(19/15) \approx -2.425758...</m>. In the next step we would use <m>x_{1} = 2</m> and <m>x_{2} = 19/15</m> in the formula <xref ref="eqn-secant" /> to find <m>x_{3}</m> and so on.
+      </p>
+      <p>
+        Below is a program for the secant method. Notice that it requires two input guesses <m>x_{0}</m> and <m>x_{1}</m>, but it does not require the derivative to be input. 
+        <listing xml:id="prg-mysecant">
+          <title>mysecant</title>
+          <program language="matlab">
+            <code><xi:include parse="text" href="../assets/programs/mysecant.m"/></code>
+          </program>
+        </listing>
+      </p>
+    </subsection>
+    <subsection>
+      <title>The  Regula Falsi (False Position) Method</title>
+      <p>
+        The  Regula Falsi method is a combination of the secant method and bisection method. As in the bisection method, we have to start with two approximations <m>a</m> and <m>b</m> for which <m>f(a)</m> and <m>f(b)</m> have different signs. As in the secant method, we follow the secant line to get a new approximation, which gives a formula similar to <xref ref="eqn-secant" />,
+        <md>
+          x = b - \frac{b - a}{f(b) - f(a)}f(b) \,.
+        </md>
+        Then, as in the bisection method, we check the sign of <m>f(x)</m>; if it is the same as the sign of <m>f(a)</m> then <m>x</m> becomes the new <m>a</m> and otherwise let <m>x</m> becomes the new <m>b</m>. Note that in general either <m>a\rightarrow x^{*}</m> or <m>b\rightarrow x^{*}</m> but not both, so <m>b-a \not\rightarrow 0</m>. For example, for the function in <xref ref="fig-secant" />, <m>a\rightarrow x^{*}</m> but <m>b</m> would never move.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Convergence</title>
+      <p>
+        If we can begin with a good choice <m>x_{0}</m>, then Newton's method will converge to <m>x^{*}</m> rapidly. The secant method is a little slower than Newton's method and the  Regula Falsi method is slightly slower than that. However, both are still much faster than the bisection method.
+      </p>
+      <p>
+        If we do not have a good starting point or interval, then the secant method, just like Newton's method, can fail altogether. The  Regula Falsi method, just like the bisection method, always works because it keeps the solution inside a definite interval.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Simulations and Experiments</title>
+      <p>
+        Although Newton's method converges faster than any other method, there are contexts when it is not convenient, or even impossible. One obvious situation is when it is difficult to calculate a formula for <m>f'(x)</m> even though one knows the formula for <m>f(x)</m>. This is often the case when <m>f(x)</m> is not defined explicitly, but implicitly. There are other situations, which are very common in engineering and science, where even a formula for <m>f(x)</m> is not known. This happens when <m>f(x)</m> is the result of experiment or simulation rather than a formula. In such situations, the secant method is usually the best choice.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-secant">
+      <exercise>
+        <p>
+          Perform 3 iterations of the secant method on the function <m>f(x) = x^{2}-5</m>, with starting points <m>x_{-1}= 1</m> and <m>x_{0}=3</m>. (By hand, but use a calculator.) Calculate the errors and percentage errors of <m>x_{1}</m>, <m>x_{2}</m>, and <m>x_{3}</m>. Compare the errors with those in <xref ref="exr-newtonbyhand"/> and <xref ref="exr-bisectionbyhand"/>
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Create and graph the function <c>g = @(x) log(x)+x.^2</c>. In the plot window, use the Tools menu to zoom in on the root (there is only one) to 2 decimal places. From this determine good starting points <c>a0</c> and <c>b0</c> and use the program <c>mysecant.m</c> (<xref ref="prg-mysecant"/>) to approximate the root <m>x^{*}</m> to 15 decimal places. Turn in your zoomed-in plot and your approximation.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Modify the program <c>mysecant.m</c> (<xref ref="prg-mysecant"/>) to iterate until the absolute value of the residual is less than a given tolerance. (Let <c>tol</c> be an input instead of <c>n</c>.) Modify the comments appropriately. Test program on the two functions in the exercises above with <c>tol</c> <m>= 10^{-10}</m>. Turn in the results and the program.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-symbolic">
+    <title>Symbolic Computations</title>
+    <introduction>
+      <p>
+        The focus of this course is on numerical computations, i.e. calculations, usually approximations, with floating point numbers. However, MATLAB can also do  symbolic computations, which means exact calculations using symbols as in Algebra or Calculus.  
+      </p>
+      <p>
+        Note: To do symbolic computations in MATLAB one must have the Symbolic Toolbox.
+      </p>
+    </introduction>
+    <subsection>
+      <title>Defining functions and basic operations</title>
+      <p>
+        Before doing any symbolic computation, one must declare the variables used to be symbolic:
+       <console prompt=">> " lang="matlab">
+        <input>syms x y</input>
+        </console>
+        An expression representing a function may be defined by simply typing the formula:
+        <console prompt=">> " lang="matlab">
+          <input>f = cos(x) + 3*x^2</input>
+        </console>
+        Note that coefficients must be multiplied using <c>*</c>. To find specific values, you must use the command <c>subs</c>:
+        <console prompt=">> " lang="matlab">
+          <input>subs(f,pi)</input>
+        </console>
+        This command stands for  substitute, it substitutes <m>\pi</m> for <m>x</m> in the formula for <m>f</m>.If we define another function:
+        <console prompt=">> " lang="matlab">
+          <input>g = exp(-y^2)</input>
+        </console>
+        then we can compose the functions:
+        <console prompt=">> " lang="matlab">
+          <input>h = compose(g,f)</input>
+        </console>
+        i.e. <m>h(x) = g(f(x))</m>. We can also form new functions by multiplying:
+        <console prompt=">> " lang="matlab">
+          <input>yg = y*g</input>
+        </console>
+        We can do simple calculus operations, like differentiation:
+        <console prompt=">> " lang="matlab">
+          <input>f1 = diff(f)</input>
+          <input> h1 = diff(h)</input>
+        </console>
+        indefinite integrals (antiderivatives):
+        <console prompt=">> " lang="matlab">
+          <input>F = int(f)</input>
+        </console>
+        and definite integrals:
+        <console prompt=">> " lang="matlab">
+          <input>int(f,0,2*pi)</input>
+        </console>
+        To change a symbolic answer into a numerical answer, use the <c>double</c> command, which stands for  double precision (not times 2):
+        <console prompt=">> " lang="matlab">
+          <input>double(ans)</input>
+        </console>
+        Note that some antiderivatives cannot be found in terms of elementary functions; for some of these the antiderivative can be expressed in terms of special functions:
+        <console prompt=">> " lang="matlab">
+          <input>G = int(g)</input>
+        </console>
+        and for others MATLAB does the best it can:
+        <console prompt=">> " lang="matlab">
+          <input>int(h)</input>
+        </console>
+        For definite integrals that cannot be evaluated exactly, MATLAB does nothing and prints a warning:
+        <console prompt=">> " lang="matlab">
+          <input>int(h,0,1)</input>
+        </console>
+        We will see later that even functions that don't have an antiderivative can be integrated numerically. You can change the last answer to a numerical answer using:
+        <console prompt=">> " lang="matlab">
+          <input>double(ans)</input>
+        </console>
+        Plotting a symbolic function can be done as follows:
+        <console prompt=">> " lang="matlab">
+          <input>fplot(f)</input>
+        </console>
+        or the domain can be specified:
+        <console prompt=">> " lang="matlab">
+          <input>fplot(g,[-10,10])</input>
+          <input>fplot(g,[-2,2])</input>
+        </console>
+        It is important to keep in mind that even though we have defined our variables to be symbolic variables, plotting can only plot a finite set of points. For intance:
+        <console prompt=">> " lang="matlab">
+          <input>fplot(cos(x^5))</input>
+        </console>
+        will produce a plot with some small mistakes, because it does not plot enough points.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Functions of Two Variables and Partial Derivatives</title>
+      <p>
+        Since <m>f = \cos(x) + 3x^{2}</m> and <m>g = \exp(-y^{2})</m> are functions of different variables, their product is a function of two variables:
+        <md>
+          k(x,y) = f(x) g(y) = ( \cos(x) + 3 x^{2}) \exp(-y^{2})
+        </md>
+        In MATLAB, set
+        <console prompt=">> " lang="matlab">
+          <input>k = f*g</input>
+        </console>
+        To evaluate, we need to specify which value goes in which variable:
+        <console prompt=">> " lang="matlab">
+          <input>subs(k,[x,y],[0,1])</input>
+        </console>
+        To plot a symbolic function of two variables use:
+        <console prompt=">> " lang="matlab">
+          <input>ezsurf(k)</input>
+        </console>
+        If we want to differentiate a function with more than one variable in MATLAB, we must specify which variable we are differentiating with respect to:
+        <console prompt=">> " lang="matlab">
+          <input>k1x = diff(k,x)</input>
+        </console>
+        Here we have differentiated with respect to <m>x</m>. This is called the <em>partial derivative</em> with respect to <m>x</m> and we use the symbol <m>\frac{\partial k}{\partial x}</m> to denote it. There is also a partial derivative with respect to <m>y</m>, i.e. <m>\frac{\partial k}{\partial y}</m>:
+        <console prompt=">> " lang="matlab">
+          <input>k1y = diff(k,y)</input>
+        </console>
+        To calculate a partial derivative by hand you differentiate as normal with respect to one variable, but treat the other variables as if they were constants. For example if <m>f(x,y) = x y^{2}</m>, then
+        <md>
+          \frac{\partial f}{ \partial x}= y^{2} \quad \text{ and }\quad \frac{\partial f}{ \partial y}= 2 xy.
+        </md>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Other useful symbolic operations</title>
+      <p>
+        MATLAB allows you to do simple algebra. For instance:
+        <console prompt=">> " lang="matlab">
+          <input>poly = (x - 3)^5</input>
+          <input> polyex = expand(poly)</input>
+          <input> polysi = simplify(polyex)</input>
+        </console>
+        To find the symbolic solutions of an equation, <m>f(x) = 0</m>, use:
+        <console prompt=">> " lang="matlab">
+          <input>solve(f)</input>
+          <input> solve(g)</input>
+          <input> solve(polyex)</input>
+        </console>
+        Another useful property of symbolic functions is that you can substitute numerical vectors for the variables:
+        <console prompt=">> " lang="matlab">
+          <input>X = 2:0.1:4;</input>
+          <input> Y = subs(polyex,X);</input>
+          <input> plot(X,Y)</input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>New Notation</title>
+      <p>
+        MATLAB recently expanded it notation for symbolic computations:
+        <console prompt=">> " lang="matlab">
+          <input>syms x </input>
+          <input>f(x) = x^2;</input>
+          <input> f(2)</input>
+        </console>
+        The function must be given as <m>f(x)</m>. If given as <m>f = x^{2}</m> this will not work. Then we have to use
+        <console prompt=">> " lang="matlab">
+          <input>subs(f,2)</input>
+        </console>
+        It works for multivariable functions also:
+        <console prompt=">> " lang="matlab">
+          <input>syms x y a b</input>
+          <input> f(x,y) = x + 2*y;</input>
+          <input> f(a,b)</input>
+        </console>
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-symbolic">
+      <exercise>
+        <p>
+          Starting from <c>mynewton</c> (<xref ref="prg-mynewton"/>) write a well-commented <alert>function</alert> program <c>mysymnewton</c> that takes as its input a symbolic function <m>f</m> and the ordinary variables <m>x_{0}</m> and <m>n</m>. Let the program take the symbolic derivative <m>f'</m>. You will need to use the command  <c>subs</c> to obtain values of <m>f(x)</m> and <m>f'(x)</m>. Test it on <m>f(x)=x^{3}-4</m> starting with <m>x_{0}=2</m>. Turn in the program and a brief summary of the results.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Find a <em>complicated</em> function in an engineering or science textbook or website. Make a well-commented <alert>script</alert> program that defines a symbolic version of this function and takes its derivative and indefinite integral symbolically (if possible). Plot the function on the domain that is relevant for the application. In the comments of the script describe what the function is and properly reference where you got it. Turn in your script and the plot.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Calculate all the partial derivative for the functions below. Do them by hand, then check them using the symbolic toolbox. 
+          <ol>
+            <li>
+              <m>f(x,y) = \sqrt{xy} + x^2 \sin^2{y}</m>
+            </li>
+            <li>
+              <m>g(u,v) = \frac{uv}{u+v}</m>
+            </li>
+          </ol>
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-chp1-review">
+    <title>Review of Chapter 1</title>
+    <subsection>
+      <title>Methods and Formulas</title>
+      <subsubsection>
+        <title>Solving equations numerically:</title>
+        <p>
+          <dl>
+            <li>
+              <title><m>f(x) = 0</m></title>
+              <p>
+                an equation we wish to solve.
+              </p>
+            </li>
+            <li>
+              <title><m>x^{*}</m></title>
+              <p>
+                a true solution.
+              </p>
+            </li>
+            <li>
+              <title><m>x_{0}</m></title>
+              <p>
+                starting approximation.
+              </p>
+            </li>
+            <li>
+              <title><m>x_{n}</m></title>
+              <p>
+                approximation after <m>n</m> steps.
+              </p>
+            </li>
+            <li>
+              <title><m>e_{n} = x_{n} - x^{*}</m></title>
+              <p>
+                error of <m>n</m>-th step.
+              </p>
+            </li>
+            <li>
+              <title><m>r_{n} = y_{n} = f(x_{n})</m></title>
+              <p>
+                residual at step <m>n</m>. Often <m>|r_{n}|</m> is sufficient.
+              </p>
+            </li>
+          </dl>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Newton's method:</title>
+        <md>
+          x_{i+1}= x_{i} - \frac{f(x_{i})}{f'(x_{i})}
+        </md>
+      </subsubsection>
+      <subsubsection>
+        <title>Bisection method:</title>
+        <p>
+          <m>f(a)</m> and <m>f(b)</m> must have different signs. <md>x = (a+b)/2</md> Choose <m>a = x</m> or <m>b = x</m>, depending on signs. <m>x^{*}</m> is always inside <m>[a,b]</m>. <m>e &#x3C; (b-a)/2</m>, current maximum error.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Secant method:</title>
+        <md>
+          x_{i+1}= x_{i} - \frac{x_{i} - x_{i-1}}{y_{i} - y_{i-1}}y_{i}
+        </md>
+      </subsubsection>
+      <subsubsection>
+        <title>Regula Falsi</title>
+        <p>
+          Is a hybrid between secant and bisection methods.
+        <md>
+          x = b - \frac{b - a}{f(b) - f(a)}f(b)
+        </md>
+          Choose <m>a = x</m> or <m>b = x</m>, depending on signs.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Convergence:</title>
+        <p>
+          Bisection is very slow. Newton is very fast. Secant methods are intermediate in speed. Bisection and Regula Falsi never fail to converge. Newton and Secant can fail if <m>x_{0}</m> is not close to <m>x^{*}</m>.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Locating roots:</title>
+        <p>
+          Use knowledge of the problem to begin with a reasonable domain. Systematically search for sign changes of <m>f(x)</m>. Choose <m>x_{0}</m> between sign changes using bisection or secant.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Usage:</title>
+        <p>
+          For Newton's method one must have formulas for <m>f(x)</m> and <m>f'(x)</m>. Secant methods are better for experiments and simulations. Bisection and  Regula Falsi are slower, but keep the root within the current bounds.
+        </p>
+      </subsubsection>
+    </subsection>
+    <subsection>
+      <title>MATLAB</title>
+      <subsubsection>
+        <title>Commands:</title>
+        <p>
+          <dl width="wide">
+            <li>
+              <title><c>v = [0 1 2 3]</c> </title>
+              <p> Make a row vector.</p>
+            </li>
+            <li>
+              <title><c>u = [0; 1; 2; 3]</c>  </title>
+              <p>Make a column vector.</p>
+            </li>
+            <li>
+              <title><c>w = v'</c>  </title>
+              <p>Transpose: row vector <m>\leftrightarrow</m> column vector</p>
+            </li>
+            <li>
+              <title><c>x = linspace(0,1,11)</c>  </title>
+              <p>Make an evenly spaced vector of length 11.</p>
+            </li>
+            <li>
+              <title><c>x = -1:.1:1</c>  </title>
+              <p>Make an evenly spaced vector, with increments <m>0.1</m>.</p>
+            </li>
+            <li>
+              <title><c>y = x.^2</c>  </title>
+              <p>Square all entries.</p>
+            </li>
+            <li>
+              <title><c>plot(x,y) </c>  </title>
+              <p>plot y versus x.</p>
+            </li>
+            <li>
+              <title><c>f = @(x) 2*x.^2 - 3*x + 1 </c>  </title>
+              <p>Make an anonymous function.</p>
+            </li>
+            <li>
+              <title><c>y = f(x) </c> </title>
+              <p>A function can act on a vector.</p>
+            </li>
+            <li>
+              <title><c>plot(x,y,'*','red')</c> </title>
+              <p> A plot with options.</p>
+            </li>
+            <li>
+              <title><c>Control-c </c></title>
+              <p>Stops a computation.</p>
+            </li>
+          </dl>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Program structures:</title>
+        <p>
+          <c>for ... end</c> example:
+          <program language="matlab">
+            <code>
+              for i=1:20 
+                S = S + i; 
+              end
+            </code>
+          </program>
+          <c>if  ... end</c> example:
+          <program language="matlab">
+            <code>
+              if y == 0 
+                disp('An exact solution has been found') 
+              end
+            </code>
+          </program>
+          <c>while  ...  end</c> example:
+          <program language="matlab">
+            <code>
+              while i &#x3C;= 20 
+                S = S + i; 
+                i = i + 1; 
+              end
+            </code>
+          </program>
+          <c>if  ... else ... end</c> example:
+          <program language="matlab">
+            <code>
+              if c*y>0 
+                a = x; 
+              else 
+                b = x; 
+              end
+            </code>
+          </program>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Function Programs:</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                Begin with the word <c>function</c>.
+              </p>
+            </li>
+            <li>
+              <p>
+                There are inputs and outputs.
+              </p>
+            </li>
+            <li>
+              <p>
+                The outputs, name of the function and the inputs must appear in the first line.  i.e. <c>function x = mynewton(f,x0,n)</c>
+              </p>
+            </li>
+            <li>
+              <p>
+                The body of the program must assign values to the outputs.
+              </p>
+            </li>
+            <li>
+              <p>
+                Internal variables are not visible outside the function.
+              </p>
+            </li>
+            <li>
+              <p>
+                A function program may not use variables in the current workspace unless they are inputs.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Script Programs:</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                There are no inputs and outputs.
+              </p>
+            </li>
+            <li>
+              <p>
+                A script program may use, create, change and even delete variables in the current workspace.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Symbolic:</title>
+        <p>
+          <dl width="wide">
+            <li>
+              <title><c>syms x y</c></title>
+            </li>
+            <li>
+              <title><c>f = 2*x^2 - sqrt(3*x)</c></title>
+            </li>
+            <li>
+              <title><c>subs(f,sym(pi)) </c></title>
+            </li>
+            <li>
+              <title><c>double(ans)</c></title>
+            </li>
+            <li>
+              <title><c>g = log(abs(y))</c>   </title>
+              <p>MATLAB uses <c>log</c> for natural logarithm.</p>
+            </li>
+            <li>
+              <title><c>h(x) = compose(g,f)</c></title>
+            </li>
+            <li>
+              <title><c>k(x,y) = f*g </c></title>
+            </li>
+            <li>
+              <title><c>fplot(f)</c></title>
+            </li>
+            <li>
+              <title><c>fplot(g,-10,10)</c></title>
+            </li>
+            <li>
+              <title><c>ezsurf(k)</c></title>
+            </li>
+            <li>
+              <title><c>f1 = diff(f,'x')</c></title>
+            </li>
+            <li>
+              <title><c>F = int(f,'x')</c>   </title>
+              <p>indefinite integral (antiderivative)</p>
+            </li>
+            <li>
+              <title><c>int(f,0,2*pi)</c>  </title>
+              <p>definite integral</p>
+            </li>
+            <li>
+              <title><c>poly = x*(x - 3)*(x-2)*(x-1)*(x+1)</c></title>
+            </li>
+            <li>
+              <title><c>polyex = expand(poly)</c></title>
+            </li>
+            <li>
+              <title><c>polysi = simple(polyex)</c></title>
+            </li>
+            <li>
+              <title><c>solve(f)</c></title>
+            </li>
+            <li>
+              <title><c>solve(g)</c></title>
+            </li>
+            <li>
+              <title><c>solve(polyex)</c></title>
+            </li>
+          </dl>
+        </p>
+      </subsubsection>
+    </subsection>
+  </section>
 </chapter>
