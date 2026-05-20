@@ -2,12 +2,1875 @@
 
 <chapter xml:id="chapter-functions" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Functions and Data</title>
-
-  <introduction>
-    <p> Text before the first section. </p>
-  </introduction>
-
   <!-- include sections 
   <xi:include href="sec-section-name.ptx" /> -->
+  <section xml:id="sec-interpolation">
+  <title>Polynomial and Spline Interpolation</title>
+    <subsection>
+      <title>A Chemical Reaction</title>
+      <p>
+        In a chemical reaction the concentration level <m>y</m> of the product at time <m>t</m> was measured every half hour. The following results were found:
+      </p>
+      <tabular>
+        <col halign="center" right="minor" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" />
+        <row bottom="minor">
+          <cell>t</cell>
+          <cell>0</cell>
+          <cell>.5</cell>
+          <cell>1.0</cell>
+          <cell>1.5</cell>
+          <cell>2.0</cell>
+        </row>
+        <row>
+          <cell>y</cell>
+          <cell>0</cell>
+          <cell>.19</cell>
+          <cell>.26</cell>
+          <cell>.29</cell>
+          <cell>.31</cell>
+        </row>
+      </tabular>
+      <p>
+        We can input this data into MATLAB as 
+        <console prompt=">> " lang="matlab">
+          <input> t1 = 0:.5:2</input>
+          <input> y1 = [ 0 .19 .26 .29 .31 ] </input>
+        </console> 
+        and plot the data with 
+        <console prompt=">> " lang="matlab"><input> plot(t1,y1) </input></console>
+        MATLAB automatically connects the data with line segments, so the graph has corners.What if we want a smoother graph? Try 
+        <console prompt=">> " lang="matlab"><input> plot(t1,y1,'*') </input></console> 
+        which will produce just asterisks at the data points. Next click on <c>Tools</c>, then click on the <c>Basic Fitting</c> option. This should produce a small window with several fitting options. Begin clicking them one at a time, clicking them off before clicking the next. Which ones produce a good-looking fit? You should note that the spline, the shape-preserving interpolant, and the 4th degree polynomial produce very good curves. The others do not.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Polynomial Interpolation</title>
+      <p>
+        Suppose we have <m>n</m> data points <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m>. A interpolant is a function <m>f(x)</m> such that <m>y_{i}=f(x_{i})</m> for <m>i=1,\dots,n</m>.The most general polynomial with degree <m>d</m> is
+        <md>
+          p_{d}(x) = a_{d} x^{d} + a_{d-1}x^{d-1}+ \ldots + a_{1} x + a_{0}
+        </md>,
+        which has <m>d+1</m> coefficients. A polynomial interpolant with degree <m>d</m> thus must satisfy
+        <md>
+          y_{i}=p_{d}(x_{i}) = a_{d} x_{i}^{d} + a_{d-1}x_{i}^{d-1}+ \ldots + a_{1} x_{i} + a_{0} \quad\text{for }i=1,\dots,n
+        </md>.
+        This system is a linear system in the unknowns <m>a_{0}, \ldots, a_{n}</m> and  solving linear systems is what computers do best. If <m>n=d+1</m>, then the system of equations has <m>n</m> equations and <m>n</m> unknowns, so in general there is a unique solution. This is the case in the example above: there are 5 data points so there is exactly one 4th degree polynomial that interpolates the data.
+      </p>
+      <p>
+        If <m>n &#x3C; d+1</m> then the system is underdetermined and so in general will have an infinite number of solutions. When we tried to use a 5th or higher degree polynomial above, MATLAB returned a warning that the polynomial is not unique since <q>degree <m>>=</m> number of data points</q>.
+      </p>
 
+      <p>
+        If the data <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m> has repeated <m>x</m>-values with distinct <m>y</m>-values, then the system of equations is inconsistent and there will be no solution.If <m>n > d+1</m> then the system has more equations than unknowns, so it is overdetermined and in general will have no solution.In these cases MATLAB does produce a function, but it does not satisfy <m>p(x_{i})=y_{i}</m> for <m>i=1,\dots,n</m> and so is not an interpolant. Instead it is a least-squares fit, which we will study in Lecture<nbsp /><xref ref="sec-leastsquares" />.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Predicting the future?</title>
+      <p>
+        Suppose we want to use the data to extrapolate into the future. Set the plot to the 4th degree polynomial. Then click the <c>Edit</c> button and select the <c>Axes Properties</c> option. A box should appear that allows you to adjust the domain of the <m>x</m> axes. Change the upper limit of the <m>x</m>-axis from <m>2</m> to <m>4</m>. Based on the 4th degree polynomial, what will the chemical reaction do in the future? Is this reasonable?
+      </p>
+      <p>
+        Next change from 4th degree polynomial to spline interpolant. According to the spline, what will the chemical reaction do in the future? Try the shape-preserving interpolant also.
+      </p>
+      <p>
+        From our (limited) knowledge of chemical reactions, what should be the behavior as time goes on? It should reach a limiting value (chemical equilibrium). Could we use the data to predict this equilibrium value? Yes, we could and it is done all the time in many different contexts, but to do so we need to know that there is an equilibrium to predict. This requires that we understand the chemistry of the problem. Thus we have the following principle: To  extrapolate beyond the data, one must have some knowledge of the process.
+      </p>
+    </subsection>
+    <subsection>
+      <title>More data</title>
+      <p>
+        Generally one would think that more data is better. Input the following data vectors: 
+        <console prompt=">> " lang="matlab">
+          <input> t2 = [ 0 .1 .4 .5 .6 1.0 1.4 1.5 1.6 1.9 2.0] </input>
+          <input>y2 = [ 0 .06 .17 .19 .21 .26 .29 .29 .30 .31 .31] </input>
+        </console> 
+        There are 11 data points, so a 10-th degree polynomial will fit the data. However, this does not give a good graph. Thus: <alert>Polynomial interpolation is better for small data sets.</alert>
+      </p>
+    </subsection>
+    <subsection>
+      <title>A challenging data set</title>
+      <p>
+        Input the following data set: 
+        <console prompt=">> " lang="matlab">
+          <input> x = -4:1:5 </input>
+          <input>y = [ 0 0 0 1 1 1 0 0 0 0] </input>
+        </console> 
+        and plot it: 
+        <console prompt=">> " lang="matlab"><input> plot(x,y,'*') </input></console> 
+        There are 10 data points, so there is a unique 9 degree polynomial that fits the data. Under <c>Tools</c> and <c>Basic Fitting</c> select the 9th degree polynomial fit. How does it look? De-select the 9th degree polynomial and select the spline interpolant. This should produce a much more satisfactory graph and the shape-preserving spline should be even better.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The idea of a spline</title>
+      <p>
+        The general idea of a spline is this: on each interval between data points, represent the graph with a simple function. The simplest spline is something very familiar to you; it is obtained by connecting the data with lines. Since linear is the most simple function of all, linear interpolation is the simplest form of spline. The next simplest function is quadratic. If we put a quadratic function on each interval then we should be able to make the graph a lot smoother. If we were really careful then we should be able to make the curve smooth at the data points themselves by matching up the derivatives. This can be done and the result is called a quadratic spline. Using cubic functions or 4th degree functions should be smoother still. So, where should we stop? There is an almost universal consensus that  cubic is the optimal degree for splines and so we focus the rest of the lecture on cubic splines.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Cubic spline</title>
+      <p>
+        Again, the basic idea of the cubic spline is that we represent the function by a different cubic function on each interval between data points. That is, if there are <m>n</m> data points, then the spline <m>S(x)</m> is the function
+        <md>
+          S(x) = \left\{ \begin{array}{ll}C_1(x), &#x26; \quad x_0 \le x \le x_1 \\ C_i(x), &#x26; \quad x_{i-1} \le x \le x_i \\ C_n(x), &#x26; \quad x_{n-1} \le x \le x_n\end{array} \right.
+        </md>,
+        where each <m>C_{i}</m> is a cubic function. The most general cubic function has the form
+        <md>
+          C_{i}(x) = a_{i} + b_{i} x + c_{i} x^{2} + d_{i} x^{3}
+        </md>.
+        To determine the spline we must determine the coefficients, <m>a_{i}</m>, <m>b_{i}</m>, <m>c_{i}</m>, and <m>d_{i}</m> for each <m>i</m>. Since there are <m>n</m> intervals, there are <m>4n</m> coefficients to determine. First we require that the spline interpolate by requiring
+        <md>
+          C_{i}(x_{i-1}) = y_{i-1}\quad \text{and}\quad C_{i}(x_{i}) = y_{i}
+        </md>,
+        at every data point. In other words,
+        <md>
+          a_{i} + b_{i} x_{i-1}+ c_{i} x_{i-1}^{2} + d_{i} x_{i-1}^{3} = y_{i-1}\quad \text{and}\quad a_{i} + b_{i} x_{i} + c_{i} x_{i}^{2} + d_{i} x_{i}^{3} = y_{i}
+        </md>.
+        Notice that there are <m>2n</m> of these conditions. Then to make <m>S(x)</m> as smooth as possible we require
+        <md>
+          \begin{split}C'_{i}(x_{i})&#x26;= C'_{i+1}(x_{i})\quad\text{and}\\ C''_{i}(x_{i})&#x26;= C''_{i+1}(x_{i})\end{split}
+        </md>
+        at all the internal points, i.e. <m>x_{1}</m>, <m>x_{2}, x_{3}, \ldots, x_{n-1}</m>. In terms of the points these conditions can be written as
+        <md>
+          \begin{split}b_{i} + 2 c_{i} x_{i} + 3 d_{i} x_{i}^{2}&#x26;= b_{i+1}+ 2 c_{i+1}x_{i} + 3 d_{i+1}x_{i}^{2} \quad\text{and}\\ 2 c_{i} + 6 d_{i} x_{i}&#x26;= 2 c_{i+1}+ 6 d_{i+1}x_{i}.\end{split}
+        </md>
+        There are <m>2(n-1)</m> of these conditions. Since each <m>C_{i}</m> is cubic, there are a total of <m>4n</m> coefficients in the formula for <m>S(x)</m>. So far we have <m>4n - 2</m> equations, so we are 2 equations short of being able to determine all the coefficients. At this point we have to make a choice. The usual choice is to require
+        <md>
+          C''_{1}(x_{0}) = C''_{n}(x_{n}) = 0.
+        </md>
+        These are called  natural or  simple boundary conditions. The other common option is called  clamped boundary conditions:
+        <md>
+          C'_{1}(x_{0}) = C'_{n}(x_{n}) = 0.
+        </md>
+        The terminology used here is obviously parallel to that used for beams. That is not the only parallel between beams and cubic splines. It is an interesting fact that a cubic spline is exactly the shape of a (linear) beam restrained to match the data by simple supports.
+      </p>
+      <p>
+        Note that the equations above are all linear equations with respect to the unknowns (coefficients). This feature makes splines easy to calculate since  solving linear systems is what computers do best.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-interpolation">
+      <exercise>
+        <p>
+          You are given the following data: 
+          <console prompt=">> " lang="matlab">
+            <input> t = [ 0 .1 .499 .5 .6 1.0 1.4 1.5 1.899 1.9 2.0 ] </input>
+            <input>y = [ 0 .06 .17 .19 .21 .26 .29 .29 .30 .31 .31 ] </input>
+          </console> 
+          <ol>
+            <li>
+              <p>
+                Plot the data, using <c>'*'</c> at the data points, then try a polynomial fit of the correct degree to interpolate this number of data points.
+                <ul>
+                  <li>
+                    <p>
+                      What do you observe? Look closely at the data and identify the points that force the interpolating polynomial to have large derivative.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What would happen if the <c>t</c> value of <m>1.899</m> was rounded to <m>1.9</m>? Is the problem of converting this data to its interpolating polynomial  well conditioned or  badly conditioned?
+                    </p>
+                  </li>
+                </ul>
+              </p>
+            </li>
+            <li>
+              <p>
+                Plot the data along with a spline interpolant. How does this compare with the plot above? What is a way to make the plot better?
+              </p>
+            </li>
+          </ol>
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-leastsquares">
+    <title>Least Squares Fitting: Noisy Data</title>
+    <introduction>
+      <p>
+        Suppose we have <m>n</m> data points <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m>. In the previous section we learned about interpolation, where the fitting function <m>f(x)</m> is required to satisfy <m>y_{i}=f(x_{i})</m> for <m>i=1,\dots,n</m>.Very often data has a significant amount of noise, so it makes more sense to only ask for <m>y_{i}\approx f(x_{i})</m>. The least squares fitting method produces such an <m>f</m>. The next illustration shows the effects noise can have and how least squares is used.    
+      </p>
+    </introduction>
+    <subsection>
+      <title>Traffic flow model</title>
+      <p>
+        Suppose you are interested in the time it takes to travel on a certain section of highway for the sake of planning. According to theory, assuming up to a moderate amount of traffic, the time should be approximately
+        <md>
+          T(x) = ax + b
+        </md>
+        where <m>b</m> is the travel time when there is no other traffic and <m>x</m> is the current number of cars on the road (in hundreds). To determine the coefficients <m>a</m> and <m>b</m> you could run several experiments which consist of driving the highway at different times of day and also estimating the number of cars on the road using a counter. Of course both of these measurements will contain  noise, i.e. random fluctuations.
+      </p>
+      <p>
+        We could simulate such data in MATLAB as follows: 
+        <console prompt=">> " lang="matlab">
+          <input> x = 1:.1:6; </input>
+          <input>T = .1*x + 1; </input>
+          <input>Tn = T + .1*randn(size(x)); </input>
+          <input>plot(x,Tn,'.') </input>
+        </console> 
+        The data should look like it lies on a line, but with noise. Click on the <c>Tools</c> button and choose <c>Basic fitting</c>. Then choose a <c>linear</c> fit. The resulting line should go through the data in what looks like a very reasonable way. Click on <c>show equations</c>. Compare the equation with <m>T(x) = .1 x + 1</m>. The coefficients should be pretty close considering the amount of noise in the plot. Next, try to fit the data with a spline. The result should be ugly. We can see from this example that <alert>splines are not suited to noisy data</alert>.
+      </p>
+      <p>
+        How does MATLAB obtain a very nice line to approximate noisy data? The answer is a very standard numerical/statistical method known as  least squares.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Least squares</title>
+      <introduction>
+        <p>
+          The least squares method requires you to first select what type of <m>f</m> to consider (sometimes called a model) and what parameters it depends on. For example, you might choose
+        <md>
+          f(x) = a_{1} \exp({a_2 x})+a_{0} \quad\text{or}\quad f(x) = a_{2} x^{2} + a_{1} x +a_{0}
+        </md>.
+        Given data <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m>, we can then determine the error at each point as <m>e_{i} = y_{i} - f(x_{i})</m>. To make <m>f</m> reasonable, we wish to simultaneously minimize all the errors <m>\{e_{1},e_{2}, \ldots, e_{n}\}</m>. There are many possible ways one could go about this, but the standard one is to try to minimize the  sum of the squares of the errors. That is, we denote by <m>\mathcal{E}</m> the sum of the squares
+        <md>
+          \mathcal{E}= \sum_{i=1}^{n} e_{i}^{2} = \sum_{i=1}^{n} \left( y_{i} - f(x_{i}) \right)^{2}
+        </md>.
+        Since <m>f</m> depends on some parameters, <m>\mathcal{E}</m> is a function of those parameters. To minimize <m>\mathcal{E}</m>, we can compute the partial derivatives of it with respect to each of the parameters, set the results equal to zero, and solve the resulting system of equations.
+        </p>
+      </introduction>
+      <subsubsection>
+        <title>Linear least squares</title>
+        <p>
+          If we choose <m>f</m> to depend linearly on the parameters, then the resulting system of equations will be a linear system, which is easy to solve. This does not mean we have to choose <m>f</m> to be a line. For example, the function <m>f(x) = a_{2} x^{2} + a_{1} x +a_{0}</m> is a quadratic in <m>x</m>, but depends linearly on each of <m>a_{2}</m>, <m>a_{1}</m>, and <m>a_{0}</m>. To illustrate the linear least squares process, we will go through it using this quadratic <m>f</m>.
+        </p>
+        <p>
+          The error is
+          <md>
+            \mathcal{E}(a_{0},a_{1},a_{2}) =\sum_{i=1}^{n} \left( y_{i} - (a_{2} x_{i}^{2} + a_{1} x_{i} +a_{0}) \right)^{2}
+          </md>,
+          which has partial derivatives
+          <md>
+            <mrow>\frac{ \partial \mathcal{E}}{\partial a_{0}} \amp = -2 \sum_{i=1}^{n} \left( y_{i} - (a_{2} x_{i}^{2} + a_{1} x_{i} +a_{0}) \right)\,, </mrow>
+            <mrow>\frac{ \partial \mathcal{E}}{\partial a_{1}} \amp = -2 \sum_{i=1}^{n} \left( y_{i} - (a_{2} x_{i}^{2} + a_{1} x_{i} +a_{0}) \right)x_{i}\,,\quad\text{and} </mrow>
+            <mrow>\frac{ \partial \mathcal{E}}{\partial a_{2}}\amp = -2 \sum_{i=1}^{n} \left( y_{i} - (a_{2} x_{i}^{2} + a_{1} x_{i} +a_{0}) \right)x_{i}^{2} </mrow>
+          </md>.
+          Setting these equal to zero and rearranging yields the linear system
+          <md>
+            \begin{pmatrix}\displaystyle\sum_{i=1}^{n} 1&#x26;\displaystyle\sum_{i=1}^{n} x_{i}&#x26;\displaystyle\sum_{i=1}^{n} x_{i}^{2}\\ \displaystyle\sum_{i=1}^{n} x_{i}&#x26;\displaystyle\sum_{i=1}^{n} x_{i}^{2}&#x26;\displaystyle\sum_{i=1}^{n} x_{i}^{3}\\ \displaystyle\sum_{i=1}^{n} x_{i}^{2}&#x26;\displaystyle\sum_{i=1}^{n} x_{i}^{3}&#x26;\displaystyle\sum_{i=1}^{n} x_{i}^{4}\\\end{pmatrix} \begin{pmatrix}a_{0} \\ a_{1} \\ a_{2}\end{pmatrix} 
+            = \begin{pmatrix}\displaystyle\sum_{i=1}^{n} y_{i} \\ \displaystyle\sum_{i=1}^{n} y_{i}x_{i} \\ \displaystyle\sum_{i=1}^{n} y_{i} x_{i}^{2}\end{pmatrix}
+          </md>.
+          The entries in the matrix are determined from simple formulas using the data. Since this is a linear system, it is easily solved. The process is quick and easily automated, which is one reason it is very standard. MATLAB's basic fitting tool uses this process to obtain a <m>d</m> degree polynomial fit whenever the number of data points is more than <m>d+1</m>.
+        </p>
+      </subsubsection>
+    </subsection>
+    <subsection>
+      <title>Drag coefficients</title>
+      <p>
+        Drag due to air resistance is proportional to the square of the velocity, i.e.<nbsp /><m>d= kv^{2}</m>. In a wind tunnel experiment the velocity <m>v</m> can be varied by setting the speed of the fan and the drag can be measured directly (it is the force on the object). In this and every experiment some random noise will occur. The following sequence of commands replicates the data one might receive from a wind tunnel: 
+        <console prompt=">> " lang="matlab">
+          <input> v = 0:1:60; </input>
+          <input>d = .1234*v.^2; </input>
+          <input>dn = d + .4*v.*randn(size(v)); </input>
+          <input>plot(v,dn,'*') </input>
+        </console> 
+        The plot should look like a quadratic, but with some noise. Using the tools menu, add a quadratic fit and enable the <q>show equations</q> option. What is the coefficient of <m>x^{2}</m>? How close is it to <m>0.1234</m>?
+      </p>
+      <p>
+        Note that whenever you select a polynomial in MATLAB with a degree less than <m>n-1</m> MATLAB will produce a least squares fit.
+      </p>
+      <p>
+        You will notice that the quadratic fit includes both a constant and linear term. We know from the physical situation that these should not be there; they are remnants of noise and the fitting process. Since we know the curve should be <m>k v^{2}</m>, we can do better by employing that knowledge. For instance, we know that the graph of <m>d</m> versus <m>v^{2}</m> should be a straight line. We can produce this easily: 
+        <console prompt=">> " lang="matlab">
+          <input> z = v.^2; </input>
+          <input>plot(z,dn,'*') </input>
+        </console> 
+        By changing the independent variable from <m>v</m> to <m>z=v^{2}</m> we produced a plot that looks like a line with noise. Add a linear fit. What is the linear coefficient? This should be closer to <m>0.1234</m> than using a quadratic fit.
+      </p>
+      <p>
+        The second fit still has a constant term, which we know should not be there. If there was no noise, then at every data point we would have <m>k = d/v^{2}</m>. We can express this as a linear system <c>z'*k = dn'</c>, which is badly overdetermined since there are more equations than unknowns. Since there is noise, each point will give a different estimate for <m>k</m>. In other words, the overdetermined linear system is also inconsistent. When MATLAB encounters such systems, it automatically gives a least squares solution of the matrix problem, i.e.<nbsp />one that minimizes the sum of the squared errors, which is exactly what we want. To get the least squares estimate for <m>k</m>, do 
+        <console prompt=">> " lang="matlab"><input> k = z'' </input></console> 
+        This will produce a number close to .1234.
+      </p>
+      <p>
+        Note that this is an application where we have physical knowledge. In this situation extrapolation would be meaningful. For instance we could use the plot to find the predicted drag at 80 mph.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-leastsquares">
+      <exercise>
+        <p>
+          Find two tables of data in an engineering textbook or engineering website. Plot each (with <c>'*'</c> at data points) and decide if the data is best represented by a polynomial interpolant, spline interpolant, or least squares fit polynomial. Label the axes and include a title. Turn in the best plot of each. Indicate the source and meaning of the data.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          The following table contains information from a chemistry experiment in which the concentration of a product was measured at one minute intervals:
+        </p>
+        <p>
+          <tabular>
+            <col halign="center" right="minor" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" />
+            <row bottom="minor">
+              <cell>Time</cell>
+              <cell>0</cell>
+              <cell>1</cell>
+              <cell>2</cell>
+              <cell>3</cell>
+              <cell>4</cell>
+              <cell>5</cell>
+              <cell>6</cell>
+              <cell>7</cell>
+            </row>
+            <row>
+              <cell>Concentration</cell>
+              <cell>3.033</cell>
+              <cell>3.306</cell>
+              <cell>3.672</cell>
+              <cell>3.929</cell>
+              <cell>4.123</cell>
+              <cell>4.282</cell>
+              <cell>4.399</cell>
+              <cell>4.527</cell>
+            </row>
+          </tabular>
+        </p>
+        <p>
+          Plot this data. Suppose it is known that this chemical reaction should follow the law: <m>c = a - b \exp(-0.2 t)</m>. Following the example in the notes about the drag coefficients, change one of the variables so that the law is a linear function. Then plot the new variables and use the linear fit option to estimate <m>a</m> and <m>b</m>. What will be the eventual concentration? Finally, plot the graph of <m>a - b \exp(-0.2 t)</m> on the interval [0,15] (as a solid curve), along with the data from the table (using <c>'*'</c>).
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-LRTrules">
+    <title>Integration: Left, Right and Trapezoid Rules</title>
+    <subsection>
+      <title>The Left and Right endpoint rules</title>
+      <p>
+        In this section, we wish to approximate a definite integral
+        <md>
+          \int_{a}^{b} f(x) \, dx
+        </md>,
+        where <m>f(x)</m> is a continuous function. In calculus we learned that integrals are (signed) areas and can be approximated by sums of smaller areas, such as the areas of rectangles. We begin by choosing points <m>\{x_{i}\}</m> that subdivide <m>[a,b]</m>:
+        <md>
+          a = x_{0} &#x3C; x_{1} &#x3C; \ldots &#x3C; x_{n-1}&#x3C; x_{n} = b
+        </md>.
+        The subintervals <m>[x_{i-1}, x_{i}]</m> determine the width <m>\Delta x_{i}</m> of each of the approximating rectangles. For the height, we learned that we can choose any height of the function <m>f(x^{*}_{i})</m> where <m>x^{*}_{i} \in [x_{i-1},x_{i}]</m>. The resulting approximation is
+        <md>
+          \int_{a}^{b} f(x) \, dx \approx \sum_{i=1}^{n} f(x^{*}_{i}) \Delta x_{i}
+        </md>.
+        To use this to approximate integrals with actual numbers, we need to have a specific <m>x^{*}_{i}</m> in each interval. The two simplest (and worst) ways to choose <m>x^{*}_{i}</m> are as the left-hand point or the right-hand point of each interval. This gives concrete approximations which we denote by <m>L_{n}</m> and <m>R_{n}</m> given by
+        <md>
+          <mrow>L_{n}\amp= \sum_{i=1}^{n} f(x_{i-1}) \Delta x_{i} \quad\text{and}</mrow>
+          <mrow>R_{n}\amp= \sum_{i=1}^{n} f(x_{i}) \Delta x_{i}</mrow>
+        </md>.
+        <program language="matlab">
+          <code> 
+            function L = myleftsum(x,y)
+              % produces the left sum from data input.
+              % Inputs: x -- vector of the x coordinates of the partition
+              %         y -- vector of the corresponding y coordinates
+              % Output: returns the approximate integral
+              n = length(x);
+              L = 0;
+              for i = 1:n-1
+                % accumulate height times width
+                L = L + y(i)*(x(i+1) - x(i));
+              end
+            end
+          </code>
+        </program>
+      </p>
+      <p>
+        Often we can take <m>\{x_{i}\}</m> to be  evenly spaced, with each interval having the same width:
+        <md>
+          h = \frac{b-a}{n}
+        </md>,
+        where <m>n</m> is the number of subintervals. If this is the case, then <m>L_{n}</m> and <m>R_{n}</m> simplify to
+        <md xml:id="eqn-evenleft" number="yes">
+          L_{n}= h \sum_{i=0}^{n-1}f(x_{i})
+        </md>
+        and 
+        <md xml:id="eqn-evenright" number="yes">
+          R_{n} = h \sum_{i=1}^{n} f(x_{i})
+        </md>.
+        The foolishness of choosing left or right endpoints is illustrated in <xref ref="fig-LnRn" />. As you can see, for a very simple function like <m>f(x) = 1 + .5 x</m>, each rectangle of <m>L_{n}</m> is too short, while each rectangle of <m>R_{n}</m> is too tall. This will hold for any increasing function. For decreasing functions <m>L_{n}</m> will always be too large while <m>R_{n}</m> will always be too small.
+      </p>
+      <figure xml:id="fig-LnRn">
+          <p>
+            FILL
+          </p>
+        <caption>The left and right sums, <m>L_{n}</m> and <m>R_{n}</m>.</caption>
+      </figure>
+    </subsection>
+    <subsection>
+      <title>The Trapezoid rule</title>
+      <p>
+        Knowing that the errors of <m>L_{n}</m> and <m>R_{n}</m> are of opposite sign, a very reasonable way to get a better approximation is to take an average of the two. We will call the new approximation <m>T_{n}</m>:
+        <md>
+          T_{n} = \frac{L_{n} + R_{n}}{2}
+        </md>.
+        This method also has a straight-forward geometric interpretation. On each subrectangle we are using
+        <md>
+          A_{i} = \frac{f(x_{i-1}) + f(x_{i})}{2}\Delta x_{i}
+        </md>,
+        which is exactly the area of the  trapezoid with sides <m>f(x_{i-1})</m> and <m>f(x_{i})</m>. We thus call the method the trapezoid method. See <xref ref="fig-trap" />.
+      </p>
+      <figure xml:id="fig-trap">
+        <blockquote>
+          <p>
+            FILL
+          </p>
+        </blockquote>
+        <caption>The trapezoid rule, <m>T_{n}</m>.</caption>
+      </figure>
+      <p>
+        We can rewrite <m>T_{n}</m> as
+        <md>
+          T_{n} = \sum_{i=1}^{n} \frac{f(x_{i-1}) + f(x_{i})}{2}\Delta x_{i} 
+        </md>.
+        In the evenly spaced case, we can write this as
+        <md xml:id="eqn-eventrap" number="yes">
+          T_{n} = \frac{h}{2}\bigl( f(x_{0}) + 2f(x_{1}) + \ldots + 2f(x_{n-1}) + f(x_{n}) \bigr)
+        </md>.
+        <alert>Caution:</alert> The convention used here is to begin numbering the points at <m>0</m>, i.e.<nbsp /><m>x_{0} = a</m>; this allows <m>n</m> to be the number of subintervals and the index of the last point <m>x_{n}</m>. However, MATLAB's indexing convention begins at <m>1</m>. Thus, when programming in MATLAB, the first entry in <c>x</c> will be <m>x_{0}</m>, i.e.<nbsp /><c>x(1)</c><m>= x_{0}</m> and <c>x(n+1)</c><m>=x_{n}</m>.
+      </p>
+      <p>
+        If we are given data about the function, rather than a formula for the function, often the data are not evenly spaced. The following function program could then be used. 
+        <program language="matlab">
+          <code>
+            function T = mytrap(x,y)
+              % Calculates the Trapezoid rule approximation of the integral from data
+              % Inputs: x -- vector of the x coordinates of the partitian
+              %         y -- vector of the corresponding y coordinates
+              % Output: returns the approximate integral
+              n = length(x);
+              T = 0;
+              for i = 1:n-1
+                % accumulate twice the signed area of the trapezoids
+                T = T + (y(i) + y(i+1)) * (x(i+1) - x(i));
+              end
+              T = T/2; % correct for the missing 1/2
+            end
+          </code>
+        </program>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Using the Trapezoid rule for areas in the plane</title>
+      <p>
+        Multi-variable Calculus tells us that you can calculate the area of a region <m>R</m> in the plane by calculating the line integral
+        <md xml:id="eqn-areaint"  number="yes">
+          A = - \oint_{C}y \, dx
+        </md>,
+        where <m>C</m> is the counter-clockwise curve around the boundary of the region. We can represent such a curve by consecutive points on it, i.e.<nbsp /> <m>\bar{x}= (x_{0}, x_{1}, x_{2}, \ldots, x_{n-1}, x_{n})</m>, and <m>\bar{y}= (y_{0}, y_{1}, y_{2}, \ldots, y_{n-1}, y_{n})</m>. Since we are assuming the curve ends where it begins, we require <m>(x_{n},y_{n}) = (x_{0},y_{0})</m>. Applying the trapezoid method to the integral <xref ref="eqn-areaint" /> gives
+        <md>
+          A = - \sum_{i=1}^{n} \frac{y_{i-1}+ y_{i}}{2}\, (x_{i} -x_{i-1})
+        </md>.
+        This formula then is the basis for calculating areas when coordinates of boundary points are known, but not necessarily formulas for the boundaries such as in a land survey.
+      </p>
+      <p>
+        In the following script, we can use this method to approximate the area of a unit circle using <m>n</m> points on the circle: 
+        <program language="matlab">
+          <code>
+            % Calculates pi using a trapezoid approximation of the unit circle.
+            format long
+            n = 10;        % evaluate points on the circle
+            t = linspace(0,2*pi,n+1);
+            x = cos(t);
+            y = sin(t);
+            plot(x,y)
+            A = 0      % accumulate (twice) the trapezoid area
+            for i = 1:n
+                A = A - (y(i)+y(i+1))*(x(i+1)-x(i));
+            end
+            A = A/2 % correct for the missing 1/2
+          </code>
+        </program>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Vector Operations using Slicing and Summing</title>
+      <p>
+        In the programs above we used loops to explicitly accumulate sums. For example, in <c>mytrap</c> we had 
+        <program language="matlab">
+          <code> 
+            T = 0; 
+            for i = 1:n-1 
+              T = T + .5*(y(i)+y(i+1))*(x(i+1) - x(i)); 
+            end 
+          </code>
+        </program> 
+        The alternative is to use vector operations by taking slices out of the vectors and using the <c>sum</c> function. We can replace the above code by 
+        <program language="matlab">
+          <code> 
+            T = .5*sum( (y(1:n-1)+y(2:n)) .* (x(2:n)-x(1:n-1)) ); 
+          </code>
+        </program>
+        Generally, explicit loops are easier to understand but vector operations are more efficient and compact.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-LRTrules">
+      <exercise xml:id="exr-L4R4">
+        <p>
+          For the integral <m>\int_{1}^{2} \sqrt{x}\, dx</m> calculate <m>L_{4}</m>, <m>R_{4}</m>, and <m>T_{4}</m> with even spacing (by hand, but use a calculator and a lot of digits) using formulas <xref ref="eqn-evenleft" />, <xref ref="eqn-evenright" /> and <xref ref="eqn-eventrap" />. Find the percentage error of these approximations, using the exact value.
+        </p>
+      </exercise>
+      <exercise>
+         <p>
+          Write a well-commented MATLAB <alert>function</alert> program <c>myints</c> whose inputs are <m>f</m>, <m>a</m>, <m>b</m> and <m>n</m> and whose outputs are <m>L</m>, <m>R</m> and <m>T</m>, the left, right and trapezoid integral approximations for <m>f</m> on <m>[a,b]</m> with <m>n</m> subintervals. To make it efficient,
+          <ul>
+            <li>
+              <p>
+                take advantage of the fact that <m>\Delta x_{i}</m> is constant,
+              </p>
+            </li>
+            <li>
+              <p>
+                use <c>x = linspace(a,b,n+1)</c> to make the <m>x</m> values,
+              </p>
+            </li>
+            <li>
+              <p>
+                use <c>y = f(x)</c> to make the <m>y</m> values,
+              </p>
+            </li>
+            <li>
+              <p>
+                use slice and <c>sum</c> to add the <m>2</m>nd to <m>n</m>th <m>y</m> entries once,
+              </p>
+            </li>
+            <li>
+              <p>
+                and then add on the missing terms to obtain the left, right and trapezoid approximations.
+              </p>
+            </li>
+          </ul>
+          Change to <c>format long</c> and apply your program to the integral <m>\int_{1}^{2} \sqrt{x}\, dx</m>. Compare with the results of the previous exercise. Also find <m>L_{100}</m>, <m>R_{100}</m> and <m>T_{100}</m> and the percentage errors of these approximations.
+        </p>
+        <p>
+          Turn in the program and a brief summary of the results.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-MSrules">
+    <title>Integration: Midpoint and Simpson's Rules</title>
+    <subsection>
+      <title>Midpoint rule</title>
+      <p>
+        If we use the endpoints of the subintervals to approximate the integral, we run the risk that the values at the endpoints do not accurately represent the average value of the function on the subinterval. A point which is much more likely to be close to the average would be the midpoint of each subinterval. Using the midpoint in the sum is called the  midpoint rule. On the <m>i</m>-th interval <m>[x_{i-1},x_{i}]</m> we will call the midpoint <m>\bar{x}_{i}</m>, i.e.
+        <md>
+          \bar{x}_{i} = \frac{ x_{i-1}+ x_{i}}{2}
+        </md>.
+        If <m>\Delta x_{i} = x_{i} - x_{i-1}</m> is the length of each interval, then using midpoints to approximate the integral would give the formula
+        <md>
+          M_{n} = \sum_{i=1}^{n} f(\bar{x}_{i}) \Delta x_{i}
+        </md>.
+        For even spacing, <m>\Delta x_{i} = h = (b-a)/n</m>, and the formula is
+        <md xml:id="eqn-evenmid" number="yes">
+          M_{n} = h \, \sum_{i=1}^{n}f(\bar{x}_{i}) = h \, (\hat{y}_{1} + \hat{y}_{2} + \ldots + \hat{y}_{n})
+        </md>,
+        where we define <m>\hat{y}_{i} = f(\bar{x}_{i})</m>.
+      </p>
+      <p>
+        While the midpoint method is obviously better than <m>L_{n}</m> or <m>R_{n}</m>, it is not obvious that it is actually better than the trapezoid method <m>T_{n}</m>, but it is.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Simpson's rule</title>
+      <p>
+        Consider <xref ref="fig-trapsim" />.
+      </p>
+      <figure xml:id="fig-trapsim">
+        <blockquote>
+          <p>
+            FILL
+          </p>
+          (0,0)(1,0)70 (0,0)(0,1)49 (-1,10)(40,10)(65,43.5)(32,-1)(0,1)2 (32,16.5)*2 (64,0)(0,1)42 (0,10)(2,1)64 (0,16.5)(1,0)64
+        </blockquote>
+        <caption>Comparing the trapezoid and midpoint method on a single subinterval. The function is concave up, in which case <m>T_{n}</m> is too high, while <m>M_{n}</m> is too low.</caption>
+      </figure>
+      <p>
+        If <m>f</m> is not linear on a subinterval, then it can be seen that the errors for the midpoint and trapezoid rules behave in a very predictable way, they have opposite sign. For example, if the function is concave up then <m>T_{n}</m> will be too high, while <m>M_{n}</m> will be too low. Thus it makes sense that a better estimate would be to average <m>T_{n}</m> and <m>M_{n}</m>. However, in this case we can do better than a simple average. The error will be minimized if we use a weighted average. To find the proper weight we take advantage of the fact that for a quadratic function the errors <m>EM_{n}</m> and <m>ET_{n}</m> are exactly related by
+        <md>
+          |EM_{n}| = \frac{1}{2}|ET_{n}|
+        </md>.
+        Thus we take the following weighted average of the two, which is called Simpson's rule:
+        <md>
+          S_{2n}= \frac{2}{3}M_{n} + \frac{1}{3}T_{n}
+        </md>.
+        If we use this weighting on a quadratic function the two errors will exactly cancel.
+      </p>
+      <p>
+        Notice that we write the subscript as <m>2n</m>. That is because we usually think of <m>2n</m> subintervals in the approximation; the <m>n</m> subintervals of the trapezoid are further subdivided by the midpoints. We can then number all the points using integers. If we number them this way we notice that the number of subintervals must be an even number.
+      </p>
+      <p>
+        The formula for Simpson's rule if the subintervals are evenly spaced is the following (with <m>n</m> intervals, where <m>n</m> is even):
+        <md>
+          S_{n} = \frac{h}{3}\left( f(x_{0}) + 4f(x_{1}) + 2f(x_{2}) + 4f(x_{3}) + \ldots + 2f(x_{n-2}) + 4f(x_{n-1}) + f(x_{n}) \right)
+        </md>.
+      </p>
+      <p>
+        Note that if we are presented with data <m>\{x_{i},y_{i}\}</m> where the <m>x_{i}</m> points are evenly spaced with <m>x_{i+1}- x_{i} = \Delta x</m>, it is easy to apply Simpson's method:
+        <md xml:id="eqn-datasimp" number="yes">
+          S_{n} = \frac{h}{3}\left( y_{0} + 4 y_{1} + 2 y_{2} + 4 y_{3} + \ldots + 2 y_{n-2}+ 4 y_{n-1}+ y_{n} \right).
+        </md>
+        Notice the pattern of the coefficients. The following program will produce these coefficients for <m>n</m> intervals, if <m>n</m> is an even number. Try it for <m>n = 6,7,100</m>.
+        <listing xml:id="prg-mysimpweights">
+          <title>mysimpweights</title>
+          <program language="matlab">
+            <code><xi:include parse="text" href="../assets/programs/mysimpweights.m"/></code>
+          </program>
+        </listing>
+      </p>
+      <p>
+        Simpson's rule is incredibly accurate. We will consider just how accurate in the next section. The one drawback is that the points used must either be evenly spaced, or at least the odd number points must lie exactly at the midpoint between the even numbered points. In applications where you can choose the spacing, this is not a problem. In applications such as experimental or simulated data, you might not have control over the spacing and then you cannot use Simpson's rule.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Error bounds</title>
+      <p>
+        The trapezoid, midpoint, and Simpson's rules are all approximations. As with any approximation, before you can safely use it, you must know how good (or bad) the approximation might be. For these methods there are formulas that give upper bounds on the error. In other words, the worst case errors for the methods. These bounds are given by the following statements:
+      </p>
+      <p>
+        <ul>
+          <li>
+            <p>
+              Suppose <m>f''</m> is continuous on <m>[a,b]</m>. Let <m>K_{2} = \max_{x \in [a,b]}|f''(x)|</m>. Then the errors <m>ET_{n}</m> and <m>EM_{n}</m> of the Trapezoid and Midpoint rules, respectively, applied to <m>\int_{a}^{b} f \, dx</m> satisfy
+              <md>
+                |ET_{n}|\le K_{2} \frac{b-a}{12}h^{2}
+              </md>
+              and 
+              <md>
+                |EM_{n}| \le K_{2}\frac{b-a}{24}h^{2}
+              </md>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Suppose <m>f^{(4)}</m> is continuous on <m>[a,b]</m>. Let <m>K_{4} = \max_{x \in [a,b]}|f^{(4)}(x)|</m>. Then the error <m>ES_{n}</m> of Simpson's rule applied to <m>\int_{a}^{b} f \, dx</m> satisfies
+              <md>
+                |ES_{n}| \le K_{4}\frac{b-a}{180}h^{4}.
+              </md>
+            </p>
+          </li>
+        </ul>
+        In practice <m>K_{2}</m> and <m>K_{4}</m> are themselves approximated from the values of <m>f</m> at the evaluation points.
+      </p>
+      <p>
+        The most important thing in these error bounds is the dependence on <m>h</m>. To emphasize this dependence, we sometimes use the <alert>order notation</alert> <m>O(\;)</m>. The trapezoid and midpoint method errors are <m>O(h^{2})</m>, so the methods have order 2. The Simpson's rule error is <m>O(h^{4})</m>, so it has order 4. If <m>h</m> is just moderately small, then there is a huge advantage with Simpson's method.
+      </p>
+      <p>
+        In MATLAB there is a built-in command for definite integrals: <c>integral(f,a,b)</c> where the <c>f</c> is a function and <c>a</c> and <c>b</c> are the endpoints. The command uses <q>adaptive Simpson quadrature</q>, a form of Simpson's rule that checks its own accuracy and adjusts the grid size where needed. Here is an example of its usage: 
+        <console prompt=">> " lang="matlab">
+          <input> f = @(x) x.^(1/3).*sin(x.^3) </input>
+          <input>I = integral(f,0,1) </input>
+        </console>
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-MSrules">
+      <exercise xml:id="exr-M4S4">
+        <p>
+           Using formulas <xref ref="eqn-evenmid" /> and <xref ref="eqn-datasimp" />, for the integral <m>\int_{1}^{2} \sqrt{x}\, dx</m> calculate <m>M_{4}</m> and <m>S_{4}</m> (by hand, but use a calculator and a lot of digits). Find the percentage error of these approximations, using the exact value. Compare with <xref ref="exr-L4R4" />.
+        </p>
+      </exercise>
+      <exercise xml:id="exr-mymidpoint">
+        <p>
+          Write a well-commented MATLAB <alert>function</alert> program <c>mymidpoint</c> that calculates the midpoint rule approximation for <m>\int f</m> on the interval <m>[a,b]</m> with <m>n</m> subintervals. The inputs should be <m>f</m>, <m>a</m>, <m>b</m> and <m>n</m>. Use your program on the integral <m>\int_{1}^{2} \sqrt{x}\, dx</m> to obtain <m>M_{4}</m> and <m>M_{100}</m>. Compare these with <xref ref="exr-M4S4" /> and the true value of the integral.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Write a well-commented MATLAB <alert>function</alert> program <c>mysimpson</c> that calculates the Simpson's rule approximation for <m>\int f</m> on the interval <m>[a,b]</m> with <m>n</m> subintervals. It should call the program <c>mysimpweights</c> (<xref ref="prg-mysimpweights"/>) to produce the coefficients. Use your program on the integral <m>\int_{1}^{2} \sqrt{x}\, dx</m> to obtain <m>S_{4}</m> and <m>S_{100}</m>. Compare these with <xref ref="exr-M4S4" />, <xref ref="exr-mymidpoint" />, and the true value of the integral.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-plotting-two">
+    <title>Plotting Functions of Two Variables</title>
+    <subsection>
+      <title>Functions on Rectangular Grids</title>
+      <p>
+        Suppose you wish to plot a function <m>f(x,y)</m> on the rectangle <m>a \le x \le b</m> and <m>c \le y \le d</m>. The graph of a function of two variables is of course a three dimensional object. Visualizing the graph is often very useful.
+      </p>
+      <p>
+        For example, suppose you have a formula
+        <md>
+          f(x,y) = x \sin(xy)
+        </md>
+        and you are interested in the function on the region <m>0 \le x \le 5</m>, <m>\pi \le y \le 2 \pi</m>. A way to plot this function in MATLAB would be the following sequence of commands: 
+        <console prompt=">> " lang="matlab">
+          <input> f = @(x,y) x.*sin(x.*y) </input>
+          <input>[X,Y] = meshgrid(0:.1:5,pi:.01*pi:2*pi); </input>
+          <input>Z = f(X,Y) </input>
+          <input>mesh(X,Y,Z) </input>
+        </console> 
+        This will produce a 3-D plot that you can rotate by clicking on the rotate icon and then dragging with the mouse.Instead of the command <c> mesh</c>, you could use the command 
+        <console prompt=">> " lang="matlab"><input> surf(X,Y,Z) </input></console>
+      </p>
+      <p>
+        The key command in this sequence is <c>[X Y] = meshgrid(a:h:b,c:k:d)</c>, which produces  matrices of x and y values in <c>X</c> and <c>Y</c>. Enter: 
+        <console prompt=">> " lang="matlab">
+          <input> size(X) </input>
+          <input>size(Y) </input>
+          <input>size(Z) </input>
+        </console> 
+        to see that each of these variables is a <m>101 \times 51</m> matrix. To see the first few entries of <c>X</c> enter 
+        <console prompt=">> " lang="matlab"><input> X(1:6,1:6) </input></console> 
+        and to see the first few values of <c>Y</c> type 
+        <console prompt=">> " lang="matlab"><input> Y(1:6,1:6) </input></console> 
+        You should observe that the <m>x</m> values in <c>X</c> begin at <m>0</m> on the left column and increase from left to right. The <m>y</m> values on the other have start at <m>\pi</m> at the top and increase from top to bottom. Note that this arrangement is flipped from the usual arrangment in the <m>x</m>-<m>y</m> plane.
+      </p>
+      <p>
+        In the command <c>[X Y] = meshgrid(a:h:b,c:k:d)</c>, <m>h</m> is the increment in the <m>x</m> direction and <m>k</m> is the increment in the <m>y</m> direction. Often we will calculate
+        <md>
+          h = \frac{b-a}{m}\quad \textrm{ and }\quad k = \frac{d-c}{n}
+        </md>,
+        where <m>m</m> is the number of  intervals in the <m>x</m> direction and <m>n</m> is the number of intervals in the <m>y</m> direction. To obtain a good plot it is best if <m>m</m> and <m>n</m> can be set between <m>10</m> and <m>100</m>.
+      </p>
+      <p>
+        A common way of visualizing a function of two variables is by a  Contour Plot. In a contour plot we draw several  level curves of the function, which are the curves at which the function is equal to a few values. A topographical map is an example of a contour plot. To produce a contour plot for the function <m>f(x,y)</m> as above, since we have input the function itself and created a meshgrid on which we want to plot it, we simply input: 
+        <console prompt=">> " lang="matlab"><input> contour(X,Y,Z,10) </input></console> 
+        The optional number ``10'' specify how many contour curves to display.
+      </p>
+      <p>
+        For another example of <c>meshgrid</c>, <c>contour</c> and <c>mesh</c>, try the following and look at <c>X</c> and <c>Y</c>. 
+        <console prompt=">> " lang="matlab">
+          <input> [X,Y] = meshgrid(0:.05:4,1:.02:2); </input>
+          <input>Z = (X+Y)./(1+X.^2+Y.^2); </input>
+          <input>contour(X,Y,Z,11) </input>
+          <input>mesh(X,Y,Z) </input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Scattered Data and Triangulation</title>
+      <p>
+        Often we are interested in objects whose bases are not rectangular. For instance, data does not usually come arranged in a nice rectangular grid; rather, measurements are taken where convenient.
+      </p>
+      <p>
+        In MATLAB we can produce triangles for a region by recording the coordinates of the vertices and recording which vertices belong to each triangle. The following script program produces such a set of triangles: 
+        <program language="matlab">
+          <code>
+            % mytriangles
+            % Program to produce a triangulation.
+            % V contains vertices, which are (x,y) pairs
+            V = [ 1/2 1/2  ;  1   1 ; 3/2 1/2 ;  .5  1.5 ;  0    0
+                  1    0  ;  2   0 ; 2    1  ; 1.5 1.5  ;  1    2
+                  0    2  ;  0    1]
+            % x, y are row vectors containing coordinates of vertices
+            x = V(:,1)';
+            y = V(:,2)';
+            %  Assign the triangles using Delaunay's algorithm
+            T = delaunay(x,y)
+          </code>
+        </program>
+      </p>
+      <p>
+        You can plot the triangles using 
+        <console prompt=">> " lang="matlab"><input> trimesh(T,x,y) </input></console> 
+        You can also prescribe values (heights) at each vertex directly (say from a survey): 
+        <console prompt=">> " lang="matlab"><input> z1 = [ 2 3 2.5 2 1 1 .5 1.5 1.6 1.7 .9 .5 ]; </input></console> 
+        or using a function: 
+        <console prompt=">> " lang="matlab">
+          <input> f = @(x,y) abs(sin(x.*y)).^(3/2); </input>
+          <input>z2 = f(x,y); </input>
+        </console> 
+        The resulting profiles can be plotted: 
+        <console prompt=">> " lang="matlab">
+          <input> trimesh(T,x,y,z1) </input>
+          <input>trisurf(T,x,y,z2) </input>
+        </console>
+      </p>
+      <p>
+        Each row of the matrix <c>T</c> corresponds to a triangle, so <c>T(i,:)</c> gives triangle number <c>i</c>. The three corners of triangle number <c>i</c> are at indices <c>T(i,1)</c>, <c>T(i,2)</c>, and <c>T(i,3)</c>. So for example to get the <m>y</m>-coordinate of the second point of triangle number 5, enter 
+        <console prompt=">> " lang="matlab"><input> y(T(5,2)) </input></console>
+      </p>
+      <p>
+        To see other examples of regions defined by triangles, download **************************mywedge.m and mywasher.m and run them. Each of these programs defines vectors <c>x</c> and <c>y</c> of <m>x</m> and <m>y</m> values of vertices and a matrix <c>T</c>. As before <c>T</c> is a list of sets of three integers. Each triple of integers indicates which vertices to connect in a triangle.
+      </p>
+      <p>
+        To plot a function, say <m>f(x,y) = x^{2} - y^{2}</m> on the washer figure try 
+        <console prompt=">> " lang="matlab">
+          <input> mywasher </input>
+          <input>z = x.^2 - y.^2 </input>
+          <input>trisurf(T,x,y,z) </input>
+        </console> 
+        Note again that this plot can be rotated using the icon and mouse.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-plotting-two">
+      <exercise>
+        <p>
+            Plot the function <m>f(x,y) = \sin(x) \ e^{-x^2 - y^2}</m> on the rectangle <m>-3 \le x \le 3</m>, <m>-2 \le y \le 2</m> using <c>meshgrid</c> and <c>mesh</c>. Make an appropriate choice of <m>m</m> and <m>n</m> and if necessary a rotation to produce a good plot. Calculate the <m>h</m> and <m>k</m> corresponding to your <m>m</m> and <m>n</m>. Turn in your plot and the calculation of <m>h</m> and <m>k</m>.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+              Modeling after mywasher.m, produce \unitlength1 mm ****************
+            </p>
+            (0,0)(1,0)30 (0,10)(1,0)20 (0,0)(0,1)10 (10,0)(0,1)10 (0,10)(1,-1)10 (20,10)(1,-1)10 (10,10)(2,-1)20
+            <p>
+              using integer coordinates for the vertices. Use the <c>axis</c> command to zoom out so the outside edges are clearly visible. Compute <m>z = 3x +y^{2}</m> and plot the graph. Turn in your program and the plots.
+            </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-maxmingrad">
+    <title>The Gradient and Max-Min Problems</title>
+    <subsection>
+      <title>The gradient of a function of multiple variables</title>
+      <p>
+        If <m>f(x_{1}, x_{2}, \ldots, x_{n})</m> is a real-valued function of <m>n</m> variables, i.e. <m>x_{1}</m>, <m>x_{2}</m>, <ellipsis />, <m>x_{n}</m>, then the  gradient of <m>f</m> is the vector:
+        <md>
+          \nabla f(\mathbf{x}) = \left( \begin{array}{c}\frac{ \partial f}{ \partial x_{1}} (\mathbf{x} ) \\ \frac{ \partial f}{ \partial x_{2}} (\mathbf{x} ) \\ \vdots \\ \frac{ \partial f}{ \partial x_{n}} (\mathbf{x} )\end{array} \right)
+        </md>,
+        where we use the vector notation <m>\mathbf{x}= (x_{1}, x_{2}, \ldots, x_{n})'</m>. For example, if <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_2^2+\sin(x_1x_2)}</m>, then
+        <md>
+          \nabla f(\mathbf{x}) = \left( \begin{array}{c}(1+x_1(-2x_1+\cos(x_1x_2)x_2)) e^{-x_1^2-x_2^2+\sin(x_1x_2)}\\ x_1(-2x_2+\cos(x_1x_2)x_1) e^{-x_1^2-x_2^2+\sin(x_1x_2)}\end{array} \right)
+        </md>.
+      </p>
+      <p>
+        Note that the gradient is a vector-valued function of multiple variables. This type of function is often called a  vector field.
+      </p>
+      <p>
+        The gradient vector has important features with geometric meaning.
+        <ul>
+          <li>
+            <p>
+              The gradient vector points in the direction in which <m>f</m> is increasing the most.
+            </p>
+          </li>
+          <li>
+            <p>
+              The length of the gradient vector is equal to the derivative of <m>f</m> in that direction.
+            </p>
+          </li>
+          <li>
+            <p>
+              The gradient vector is perpendicular to the level curve through that point.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        We can visualize a gradient (or other vector field) using the MATLAB command <c>quiver</c> (makes arrows). 
+        <console prompt=">> " lang="matlab">
+          <input> [x1,x2] = meshgrid(-2:0.2:2); </input>
+          <input>z = x1.*exp(-x1.^2-x2.^2+sin(x1.*x2)); </input>
+          <input>dz_dx1 = (1+x1.*(-2*x1+cos(x1.*x2).*x2)).*exp(-x1.^2-x2.^2+sin(x1.*x2)); </input>
+          <input>dz_dx2 = x1.*(-2*x2+cos(x1.*x2).*x1).*exp(-x1.^2-x2.^2+sin(x1.*x2)); </input>
+          <input>contour(x1,x2,z,10) </input>
+          <input>hold on </input>
+          <input>quiver(x1,x2,dz_dx1,dz_dx2) </input>
+          <input>hold off </input>
+        </console>
+        Compare this to the surface plot: 
+        <console prompt=">> " lang="matlab">
+          <input> figure() </input>
+          <input>surf(x1,x2,z) </input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Optimization in multiple variables</title>
+      <p>
+        If a differentiable function of multiple variables, <m>f</m>, has a maximum or minimum at point <m>\mathbf{x}^{*}</m>, then we will have:
+        <md>
+          \nabla f(\mathbf{x}^{*}) = \mathbf{0}\quad \text{ (the zero vector)}
+        </md>.
+        Thus one way to locate max or min points for a specific function is to solve <m>\nabla f(\mathbf{x}^{*}) = \mathbf{0}</m>. This will often lead to systems of non-linear equations as we encountered in Lecture<nbsp /><xref ref="lec-multnewton" />. For example, for <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>,to attempt to find critical point we would need to try to solve:
+        <md>
+          (1+x_{1}(-2x_{1}+\cos(x_{1}x_{2})x_{2})) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
+        </md> 
+        and
+        <md>
+          x_{1}(-2x_{2}+\cos(x_{1}x_{2})x_{1}) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
+        </md>.
+        That, obviously, is going to be very hard and in fact is impossible using algebra. Thus we will have to use numerical methods to find any maximum or minimum points. The multiple variable Newton's method that we learned in Lecture<nbsp /><xref ref="lec-multnewton" /> would be one option. In the next section we introduce another common algorithm.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The gradient ascent or descent method</title>
+      <p>
+        We will take advantage of the fact that the gradient vector points in the direction of greatest increase in the function <m>f</m>. If <m>f</m> is a function of <m>x</m> and <m>y</m>, then we can think of the graph of <m>z = f(x,y)</m> as a landscape and the gradient points ``uphill''. That gives us a very handy way to find maximum points, just follow the gradient vectors as they will take you toward higher values of <m>z</m>. See <xref ref="fig-gradientascent" />.
+      </p>
+      <figure xml:id="fig-gradientascent">
+        <sidebyside>
+          <image source="images/grad_ascent_quiver">
+            <shortdescription>Quiver plot showing ascent path.</shortdescription> 
+          </image>
+          <image source="images/grad_ascent_surf">
+            <shortdescription>Surface plot.</shortdescription>
+          </image>
+        </sidebyside>
+       <caption>Gradient ascent on <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>.</caption>
+      </figure>
+      <p>
+        Since the gradient vector field may change from point to point, we can only ``follow'' it numerically in finite steps. That is, starting from an initial guess <m>\mathbf{x}_{0}</m>, we generate a sequence of points by the formula
+        <md>
+          \mathbf{x}_{n+1}= \mathbf{x}_{n} + \epsilon \nabla f(\mathbf{x}_{n})
+        </md>.
+        The hope then is that
+        <md>
+          \mathbf{x}_{n} \rightarrow \mathbf{x}^{*}
+        </md>.
+        The number <m>\epsilon</m> is often called the ``learning rate''. It should not be too small or too large. If it is too small the algorithm will be slow. If it is too large, the steps might skip over a critical point. There is ongoing research about how to choose it optimally.
+      </p>
+      <p>
+        Notice the similarities between this method and the Newton's method for nonlinear systems in <xref ref="lec-multnewton" />. In both cases we have a function of a vector and generate a sequence of vectors <m>\mathbf{x}_{0},\mathbf{x}_{1},\dots</m>.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-maxmingrad">
+      <exercise xml:id="exr-plotquiver">
+        <p>
+          Find by hand the gradient of the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>. Plot it on the rectangle <m>-3 \le x_{1} \le 3</m>, <m>-2 \le x_{2} \le 2</m> using <c>meshgrid</c> and <c>quiver</c>. On the same figure, add the contour plot of <m>f</m>.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Write a well-commented <alert>script</alert> program that uses the gradient descent method to find a minimum point for the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>, starting from <m>\mathbf{x}_{0} = [-1;-2]</m>. Compare with the plot in <xref ref="exr-plotquiver" /> to check that it worked. (Hint: Review the program <c>mymultnewton</c> ***********in <xref ref="lec-multnewton" /> for examples of making functions of vectors.)
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-double-int-rect">
+    <title>Double Integrals for Rectangles</title>
+    <subsection>
+      <title>The center point method</title>
+      <p>
+        Suppose that we need to find the integral of a function, <m>f(x,y)</m>, on a rectangle
+        <md>
+          R = \{(x,y): a\le x \le b, c \le y \le d\}
+        </md>.
+        Calculus tells us to do this by an iterated integral
+        <md>
+          I = \iint_{R} f \, dA = \int_{a}^{b} \int_{c}^{d} f(x,y) \, dy dx = \int_{c}^{d} \int_{a}^{b} f(x,y) \, dx dy
+        </md>.
+        For instance, if <m>R</m> is the rectangle <m>0 \le x \le 2</m>, <m>1 \le y \le 3</m>, then
+        <md>
+          \begin{split}\iint_{R} x^{2} y \, dA&#x26;= \int_{0}^{2} \left(\int_{1}^{3} x^{2} y \, dy \right) \, dx \\&#x26;= \int_{0}^{2} x^{2} \left(\left. \frac{y^{2}}{2}\right|_{1}^{3} \right) \, dx \\&#x26;= \int_{0}^{2} x^{2} \left( \frac{9}{2}- \frac{1}{2}\right) \, dx \\&#x26;= 4 \int_{0}^{2} x^{2} \, dx\\&#x26;= 4 \cdot \frac{8}{3}= \frac{32}{3}= 10.66... .\end{split}
+        </md>
+        Calculus also tells us that the integral is the limit of the Riemann sums of the function as the size of the subrectangles goes to zero. This means that the Riemann sums are approximations of the integral, which is precisely what we need for numerical methods.
+      </p>
+      <p>
+        For a rectangle <m>R</m>, we begin by subdividing into smaller subrectangles <m>\{R_{ij}\}</m>, in a systematic way. We will divide <m>[a,b]</m> into <m>m</m> subintervals and <m>[c,d]</m> into <m>n</m> subintervals. Then <m>R_{ij}</m> will be the <q>intersection</q> of the <m>i</m>-th subinterval in <m>[a,b]</m> with the <m>j</m>-th subinterval of <m>[c,d]</m>. In this way the entire rectangle is subdivided into <m>mn</m> subrectangles, numbered as in Figure<nbsp /><xref ref="fig-rects" />.
+      </p>
+      <figure xml:id="fig-rects">
+        <blockquote>
+          <p>
+            \unitlength0.9 mm FILL
+          </p>
+          (0,0)(1,0)80 (0,10)(1,0)80 (0,20)(1,0)80 (0,30)(1,0)80 (0,40)(1,0)80 (0,50)(1,0)80 (0,0)(0,1)50 (20,0)(0,1)50 (40,0)(0,1)50 (60,0)(0,1)50 (80,0)(0,1)50(0,-3) (79,-4) (-3,0) (-3,49)(5,5) (25,5) (45,5) (65,5) (5,15) (5,25) (5,35) (5,45) (25,15) (25,25) (25,35) (25,45) (45,15) (45,25) (45,35) (45,45) (65,15) (65,25) (65,35) (65,45)
+        </blockquote>
+        <caption>Subdivision of the rectangle <m>R = [a,b] \times [c,d]</m> into subrectangles <m>R_{ij}</m>. Note that the arrangement in the <m>x</m>-<m>y</m> plane is completely different from the convention in a matrix.</caption>
+      </figure>
+      <p>
+        A Riemann sum using this subdivision would have the form
+        <md>
+          S = \sum_{i,j=1,1}^{m,n}f(x^{*}_{ij}) A_{ij}= \sum_{j=1}^{n} \left(\sum_{i=1}^{m} f(x^{*}_{ij}) A_{ij}\right)
+        </md>,
+        where <m>A_{ij}= \Delta x_{i} \Delta y_{j}</m> is the area of <m>R_{ij}</m>, and <m>x^{*}_{ij}</m> is a point in <m>R_{ij}</m>. The theory of integrals tells us that if <m>f</m> is continuous, then this sum will converge to the same number, no matter how we choose <m>x^{*}_{ij}</m>. For instance, we could choose <m>x^{*}_{ij}</m> to be the point in the lower left corner of <m>R_{ij}</m> and the sum would still converge as the size of the subrectangles goes to zero. However, in practice we wish to choose <m>x^{*}_{ij}</m> in such a way to make <m>S</m> as accurate as possible even when the subrectangles are not very small. The obvious choice for the best point in <m>R_{ij}</m> would be the center point. The center point is most likely of all points to have a value of <m>f</m> close to the average value of <m>f</m>. If we denote the center points by <m>c_{ij}</m>, then the sum becomes
+        <md>
+          C_{mn}= \sum_{i,j=1,1}^{m,n}f(c_{ij}) A_{ij}
+        </md>.
+        Here
+        <md>
+          c_{ij}= \left( \frac{x_{i-1}+ x_{i}}{2}, \frac{y_{i-1}+ y_{i}}{2}\right)
+        </md>.
+        Note that if the subdivision is evenly spaced then <m>\Delta x \equiv (b-a)/m</m> and <m>\Delta y \equiv (d-c)/n</m>, and so in that case
+        <md>
+          C_{mn}= \frac{(b-a)(d-c)}{mn}\sum_{i,j=1,1}^{m,n}f(c_{ij})
+        </md>.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The four corners method</title>
+      <p>
+        Another good idea would be to take the value of <m>f</m> not only at one point, but as the average of the values at several points. An obvious choice would be to evaluate <m>f</m> at all four corners of each <m>R_{ij}</m> then average those. If we note that the lower left corner is <m>(x_{i},y_{j})</m>, the upper left is <m>(x_{i},y_{j+1})</m>, the lower right is <m>(x_{i+1},y_{i})</m> and the upper right is <m>(x_{i+1},y_{i+1})</m>, then the corresponding sum will be
+        <md>
+          F_{mn}= \sum_{i,j=1,1}^{m,n}\frac{1}{4}\left( f(x_{i},y_{j}) + f(x_{i},y_{j+1}) + f(x_{i+1},y_{i}) + f(x_{i+1},y_{j+1}) \right) A_{ij}
+        </md>,
+        which we will call the  four-corners method. If the subrectangles are evenly spaced, then we can simplify this expression. Notice that <m>f(x_{i},y_{j})</m> gets counted multiple times depending on where <m>(x_{i},y_{j})</m> is located. For instance if <m>(x_{i},y_{j})</m> is in the interior of <m>R</m> then it is the corner of <m>4</m> subrectangles. Thus the sum becomes
+        <md>
+          F_{mn}= \frac{A}{4}\left( \sum_{\text{corners}}f(x_{i},y_{j}) + 2 \sum_{\text{edges}}f(x_{i},y_{j}) + 4 \sum_{\text{interior}}f(x_{i},y_{j}) \right)
+        </md>,
+        where <m>A = \Delta x \, \Delta y</m> is the area of the subrectangles. We can think of this as a weighted average of the values of <m>f</m> at the grid points <m>(x_{i},y_{j})</m>. The weights used are represented in the matrix
+        <md xml:id="eqn-dbltrapmatrix" number="yes">
+          W = \left( \begin{array}{cccccccc}1 &#x26; 2 &#x26; 2 &#x26; 2 &#x26; \cdots &#x26; 2 &#x26; 2 &#x26; 1 \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ \vdots &#x26; \vdots &#x26; \vdots &#x26; \vdots &#x26; \cdots &#x26; \vdots &#x26; \vdots &#x26; \vdots \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ 1 &#x26; 2 &#x26; 2 &#x26; 2 &#x26; \cdots &#x26; 2 &#x26; 2 &#x26; 1 \\\end{array} \right)
+        </md>.
+        We could implement the four-corner method by forming a matrix <m>(f_{ij})</m> of <m>f</m> values at the grid points, then doing entry-wise multiplication of the matrix with the weight matrix. Then the integral would be obtained by summing all the entries of the resulting matrix and multiplying that by <m>A/4</m>. The formula would be
+        <md>
+          F_{mn}= \frac{(b-a)(d-c)}{4mn}\sum_{i,j = 1,1}^{m+1,n+1}W_{ij}f(x_{i},y_{j})
+        </md>.
+        Notice that the four-corners method coincides with applying the trapezoid rule in each direction. Thus it is in fact a  double trapezoidrule.
+      </p>
+    </subsection>
+    <subsection>
+      <title>The double Simpson method</title>
+      <p>
+        The next improvement one might make would be to take an average of the center point sum <m>C_{mn}</m> and the four corners sum <m>F_{mn}</m>. However, a more standard way to obtain a more accurate method is the Simpson double integral. It is obtained by applying Simpson's rule for single integrals to the iterated double integral. The resulting method requires that both <m>m</m> and <m>n</m> be even numbers and the grid be evenly spaced. If this is the case we sum up the values <m>f(x_{i},y_{j})</m> with weights represented in the matrix
+        <md xml:id="eqn-dblsimpmatrix" number="yes">
+          W = \left( \begin{array}{cccccccc}1 &#x26; 4 &#x26; 2 &#x26; 4 &#x26; \cdots &#x26; 2 &#x26; 4 &#x26; 1 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ 2 &#x26; 8 &#x26; 4 &#x26; 8 &#x26; \cdots &#x26; 4 &#x26; 8 &#x26; 2 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ \vdots &#x26; \vdots &#x26; \vdots &#x26; \vdots &#x26; \cdots &#x26; \vdots &#x26; \vdots &#x26; \vdots \\ 2 &#x26; 8 &#x26; 4 &#x26; 8 &#x26; \cdots &#x26; 4 &#x26; 8 &#x26; 2 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ 1 &#x26; 4 &#x26; 2 &#x26; 4 &#x26; \cdots &#x26; 2 &#x26; 4 &#x26; 1 \\\end{array} \right).
+        </md>
+        The sum of the weighted values is multiplied by <m>A/9</m> and the formula is
+        <md>
+          S_{mn}= \frac{(b-a)(d-c)}{9mn}\sum_{i,j = 1,1}^{m+1,n+1}W_{ij}f(x_{i},y_{j})
+        </md>.
+      </p>
+      <p>
+        MATLAB has a built in command for double integrals on rectangles: <c>integral2(f,a,b,c,d)</c>. Here is an example: 
+        <console prompt=">> " lang="matlab">
+          <input> f = @(x,y) sin(x.*y)./sqrt(x+y) </input>
+          <input>I = integral2(f,0.5,1,0.5,2) </input>
+        </console> 
+        Note that here, as usual, operations are component-wise.
+      </p>
+      <p>
+        Below is a MATLAB function which will produce the matrix of weights needed for Simpson's rule for double integrals. It uses the function <c>mysimpweights</c> from Lecture<nbsp />22.
+      </p>
+      <listing xml:id="prg-mydblsimpweights">
+        <title>mydblsimpweights</title>
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mydblsimpweights.m"/></code>
+        </program>
+      </listing>
+    </subsection>
+    <exercises xml:id="exercises-double-int-rect">
+      <exercise>
+        <p>
+          Download the program ****************mylowerleft.m and test it. Find and fix the bug in it. Modify it to make a new program <c>mycenter</c> that does the center point method. Implement the change by changing the <q>meshgrid</q> to put the grid points at the centers of the subrectangles. Look at the mesh plot produced to make sure the program is putting the grid where you want it. Use both programs to approximate the integral
+          <md>
+            \int_{0}^{2} \int_{1}^{5} \sqrt{xy}\, dy \, dx
+          </md>,
+          using <m>(m,n) = (10,18)</m>. Evaluate this integral exactly (by hand) and compare the accuracy of the two programs.
+        </p>  
+      </exercise>
+      <exercise>
+        <p>
+          Write a well-commented MATLAB <alert>function</alert> program <c>mydblsimp</c> that computes the Simpson's rule approximation. Let it call the program <c>mydblsimpweights</c> (<xref ref="prg-mydblsimpweights"/>) to make the weight matrix, <m>w</m> <xref ref="eqn-dblsimpmatrix" />. Check the program on the integral in the previous problem using <m>(m,n) = (10,18)</m> and <m>(m,n) = (100,100)</m>.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Using <c>mysimpweights</c> (<xref ref="prg-mysimpweights"/>) and <c>mydblsimpweights</c> (<xref ref="prg-mydblsimpweights"/>) as models make well-commented MATLAB <alert>function</alert> programs <c>mytrapweights</c> and <c>mydbltrapweights</c> that will produce the weights for the trapezoid rule and the weight matrix for the four corners (double trapezoid) method <xref ref="eqn-dbltrapmatrix" />. Use it to approximate the integral in the previous problem usings <m>(m,n) = (5,6)</m> and <m>(m,n) = (100,100)</m>. Turn in the programs, the weights for a <m>5\times 6</m> grid, and the results of your tests on the integral.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-double-int-non">
+    <title>Double Integrals for Non-rectangles</title>
+    <introduction>
+      <p>
+        In the previous lecture we considered only integrals over rectangular regions. In practice, regions of interest are rarely rectangles and so in this lecture we consider two strategies for evaluating integrals over other regions.
+      </p>
+      <p>
+        Calculus tells us that if the region can be described by simple functions, then we might be able to use iterated integrals. For instance, suppose that <m>R</m> is the region inside of a circle of radius <m>2</m>. Since the boundary of that circle is given by <m>x^{2} + y^{2} = 2^{2}</m>, we could express the integral of <m>f(x,y)</m> on this region by:
+        <md>
+          \int_{-2}^{2} \int_{-\sqrt{4-x^{2}}}^{ \sqrt{4-x^{2}}}f(x,y) \, dy dx
+        </md>.
+        Of course this integral may be complicated, even if <m>f(x,y)</m> is simple. If <m>f(x,y) = x^{2} y^{2}</m>, then
+        <md>
+          \begin{split}\int_{-2}^{2} \int_{-\sqrt{4-x^{2}}}^{ \sqrt{4-x^{2}}}x^{2} y^{2} \, dy dx&#x26;= \int_{-2}^{2} \left. x^{2} \frac{y^{3}}{3}\right|_{-\sqrt{4-x^{2}}}^{ \sqrt{4-x^{2}}}\, dx \\&#x26;= \frac{2}{3}\int_{-2}^{2} x^{2} (4 - x^{2})^{\frac{3}{2}}\, dx\end{split}
+        </md>.
+        At this point we would need to do a trig substitution to find the value of the integral.
+      </p>
+    </introduction>
+    <subsection>
+      <title>Redefining the function</title>
+      <p>
+        One strategy is to redefine the function so that it is zero outside the region of interest, then integrate over a rectangle that includes the region.
+      </p>
+      <p>
+        For example, suppose we need to approximate the value of
+        <md>
+          I = \iint_{T} \sin^{3} (xy) \, dx \, dy
+        </md>
+        where <m>T</m> is the triangle with corners at <m>(0,0)</m>, <m>(1,0)</m> and <m>(0,2)</m>. Then we could let <m>R</m> be the rectangle <m>[0,1] \times [0,2]</m> which contains the triangle <m>T</m>. Notice that the hypotenuse of the triangle has the equation <m>2x + y = 2</m>. Then make <m>f(x) = \sin^{3} (xy)</m> if <m>2x +y \le 2</m> and <m>f(x) = 0</m> if <m>2x+y > 2</m>. In MATLAB we can make this function with the command <console prompt=">> " lang="matlab"><input> f = @(x,y) sin(x.*y).^3.*(2*x + y &#x3C;= 2) </input></console> In this command <c>&#x3C;=</c> is a  logicalcommand. The term in parentheses is then a  logical statementand is given the value 1 if the statement is true and 0 if it is false. We can then integrate the modified <c>f</c> on <m>[0,1] \times [0,2]</m> using the command <console prompt=">> " lang="matlab"><input> I = integral2(f,0,1,0,2) </input></console>
+      </p>
+      <p>
+        As another example, suppose we need to integrate the function <m>f(x,y) = 10+(x-1)(y-2)</m> inside the circle of radius 2 centered at <m>(1,2)</m>. The equation for this circle is <m>(x-1)^{2} + (y-2)^{2} = 4</m>. Note that the inside of the circle is <m>(x-1)^{2} + (y-2)^{2} \le 4</m> and that the circle is contained in the rectangle <m>[-1,3] \times [0,4]</m>. Thus we can create the right function, plot it, and integrate it by 
+        <console prompt=">> " lang="matlab">
+          <input> f = @(x,y) (10+(x-1).*(y-2)).*((x-1).^2 + (y-2).^2 &#x3C;= 4) </input>
+          <input>[X Y] = meshgrid(-4:0.01:4,-3:0.01:5); </input>
+          <input>Z = f(X,Y); </input>
+          <input>mesh(X,Y,Z) </input>
+          <input>I = integral2(f,-1,3,0,4) </input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Integration Based on Triangles</title>
+      <p>
+        The second approach to integrating over non-rectangular regions is based on subdividing the region into triangles. Such a subdivision is called a  triangulation. On regions where the boundary consists of line segments, this can be done exactly. Even on regions where the boundary contains curves, this can be done approximately. This is a very important idea for several reasons, the most important of which is that the finite elements method is based on it. Another reason this is important is that often the values of <m>f</m> are not given by a formula, but from data. For example, suppose you are surveying on a construction site and you want to know how much fill will be needed to bring the level up to the plan. You would proceed by taking elevations at numerous points across the site. However, if the site is irregularly shaped or if there are obstacles on the site, then you cannot make these measurements on an exact rectangular grid. In this case, you can use triangles by connecting your points with triangles. Many software packages will even choose the triangles for you (MATLAB will do it using the command <c>delaunay</c>).
+      </p>
+      <p>
+        The basic idea of integrals based on triangles is exactly the same as that for rectangles; the integral is approximated by a sum where each term is a value times an area
+        <md>
+          I \approx \sum_{i=1}^{n} f(x^{*}_{i}) A_{i}
+        </md>,
+        where <m>n</m> is the number of triangles, <m>A_{i}</m> is the area of the triangle and <m>x^{*}</m> a point in the triangle. However, rather than considering the value of <m>f</m> at just one point people often consider an average of values at several points. The most convenient of these is of course the corner points. We can represent this sum by
+        <md>
+          T_{n} = \sum_{i=1}^{n} \bar{f}_{i} A_{i}
+        </md>,
+        where <m>\bar{f}</m> is the average of <m>f</m> at the corners.
+      </p>
+      <p>
+        If the triangle has vertices <m>(x_{1},y_{1})</m>, <m>(x_{2},y_{2})</m> and <m>(x_{3},y_{3})</m>, the formula for area is
+        <md>
+          A = \frac{1}{2}\left| \text{det}\left( \begin{array}{ccc}x_1 &#x26;x_2 &#x26;x_3\\ y_1 &#x26;y_2 &#x26;y_3\\ 1 &#x26;1 &#x26;1\\\end{array} \right) \right|
+        </md>.
+        The function below implements this method. 
+      </p>
+      <listing xml:id="prg-mythreecorners">
+        <title>mythreecorners</title>
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mythreecorners.m"/></code>
+        </program>
+      </listing>
+      <p>
+        Another idea would be to use the center point (centroid) of each triangle. If the triangle has vertices <m>(x_{1},y_{1})</m>, <m>(x_{2},y_{2})</m> and <m>(x_{3},y_{3})</m>, then the centroid is given by the simple formulas
+        <md>
+          \bar{x}= \frac{x_{1} + x_{2} + x_{3}}{3}\quad\text{and}\quad \bar{y}= \frac{y_{1} + y_{2} + y_{3}}{3}
+        </md>.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-double-int-non">
+      <exercise>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Download ****** the program mywasher.m. Plot <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> on the region produced by mywasher.m and use the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to calculate the integral of <m>f</m> on the washer. Is this accurate? How do you know?
+              </p>
+            </li>
+            <li>
+              <p>
+                Download **********the program mywedge.m. Plot <m>g(x,y) = \sin(x) + \sqrt{y}</m> on the region produced by mywedge.m use <c>mythreecorners.m</c> to calculate the integral of <m>g</m> on this wedge.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Modify the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to a new program <c>mycenters.m</c> that does the centerpoint method for triangles. Run the program on the region produced by mywasher.m with the function <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> and on the region produced by mywedge.m with the function <m>g(x,y) = \sin(x) + \sqrt{y}</m>.
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-differentiation">
+    <title>Numerical Differentiation</title>
+    <subsection>
+      <title>Approximating derivatives from data</title>
+      <p>
+        Suppose that a variable <m>y</m> depends on another variable <m>x</m>, i.e.<nbsp /><m>y = f(x)</m>, but we only know the values of <m>f</m> at a finite set of points, e.g., as data from an experiment or a simulation:
+        <md>
+          (x_{1},y_{1}), (x_{2},y_{2}), \ldots, (x_{n},y_{n})
+        </md>.
+        Suppose then that we need information about the derivative of <m>f(x)</m>. One obvious idea would be to approximate <m>f'(x_{i})</m> by the <alert>Forward Difference</alert>
+        <md>
+          f'(x_{i}) = y'_{i} \approx \frac{y_{i+1}- y_{i}}{x_{i+1}-x_{i}}
+        </md>.
+        This formula follows directly from the definition of the derivative in Calculus. An alternative would be to use a <alert>Backward Difference</alert>
+        <md>
+          f'(x_{i}) \approx \frac{y_{i} - y_{i-1}}{x_{i}-x_{i-1}}
+        </md>.
+      </p>
+      <p>
+        Since the errors for the forward difference and backward difference tend to have opposite signs, it would seem likely that averaging the two methods would give a better result than either alone. If the points are evenly spaced, i.e. <m>x_{i+1}-x_{i} = x_{i}-x_{i-1}= h</m>, then averaging the forward and backward differences leads to a symmetric expression called the <alert>Central Difference</alert>
+        <md>
+          f'(x_{i}) = y'_{i} \approx \frac{y_{i+1}- y_{i-1}}{2h}
+        </md>.
+        See <xref ref="fig-FBCdifferences" /> for an illustration of these three differences.
+      </p>
+      <figure xml:id="fig-FBCdifferences">
+        <image source="images/differences">
+          <shortdescription>**************************Line segments for three difference approximations.</shortdescription>
+        </image>
+        <caption>The three difference approximations of <m>y'_{i}</m>.</caption>
+      </figure>
+    </subsection>
+    <subsection>
+      <title>An example</title>
+      <p>
+        The following code plots the function <m>y = \sin(x) + .5\sin(1.5x)</m>, its derivative, and the central difference approximation to the derivative.
+      </p>
+      <p>
+        <console prompt=">> " lang="matlab">
+          <input> x = linspace(0,2*pi,51); </input>
+          <input>h = x(2)-x(1); </input>
+          <input>mid = (x(1:end-1)+x(2:end))/2; </input>
+          <input>y = sin(x) + .5*sin(1.5*x); </input>
+          <input>dy1 = (y(2:end)-y(1:end-1))/h; </input>
+          <input>dy2 = cos(x) + .75*cos(1.5*x); </input>
+          <input>plot(x,y,'k',mid,dy1,'b*',x,dy2,'r') </input>
+        </console>
+      </p>
+    </subsection>
+    <subsection>
+      <title>Errors of approximation</title>
+      <p>
+        We can use Taylor polynomials to derive the accuracy of the forward, backward, and central difference formulas. For example the usual form of the Taylor polynomial with remainder (sometimes called Taylor's Theorem) is
+        <md>
+          f(x+h) = f(x) + h f'(x) + \frac{h^{2}}{2}f''(c)
+        </md>,
+        where <m>c</m> is some (unknown) number between <m>x</m> and <m>x+h</m>. Letting <m>x = x_{i}</m>, <m>x+h = x_{i+1}</m> and solving for <m>f'(x_{i})</m> leads to
+        <md>
+          f'(x_{i}) = \frac{f(x_{i+1})-f(x_{i})}{h}- \frac{h}{2}f''(c)
+        </md>.
+        Notice that the quotient in this equation is exactly the forward difference formula. Thus the error of the forward difference is <m>- (h/2) f''(c)</m> which means it is <m>O(h)</m>. Replacing <m>h</m> in the above calculation by <m>-h</m> gives the error for the backward difference formula; it is also <m>O(h)</m>. For the central difference, the error can be found from the third degree Taylor polynomials with remainder
+        <md>
+          <mrow>f(x_{i+1}) \amp = f(x_{i} + h) = f(x_{i}) + hf'(x_{i})+ \frac{h^{2}}{2}f''(x_{i}) + \frac{h^{3}}{3!}f'''(c_{1}) \quad\text{and}</mrow>
+          <mrow>f(x_{i-1}) \amp = f(x_{i} - h) = f(x_{i}) - hf'(x_{i})+ \frac{h^{2}}{2}f''(x_{i}) - \frac{h^{3}}{3!}f'''(c_{2})</mrow>
+        </md>,
+        where <m>x_{i} \le c_{1} \le x_{i+1}</m> and <m>x_{i-1}\le c_{2} \le x_{i}</m>. Subtracting these two equations and solving for <m>f'(x_{i})</m> leads to
+        <md>
+          f'(x_{i}) = \frac{f(x_{i+1})-f(x_{i-1})}{2h}- \frac{h^{2}}{3!}\frac{f'''(c_{1}) + f'''(c_{2})}{2}
+        </md>.
+        This shows that the error for the central difference formula is <m>O(h^{2})</m>. Thus, central differences are significantly better and so: <alert>It is best to use central differences whenever possible.</alert>
+      </p>
+      <p>
+        There are also central difference formulas for higher order derivatives. These all have error of order <m>O(h^{2})</m>:
+        <md>
+          <mrow>f''(x_{i}) \amp = y''_{i} \approx \frac{y_{i+1}- 2 y_{i} + y_{i-1}}{h^{2}},</mrow>
+          <mrow>f'''(x_{i}) \amp = y'''_{i} \approx \frac{1}{2 h^{3}}\left[y_{i+2}- 2y_{i+1}+ 2y_{i-1}- y_{i-2}\right] ,\quad\text{and}</mrow>
+          <mrow>f^{(4)}(x_{i}) \amp = y^{(4)}_{i} \approx \frac{1}{h^{4}}\left[y_{i+2}- 4y_{i+1}+ 6y_{i} - 4y_{i-1}+ y_{i-2}\right]</mrow>
+        </md>.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Partial Derivatives</title>
+      <p>
+        Suppose <m>u = u(x,y)</m> is a function of two variables that we only know at grid points <m>(x_{i},y_{j})</m>. We will use the notation
+        <md>
+          u_{i,j}= u(x_{i},y_{j})
+        </md>
+        frequently throughout the rest of the lectures. We can suppose that the grid points are evenly spaced, with an increment of <m>h</m> in the <m>x</m> direction and <m>k</m> in the <m>y</m> direction. The central difference formulas for the partial derivatives would be
+        <md>
+          <mrow>u_{x}(x_{i},y_{j}) \amp \approx \frac{1}{2h}\left( u_{i+1,j}- u_{i-1,j}\right) \quad\text{and}</mrow>
+          <mrow>u_{y}(x_{i},y_{j}) \amp \approx \frac{1}{2k}\left( u_{i,j+1}- u_{i,j-1}\right)</mrow>
+        </md>.
+        The second partial derivatives are
+        <md>
+          <mrow>u_{xx}(x_{i},y_{j}) \amp \approx \frac{1}{h^{2}}\left( u_{i+1,j}-2u_{i,j}+ u_{i-1,j}\right) \quad\text{and}</mrow>
+          <mrow>u_{yy}(x_{i},y_{j}) \amp \approx \frac{1}{k^{2}}\left( u_{i,j+1}-2u_{i,j}+ u_{i,j-1}\right)</mrow>
+        </md>,
+        and the mixed partial derivative is
+        <md>
+          u_{xy}(x_{i},y_{j}) \approx \frac{1}{4hk}\left( u_{i+1,j+1}- u_{i+1,j-1}- u_{i-1,j+1}+ u_{i-1,j-1}\right)
+        </md>.
+      </p>
+      <p>
+        <alert>Caution:</alert> Notice that we have indexed <m>u_{ij}</m> so that as a matrix each row represents the values of <m>u</m> at a certain <m>x_{i}</m> and each column contains values at <m>y_{j}</m>. The arrangement in the matrix does not coincide with the usual orientation of the <m>xy</m>-plane.
+      </p>
+      <p>
+        Let's consider an example. Let the values of <m>u</m> at <m>(x_{i},y_{j})</m> be recorded in the matrix
+        <md xml:id="eqn-umatrix" number="yes">
+          (u_{ij}) = \left( \begin{array}{ccccc}5.1 &#x26; 6.5 &#x26; 7.5 &#x26; 8.1 &#x26; 8.4 \\ 5.5 &#x26; 6.8 &#x26; 7.8 &#x26; 8.3 &#x26; 8.9 \\ 5.5 &#x26; 6.9 &#x26; 9.0 &#x26; 8.4 &#x26; 9.1 \\ 5.4 &#x26; 9.6 &#x26; 9.1 &#x26; 8.6 &#x26; 9.4\end{array} \right)
+        </md>
+        Assume the indices begin at 1, <m>i</m> is the index for rows and <m>j</m> the index for columns. Suppose that <m>h = .5</m> and <m>k = .2</m>. Then <m>u_{y}(x_{2},y_{4})</m> would be approximated by the central difference
+        <md>
+          u_{y}(x_{2},y_{4}) \approx \frac{u_{2,5}- u_{2,3}}{2k}\approx \frac{8.9 - 7.8}{2 \cdot 0.2}= 2.75
+        </md>.
+        The partial derivative <m>u_{xy}(x_{2},y_{4})</m> is approximated by
+        <md>
+          u_{xy}(x_{2},y_{4}) \approx \frac{u_{3,5}- u_{3,3}- u_{1,5}+ u_{1,3}}{4hk}\approx \frac{9.1 - 9.0 - 8.4 + 7.5}{4\cdot .5 \cdot .2}= -2
+        </md>.
+      </p>
+    </subsection>
+    <exercises xml:id="exercises-differentiation">
+      <exercise>
+        <p>
+          Suppose you are given the data in the following table.
+          <tabular>
+            <col halign="center" right="minor" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" />
+            <row bottom="minor">
+              <cell>x</cell>
+              <cell>0</cell>
+              <cell>5</cell>
+              <cell>10</cell>
+              <cell>15</cell>
+              <cell>20</cell>
+            </row>
+            <row>
+              <cell>y</cell>
+              <cell>0</cell>
+              <cell>19</cell>
+              <cell>26</cell>
+              <cell>29</cell>
+              <cell>31</cell>
+            </row>
+          </tabular>
+          <ol>
+            <li>
+              <p>
+                Give the forward, backward and central difference approximations of <m>f'(5)</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Give the central difference approximations for <m>f''(10)</m>, <m>f'''(10)</m> and <m>f^{(4)}(10)</m>.
+              </p>
+            </li>
+          </ol>  
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Suppose the position of a runner was recorded every half second and the results are given in the following table. Units of distance are meters.
+          <tabular>
+            <col halign="center" right="minor" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" /><col halign="center" />
+            <row bottom="minor">
+              <cell>t</cell>
+              <cell>0</cell>
+              <cell>.5</cell>
+              <cell>1.0</cell>
+              <cell>1.5</cell>
+              <cell>2.0</cell>
+              <cell>2.5</cell>
+              <cell>3.0</cell>
+              <cell>3.5</cell>
+              <cell>4.0</cell>
+              <cell>4.5</cell>
+              <cell>5.0</cell>
+              <cell>5.5</cell>
+              <cell>6.0</cell>
+            </row>
+            <row>
+              <cell>y</cell>
+              <cell>0</cell>
+              <cell>.25</cell>
+              <cell>1</cell>
+              <cell>3</cell>
+              <cell>6</cell>
+              <cell>10</cell>
+              <cell>15</cell>
+              <cell>21</cell>
+              <cell>27</cell>
+              <cell>33</cell>
+              <cell>39</cell>
+              <cell>45</cell>
+              <cell>51</cell>
+            </row>
+          </tabular>
+          Using central differences everywhere possible, and a forward or backward difference where a central difference is not possible, calculate and plot the velocity and the acceleration of the runner as a function of time for <m>t=0</m> to 6. You may do the calculations by hand or by MATLAB. Turn in your plots and calculations.
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          Suppose values of <m>u(x,y)</m> at points <m>(x_{i},y_{j})</m> are given in the matrix <xref ref="eqn-umatrix" />. Suppose that <m>h = .1</m> and <m>k = .3</m>. Approximate the following derivatives by central differences: 
+          <ol>
+            <li>
+              <p>
+                <m>u_{x}(x_{3},y_{4})</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>u_{xx}(x_{2},y_{2})</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>u_{yy}(x_{3},y_{4})</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>u_{xy}(x_{3},y_{3})</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-main-error">
+    <title>The Main Sources of Error</title>
+    <subsection>
+      <title>Truncation Error</title>
+      <p>
+        Truncation error is defined as the error caused directly by an approximation method. For instance, all numerical integration methods are approximations and so there is error, even if the calculations are performed exactly. Numerical differentiation also has a truncation error, as will the differential equations methods we will study in Part IV, which are based on numerical differentiation formulas. There are two ways to minimize truncation error: (1) use a higher order method, and (2) use a finer grid so that points are closer together. Unless the grid is very small, truncation errors are usually much larger than roundoff errors. The obvious tradeoff is that a smaller grid requires more calculations, which in turn produces more roundoff errors and requires more running time.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Roundoff Error</title>
+      <p>
+        Roundoff error always occurs when a finite number of digits are recorded after an operation. Fortunately, this error is extremely small. The standard measure of how small is called <alert>machine epsilon</alert>. It is defined as the smallest number that can be added to <m>1</m> to produce another number on the machine, i.e.<nbsp />if a smaller number is added the result will be rounded down to <m>1</m>. In IEEE standard double precision (used by MATLAB and most serious software), machine epsilon is <m>2^{-52}</m> or about <m>2.2 \times 10^{-16}</m>. A different, but equivalent, way of thinking about this is that the machine records <m>52</m> floating binary digits or about <m>15</m> floating decimal digits. Thus there are never more than <m>15</m> significant digits in any calculation. This of course is more than adequate for any application. However, there are ways in which this very small error can cause problems.
+      </p>
+      <p>
+        You can test that machine epsilon is <m>2^{-52}</m>: 
+        <console prompt=">> " lang="matlab">
+          <input> format long </input>
+          <input>(1 + 2^(-52)) - 1 </input>
+          <input>(1 + 2^(-53)) - 1 </input>
+        </console> 
+        MATLAB has a command that produces machine epsilon: 
+        <console prompt=">> " lang="matlab"><input> eps </input></console> 
+        To see an unexpected occurence of round-off try 
+        <console prompt=">> " lang="matlab">
+          <input> (2^52+1) - 2^52 </input>
+          <input>(2^53+1) - 2^53 </input>
+        </console> 
+        Thus roundoff isn't always small! It is just small compared with the scale of the numbers you are calculating. A number of magnitude <m>10^{p}</m> will have roundoff of magnitude about <m>10^{p}\cdot 10^{-16}=10^{p-16}</m>.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Loss of Precision (also called Loss of Significance)</title>
+      <p>
+        Suppose we had some way to compute <m>\pi</m> that effectively did the calculation <m>(e\cdot10^{9}+\pi)-e\cdot10^{9}</m>. Rounding everything to 16 digits, we are computing
+        <md>
+          (2718281828.459045 +3.141592653589793) -2718281828.459045
+        </md>.
+        The addition is performed first and the result rounded to 16 digits, giving
+        <md>
+          2718281831.600637 -2718281828.459045 
+        </md>.
+        Although roundoff caused some error, it is about a factor of <m>10^{-16}</m> smaller than the numbers shown. In other words, all but perhaps the last digit shown is correct. Next the subtraction is performed, giving
+        <md>
+          00 00 00 00 03.141592 
+        </md>.
+        The leading zeros are not significant, so we lost 9 significant digits and have only 7 left. This type of error, where common leading significant digits cancel, is loss-of-precision (also called loss-of-significance) error. Computers will not display these leading zeros. Instead, the subtraction above yielded
+        <md>
+          3.141592025756836
+        </md>.
+        Although it is displayed with 16 digits, only the first 7 are correct.Usually, if you add two numbers of magnitude <m>10^{p}</m> each with roundoff error <m>10^{p-16}</m>, then the result is also of magnitude <m>10^{p}</m> and the relative error due to roundoff is <m>10^{p-16}/10^{p}=10^{-16}</m>. In this example, cancellation made the result of magnitude <m>10^{p-q}</m>, so the relative error due to roundoff is <m>10^{p-16}/10^{p-q}=10^{q-16}</m>, and so we lost <m>q=9</m> digits of precision.
+      </p>
+      <p>
+        This type of  loss of precisioncan happen by accident, with catastrophic results, if you are not careful. For example in <m>f'(x)\approx (f(x+h)-f(x))/h</m> you will lose precision when <m>h</m> gets too small. Try 
+        <program language="matlab">
+          <code>
+            format long 
+            format compact 
+            f = @(x) x^2
+            for i = 1:30 
+              h = 10^(-i) 
+              df = (f(1+h)-f(1))/h 
+              relerr = (2-df)/2 
+            end  
+          </code>
+        </program>  
+        At first the relative error decreases since truncation error is reduced. Then loss of precision takes over and the relative error increases to 1. This happens because when <m>f(1)</m> and <m>f(1+h)</m> become close, the subtraction ``cancels'' digits.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Bad Conditioning</title>
+      <p>
+        We encountered bad conditioning in Part II, when we talked about solving linear systems. Bad conditioning means that the problem is unstable in the sense that small input errors can produce large output errors. This can be a problem in a couple of ways. First, the measurements used to get the inputs cannot be completely accurate. Second, the computations along the way have roundoff errors. Errors in the computations near the beginning especially can be magnified by a factor close to the condition number of the matrix. Thus what was a very small problem with roundoff can become a very big problem.
+      </p>
+      <p>
+        It turns out that matrix equations are not the only place where condition numbers occur. In any problem one can define the condition number as the maximum ratio of the relative errors in the output versus input, i.e.
+        <md>
+          \textrm{condition \# of a problem}= \max \left( \frac{\text{Relative error of output}}{\text{Relative error of inputs}}\right)
+        </md>.
+        An easy example is solving a simple equation
+        <md>
+          f(x) = 0
+        </md>.
+        Suppose that <m>f'</m> is close to zero at the solution <m>x^{*}</m>. Then a very small change in <m>f</m> (caused perhaps by an inaccurate measurement of some of the coefficients in <m>f</m>) can cause a large change in <m>x^{*}</m>. It can be shown that the condition number of this problem is <m>1/f'(x^{*})</m>.
+      </p>
+    </subsection>
+    <subsection>
+      <title>Summary</title>
+      <table xml:id="tab-errors">
+        <tabular>
+          <col halign="center" right="minor" /><col halign="center" right="minor" /><col halign="center"/>
+          <row />
+          <row bottom="minor">
+            <cell> Error type:  </cell>
+            <cell> Whose fault is it?  </cell>
+            <cell> How to mitigate it?  </cell>
+          </row>
+          <row>
+            <cell> Truncation  </cell>
+            <cell> the method  </cell>
+            <cell> higher-order method or finer grid  </cell>
+          </row>
+          <row>
+            <cell> Round-off  </cell>
+            <cell> the computer  </cell>
+            <cell> usually okay, higher precision arithmetic  </cell>
+          </row>
+          <row>
+            <cell> Loss of Precision  </cell>
+            <cell> the programmer  </cell>
+            <cell> avoid cancellation of significant digits  </cell>
+          </row>
+          <row>
+            <cell> Bad Conditioning  </cell>
+            <cell> the problem  </cell>
+            <cell> check answers, redesign if possible  </cell>
+          </row>
+        </tabular>
+        <title>A summary of the main sources of error.</title>
+      </table>
+    </subsection>
+    <exercises xml:id="exercises-main-error">
+      <exercise>
+        <p>
+          Identify the (main) source of error in each case and propose a way to reduce this error if possible. 
+          <ol>
+            <li>
+              <p> 
+              If we do <m>(\sqrt{3})^{2}</m> we should get 3, but if we check 
+              <console prompt=">> " lang="matlab">
+                <input> mythree = (sqrt(3))^2 </input>
+                <input>mythree-3 </input>
+              </console> 
+              we find the error is <c>ans = -4.4409e-16</c>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Since it is a quarter of a circle of radius 2, we should have <m>\int_{0}^{2} \sqrt{4-x^{2}}dx=\frac{1}{4}\pi2^{2}=\pi</m>. We try to use <c>mytrap</c> from Lecture<nbsp /><xref ref="sec-LRTrules" /> and do 
+                <console prompt=">> " lang="matlab">
+                  <input> x = 0:.2:2; </input>
+                  <input>y = sqrt(4-x.^2); </input>
+                  <input>mypi = mytrap(x,y) </input>
+                  <input>mypi-pi </input>
+                </console> 
+                and find the error is <c>ans = -0.0371</c>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </exercise>
+      <exercise>
+        <p>
+          <fn>From  Numerical Linear Algebra by L.<nbsp />Trefethen and D.<nbsp />Bau, SIAM, 1997.</fn>
+          The function <m>f(x)=(x-2)^{9}</m> could be evaluated as written, or first expanded as <m>f(x)=x^{9}-18x^{8}+\cdots</m> and then evaluated. To find the expanded version, type 
+          <console prompt=">> " lang="matlab">
+            <input> syms x </input>
+            <input>expand((x-2)^9) </input>
+            <input>clear </input>
+          </console> 
+          To evaluate it without expansion, type 
+          <console prompt=">> " lang="matlab">
+            <input> f1 = @(x) (x-2).^9 </input>
+            <input>x = 1.92:.001:2.08; </input>
+            <input>y1 = f1(x); </input>
+            <input>plot(x,y1,'blue') </input>
+          </console> 
+          To do it with expansion, convert the symbolic expansion above to an anonymous function <c>f2</c> and then type 
+          <console prompt=">> " lang="matlab">
+            <input> y2 = f2(x); </input>
+            <input>hold on </input>
+            <input>plot(x,y2,'red') </input>
+          </console> 
+          Carefully study the resulting graphs. Should the graphs be the same? Which is more correct? MATLAB does calculations using approximately 16 decimal places. What is the largest error in the graph, and how big is it relative to <m>10^{-16}</m>? Which source of error is causing this problem?
+        </p>
+      </exercise>
+    </exercises>
+  </section>
+  <section xml:id="sec-chp3-review">
+    <title>Review of Chapter 3</title>
+    <subsection>
+      <title>Methods and Formulas</title>
+      <subsubsection>
+        <title>Polynomial Interpolation:</title>
+        <p>
+          An exact fit to the data. For <m>n</m> data points it is a <m>n-1</m> degree polynomial. Only good for very few, accurate data points. The coefficients are found by solving a linear system of equations.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Spline Interpolation:</title>
+        <p>
+          Fit a simple function between each pair of points. Joining points by line segments is the most simple spline. Cubic is by far the most common and important. Cubic matches derivatives and second derivatives at data points. Simply supported and clamped ends are available. Good for more, but accurate points. The coefficients are found by solving a linear system of equations.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Least Squares:</title>
+        <p>
+          Makes a <q>close fit</q> of a simple function to all the data. Minimizes the sum of the squares of the errors. Good for noisy data. The coefficients are found by solving a linear system of equations.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Interpolation vs. Extrapolation:</title>
+        <p>
+          Polynomials, Splines and Least Squares are generally used for  Interpolation, fitting between the data.  Extrapolation, i.e. making fits beyond the data, is much more tricky. To make predictions beyond the data, you must have knowledge of the underlying process, i.e. what the function should be.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Numerical Integration:</title>
+        <p>
+          <alert>Left Endpoint:</alert>
+          <md>
+            L_{n} = \sum_{i=1}^{n} f(x_{i-1}) \Delta x_{i}
+          </md>
+          <alert>Right Endpoint:</alert>
+          <md>
+            R_{n} = \sum_{i=1}^{n} f(x_{i}) \Delta x_{i} 
+          </md>.
+          <alert>Trapezoid Rule:</alert>
+          <md>
+            T_{n} = \sum_{i=1}^{n} \frac{f(x_{i-1}) + f(x_{i})}{2}\Delta x_{i} 
+          </md>.
+          <alert>Midpoint Rule:</alert>
+          <md>
+            M_{n} = \sum_{i=1}^{n} f(\bar{x}_{i}) \Delta x_{i} \qquad \textrm{where}\qquad \bar{x}_{i} = \frac{ x_{i-1}+ x_{i}}{2}
+          </md>.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Numerical Integration Rules with Even Spacing:</title>
+        <p>
+          For even spacing: <m>\Delta x = \frac{b-a}{n}</m> where <m>n</m> is the number of subintervals, then:
+          <md>
+            L_{n} = \Delta x \sum_{i=0}^{n-1}y_{i} = \frac{b-a}{n}\sum_{i=0}^{n-1}f(x_{i})
+          </md>
+          <md>
+            R_{n} = \Delta x \sum_{i=1}^{n}y_{i} = \frac{b-a}{n}\sum_{i=1}^{n} f(x_{i})
+          </md>
+          <md>
+            T_{n} = \Delta x \bigl( y_{0} + 2y_{1} + \ldots + 2y_{n-1}+ y_{n} \bigr) = \frac{b-a}{2n}\bigl( f(x_{0}) + 2f(x_{1}) + \ldots + 2f(x_{n-1}) + f(x_{n}) \bigr)
+          </md>
+          <md>
+            M_{n} = \Delta x \sum_{i=1}^{n}\bar{y}_{i} = \frac{b-a}{n}\sum_{i=1}^{n}f(\bar{x}_{i})
+          </md>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Simpson's rule:</title>
+        <md>
+          <mrow>S_{n} \amp = \Delta x \bigl( y_{0} + 4y_{1} + 2y_{2} + 4y_{3} + \ldots + 2y_{n-2}+ 4y_{n-1}+ y_{n} \bigr)</mrow>
+          <mrow> \amp = \frac{b-a}{3n}\left( f(x_{0}) + 4f(x_{1}) + 2f(x_{2}) + 4f(x_{3}) + \ldots + 2f(x_{n-2}) + 4f(x_{n-1}) + f(x_{n}) \right)</mrow>
+        </md>
+      </subsubsection>
+      <subsubsection>
+        <title>Area of a region:</title>
+        <p>
+          <md>
+            A = - \oint_{C}y \, dx
+          </md>,
+          where <m>C</m> is the counter-clockwise curve around the boundary of the region. We can represent such a curve, by consecutive points on it, i.e.<nbsp /> <m>\bar{x}= (x_{0}, x_{1}, x_{2}, \ldots, x_{n-1}, x_{n})</m>, and <m>\bar{y}= (y_{0}, y_{1}, y_{2}, \ldots, y_{n-1}, y_{n})</m> with <m>(x_{n},y_{n}) = (x_{0},y_{0})</m>. Applying the trapezoid method to the integral <xref ref="eqn-areaint" />:
+          <md>
+            A = - \sum_{i=1}^{n} \frac{y_{i-1}+ y_{i}}{2}\, (x_{i} -x_{i-1})
+          </md>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Accuracy of integration rules:</title>
+        <p>
+          Right and Left endpoint are <m>O(\Delta x)</m> Trapezoid and Midpoint are <m>O(\Delta x^{2})</m> Simpson is <m>O(\Delta x^{4})</m>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Double Integrals on Rectangles:</title>
+        <p>
+          <alert>Centerpoint:</alert>
+          <md>
+            C_{mn}= \sum_{i,j=1,1}^{m,n}f(c_{ij}) A_{ij}
+          </md>,
+          where
+          <md>
+            c_{ij}= \left( \frac{x_{i-1}+ x_{i}}{2}, \frac{y_{i-1}+ y_{i}}{2}\right).
+          </md>
+          <alert>Centerpoint <ndash /> Evenly spaced:</alert>
+          <md>
+            C_{mn}= \Delta x \Delta y \sum_{i,j=1,1}^{m,n}z_{ij}= \frac{(b-a)(d-c)}{mn}\sum_{i,j=1,1}^{m,n}f(c_{ij})
+          </md>
+          <alert>Four corners:</alert>
+          <md>
+            F_{mn}= \sum_{i,j=1,1}^{m,n}\frac{1}{4}\left( f(x_{i},y_{j}) + f(x_{i},y_{j+1}) + f(x_{i+1},y_{i}) + f(x_{i+1},y_{j+1}) \right) A_{ij}
+          </md>
+          <alert>Four Corners <ndash /> Evenly spaced:</alert>
+          <md>
+            \begin{split}F_{mn}&#x26;= \frac{A}{4}\left( \sum_{\text{corners}}f(x_{i},y_{j}) + 2 \sum_{\text{edges}}f(x_{i},y_{j}) + 4 \sum_{\text{interior}}f(x_{i},y_{j}) \right)\\&#x26;= \frac{(b-a)(d-c)}{4mn}\sum_{i,j = 1,1}^{m,n}W_{ij}f(x_{i},y_{j})\end{split}
+          </md>
+          where
+          <md>
+            W = \left( \begin{array}{cccccccc}1 &#x26; 2 &#x26; 2 &#x26; 2 &#x26; \cdots &#x26; 2 &#x26; 2 &#x26; 1 \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ \vdots &#x26; \vdots &#x26; \vdots &#x26; \vdots &#x26; \cdots &#x26; \vdots &#x26; \vdots &#x26; \vdots \\ 2 &#x26; 4 &#x26; 4 &#x26; 4 &#x26; \cdots &#x26; 4 &#x26; 4 &#x26; 2 \\ 1 &#x26; 2 &#x26; 2 &#x26; 2 &#x26; \cdots &#x26; 2 &#x26; 2 &#x26; 1 \\\end{array} \right)
+          </md>.
+          <alert>Double Simpson:</alert>
+          <md>
+            S_{mn}= \frac{(b-a)(d-c)}{9mn}\sum_{i,j = 1,1}^{m,n}W_{ij}f(x_{i},y_{j})
+          </md>,
+          where
+          <md>
+            W = \left( \begin{array}{cccccccc}1 &#x26; 4 &#x26; 2 &#x26; 4 &#x26; \cdots &#x26; 2 &#x26; 4 &#x26; 1 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ 2 &#x26; 8 &#x26; 4 &#x26; 8 &#x26; \cdots &#x26; 4 &#x26; 8 &#x26; 2 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ \vdots &#x26; \vdots &#x26; \vdots &#x26; \vdots &#x26; \cdots &#x26; \vdots &#x26; \vdots &#x26; \vdots \\ 2 &#x26; 8 &#x26; 4 &#x26; 8 &#x26; \cdots &#x26; 4 &#x26; 8 &#x26; 2 \\ 4 &#x26; 16 &#x26; 8 &#x26; 16 &#x26; \cdots &#x26; 8 &#x26; 16 &#x26; 4 \\ 1 &#x26; 4 &#x26; 2 &#x26; 4 &#x26; \cdots &#x26; 2 &#x26; 4 &#x26; 1 \\\end{array} \right)
+          </md>.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Integration based on triangles:</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                Triangulation: Dividing a region up into triangles.
+              </p>
+            </li>
+            <li>
+              <p>
+                Triangles are suitable for odd-shaped regions.
+              </p>
+            </li>
+            <li>
+              <p>
+                A triangulation is better if the triangles are nearly equilateral.
+              </p>
+            </li>
+          </ul>
+          <alert>Three corners:</alert>
+          <md>
+            T_{n} = \sum_{i=1}^{n} \bar{f}_{i} A_{i}
+          </md>
+          where <m>\bar{f}</m> is the average of <m>f</m> at the corners of the <m>i</m>-th triangle. Area of a triangle with corners <m>(x_{1},y_{1})</m>, <m>(x_{2},y_{2})</m>, <m>(x_{3},y_{3})</m>:
+          <md>
+            A = \frac{1}{2}\left| \text{det}\left( \begin{array}{ccc}x_1 &#x26;x_2 &#x26;x_3\\ y_1 &#x26;y_2 &#x26;y_3\\ 1 &#x26;1 &#x26;1\\\end{array} \right) \right| 
+          </md>
+        </p>
+        <p>
+          <alert>Centerpoint:</alert>
+          <md>
+            C = \sum_{i=1}^{n} f(\bar{x}_{i},\bar{y}_{i}) A_{i}, \quad\text{with}
+          </md>
+          <md>
+            \bar{x}= \frac{x_{1} + x_{2} + x_{3}}{3}\quad\text{and}\quad \bar{y}= \frac{y_{1} + y_{2} + y_{3}}{3}\,.
+          </md>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Finite Differences</title>
+        <p>
+          <alert>Forward Difference</alert>:
+          <md>
+            f'(x_{i}) = y'_{i} \approx \frac{y_{i+1}- y_{i}}{x_{i+1}-x_{i}}
+          </md>
+          <alert>Backward Difference</alert>:
+          <md>
+            f'(x_{i}) \approx \frac{y_{i} - y_{i-1}}{x_{i}-x_{i-1}}
+          </md>
+          <alert>Central Difference</alert>:
+          <md>
+            f'(x_{i}) = y'_{i} \approx \frac{y_{i+1}- y_{i-1}}{2h}
+          </md>
+          <alert>Higher order central differences:</alert>
+          <md>
+            <mrow>f''(x_{i})\amp= y''_{i} \approx \frac{y_{i+1}- 2 y_{i} + y_{i-1}}{h^{2}}</mrow> 
+            <mrow>f'''(x_{i})\amp= y'''_{i} \approx \frac{1}{2 h^{3}}\left[y_{i+2}- 2y_{i+1}+ 2y_{i-1}- y_{i-2}\right] </mrow>
+            <mrow>f^{(4)}(x_{i})\amp= y^{(4)}_{i} \approx \frac{1}{h^{4}}\left[y_{i+2}- 4y_{i+1}+ 6y_{i} - 4y_{i-1}+ y_{i-2}\right]</mrow>
+          </md>
+          <alert>Partial Derivatives:</alert> Denote <m>u_{i,j}= u(x_{i},y_{j})</m>.
+          <md>
+            <mrow>u_{x}(x_{i},y_{j})\amp\approx \frac{1}{2h}\left( u_{i+1,j}- u_{i-1,j}\right)</mrow>
+            <mrow>u_{y}(x_{i},y_{j})\amp\approx \frac{1}{2k}\left( u_{i,j+1}- u_{i,j-1}\right)</mrow> 
+            <mrow>u_{xx}(x_{i},y_{j})\amp\approx \frac{1}{h^{2}}\left( u_{i+1,j}-2u_{i,j}+ u_{i-1,j}\right)</mrow> 
+            <mrow>u_{yy}(x_{i},y_{j})\amp\approx \frac{1}{k^{2}}\left( u_{i,j+1}-2u_{i,j}+ u_{i,j-1}\right)</mrow> 
+            <mrow>u_{xy}(x_{i},y_{j})\amp\approx \frac{1}{4hk}\left( u_{i+1,j+1}- u_{i+1,j-1}- u_{i-1,j+1}+ u_{i-1,j-1}\right) </mrow>
+          </md>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Sources of error:</title>
+        <p>
+          <dl>
+            <li>
+              <title>Truncation</title>
+              <p>the method is an approximation.</p>
+            </li>
+            <li>
+              <title>Roundoff</title>
+              <p>double precision arithmetic uses <m>\approx 15</m> significant digits.</p>
+            </li>
+            <li>
+              <title>Loss of precision</title>
+              <p>an amplification of roundoff error due to cancellations.</p>
+            </li>
+            <li>
+              <title>Bad conditioning</title>
+              <p>the problem is sensitive to input errors.</p>
+            </li>
+          </dl>
+           Error can build up after multiple calculations.
+        </p>
+        <p>
+          See <xref ref="tab-errors" />.
+        </p>
+      </subsubsection>
+    </subsection>
+    <subsection>
+      <title>MATLAB</title>
+      <subsubsection>
+        <title>Data Interpolation:</title>
+        <p>
+          Use the plot command <c>plot(x,y,'*')</c> to plot the data. Use the Basic Fitting tool to make an interpolation or spline. If you choose an <m>n-1</m> degree polynomial with <m>n</m> data points the result will be the exact polynomial interpolation. If you select a polynomial degree less than <m>n-1</m>, then MATLAB will produce a least squares approximation.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Functions of 2 Variables and Meshgrids:</title>
+        <p>
+          <dl width="wide">
+            <li>
+              <title><c>f= @(x,y) sin(x.*y)./sqrt(x+y)</c></title>
+              <p>make an anonymous function of <m>x</m> and <m>y</m>.</p>
+            </li>
+            <li>
+              <title><c>[X Y]=meshgrid(-1:.01:2, 0:.01:3)</c></title>
+              <p>make a 2-d grid of points.</p>
+            </li>
+            <li>
+              <title><c>Z = f(X,Y)</c></title>
+              <p>evaluate the function at all points on the grid.</p>
+            </li>
+            <li>
+              <title><c>mesh(X,Y,Z)</c> or <c>surf(X,Y,Z)</c></title>
+              <p>plot the function on the grid.</p>
+            </li>
+          </dl>     
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Integration:</title>
+        <p>
+          <dl>
+            <li>
+              <title><c>integral(f,a,b)</c></title>
+              <p>Numerical integral of <m>f(x)</m> on <m>[a,b]</m>.</p>
+            </li>
+            <li>
+              <title><c>integral2(f,a,b,c,d)</c></title>
+              <p>Integral of <m>f(x,y)</m> on <m>[a,b]\times[c,d]</m>.</p>
+            </li>
+          </dl>
+          Example: 
+          <console prompt=">> " lang="matlab">
+            <input> f = @(x,y) sin(x.*y)/sqrt(x+y) </input>
+            <input>I = integral2(f,0,1,0,2) </input>
+          </console> 
+          MATLAB uses an advanced form of Simpson's method.
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Integration over non-rectangles:</title>
+        <p>
+          <alert>Redefine the function</alert> to be zero outside the region. For example:
+           <console prompt=">> " lang="matlab">
+            <input> f = @(x,y) sin(x.*y).^3.*(2*x + y &#x3C;= 2) </input>
+            <input>I = integral2(f,0,1,0,2) </input>
+          </console> 
+           Integrates <m>f(x,y) = \sin^{3}(xy)</m> on the triangle with corners <m>(0,0)</m>, <m>(0,2)</m>, and <m>(1,0)</m>.
+        </p>
+        <p>
+          <alert>Triangles:</alert> MATLAB stores triangulations as a matrix of vertices <c>V</c> and triangles <c>T</c>. 
+          <dl>
+            <li>
+              <title><c>T = delaunay(V)</c> (or <c> delaunay(x,y)</c>) </title>
+              <p>Produces triangles from vertices.</p>
+            </li>
+            <li>
+              <title><c>trimesh(T,x,y)</c></title>
+              <p></p>
+            </li>
+            <li>
+              <title><c>trimesh(T,x,y,z)</c></title>
+              <p></p>
+            </li>
+            <li>
+              <title><c>trisurf(T,x,y)</c></title>
+              <p></p>
+            </li>
+            <li>
+              <title><c>trisurf(T,x,y,z)</c></title>
+              <p></p>
+            </li>
+          </dl>
+        </p>
+      </subsubsection>
+      <subsubsection>
+        <title>Logical expressions</title>
+        <p>
+          <c>(2*x + y &#x3C;= 2)</c>, <c>(x.^2+y.^2&#x3C;=1)</c> are examples of logical expressions. If a logical expression is true it is given the value <m>1</m>. If false, then it is assigned the value <m>0</m>.
+        </p>
+      </subsubsection>
+    </subsection>
+  </section>
 </chapter>
