@@ -19,7 +19,21 @@
   <!-- macros for defining latex math shortcuts. It is good practice -->
   <!-- to define these semantically, so that the macro relates to what-->
   <!-- it defines. -->
-  <macros> \newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} </macros>
+  <macros> \newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} 
+    \newcommand{\bb}{\mathbf{b}}
+    \newcommand{\fb}{\mathbf{f}}
+    \newcommand{\rb}{\mathbf{r}}
+    \newcommand{\ub}{\mathbf{u}}
+    \newcommand{\vb}{\mathbf{v}}
+    \newcommand{\wb}{\mathbf{w}}
+    \newcommand{\xb}{\mathbf{x}}
+    \newcommand{\yb}{\mathbf{y}}
+    \newcommand{\zb}{\mathbf{z}}
+    \newcommand{\Eb}{\mathbf{E}}
+    \newcommand{\Ub}{\mathbf{U}}
+    \newcommand{\ew}{\textbf{ew}}
+    \newcommand{\ev}{\textbf{ev}} 
+  </macros>
 
   <!-- If you put any latex-image elements you can include preambles -->
   <!-- for those in the next element. -->

@@ -866,7 +866,7 @@
         <md>
           \nabla f(\mathbf{x}^{*}) = \mathbf{0}\quad \text{ (the zero vector)}
         </md>.
-        Thus one way to locate max or min points for a specific function is to solve <m>\nabla f(\mathbf{x}^{*}) = \mathbf{0}</m>. This will often lead to systems of non-linear equations as we encountered in Lecture<nbsp /><xref ref="lec-multnewton" />. For example, for <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>,to attempt to find critical point we would need to try to solve:
+        Thus one way to locate max or min points for a specific function is to solve <m>\nabla f(\mathbf{x}^{*}) = \mathbf{0}</m>. This will often lead to systems of non-linear equations as we encountered in Lecture<nbsp /><xref ref="sec-multnewton" />. For example, for <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>,to attempt to find critical point we would need to try to solve:
         <md>
           (1+x_{1}(-2x_{1}+\cos(x_{1}x_{2})x_{2})) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
         </md> 
@@ -874,7 +874,7 @@
         <md>
           x_{1}(-2x_{2}+\cos(x_{1}x_{2})x_{1}) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
         </md>.
-        That, obviously, is going to be very hard and in fact is impossible using algebra. Thus we will have to use numerical methods to find any maximum or minimum points. The multiple variable Newton's method that we learned in Lecture<nbsp /><xref ref="lec-multnewton" /> would be one option. In the next section we introduce another common algorithm.
+        That, obviously, is going to be very hard and in fact is impossible using algebra. Thus we will have to use numerical methods to find any maximum or minimum points. The multiple variable Newton's method that we learned in Lecture<nbsp /><xref ref="sec-multnewton" /> would be one option. In the next section we introduce another common algorithm.
       </p>
     </subsection>
     <subsection>
@@ -905,7 +905,7 @@
         The number <m>\epsilon</m> is often called the ``learning rate''. It should not be too small or too large. If it is too small the algorithm will be slow. If it is too large, the steps might skip over a critical point. There is ongoing research about how to choose it optimally.
       </p>
       <p>
-        Notice the similarities between this method and the Newton's method for nonlinear systems in <xref ref="lec-multnewton" />. In both cases we have a function of a vector and generate a sequence of vectors <m>\mathbf{x}_{0},\mathbf{x}_{1},\dots</m>.
+        Notice the similarities between this method and the Newton's method for nonlinear systems in <xref ref="sec-multnewton" />. In both cases we have a function of a vector and generate a sequence of vectors <m>\mathbf{x}_{0},\mathbf{x}_{1},\dots</m>.
       </p>
     </subsection>
     <exercises xml:id="exercises-maxmingrad">
@@ -916,7 +916,7 @@
       </exercise>
       <exercise>
         <p>
-          Write a well-commented <alert>script</alert> program that uses the gradient descent method to find a minimum point for the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>, starting from <m>\mathbf{x}_{0} = [-1;-2]</m>. Compare with the plot in <xref ref="exr-plotquiver" /> to check that it worked. (Hint: Review the program <c>mymultnewton</c> ***********in <xref ref="lec-multnewton" /> for examples of making functions of vectors.)
+          Write a well-commented <alert>script</alert> program that uses the gradient descent method to find a minimum point for the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>, starting from <m>\mathbf{x}_{0} = [-1;-2]</m>. Compare with the plot in <xref ref="exr-plotquiver" /> to check that it worked. (Hint: Review the program <c>mymultnewton</c> ***********in <xref ref="sec-multnewton" /> for examples of making functions of vectors.)
         </p>
       </exercise>
     </exercises>
