@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.6.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mysecant<div class="autopermalink" data-description="Listing 1.6.2: mysecant"><a href="#prg-mysecant" title="Copy heading and permalink for Listing 1.6.2: mysecant" aria-label="Copy heading and permalink for Listing 1.6.2: mysecant">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function x = mysecant(f,x0,x1,n)
+    % Solves f(x) = 0 by doing n steps of the secant method 
+    %   starting with x0 and x1.
+    % Inputs: f -- the function
+    %         x0 -- starting guess, a number
+    %         x1 -- second starting guess
+    %         n -- the number of steps to do
+    % Output: x -- the approximate solution
+    y0 = f(x0);
+    y1 = f(x1);
+    for i = 1:n               % Do n times
+        x = x1 - (x1-x0)*y1/(y1-y0)    % secant formula.
+        y=f(x)           % y value at the new approximate solution.
+        % Move numbers to get ready for the next step
+        x0=x1;
+        y0=y1;
+        x1=x;
+        y1=y;
+    end
+end
+</code></pre></div></div>
+</figure><span class="incontext"><a class="internal" href="sec-secant.html#prg-mysecant">In Context</a></span>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Matrices and Matrix Operations in MATLAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script type="module">import { startMathJax } from './_static/pretext/js/mathjax_startup.js';
+startMathJax({
+hasWebworkReps: false,
+hasSage: false,
+isReact: false,
+htmlPresentation: false,
+});
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Introduction to Numerical Methods and Matlab Programming for Engineers">
+<meta property="book:author" content="Todd Young">
+<meta property="book:author" content="Martin J. Mohlenkamp">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.1.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.dcab57465a404e85.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.79fbb790b185d712.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="intro-numerical-methods" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="intro-numerical-methods.html"><span class="title">Introduction to Numerical Methods and Matlab Programming for Engineers</span></a></h1>
+<p class="byline">Todd Young, Martin J. Mohlenkamp</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="chapter-linear.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-linear.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-intro_linsys.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} 
+   \newcommand{\bb}{\mathbf{b}}
+   \newcommand{\fb}{\mathbf{f}}
+   \newcommand{\rb}{\mathbf{r}}
+   \newcommand{\ub}{\mathbf{u}}
+   \newcommand{\vb}{\mathbf{v}}
+   \newcommand{\wb}{\mathbf{w}}
+   \newcommand{\xb}{\mathbf{x}}
+   \newcommand{\yb}{\mathbf{y}}
+   \newcommand{\zb}{\mathbf{z}}
+   \newcommand{\Eb}{\mathbf{E}}
+   \newcommand{\Ub}{\mathbf{U}}
+   \newcommand{\ew}{\textbf{ew}}
+   \newcommand{\ev}{\textbf{ev}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-4.html" class="internal"><span class="title">Preface</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">MATLAB and Solving Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vectors.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Functions, and Plots in MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-2" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Entering vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-3" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Basic Formatting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-4" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Plotting Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-5" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Data as a Representation of a Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-6" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Built-in Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-7" class="internal"><span class="codenumber">1.1.6</span> <span class="title">User-Defined Anonymous Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-8" class="internal"><span class="codenumber">1.1.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-programs.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matlab Programs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-programs.html#sec-programs-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Function Programs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-3-3" class="internal"><span class="codenumber">1.2.1.1</span> <span class="title">Printing, Returning, Capturing, and Printing</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Script Programs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-5" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Program Comments</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-6" class="internal"><span class="codenumber">1.2.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-newton.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Newton’s Method and Loops</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-2" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Solving equations numerically</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-3" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Newton iterations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-4" class="internal"><span class="codenumber">1.3.3</span> <span class="title">The loop: <code class="code-inline tex2jax_ignore">for ... end</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-5" class="internal"><span class="codenumber">1.3.4</span> <span class="title">Convergence</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-newton.html#exercises-newton" class="internal"><span class="codenumber">1.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-conditional.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Controlling Error and Conditional Statements</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-2" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Measuring error and the Residual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-3" class="internal"><span class="codenumber">1.4.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">if ... end</code> statement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-4" class="internal"><span class="codenumber">1.4.3</span> <span class="title">The loop: <code class="code-inline tex2jax_ignore">while ... end</code></span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-conditional.html#exercises-conditional" class="internal"><span class="codenumber">1.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-bisection.html" class="internal"><span class="codenumber">1.5</span> <span class="title">The Bisection Method and Locating Roots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-2" class="internal"><span class="codenumber">1.5.1</span> <span class="title">Bisecting and the <code class="code-inline tex2jax_ignore">if ... else ... end</code> statement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-3" class="internal"><span class="codenumber">1.5.2</span> <span class="title">Bounding the Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-4" class="internal"><span class="codenumber">1.5.3</span> <span class="title">Locating the roots (if any)</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-bisection.html#exercises-bisection" class="internal"><span class="codenumber">1.5.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-secant.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Secant Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-3" class="internal"><span class="codenumber">1.6.1</span> <span class="title">The Secant Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-4" class="internal"><span class="codenumber">1.6.2</span> <span class="title">The  Regula Falsi (False Position) Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-5" class="internal"><span class="codenumber">1.6.3</span> <span class="title">Convergence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-6" class="internal"><span class="codenumber">1.6.4</span> <span class="title">Simulations and Experiments</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-secant.html#exercises-secant" class="internal"><span class="codenumber">1.6.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-symbolic.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Symbolic Computations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-3" class="internal"><span class="codenumber">1.7.1</span> <span class="title">Defining functions and basic operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-4" class="internal"><span class="codenumber">1.7.2</span> <span class="title">Functions of Two Variables and Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-5" class="internal"><span class="codenumber">1.7.3</span> <span class="title">Other useful symbolic operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-6" class="internal"><span class="codenumber">1.7.4</span> <span class="title">New Notation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-symbolic.html#exercises-symbolic" class="internal"><span class="codenumber">1.7.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chp1-review.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Review of Chapter 1</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2" class="internal"><span class="codenumber">1.8.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-2" class="internal"><span class="codenumber">1.8.1.1</span> <span class="title">Solving equations numerically:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-3" class="internal"><span class="codenumber">1.8.1.2</span> <span class="title">Newton’s method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-4" class="internal"><span class="codenumber">1.8.1.3</span> <span class="title">Bisection method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-5" class="internal"><span class="codenumber">1.8.1.4</span> <span class="title">Secant method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-6" class="internal"><span class="codenumber">1.8.1.5</span> <span class="title">Regula Falsi</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-7" class="internal"><span class="codenumber">1.8.1.6</span> <span class="title">Convergence:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-8" class="internal"><span class="codenumber">1.8.1.7</span> <span class="title">Locating roots:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-9" class="internal"><span class="codenumber">1.8.1.8</span> <span class="title">Usage:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3" class="internal"><span class="codenumber">1.8.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-2" class="internal"><span class="codenumber">1.8.2.1</span> <span class="title">Commands:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-3" class="internal"><span class="codenumber">1.8.2.2</span> <span class="title">Program structures:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-4" class="internal"><span class="codenumber">1.8.2.3</span> <span class="title">Function Programs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-5" class="internal"><span class="codenumber">1.8.2.4</span> <span class="title">Script Programs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-6" class="internal"><span class="codenumber">1.8.2.5</span> <span class="title">Symbolic:</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-linear.html" class="internal"><span class="codenumber">2</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-matrices.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrices and Matrix Operations in MATLAB</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-3" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Matrix operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-4" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Component-wise operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-5" class="internal"><span class="codenumber">2.1.3</span> <span class="title">The identity matrix and the inverse of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-6" class="internal"><span class="codenumber">2.1.4</span> <span class="title">The “Norm” of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-7" class="internal"><span class="codenumber">2.1.5</span> <span class="title">Some other useful commands</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-matrices.html#exercises-matrices" class="internal"><span class="codenumber">2.1.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro_linsys.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Introduction to Linear Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-2" class="internal"><span class="codenumber">2.2.1</span> <span class="title">How linear systems occur</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#subsec-LSME" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Linear systems are equivalent to matrix equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-4" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Triangular matrices and back substitution</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-5" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-6" class="internal"><span class="codenumber">2.2.5</span> <span class="title">MATLAB’s matrix solve command</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-intro_linsys.html#exercises-intro_linsys" class="internal"><span class="codenumber">2.2.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-lineartheory.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Some Facts About Linear Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-2" class="internal"><span class="codenumber">2.3.1</span> <span class="title">Some inconvenient truths</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-3" class="internal"><span class="codenumber">2.3.2</span> <span class="title">Basic theory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-4" class="internal"><span class="codenumber">2.3.3</span> <span class="title">The Residual</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-lineartheory.html#exercises-lineartheory" class="internal"><span class="codenumber">2.3.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-accuracy.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Accuracy, Condition Numbers and Pivoting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-3" class="internal"><span class="codenumber">2.4.1</span> <span class="title">The effect of rounding</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-4" class="internal"><span class="codenumber">2.4.2</span> <span class="title">Row Pivoting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-5" class="internal"><span class="codenumber">2.4.3</span> <span class="title">Condition number</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-accuracy.html#exercises-accuracy" class="internal"><span class="codenumber">2.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-LU.html" class="internal"><span class="codenumber">2.5</span> <span class="title">LU Decomposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LU.html#sec-LU-3" class="internal"><span class="codenumber">2.5.1</span> <span class="title">LU decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LU.html#sec-LU-4" class="internal"><span class="codenumber">2.5.2</span> <span class="title">Using LU to solve equations</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-LU.html#exercises-LU" class="internal"><span class="codenumber">2.5.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-multnewton.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Nonlinear Systems - Newton’s Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-2" class="internal"><span class="codenumber">2.6.1</span> <span class="title">An Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-3" class="internal"><span class="codenumber">2.6.2</span> <span class="title">Vector Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-4" class="internal"><span class="codenumber">2.6.3</span> <span class="title">Linear Approximation for Vector Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-5" class="internal"><span class="codenumber">2.6.4</span> <span class="title">Newton’s Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-6" class="internal"><span class="codenumber">2.6.5</span> <span class="title">An Experiment</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-multnewton.html#exercises-multnewton" class="internal"><span class="codenumber">2.6.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigen.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-3" class="internal"><span class="codenumber">2.7.1</span> <span class="title">Finding Eigenvalues for <span class="process-math">\(2\times 2\)</span> and <span class="process-math">\(3\times3\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-4" class="internal"><span class="codenumber">2.7.2</span> <span class="title">Larger Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-5" class="internal"><span class="codenumber">2.7.3</span> <span class="title">Complex Eigenvalues</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-eigen.html#exercises-eign" class="internal"><span class="codenumber">2.7.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vibration.html" class="internal"><span class="codenumber">2.8</span> <span class="title">An Application of Eigenvectors: Vibrational Modes and Frequencies</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vibration.html#exercises-vibration" class="internal"><span class="codenumber">2.8</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-EWmeth.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Numerical Methods for Eigenvalues</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-3" class="internal"><span class="codenumber">2.9.1</span> <span class="title">The Power Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-4" class="internal"><span class="codenumber">2.9.2</span> <span class="title">Symmetric, Positive-Definite Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-5" class="internal"><span class="codenumber">2.9.3</span> <span class="title">The residual of an approximate eigenvector-eigenvalue pair</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-6" class="internal"><span class="codenumber">2.9.4</span> <span class="title">The Inverse Power Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-EWmeth.html#exercises-EWmeth" class="internal"><span class="codenumber">2.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR.html" class="internal"><span class="codenumber">2.10</span> <span class="title">The QR Method*</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-QR.html#exercises-QR" class="internal"><span class="codenumber">2.10</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chapter2-review.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Review of Chapter 2</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2" class="internal"><span class="codenumber">2.11.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-2" class="internal"><span class="codenumber">2.11.1.1</span> <span class="title">Basic Matrix Theory:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-3" class="internal"><span class="codenumber">2.11.1.2</span> <span class="title">Solving Process:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-4" class="internal"><span class="codenumber">2.11.1.3</span> <span class="title">Condition number:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-5" class="internal"><span class="codenumber">2.11.1.4</span> <span class="title">LU factorization:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-6" class="internal"><span class="codenumber">2.11.1.5</span> <span class="title">Eigenvalues and eigenvectors:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-7" class="internal"><span class="codenumber">2.11.1.6</span> <span class="title">Complex eigenvalues:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-8" class="internal"><span class="codenumber">2.11.1.7</span> <span class="title">Vibrational modes:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-9" class="internal"><span class="codenumber">2.11.1.8</span> <span class="title">Power Method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-10" class="internal"><span class="codenumber">2.11.1.9</span> <span class="title">Inverse Power Method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-11" class="internal"><span class="codenumber">2.11.1.10</span> <span class="title">Symmetric and Positive definite:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-12" class="internal"><span class="codenumber">2.11.1.11</span> <span class="title">QR method (Not covered in MATH 3600 at Ohio University):</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3" class="internal"><span class="codenumber">2.11.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-2" class="internal"><span class="codenumber">2.11.2.1</span> <span class="title">Matrix arithmetic:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-3" class="internal"><span class="codenumber">2.11.2.2</span> <span class="title">Special matrices:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-4" class="internal"><span class="codenumber">2.11.2.3</span> <span class="title">General matrix commands:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-5" class="internal"><span class="codenumber">2.11.2.4</span> <span class="title">Matrix decompositions:</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions and Data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-interpolation.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Polynomial and Spline Interpolation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-2" class="internal"><span class="codenumber">3.1.1</span> <span class="title">A Chemical Reaction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-3" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Polynomial Interpolation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-4" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Predicting the future?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-5" class="internal"><span class="codenumber">3.1.4</span> <span class="title">More data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-6" class="internal"><span class="codenumber">3.1.5</span> <span class="title">A challenging data set</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-7" class="internal"><span class="codenumber">3.1.6</span> <span class="title">The idea of a spline</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-8" class="internal"><span class="codenumber">3.1.7</span> <span class="title">Cubic spline</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-interpolation.html#exercises-interpolation" class="internal"><span class="codenumber">3.1.8</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-leastsquares.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Least Squares Fitting: Noisy Data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-3" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Traffic flow model</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-4" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Least squares</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-4-3" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">Linear least squares</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-5" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Drag coefficients</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-leastsquares.html#exercises-leastsquares" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-LRTrules.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Integration: Left, Right and Trapezoid Rules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-2" class="internal"><span class="codenumber">3.3.1</span> <span class="title">The Left and Right endpoint rules</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-3" class="internal"><span class="codenumber">3.3.2</span> <span class="title">The Trapezoid rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-4" class="internal"><span class="codenumber">3.3.3</span> <span class="title">Using the Trapezoid rule for areas in the plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-5" class="internal"><span class="codenumber">3.3.4</span> <span class="title">Vector Operations using Slicing and Summing</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-LRTrules.html#exercises-LRTrules" class="internal"><span class="codenumber">3.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-MSrules.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Integration: Midpoint and Simpson’s Rules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-2" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Midpoint rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-3" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Simpson’s rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-4" class="internal"><span class="codenumber">3.4.3</span> <span class="title">Error bounds</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-MSrules.html#exercises-MSrules" class="internal"><span class="codenumber">3.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-plotting-two.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Plotting Functions of Two Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plotting-two.html#sec-plotting-two-2" class="internal"><span class="codenumber">3.5.1</span> <span class="title">Functions on Rectangular Grids</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plotting-two.html#sec-plotting-two-3" class="internal"><span class="codenumber">3.5.2</span> <span class="title">Scattered Data and Triangulation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-plotting-two.html#exercises-plotting-two" class="internal"><span class="codenumber">3.5.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxmingrad.html" class="internal"><span class="codenumber">3.6</span> <span class="title">The Gradient and Max-Min Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-2" class="internal"><span class="codenumber">3.6.1</span> <span class="title">The gradient of a function of multiple variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-3" class="internal"><span class="codenumber">3.6.2</span> <span class="title">Optimization in multiple variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-4" class="internal"><span class="codenumber">3.6.3</span> <span class="title">The gradient ascent or descent method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-maxmingrad.html#exercises-maxmingrad" class="internal"><span class="codenumber">3.6.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-double-int-rect.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Double Integrals for Rectangles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-2" class="internal"><span class="codenumber">3.7.1</span> <span class="title">The center point method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-3" class="internal"><span class="codenumber">3.7.2</span> <span class="title">The four corners method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-4" class="internal"><span class="codenumber">3.7.3</span> <span class="title">The double Simpson method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-double-int-rect.html#exercises-double-int-rect" class="internal"><span class="codenumber">3.7.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-double-int-non.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Double Integrals for Non-rectangles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-non.html#sec-double-int-non-3" class="internal"><span class="codenumber">3.8.1</span> <span class="title">Redefining the function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-non.html#sec-double-int-non-4" class="internal"><span class="codenumber">3.8.2</span> <span class="title">Integration Based on Triangles</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-double-int-non.html#exercises-double-int-non" class="internal"><span class="codenumber">3.8.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-differentiation.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Numerical Differentiation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-2" class="internal"><span class="codenumber">3.9.1</span> <span class="title">Approximating derivatives from data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-3" class="internal"><span class="codenumber">3.9.2</span> <span class="title">An example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-4" class="internal"><span class="codenumber">3.9.3</span> <span class="title">Errors of approximation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-5" class="internal"><span class="codenumber">3.9.4</span> <span class="title">Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-differentiation.html#exercises-differentiation" class="internal"><span class="codenumber">3.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-main-error.html" class="internal"><span class="codenumber">3.10</span> <span class="title">The Main Sources of Error</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-2" class="internal"><span class="codenumber">3.10.1</span> <span class="title">Truncation Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-3" class="internal"><span class="codenumber">3.10.2</span> <span class="title">Roundoff Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-4" class="internal"><span class="codenumber">3.10.3</span> <span class="title">Loss of Precision (also called Loss of Significance)</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-5" class="internal"><span class="codenumber">3.10.4</span> <span class="title">Bad Conditioning</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-6" class="internal"><span class="codenumber">3.10.5</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-main-error.html#exercises-main-error" class="internal"><span class="codenumber">3.10.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chp3-review.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Review of Chapter 3</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2" class="internal"><span class="codenumber">3.11.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-2" class="internal"><span class="codenumber">3.11.1.1</span> <span class="title">Polynomial Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-3" class="internal"><span class="codenumber">3.11.1.2</span> <span class="title">Spline Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-4" class="internal"><span class="codenumber">3.11.1.3</span> <span class="title">Least Squares:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-5" class="internal"><span class="codenumber">3.11.1.4</span> <span class="title">Interpolation vs. Extrapolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-6" class="internal"><span class="codenumber">3.11.1.5</span> <span class="title">Numerical Integration:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-7" class="internal"><span class="codenumber">3.11.1.6</span> <span class="title">Numerical Integration Rules with Even Spacing:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-8" class="internal"><span class="codenumber">3.11.1.7</span> <span class="title">Simpson’s rule:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-9" class="internal"><span class="codenumber">3.11.1.8</span> <span class="title">Area of a region:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-10" class="internal"><span class="codenumber">3.11.1.9</span> <span class="title">Accuracy of integration rules:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-11" class="internal"><span class="codenumber">3.11.1.10</span> <span class="title">Double Integrals on Rectangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-12" class="internal"><span class="codenumber">3.11.1.11</span> <span class="title">Integration based on triangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-13" class="internal"><span class="codenumber">3.11.1.12</span> <span class="title">Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-14" class="internal"><span class="codenumber">3.11.1.13</span> <span class="title">Sources of error:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3" class="internal"><span class="codenumber">3.11.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-2" class="internal"><span class="codenumber">3.11.2.1</span> <span class="title">Data Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-3" class="internal"><span class="codenumber">3.11.2.2</span> <span class="title">Functions of 2 Variables and Meshgrids:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-4" class="internal"><span class="codenumber">3.11.2.3</span> <span class="title">Integration:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-5" class="internal"><span class="codenumber">3.11.2.4</span> <span class="title">Integration over non-rectangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-6" class="internal"><span class="codenumber">3.11.2.5</span> <span class="title">Logical expressions</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-differential.html" class="internal"><span class="codenumber">4</span> <span class="title">Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-reduction.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Reduction of Higher Order Equations to Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-2" class="internal"><span class="codenumber">4.1.1</span> <span class="title">The motion of a pendulum</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-3" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Converting a general higher order equation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-4" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Using MATLAB to solve a system of ODE’s</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-reduction.html#exercises-reduction" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-euler.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Euler Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-2" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Numerical Solution of an IVP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-3" class="internal"><span class="codenumber">4.2.2</span> <span class="title">The Euler Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-4" class="internal"><span class="codenumber">4.2.3</span> <span class="title">The problem with the Euler method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-5" class="internal"><span class="codenumber">4.2.4</span> <span class="title">The Modified Euler Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-euler.html#exercises-euler" class="internal"><span class="codenumber">4.2.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-higher-order.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Higher Order Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-2" class="internal"><span class="codenumber">4.3.1</span> <span class="title">The order of a method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-3" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Fourth Order Runge-Kutta</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-4" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Variable Step Size and RK45</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-5" class="internal"><span class="codenumber">4.3.4</span> <span class="title">Why order matters</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-higher-order.html#exercises-higher-order" class="internal"><span class="codenumber">4.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-ODE-BVP.html" class="internal"><span class="codenumber">4.4</span> <span class="title">ODE Boundary Value Problems and Finite Differences</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-2" class="internal"><span class="codenumber">4.4.1</span> <span class="title">Steady State Heat and Diffusion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-3" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Beam With Tension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-4" class="internal"><span class="codenumber">4.4.3</span> <span class="title">Finite Difference Method – Linear ODE</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-ODE-BVP.html#exercises-ODE-BVP" class="internal"><span class="codenumber">4.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-FD-NODE.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Finite Difference Method – Nonlinear ODE</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-2" class="internal"><span class="codenumber">4.5.1</span> <span class="title">Heat conduction with radiation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-3" class="internal"><span class="codenumber">4.5.2</span> <span class="title">Relaxation Method for Nonlinear Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-4" class="internal"><span class="codenumber">4.5.3</span> <span class="title">Implementing the Relaxation Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-FD-NODE.html#exercises-FD-NODE" class="internal"><span class="codenumber">4.5.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-parabolic-explicit.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Parabolic PDEs - Explicit Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-2" class="internal"><span class="codenumber">4.6.1</span> <span class="title">Heat Flow and Diffusion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-3" class="internal"><span class="codenumber">4.6.2</span> <span class="title">Explicit Method Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-4" class="internal"><span class="codenumber">4.6.3</span> <span class="title">Initial Condition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-5" class="internal"><span class="codenumber">4.6.4</span> <span class="title">Boundary Conditions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-6" class="internal"><span class="codenumber">4.6.5</span> <span class="title">Implementation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#exercises-parabolic-explicit" class="internal"><span class="codenumber">4.6.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-instability-explicit.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Solution Instability for the Explicit Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-instability-explicit.html#sec-instability-explicit-3" class="internal"><span class="codenumber">4.7.1</span> <span class="title">Writing the Difference Equations in Matrix Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-instability-explicit.html#sec-instability-explicit-4" class="internal"><span class="codenumber">4.7.2</span> <span class="title">Consequences</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-instability-explicit.html#exercises-instability-explicit" class="internal"><span class="codenumber">4.7.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-implicit-methods.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Implicit Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-implicit-methods.html#sec-implicit-methods-2" class="internal"><span class="codenumber">4.8.1</span> <span class="title">The Implicit Difference Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-implicit-methods.html#sec-implicit-methods-3" class="internal"><span class="codenumber">4.8.2</span> <span class="title">Crank-Nicholson Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-implicit-methods.html#exercises-implicit-methods" class="internal"><span class="codenumber">4.8.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-insulated-BC.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Insulated Boundary Conditions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-2" class="internal"><span class="codenumber">4.9.1</span> <span class="title">Insulation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-3" class="internal"><span class="codenumber">4.9.2</span> <span class="title">Implementation in a linear equation by elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-time" class="internal"><span class="codenumber">4.9.3</span> <span class="title">Insulated boundary conditions in time-dependent problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-5" class="internal"><span class="codenumber">4.9.4</span> <span class="title">An example</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-insulated-BC.html#exercises-insulated-BC" class="internal"><span class="codenumber">4.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-FD-elliptic.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Finite Difference Method for Elliptic PDEs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-2" class="internal"><span class="codenumber">4.10.1</span> <span class="title">Examples of Elliptic PDEs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-3" class="internal"><span class="codenumber">4.10.2</span> <span class="title">The Finite Difference Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-4" class="internal"><span class="codenumber">4.10.3</span> <span class="title">Direct Solution of the Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-5" class="internal"><span class="codenumber">4.10.4</span> <span class="title">Iterative Solution</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-FD-elliptic.html#exercises-FD-elliptic" class="internal"><span class="codenumber">4.10.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-finiteelements.html" class="internal"><span class="codenumber">4.11</span> <span class="title">Finite Elements</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#subsec-" class="internal"><span class="codenumber">4.11.1</span> <span class="title">Triangulating a Region</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-3" class="internal"><span class="codenumber">4.11.2</span> <span class="title">What is a finite element?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-4" class="internal"><span class="codenumber">4.11.3</span> <span class="title">What is a finite element solution?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-5" class="internal"><span class="codenumber">4.11.4</span> <span class="title">Experiment with finite elements</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-6" class="internal"><span class="codenumber">4.11.5</span> <span class="title">Values at boundary nodes</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-finiteelements.html#exercises-finiteelements" class="internal"><span class="codenumber">4.11.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-determining-internal.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Determining Internal Node Values</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-3" class="internal"><span class="codenumber">4.12.1</span> <span class="title">Variational Principles</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-4" class="internal"><span class="codenumber">4.12.2</span> <span class="title">The finite element solution</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-5" class="internal"><span class="codenumber">4.12.3</span> <span class="title">Application to the steady state heat equation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-6" class="internal"><span class="codenumber">4.12.4</span> <span class="title">Experiment</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-determining-internal.html#exercises-determining-internal" class="internal"><span class="codenumber">4.12.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chapter4-review.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Review of Chapter 4</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2" class="internal"><span class="codenumber">4.13.1</span> <span class="title">Initial Value Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-2" class="internal"><span class="codenumber">4.13.1.1</span> <span class="title">Reduction to First order system:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-3" class="internal"><span class="codenumber">4.13.1.2</span> <span class="title">Euler’s method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-4" class="internal"><span class="codenumber">4.13.1.3</span> <span class="title">Modified (or Improved) Euler method:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3" class="internal"><span class="codenumber">4.13.2</span> <span class="title">Boundary Value Probems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-2" class="internal"><span class="codenumber">4.13.2.1</span> <span class="title">Finite Differences:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-3" class="internal"><span class="codenumber">4.13.2.2</span> <span class="title">Explicit Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-4" class="internal"><span class="codenumber">4.13.2.3</span> <span class="title">Implicit Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-5" class="internal"><span class="codenumber">4.13.2.4</span> <span class="title">Crank-Nicholson Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-6" class="internal"><span class="codenumber">4.13.2.5</span> <span class="title">Finite Difference Method for Elliptic PDEs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-7" class="internal"><span class="codenumber">4.13.2.6</span> <span class="title">Finite Elements:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-4" class="internal"><span class="codenumber">4.13.3</span> <span class="title">MATLAB</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="backmatter-2.html" class="internal"><span class="codenumber">A</span> <span class="title">Programs Used and MATLAB Reference</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-appendix-matlab.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Glossary of Select MATLAB Commands</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-2" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-3" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Built-in Mathematical Constants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-4" class="internal"><span class="codenumber">A.1.3</span> <span class="title">Built-in Mathematical Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-5" class="internal"><span class="codenumber">A.1.4</span> <span class="title">Built-in Numerical Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-6" class="internal"><span class="codenumber">A.1.5</span> <span class="title">Built-in Symbolic Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-7" class="internal"><span class="codenumber">A.1.6</span> <span class="title">Graphics Commands</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-8" class="internal"><span class="codenumber">A.1.7</span> <span class="title">Special MATLAB Commands</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-9" class="internal"><span class="codenumber">A.1.8</span> <span class="title">MATLAB Programming</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-10" class="internal"><span class="codenumber">A.1.9</span> <span class="title">Commands for Matrices and Linear Algebra</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-programs-used.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Programs Used</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-3.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="sec-matrices">
+<h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Matrices and Matrix Operations in MATLAB</span>
+</h2>
+<section class="introduction" id="sec-matrices-2">
+<div class="para" id="sec-matrices-2-1">You should review the vector operations in <a href="sec-vectors.html" class="internal" title="Section 1.1: Vectors, Functions, and Plots in MATLAB">Section 1.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section>
+<section class="subsection" id="sec-matrices-3">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Matrix operations</span>
+</h3>
+<div class="para logical" id="sec-matrices-3-2">
+<div class="para">Recall how to multiply a matrix <span class="process-math">\(A\)</span> times a vector <span class="process-math">\(\vb\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="sec-matrices-3-2-3">
+\begin{equation*}
+A \vb = \left( \begin{array}{cc}1 &amp; 2 \\ 3 &amp; 4 \\\end{array} \right) \left( \begin{array}{c}-1 \\ 2 \\\end{array} \right) = \left( \begin{array}{c}1 \cdot (-1) + 2 \cdot 2 \\ 3 \cdot (-1) + 4 \cdot 2 \\\end{array} \right) = \left( \begin{array}{c}3 \\ 5 \\\end{array} \right)\text{.}
+\end{equation*}
+</div>
+<div class="para">This is a special case of matrix multiplication. To multiply two matrices, <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> you proceed as follows:</div>
+<div class="displaymath process-math" id="sec-matrices-3-2-6">
+\begin{equation*}
+A B = \left( \begin{array}{cc}1 &amp; 2 \\ 3 &amp; 4 \\\end{array} \right) \left( \begin{array}{cc}-1 &amp; -2 \\ 2 &amp; 1\\\end{array} \right) = \left( \begin{array}{cc}-1 + 4 &amp; -2 + 2 \\ -3 + 8 &amp; -6 + 4 \\\end{array} \right) = \left( \begin{array}{cc}3 &amp; 0 \\ 5 &amp; -2 \\\end{array} \right)\text{.}
+\end{equation*}
+</div>
+<div class="para">Here both <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> are <span class="process-math">\(2 \times 2\)</span> matrices. Matrices can be multiplied together in this way provided that the number of columns of <span class="process-math">\(A\)</span> match the number of rows of <span class="process-math">\(B\text{.}\)</span> We always list the size of a matrix by rows, then columns, so a <span class="process-math">\(3 \times 5\)</span> matrix would have 3 rows and 5 columns. So, if <span class="process-math">\(A\)</span> is <span class="process-math">\(m \times n\)</span> and <span class="process-math">\(B\)</span> is <span class="process-math">\(p \times q\text{,}\)</span> then we can multiply <span class="process-math">\(AB\)</span> if and only if <span class="process-math">\(n = p\text{.}\)</span> A column vector can be thought of as a <span class="process-math">\(p \times 1\)</span> matrix and a row vector as a <span class="process-math">\(1 \times q\)</span> matrix. Unless otherwise specified we will assume a vector <span class="process-math">\(\vb\)</span> to be a column vector and so <span class="process-math">\(A\vb\)</span> makes sense as long as the number of columns of <span class="process-math">\(A\)</span> matches the number of entries in <span class="process-math">\(\vb\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-matrices-3-3">Printing matrices on the screen takes up a lot of space, so you may want to use <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>format compact
+</b></pre></div> Enter a matrix into MATLAB either as <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A = [ 1 3 -2 5 ; -1 -1 5 4 ; 0 1 -9 0]
+</b></pre></div> or <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A = [1,3,-2,5; -1,-1,5,4; 0,1,-9,0]
+</b></pre></div> Also enter a vector <span class="process-math">\(\ub\text{:}\)</span> <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>u = [ 1 2 3 4]'
+</b></pre></div> To multiply a matrix times a vector <span class="process-math">\(A\mathbf{u}\)</span> use <code class="code-inline tex2jax_ignore">*</code>: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A*u
+</b></pre></div> Since <span class="process-math">\(A\)</span> is 3 by 4 and <span class="process-math">\(\ub\)</span> is 4 by 1 this multiplication is valid and the result is a 3 by 1 vector.<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-matrices-3-4">Now enter another matrix <span class="process-math">\(B\)</span> using <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B = [3 2 1; 7 6 5; 4 3 2]
+</b></pre></div> You can multiply <span class="process-math">\(B\)</span> times <span class="process-math">\(A\)</span> with <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B*A
+</b></pre></div> but <span class="process-math">\(A\)</span> times <span class="process-math">\(B\)</span> is not defined and <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A*B
+</b></pre></div> will result in an error message.<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-matrices-3-5">You can multiply a matrix by a scalar: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>2*A
+</b></pre></div> Adding matrices <span class="process-math">\(A + A\)</span> will give the same result: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A + A
+</b></pre></div> You can even add a number to a matrix: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A + 3      % add 3 to every entry of A
+</b></pre></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 2.1.1: Matrix operations"><a href="#sec-matrices-3" title="Copy heading and permalink for Subsection 2.1.1: Matrix operations" aria-label="Copy heading and permalink for Subsection 2.1.1: Matrix operations">🔗</a></div>
+</section>
+<section class="subsection" id="sec-matrices-4">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Component-wise operations</span>
+</h3>
+<div class="para" id="sec-matrices-4-2">Just as for vectors, adding a ‘<code class="code-inline tex2jax_ignore">.</code>’ before ‘<code class="code-inline tex2jax_ignore">*</code>’, ‘<code class="code-inline tex2jax_ignore">/</code>’, or ‘<code class="code-inline tex2jax_ignore">^</code>’ produces entry-wise multiplication, division and exponentiation. If you enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B*B
+</b></pre></div> the result will be <span class="process-math">\(BB\text{,}\)</span> i.e. matrix multiplication of <span class="process-math">\(B\)</span> times itself. But, if you enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B.*B
+</b></pre></div> the entries of the resulting matrix will contain the squares of the same entries of <span class="process-math">\(B\text{.}\)</span> Similarly if you want <span class="process-math">\(B\)</span> multiplied by itself 3 times then enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B^3
+</b></pre></div> but, if you want to cube all the entries of B then enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>B.^3
+</b></pre></div> Note that <code class="code-inline tex2jax_ignore">B*B</code> and <code class="code-inline tex2jax_ignore">B^3</code> only make sense if <span class="process-math">\(B\)</span> is square, but <code class="code-inline tex2jax_ignore">B.*B</code> and <code class="code-inline tex2jax_ignore">B.^3</code> make sense for any size matrix.<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 2.1.2: Component-wise operations"><a href="#sec-matrices-4" title="Copy heading and permalink for Subsection 2.1.2: Component-wise operations" aria-label="Copy heading and permalink for Subsection 2.1.2: Component-wise operations">🔗</a></div>
+</section>
+<section class="subsection" id="sec-matrices-5">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The identity matrix and the inverse of a matrix</span>
+</h3>
+<div class="para logical" id="sec-matrices-5-2">
+<div class="para">The <span class="process-math">\(n \times n\)</span>  identity matrix is a square matrix with ones on the diagonal and zeros everywhere else. It is called the identity because it plays the same role that <span class="process-math">\(1\)</span> plays in multiplication, i.e.</div>
+<div class="displaymath process-math" id="sec-matrices-5-2-3">
+\begin{equation*}
+A I = A, \qquad I A = A, \qquad I \vb = \vb
+\end{equation*}
+</div>
+<div class="para">for any matrix <span class="process-math">\(A\)</span> or vector <span class="process-math">\(\vb\)</span> where the sizes match. An identity matrix in MATLAB is produced by the command <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>I = eye(3)
+</b></pre></div>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sec-matrices-5-3">
+<div class="para">A square matrix <span class="process-math">\(A\)</span> can have an  inverse which is denoted by <span class="process-math">\(A^{-1}\text{.}\)</span> The definition of the inverse is that</div>
+<div class="displaymath process-math" id="sec-matrices-5-3-3">
+\begin{equation*}
+A A^{-1}= I \qquad \text{and}\qquad A^{-1}A = I\text{.}
+\end{equation*}
+</div>
+<div class="para">In theory an inverse is very important, because if you have an equation</div>
+<div class="displaymath process-math" id="sec-matrices-5-3-4">
+\begin{equation*}
+A \xb = \bb
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(A\)</span> and <span class="process-math">\(\bb\)</span> are known and <span class="process-math">\(\xb\)</span> is unknown (as we will see, such problems are very common and important) then the theoretical solution is</div>
+<div class="displaymath process-math" id="sec-matrices-5-3-8">
+\begin{equation*}
+\xb = A^{-1}\bb\text{.}
+\end{equation*}
+</div>
+<div class="para">We will see later that this is not a practical way to solve an equation, and <span class="process-math">\(A^{-1}\)</span> is only important for the purpose of derivations.In MATLAB we can calculate a matrix’s inverse very conveniently: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>C = randn(5,5)
+</b><span class="prompt unselectable">&gt;&gt; </span><b>inv(C)
+</b></pre></div> However, not all square matrices have inverses: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>D = ones(5,5)
+</b><span class="prompt unselectable">&gt;&gt; </span><b>inv(D)
+</b></pre></div>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 2.1.3: The identity matrix and the inverse of a matrix"><a href="#sec-matrices-5" title="Copy heading and permalink for Subsection 2.1.3: The identity matrix and the inverse of a matrix" aria-label="Copy heading and permalink for Subsection 2.1.3: The identity matrix and the inverse of a matrix">🔗</a></div>
+</section>
+<section class="subsection" id="sec-matrices-6">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The “Norm” of a matrix</span>
+</h3>
+<div class="para" id="sec-matrices-6-2">For a vector, the “norm” means the same thing as the length (geometrically, not the number of entries). Another way to think of it is how far the vector is from being the zero vector. We want to measure a matrix in much the same way and the  norm is such a quantity. The usual definition of the norm of a matrix is<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="sec-matrices-6-3"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4>
+<div class="para logical" id="sec-matrices-6-3-1-1">
+<div class="para">Suppose <span class="process-math">\(A\)</span> is a <span class="process-math">\(m \times n\)</span> matrix. The norm of <span class="process-math">\(A\)</span> is</div>
+<div class="displaymath process-math" id="sec-matrices-6-3-1-1-4">
+\begin{equation*}
+\|A\| \equiv \max_{\|\vb\|=1}\|A\vb\|\text{.}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-6-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.1"><a href="#sec-matrices-6-3" title="Copy heading and permalink for Definition 2.1.1" aria-label="Copy heading and permalink for Definition 2.1.1">🔗</a></div>
+</article>
+<div class="para logical" id="sec-matrices-6-4">
+<div class="para">The maximum in the definition is taken over all vectors with length <span class="process-math">\(1\)</span> (unit vectors), so the definition means the largest factor that the matrix stretches (or shrinks) a unit vector. This definition seems cumbersome at first, but it turns out to be the best one. For example, with this definition we have the following inequality for any vector <span class="process-math">\(\vb\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="sec-matrices-6-4-3">
+\begin{equation*}
+\|A\vb\| \le \|A\| \|\vb\|\text{.}
+\end{equation*}
+</div>
+<div class="para">In MATLAB the norm of a matrix is obtained by the command <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>norm(A)
+</b></pre></div> For instance the norm of an identity matrix is <span class="process-math">\(1\text{:}\)</span> <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>norm(eye(100))
+</b></pre></div> and the norm of a zero matrix is <span class="process-math">\(0\text{:}\)</span> <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>norm(zeros(50,50))
+</b></pre></div>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-6-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-matrices-6-5">For a matrix the norm defined above and calculated by MATLAB is not the square root of the sum of the square of its entries. That quantity is called the  Froebenius norm, which is also sometimes useful, but we will not need it.<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-6-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description='Subsection 2.1.4: The "Norm" of a matrix'><a href="#sec-matrices-6" title='Copy heading and permalink for Subsection 2.1.4: The "Norm" of a matrix' aria-label='Copy heading and permalink for Subsection 2.1.4: The "Norm" of a matrix'>🔗</a></div>
+</section>
+<section class="subsection" id="sec-matrices-7">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Some other useful commands</span>
+</h3>
+<div class="para" id="sec-matrices-7-2">
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">C = rand(5,5)</code></td>
+<td class="l m b0 r0 l0 t0 lines">random matrix with uniform distribution in <span class="process-math">\([0,1]\text{.}\)</span>
+</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">size(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">gives the dimensions (<span class="process-math">\(m\times n\)</span>) of <span class="process-math">\(C\text{.}\)</span>
+</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">det(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">the determinant of the matrix.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">max(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">the maximum of each column.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">min(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">the minimum in each column.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sum(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">sums each column.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mean(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">the average of each column.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">diag(C)</code></td>
+<td class="l m b0 r0 l0 t0 lines">just the diagonal elements.</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">C'</code></td>
+<td class="l m b0 r0 l0 t0 lines">tranpose the matrix.</td>
+</tr>
+</table></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-matrices-7-3">In addition to <code class="code-inline tex2jax_ignore">ones</code>, <code class="code-inline tex2jax_ignore">eye</code>, <code class="code-inline tex2jax_ignore">zeros</code>, <code class="code-inline tex2jax_ignore">rand</code> and <code class="code-inline tex2jax_ignore">randn</code>, MATLAB has several other commands that automatically produce special matrices: <code class="code-inline tex2jax_ignore">hilb(6)</code> <code class="code-inline tex2jax_ignore">pascal(5)</code><div class="autopermalink" data-description="Paragraph"><a href="#sec-matrices-7-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 2.1.5: Some other useful commands"><a href="#sec-matrices-7" title="Copy heading and permalink for Subsection 2.1.5: Some other useful commands" aria-label="Copy heading and permalink for Subsection 2.1.5: Some other useful commands">🔗</a></div>
+</section>
+<section class="exercises" id="exercises-matrices">
+<h3 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="exercises-matrices-1"><h4 class="heading"><span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para logical" id="exercises-matrices-1-1">
+<div class="para">Enter the matrix <span class="process-math">\(A\)</span> by <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>A = [3 2 1; 6 5 4; 9 8 7]
+</b></pre></div> and also the matrix</div>
+<div class="displaymath process-math" id="exercises-matrices-1-1-3">
+\begin{equation*}
+B = \left[{\begin{array}{rrr}7 &amp; 8 &amp; 9 \\ 4 &amp; 5 &amp; 6 \\ 1 &amp; 2 &amp; 3\end{array}}\right]\,\text{.}
+\end{equation*}
+</div>
+<div class="para">Find</div>
+<ol class="lower-alpha lower-alpha-level-1 cols3 multicolumn" id="exercises-matrices-1-1-4">
+<li id="exercises-matrices-1-1-4-1">
+<div class="para" id="exercises-matrices-1-1-4-1-1">
+<code class="code-inline tex2jax_ignore">A*A</code><div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2.1.6.1.a"><a href="#exercises-matrices-1-1-4-1" title="Copy heading and permalink for Item 2.1.6.1.a" aria-label="Copy heading and permalink for Item 2.1.6.1.a">🔗</a></div>
+</li>
+<li id="exercises-matrices-1-1-4-2">
+<div class="para" id="exercises-matrices-1-1-4-2-1">
+<code class="code-inline tex2jax_ignore">A^2</code><div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2.1.6.1.b"><a href="#exercises-matrices-1-1-4-2" title="Copy heading and permalink for Item 2.1.6.1.b" aria-label="Copy heading and permalink for Item 2.1.6.1.b">🔗</a></div>
+</li>
+<li id="exercises-matrices-1-1-4-3">
+<div class="para" id="exercises-matrices-1-1-4-3-1">
+<code class="code-inline tex2jax_ignore">A.^2</code><div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1-4-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2.1.6.1.c"><a href="#exercises-matrices-1-1-4-3" title="Copy heading and permalink for Item 2.1.6.1.c" aria-label="Copy heading and permalink for Item 2.1.6.1.c">🔗</a></div>
+</li>
+<li id="exercises-matrices-1-1-4-4">
+<div class="para" id="exercises-matrices-1-1-4-4-1">
+<code class="code-inline tex2jax_ignore">A.*B</code><div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1-4-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2.1.6.1.d"><a href="#exercises-matrices-1-1-4-4" title="Copy heading and permalink for Item 2.1.6.1.d" aria-label="Copy heading and permalink for Item 2.1.6.1.d">🔗</a></div>
+</li>
+<li id="exercises-matrices-1-1-4-5">
+<div class="para" id="exercises-matrices-1-1-4-5-1">
+<code class="code-inline tex2jax_ignore">A*B</code><div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1-4-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2.1.6.1.e"><a href="#exercises-matrices-1-1-4-5" title="Copy heading and permalink for Item 2.1.6.1.e" aria-label="Copy heading and permalink for Item 2.1.6.1.e">🔗</a></div>
+</li>
+</ol>
+<div class="para">Turn in the output.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 2.1.6.1"><a href="#exercises-matrices-1" title="Copy heading and permalink for Exercise 2.1.6.1" aria-label="Copy heading and permalink for Exercise 2.1.6.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="exercises-matrices-2"><h4 class="heading"><span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para logical" id="exercises-matrices-2-1">
+<div class="para">By hand, calculate <span class="process-math">\(A \vb\text{,}\)</span> <span class="process-math">\(AB\text{,}\)</span> and <span class="process-math">\(BA\)</span> for:</div>
+<div class="displaymath process-math" id="exercises-matrices-2-1-4">
+\begin{equation*}
+A = \left( \begin{array}{ccc}2 &amp; 4 &amp; -1 \\ -2 &amp; 1 &amp; 9 \\ -1 &amp; -1 &amp; 0 \\\end{array} \right), \quad B = \left( \begin{array}{ccc}0 &amp; -1 &amp; -1 \\ 1 &amp; 0 &amp; 2 \\ -1 &amp; -2 &amp; 0 \\\end{array} \right), \quad \vb = \left( \begin{array}{c}3 \\ 1 \\ -1 \\\end{array} \right)\text{.}
+\end{equation*}
+</div>
+<div class="para">Check the results using MATLAB. Think about how fast computers are. Turn in your hand work.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 2.1.6.2"><a href="#exercises-matrices-2" title="Copy heading and permalink for Exercise 2.1.6.2" aria-label="Copy heading and permalink for Exercise 2.1.6.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="exercises-matrices-3"><h4 class="heading"><span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para logical" id="exercises-matrices-3-1">
+<div class="para">Write a well-commented MATLAB <em class="alert">function</em> program <code class="code-inline tex2jax_ignore">myinvcheck</code> that</div>
+<ul class="disc" id="exercises-matrices-3-1-3">
+<li id="exercises-matrices-3-1-3-1">
+<div class="para" id="exercises-matrices-3-1-3-1-1">makes a <span class="process-math">\(n \times n\)</span> random matrix (normally distributed, <code class="code-inline tex2jax_ignore">A = randn(n,n)</code>),<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#exercises-matrices-3-1-3-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="exercises-matrices-3-1-3-2">
+<div class="para" id="exercises-matrices-3-1-3-2-1">calculates its inverse (<code class="code-inline tex2jax_ignore">B = inv(A)</code>),<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#exercises-matrices-3-1-3-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="exercises-matrices-3-1-3-3">
+<div class="para" id="exercises-matrices-3-1-3-3-1">multiplies the two back together,<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1-3-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#exercises-matrices-3-1-3-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="exercises-matrices-3-1-3-4">
+<div class="para" id="exercises-matrices-3-1-3-4-1">calculates the residual (difference between <span class="process-math">\(AB\)</span> and <code class="code-inline tex2jax_ignore">eye(n)</code>), and<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1-3-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#exercises-matrices-3-1-3-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="exercises-matrices-3-1-3-5">
+<div class="para" id="exercises-matrices-3-1-3-5-1">returns the scalar residual (norm of the difference).<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1-3-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#exercises-matrices-3-1-3-5" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para">Turn in your program.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 2.1.6.3"><a href="#exercises-matrices-3" title="Copy heading and permalink for Exercise 2.1.6.3" aria-label="Copy heading and permalink for Exercise 2.1.6.3">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="exercises-matrices-4"><h4 class="heading"><span class="codenumber">4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para" id="exercises-matrices-4-1">Write a well-commented MATLAB <em class="alert">script</em> program <code class="code-inline tex2jax_ignore">myinvcheckplot</code> that calls <code class="code-inline tex2jax_ignore">myinvcheck</code> for <span class="process-math">\(n=10,20,40,\ldots,2^{i}10\)</span> for <span class="process-math">\(i\)</span> as large as possible, records the results of each trial, and plots the scalar residual versus <code class="code-inline tex2jax_ignore">n</code> using a log plot. (See <code class="code-inline tex2jax_ignore">help loglog</code>.)<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="exercises-matrices-4-2">What happens to the scalar residual as <span class="process-math">\(n\)</span> gets big? Turn in the program, the plot, and a very brief report on the results of your experiments. (Do not print any large random matrices.)<div class="autopermalink" data-description="Paragraph"><a href="#exercises-matrices-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 2.1.6.4"><a href="#exercises-matrices-4" title="Copy heading and permalink for Exercise 2.1.6.4" aria-label="Copy heading and permalink for Exercise 2.1.6.4">🔗</a></div>
+</article><div class="autopermalink" data-description="Exercises 2.1.6"><a href="#exercises-matrices" title="Copy heading and permalink for Exercises 2.1.6" aria-label="Copy heading and permalink for Exercises 2.1.6">🔗</a></div>
+</section><div class="autopermalink" data-description="Section 2.1: Matrices and Matrix Operations in MATLAB"><a href="#sec-matrices" title="Copy heading and permalink for Section 2.1: Matrices and Matrix Operations in MATLAB" aria-label="Copy heading and permalink for Section 2.1: Matrices and Matrix Operations in MATLAB">🔗</a></div>
+</section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="chapter-linear.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-intro_linsys.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.5.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mybisect<div class="autopermalink" data-description="Listing 1.5.2: mybisect"><a href="#prg-mybisect" title="Copy heading and permalink for Listing 1.5.2: mybisect" aria-label="Copy heading and permalink for Listing 1.5.2: mybisect">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function [x e] = mybisect(f,a,b,n)
+    % function [x e] = mybisect(f,a,b,n)
+    % Does n iterations of the bisection method for a function f
+    % Inputs: f -- a function
+    %         a,b -- left and right edges of the interval
+    %         n -- the number of bisections to do.
+    % Outputs: x -- the estimated solution of f(x) = 0
+    %          e -- an upper bound on the error
+
+    % evaluate at the ends and make sure there is a sign change
+    c = f(a); d = f(b); 
+    if c*d &gt; 0.0
+        error('Function has same sign at both endpoints.')
+    end
+    for i = 1:n
+        % find the middle and evaluate there
+        x = (a + b)/2;
+        y = f(x);
+        if y == 0.0     % solved the equation exactly
+            a = x;
+            b = x;
+            break      % jumps out of the for loop
+        end
+        % decide which half to keep, so that the signs at the ends differ
+        if c*y &lt; 0
+            b=x;
+        else
+            a=x;
+        end
+    end
+    % set the best estimate for x and the error bound
+    x = (a + b)/2;
+    e = (b-a)/2;
+end
+</code></pre></div></div>
+</figure><span class="incontext"><a class="internal" href="sec-bisection.html#prg-mybisect">In Context</a></span>
+</body>
+</html>

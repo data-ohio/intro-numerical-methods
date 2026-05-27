@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Programs Used</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script type="module">import { startMathJax } from './_static/pretext/js/mathjax_startup.js';
+startMathJax({
+hasWebworkReps: false,
+hasSage: false,
+isReact: false,
+htmlPresentation: false,
+});
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Introduction to Numerical Methods and Matlab Programming for Engineers">
+<meta property="book:author" content="Todd Young">
+<meta property="book:author" content="Martin J. Mohlenkamp">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.1.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.dcab57465a404e85.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.79fbb790b185d712.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="intro-numerical-methods" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="intro-numerical-methods.html"><span class="title">Introduction to Numerical Methods and Matlab Programming for Engineers</span></a></h1>
+<p class="byline">Todd Young, Martin J. Mohlenkamp</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-appendix-matlab.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="backmatter-2.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="backmatter-3.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} 
+   \newcommand{\bb}{\mathbf{b}}
+   \newcommand{\fb}{\mathbf{f}}
+   \newcommand{\rb}{\mathbf{r}}
+   \newcommand{\ub}{\mathbf{u}}
+   \newcommand{\vb}{\mathbf{v}}
+   \newcommand{\wb}{\mathbf{w}}
+   \newcommand{\xb}{\mathbf{x}}
+   \newcommand{\yb}{\mathbf{y}}
+   \newcommand{\zb}{\mathbf{z}}
+   \newcommand{\Eb}{\mathbf{E}}
+   \newcommand{\Ub}{\mathbf{U}}
+   \newcommand{\ew}{\textbf{ew}}
+   \newcommand{\ev}{\textbf{ev}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-4.html" class="internal"><span class="title">Preface</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">MATLAB and Solving Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vectors.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Functions, and Plots in MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-2" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Entering vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-3" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Basic Formatting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-4" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Plotting Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-5" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Data as a Representation of a Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-6" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Built-in Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-7" class="internal"><span class="codenumber">1.1.6</span> <span class="title">User-Defined Anonymous Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-8" class="internal"><span class="codenumber">1.1.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-programs.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matlab Programs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-programs.html#sec-programs-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Function Programs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-3-3" class="internal"><span class="codenumber">1.2.1.1</span> <span class="title">Printing, Returning, Capturing, and Printing</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Script Programs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-5" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Program Comments</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-programs.html#sec-programs-6" class="internal"><span class="codenumber">1.2.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-newton.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Newton’s Method and Loops</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-2" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Solving equations numerically</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-3" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Newton iterations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-4" class="internal"><span class="codenumber">1.3.3</span> <span class="title">The loop: <code class="code-inline tex2jax_ignore">for ... end</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-newton.html#sec-newton-5" class="internal"><span class="codenumber">1.3.4</span> <span class="title">Convergence</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-newton.html#exercises-newton" class="internal"><span class="codenumber">1.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-conditional.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Controlling Error and Conditional Statements</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-2" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Measuring error and the Residual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-3" class="internal"><span class="codenumber">1.4.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">if ... end</code> statement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-conditional.html#sec-conditional-4" class="internal"><span class="codenumber">1.4.3</span> <span class="title">The loop: <code class="code-inline tex2jax_ignore">while ... end</code></span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-conditional.html#exercises-conditional" class="internal"><span class="codenumber">1.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-bisection.html" class="internal"><span class="codenumber">1.5</span> <span class="title">The Bisection Method and Locating Roots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-2" class="internal"><span class="codenumber">1.5.1</span> <span class="title">Bisecting and the <code class="code-inline tex2jax_ignore">if ... else ... end</code> statement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-3" class="internal"><span class="codenumber">1.5.2</span> <span class="title">Bounding the Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-bisection.html#sec-bisection-4" class="internal"><span class="codenumber">1.5.3</span> <span class="title">Locating the roots (if any)</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-bisection.html#exercises-bisection" class="internal"><span class="codenumber">1.5.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-secant.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Secant Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-3" class="internal"><span class="codenumber">1.6.1</span> <span class="title">The Secant Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-4" class="internal"><span class="codenumber">1.6.2</span> <span class="title">The  Regula Falsi (False Position) Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-5" class="internal"><span class="codenumber">1.6.3</span> <span class="title">Convergence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-secant.html#sec-secant-6" class="internal"><span class="codenumber">1.6.4</span> <span class="title">Simulations and Experiments</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-secant.html#exercises-secant" class="internal"><span class="codenumber">1.6.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-symbolic.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Symbolic Computations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-3" class="internal"><span class="codenumber">1.7.1</span> <span class="title">Defining functions and basic operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-4" class="internal"><span class="codenumber">1.7.2</span> <span class="title">Functions of Two Variables and Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-5" class="internal"><span class="codenumber">1.7.3</span> <span class="title">Other useful symbolic operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-symbolic.html#sec-symbolic-6" class="internal"><span class="codenumber">1.7.4</span> <span class="title">New Notation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-symbolic.html#exercises-symbolic" class="internal"><span class="codenumber">1.7.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chp1-review.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Review of Chapter 1</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2" class="internal"><span class="codenumber">1.8.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-2" class="internal"><span class="codenumber">1.8.1.1</span> <span class="title">Solving equations numerically:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-3" class="internal"><span class="codenumber">1.8.1.2</span> <span class="title">Newton’s method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-4" class="internal"><span class="codenumber">1.8.1.3</span> <span class="title">Bisection method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-5" class="internal"><span class="codenumber">1.8.1.4</span> <span class="title">Secant method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-6" class="internal"><span class="codenumber">1.8.1.5</span> <span class="title">Regula Falsi</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-7" class="internal"><span class="codenumber">1.8.1.6</span> <span class="title">Convergence:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-8" class="internal"><span class="codenumber">1.8.1.7</span> <span class="title">Locating roots:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-2-9" class="internal"><span class="codenumber">1.8.1.8</span> <span class="title">Usage:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3" class="internal"><span class="codenumber">1.8.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-2" class="internal"><span class="codenumber">1.8.2.1</span> <span class="title">Commands:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-3" class="internal"><span class="codenumber">1.8.2.2</span> <span class="title">Program structures:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-4" class="internal"><span class="codenumber">1.8.2.3</span> <span class="title">Function Programs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-5" class="internal"><span class="codenumber">1.8.2.4</span> <span class="title">Script Programs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp1-review.html#sec-chp1-review-3-6" class="internal"><span class="codenumber">1.8.2.5</span> <span class="title">Symbolic:</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-linear.html" class="internal"><span class="codenumber">2</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matrices.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Matrices and Matrix Operations in MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-3" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Matrix operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-4" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Component-wise operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-5" class="internal"><span class="codenumber">2.1.3</span> <span class="title">The identity matrix and the inverse of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-6" class="internal"><span class="codenumber">2.1.4</span> <span class="title">The “Norm” of a matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matrices.html#sec-matrices-7" class="internal"><span class="codenumber">2.1.5</span> <span class="title">Some other useful commands</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-matrices.html#exercises-matrices" class="internal"><span class="codenumber">2.1.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro_linsys.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Introduction to Linear Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-2" class="internal"><span class="codenumber">2.2.1</span> <span class="title">How linear systems occur</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#subsec-LSME" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Linear systems are equivalent to matrix equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-4" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Triangular matrices and back substitution</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-5" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Gaussian Elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_linsys.html#sec-intro_linsys-6" class="internal"><span class="codenumber">2.2.5</span> <span class="title">MATLAB’s matrix solve command</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-intro_linsys.html#exercises-intro_linsys" class="internal"><span class="codenumber">2.2.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-lineartheory.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Some Facts About Linear Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-2" class="internal"><span class="codenumber">2.3.1</span> <span class="title">Some inconvenient truths</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-3" class="internal"><span class="codenumber">2.3.2</span> <span class="title">Basic theory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-lineartheory.html#sec-lineartheory-4" class="internal"><span class="codenumber">2.3.3</span> <span class="title">The Residual</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-lineartheory.html#exercises-lineartheory" class="internal"><span class="codenumber">2.3.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-accuracy.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Accuracy, Condition Numbers and Pivoting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-3" class="internal"><span class="codenumber">2.4.1</span> <span class="title">The effect of rounding</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-4" class="internal"><span class="codenumber">2.4.2</span> <span class="title">Row Pivoting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-accuracy.html#sec-accuracy-5" class="internal"><span class="codenumber">2.4.3</span> <span class="title">Condition number</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-accuracy.html#exercises-accuracy" class="internal"><span class="codenumber">2.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-LU.html" class="internal"><span class="codenumber">2.5</span> <span class="title">LU Decomposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LU.html#sec-LU-3" class="internal"><span class="codenumber">2.5.1</span> <span class="title">LU decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LU.html#sec-LU-4" class="internal"><span class="codenumber">2.5.2</span> <span class="title">Using LU to solve equations</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-LU.html#exercises-LU" class="internal"><span class="codenumber">2.5.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-multnewton.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Nonlinear Systems - Newton’s Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-2" class="internal"><span class="codenumber">2.6.1</span> <span class="title">An Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-3" class="internal"><span class="codenumber">2.6.2</span> <span class="title">Vector Notation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-4" class="internal"><span class="codenumber">2.6.3</span> <span class="title">Linear Approximation for Vector Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-5" class="internal"><span class="codenumber">2.6.4</span> <span class="title">Newton’s Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-multnewton.html#sec-multnewton-6" class="internal"><span class="codenumber">2.6.5</span> <span class="title">An Experiment</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-multnewton.html#exercises-multnewton" class="internal"><span class="codenumber">2.6.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-eigen.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-3" class="internal"><span class="codenumber">2.7.1</span> <span class="title">Finding Eigenvalues for <span class="process-math">\(2\times 2\)</span> and <span class="process-math">\(3\times3\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-4" class="internal"><span class="codenumber">2.7.2</span> <span class="title">Larger Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-eigen.html#sec-eigen-5" class="internal"><span class="codenumber">2.7.3</span> <span class="title">Complex Eigenvalues</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-eigen.html#exercises-eign" class="internal"><span class="codenumber">2.7.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vibration.html" class="internal"><span class="codenumber">2.8</span> <span class="title">An Application of Eigenvectors: Vibrational Modes and Frequencies</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vibration.html#exercises-vibration" class="internal"><span class="codenumber">2.8</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-EWmeth.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Numerical Methods for Eigenvalues</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-3" class="internal"><span class="codenumber">2.9.1</span> <span class="title">The Power Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-4" class="internal"><span class="codenumber">2.9.2</span> <span class="title">Symmetric, Positive-Definite Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-5" class="internal"><span class="codenumber">2.9.3</span> <span class="title">The residual of an approximate eigenvector-eigenvalue pair</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-EWmeth.html#sec-EWmeth-6" class="internal"><span class="codenumber">2.9.4</span> <span class="title">The Inverse Power Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-EWmeth.html#exercises-EWmeth" class="internal"><span class="codenumber">2.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-QR.html" class="internal"><span class="codenumber">2.10</span> <span class="title">The QR Method*</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-QR.html#exercises-QR" class="internal"><span class="codenumber">2.10</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chapter2-review.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Review of Chapter 2</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2" class="internal"><span class="codenumber">2.11.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-2" class="internal"><span class="codenumber">2.11.1.1</span> <span class="title">Basic Matrix Theory:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-3" class="internal"><span class="codenumber">2.11.1.2</span> <span class="title">Solving Process:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-4" class="internal"><span class="codenumber">2.11.1.3</span> <span class="title">Condition number:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-5" class="internal"><span class="codenumber">2.11.1.4</span> <span class="title">LU factorization:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-6" class="internal"><span class="codenumber">2.11.1.5</span> <span class="title">Eigenvalues and eigenvectors:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-7" class="internal"><span class="codenumber">2.11.1.6</span> <span class="title">Complex eigenvalues:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-8" class="internal"><span class="codenumber">2.11.1.7</span> <span class="title">Vibrational modes:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-9" class="internal"><span class="codenumber">2.11.1.8</span> <span class="title">Power Method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-10" class="internal"><span class="codenumber">2.11.1.9</span> <span class="title">Inverse Power Method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-11" class="internal"><span class="codenumber">2.11.1.10</span> <span class="title">Symmetric and Positive definite:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-2-12" class="internal"><span class="codenumber">2.11.1.11</span> <span class="title">QR method (Not covered in MATH 3600 at Ohio University):</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3" class="internal"><span class="codenumber">2.11.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-2" class="internal"><span class="codenumber">2.11.2.1</span> <span class="title">Matrix arithmetic:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-3" class="internal"><span class="codenumber">2.11.2.2</span> <span class="title">Special matrices:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-4" class="internal"><span class="codenumber">2.11.2.3</span> <span class="title">General matrix commands:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter2-review.html#sec-chapter2-review-3-5" class="internal"><span class="codenumber">2.11.2.4</span> <span class="title">Matrix decompositions:</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions and Data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-interpolation.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Polynomial and Spline Interpolation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-2" class="internal"><span class="codenumber">3.1.1</span> <span class="title">A Chemical Reaction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-3" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Polynomial Interpolation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-4" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Predicting the future?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-5" class="internal"><span class="codenumber">3.1.4</span> <span class="title">More data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-6" class="internal"><span class="codenumber">3.1.5</span> <span class="title">A challenging data set</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-7" class="internal"><span class="codenumber">3.1.6</span> <span class="title">The idea of a spline</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-interpolation.html#sec-interpolation-8" class="internal"><span class="codenumber">3.1.7</span> <span class="title">Cubic spline</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-interpolation.html#exercises-interpolation" class="internal"><span class="codenumber">3.1.8</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-leastsquares.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Least Squares Fitting: Noisy Data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-3" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Traffic flow model</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-4" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Least squares</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-4-3" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">Linear least squares</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-leastsquares.html#sec-leastsquares-5" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Drag coefficients</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-leastsquares.html#exercises-leastsquares" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-LRTrules.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Integration: Left, Right and Trapezoid Rules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-2" class="internal"><span class="codenumber">3.3.1</span> <span class="title">The Left and Right endpoint rules</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-3" class="internal"><span class="codenumber">3.3.2</span> <span class="title">The Trapezoid rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-4" class="internal"><span class="codenumber">3.3.3</span> <span class="title">Using the Trapezoid rule for areas in the plane</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-LRTrules.html#sec-LRTrules-5" class="internal"><span class="codenumber">3.3.4</span> <span class="title">Vector Operations using Slicing and Summing</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-LRTrules.html#exercises-LRTrules" class="internal"><span class="codenumber">3.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-MSrules.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Integration: Midpoint and Simpson’s Rules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-2" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Midpoint rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-3" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Simpson’s rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-MSrules.html#sec-MSrules-4" class="internal"><span class="codenumber">3.4.3</span> <span class="title">Error bounds</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-MSrules.html#exercises-MSrules" class="internal"><span class="codenumber">3.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-plotting-two.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Plotting Functions of Two Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plotting-two.html#sec-plotting-two-2" class="internal"><span class="codenumber">3.5.1</span> <span class="title">Functions on Rectangular Grids</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plotting-two.html#sec-plotting-two-3" class="internal"><span class="codenumber">3.5.2</span> <span class="title">Scattered Data and Triangulation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-plotting-two.html#exercises-plotting-two" class="internal"><span class="codenumber">3.5.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-maxmingrad.html" class="internal"><span class="codenumber">3.6</span> <span class="title">The Gradient and Max-Min Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-2" class="internal"><span class="codenumber">3.6.1</span> <span class="title">The gradient of a function of multiple variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-3" class="internal"><span class="codenumber">3.6.2</span> <span class="title">Optimization in multiple variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-maxmingrad.html#sec-maxmingrad-4" class="internal"><span class="codenumber">3.6.3</span> <span class="title">The gradient ascent or descent method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-maxmingrad.html#exercises-maxmingrad" class="internal"><span class="codenumber">3.6.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-double-int-rect.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Double Integrals for Rectangles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-2" class="internal"><span class="codenumber">3.7.1</span> <span class="title">The center point method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-3" class="internal"><span class="codenumber">3.7.2</span> <span class="title">The four corners method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-rect.html#sec-double-int-rect-4" class="internal"><span class="codenumber">3.7.3</span> <span class="title">The double Simpson method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-double-int-rect.html#exercises-double-int-rect" class="internal"><span class="codenumber">3.7.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-double-int-non.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Double Integrals for Non-rectangles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-non.html#sec-double-int-non-3" class="internal"><span class="codenumber">3.8.1</span> <span class="title">Redefining the function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-double-int-non.html#sec-double-int-non-4" class="internal"><span class="codenumber">3.8.2</span> <span class="title">Integration Based on Triangles</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-double-int-non.html#exercises-double-int-non" class="internal"><span class="codenumber">3.8.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-differentiation.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Numerical Differentiation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-2" class="internal"><span class="codenumber">3.9.1</span> <span class="title">Approximating derivatives from data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-3" class="internal"><span class="codenumber">3.9.2</span> <span class="title">An example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-4" class="internal"><span class="codenumber">3.9.3</span> <span class="title">Errors of approximation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-differentiation.html#sec-differentiation-5" class="internal"><span class="codenumber">3.9.4</span> <span class="title">Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-differentiation.html#exercises-differentiation" class="internal"><span class="codenumber">3.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-main-error.html" class="internal"><span class="codenumber">3.10</span> <span class="title">The Main Sources of Error</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-2" class="internal"><span class="codenumber">3.10.1</span> <span class="title">Truncation Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-3" class="internal"><span class="codenumber">3.10.2</span> <span class="title">Roundoff Error</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-4" class="internal"><span class="codenumber">3.10.3</span> <span class="title">Loss of Precision (also called Loss of Significance)</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-5" class="internal"><span class="codenumber">3.10.4</span> <span class="title">Bad Conditioning</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-main-error.html#sec-main-error-6" class="internal"><span class="codenumber">3.10.5</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-main-error.html#exercises-main-error" class="internal"><span class="codenumber">3.10.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chp3-review.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Review of Chapter 3</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2" class="internal"><span class="codenumber">3.11.1</span> <span class="title">Methods and Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-2" class="internal"><span class="codenumber">3.11.1.1</span> <span class="title">Polynomial Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-3" class="internal"><span class="codenumber">3.11.1.2</span> <span class="title">Spline Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-4" class="internal"><span class="codenumber">3.11.1.3</span> <span class="title">Least Squares:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-5" class="internal"><span class="codenumber">3.11.1.4</span> <span class="title">Interpolation vs. Extrapolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-6" class="internal"><span class="codenumber">3.11.1.5</span> <span class="title">Numerical Integration:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-7" class="internal"><span class="codenumber">3.11.1.6</span> <span class="title">Numerical Integration Rules with Even Spacing:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-8" class="internal"><span class="codenumber">3.11.1.7</span> <span class="title">Simpson’s rule:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-9" class="internal"><span class="codenumber">3.11.1.8</span> <span class="title">Area of a region:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-10" class="internal"><span class="codenumber">3.11.1.9</span> <span class="title">Accuracy of integration rules:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-11" class="internal"><span class="codenumber">3.11.1.10</span> <span class="title">Double Integrals on Rectangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-12" class="internal"><span class="codenumber">3.11.1.11</span> <span class="title">Integration based on triangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-13" class="internal"><span class="codenumber">3.11.1.12</span> <span class="title">Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-2-14" class="internal"><span class="codenumber">3.11.1.13</span> <span class="title">Sources of error:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3" class="internal"><span class="codenumber">3.11.2</span> <span class="title">MATLAB</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-2" class="internal"><span class="codenumber">3.11.2.1</span> <span class="title">Data Interpolation:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-3" class="internal"><span class="codenumber">3.11.2.2</span> <span class="title">Functions of 2 Variables and Meshgrids:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-4" class="internal"><span class="codenumber">3.11.2.3</span> <span class="title">Integration:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-5" class="internal"><span class="codenumber">3.11.2.4</span> <span class="title">Integration over non-rectangles:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chp3-review.html#sec-chp3-review-3-6" class="internal"><span class="codenumber">3.11.2.5</span> <span class="title">Logical expressions</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-differential.html" class="internal"><span class="codenumber">4</span> <span class="title">Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-reduction.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Reduction of Higher Order Equations to Systems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-2" class="internal"><span class="codenumber">4.1.1</span> <span class="title">The motion of a pendulum</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-3" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Converting a general higher order equation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reduction.html#sec-reduction-4" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Using MATLAB to solve a system of ODE’s</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-reduction.html#exercises-reduction" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-euler.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Euler Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-2" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Numerical Solution of an IVP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-3" class="internal"><span class="codenumber">4.2.2</span> <span class="title">The Euler Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-4" class="internal"><span class="codenumber">4.2.3</span> <span class="title">The problem with the Euler method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-euler.html#sec-euler-5" class="internal"><span class="codenumber">4.2.4</span> <span class="title">The Modified Euler Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-euler.html#exercises-euler" class="internal"><span class="codenumber">4.2.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-higher-order.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Higher Order Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-2" class="internal"><span class="codenumber">4.3.1</span> <span class="title">The order of a method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-3" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Fourth Order Runge-Kutta</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-4" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Variable Step Size and RK45</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-higher-order.html#sec-higher-order-5" class="internal"><span class="codenumber">4.3.4</span> <span class="title">Why order matters</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-higher-order.html#exercises-higher-order" class="internal"><span class="codenumber">4.3.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-ODE-BVP.html" class="internal"><span class="codenumber">4.4</span> <span class="title">ODE Boundary Value Problems and Finite Differences</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-2" class="internal"><span class="codenumber">4.4.1</span> <span class="title">Steady State Heat and Diffusion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-3" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Beam With Tension</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ODE-BVP.html#sec-ODE-BVP-4" class="internal"><span class="codenumber">4.4.3</span> <span class="title">Finite Difference Method – Linear ODE</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-ODE-BVP.html#exercises-ODE-BVP" class="internal"><span class="codenumber">4.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-FD-NODE.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Finite Difference Method – Nonlinear ODE</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-2" class="internal"><span class="codenumber">4.5.1</span> <span class="title">Heat conduction with radiation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-3" class="internal"><span class="codenumber">4.5.2</span> <span class="title">Relaxation Method for Nonlinear Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-NODE.html#sec-FD-NODE-4" class="internal"><span class="codenumber">4.5.3</span> <span class="title">Implementing the Relaxation Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-FD-NODE.html#exercises-FD-NODE" class="internal"><span class="codenumber">4.5.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-parabolic-explicit.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Parabolic PDEs - Explicit Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-2" class="internal"><span class="codenumber">4.6.1</span> <span class="title">Heat Flow and Diffusion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-3" class="internal"><span class="codenumber">4.6.2</span> <span class="title">Explicit Method Finite Differences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-4" class="internal"><span class="codenumber">4.6.3</span> <span class="title">Initial Condition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-5" class="internal"><span class="codenumber">4.6.4</span> <span class="title">Boundary Conditions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#sec-parabolic-explicit-6" class="internal"><span class="codenumber">4.6.5</span> <span class="title">Implementation</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-parabolic-explicit.html#exercises-parabolic-explicit" class="internal"><span class="codenumber">4.6.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-instability-explicit.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Solution Instability for the Explicit Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-instability-explicit.html#sec-instability-explicit-3" class="internal"><span class="codenumber">4.7.1</span> <span class="title">Writing the Difference Equations in Matrix Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-instability-explicit.html#sec-instability-explicit-4" class="internal"><span class="codenumber">4.7.2</span> <span class="title">Consequences</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-instability-explicit.html#exercises-instability-explicit" class="internal"><span class="codenumber">4.7.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-implicit-methods.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Implicit Methods</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-implicit-methods.html#sec-implicit-methods-2" class="internal"><span class="codenumber">4.8.1</span> <span class="title">The Implicit Difference Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-implicit-methods.html#sec-implicit-methods-3" class="internal"><span class="codenumber">4.8.2</span> <span class="title">Crank-Nicholson Method</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-implicit-methods.html#exercises-implicit-methods" class="internal"><span class="codenumber">4.8.3</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-insulated-BC.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Insulated Boundary Conditions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-2" class="internal"><span class="codenumber">4.9.1</span> <span class="title">Insulation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-3" class="internal"><span class="codenumber">4.9.2</span> <span class="title">Implementation in a linear equation by elimination</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-time" class="internal"><span class="codenumber">4.9.3</span> <span class="title">Insulated boundary conditions in time-dependent problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-insulated-BC.html#sec-insulated-BC-5" class="internal"><span class="codenumber">4.9.4</span> <span class="title">An example</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-insulated-BC.html#exercises-insulated-BC" class="internal"><span class="codenumber">4.9.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-FD-elliptic.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Finite Difference Method for Elliptic PDEs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-2" class="internal"><span class="codenumber">4.10.1</span> <span class="title">Examples of Elliptic PDEs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-3" class="internal"><span class="codenumber">4.10.2</span> <span class="title">The Finite Difference Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-4" class="internal"><span class="codenumber">4.10.3</span> <span class="title">Direct Solution of the Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-FD-elliptic.html#sec-FD-elliptic-5" class="internal"><span class="codenumber">4.10.4</span> <span class="title">Iterative Solution</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-FD-elliptic.html#exercises-FD-elliptic" class="internal"><span class="codenumber">4.10.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-finiteelements.html" class="internal"><span class="codenumber">4.11</span> <span class="title">Finite Elements</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#subsec-" class="internal"><span class="codenumber">4.11.1</span> <span class="title">Triangulating a Region</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-3" class="internal"><span class="codenumber">4.11.2</span> <span class="title">What is a finite element?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-4" class="internal"><span class="codenumber">4.11.3</span> <span class="title">What is a finite element solution?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-5" class="internal"><span class="codenumber">4.11.4</span> <span class="title">Experiment with finite elements</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-finiteelements.html#sec-finiteelements-6" class="internal"><span class="codenumber">4.11.5</span> <span class="title">Values at boundary nodes</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-finiteelements.html#exercises-finiteelements" class="internal"><span class="codenumber">4.11.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-determining-internal.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Determining Internal Node Values</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-3" class="internal"><span class="codenumber">4.12.1</span> <span class="title">Variational Principles</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-4" class="internal"><span class="codenumber">4.12.2</span> <span class="title">The finite element solution</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-5" class="internal"><span class="codenumber">4.12.3</span> <span class="title">Application to the steady state heat equation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-determining-internal.html#sec-determining-internal-6" class="internal"><span class="codenumber">4.12.4</span> <span class="title">Experiment</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-determining-internal.html#exercises-determining-internal" class="internal"><span class="codenumber">4.12.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-chapter4-review.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Review of Chapter 4</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2" class="internal"><span class="codenumber">4.13.1</span> <span class="title">Initial Value Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-2" class="internal"><span class="codenumber">4.13.1.1</span> <span class="title">Reduction to First order system:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-3" class="internal"><span class="codenumber">4.13.1.2</span> <span class="title">Euler’s method:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-2-4" class="internal"><span class="codenumber">4.13.1.3</span> <span class="title">Modified (or Improved) Euler method:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3" class="internal"><span class="codenumber">4.13.2</span> <span class="title">Boundary Value Probems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-2" class="internal"><span class="codenumber">4.13.2.1</span> <span class="title">Finite Differences:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-3" class="internal"><span class="codenumber">4.13.2.2</span> <span class="title">Explicit Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-4" class="internal"><span class="codenumber">4.13.2.3</span> <span class="title">Implicit Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-5" class="internal"><span class="codenumber">4.13.2.4</span> <span class="title">Crank-Nicholson Method Finite Differences for Parabolic PDE (heat):</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-6" class="internal"><span class="codenumber">4.13.2.5</span> <span class="title">Finite Difference Method for Elliptic PDEs:</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-3-7" class="internal"><span class="codenumber">4.13.2.6</span> <span class="title">Finite Elements:</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-chapter4-review.html#sec-chapter4-review-4" class="internal"><span class="codenumber">4.13.3</span> <span class="title">MATLAB</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter contains-active">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-appendix contains-active">
+<div class="toc-title-box"><a href="backmatter-2.html" class="internal"><span class="codenumber">A</span> <span class="title">Programs Used and MATLAB Reference</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-appendix-matlab.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Glossary of Select MATLAB Commands</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-2" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-3" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Built-in Mathematical Constants</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-4" class="internal"><span class="codenumber">A.1.3</span> <span class="title">Built-in Mathematical Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-5" class="internal"><span class="codenumber">A.1.4</span> <span class="title">Built-in Numerical Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-6" class="internal"><span class="codenumber">A.1.5</span> <span class="title">Built-in Symbolic Mathematical Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-7" class="internal"><span class="codenumber">A.1.6</span> <span class="title">Graphics Commands</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-8" class="internal"><span class="codenumber">A.1.7</span> <span class="title">Special MATLAB Commands</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-9" class="internal"><span class="codenumber">A.1.8</span> <span class="title">MATLAB Programming</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-appendix-matlab.html#sec-appendix-matlab-10" class="internal"><span class="codenumber">A.1.9</span> <span class="title">Commands for Matrices and Linear Algebra</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-programs-used.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Programs Used</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-3.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="sec-programs-used">
+<h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Programs Used</span>
+</h2>
+<section class="introduction" id="sec-programs-used-2">
+<div class="para" id="sec-programs-used-2-1"><div class="autopermalink" data-description="Paragraph"><a href="#sec-programs-used-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div></div>
+<figure class="table table-like" id="sec-programs-used-2-2"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>List of Programs Used<div class="autopermalink" data-description="Table A.2.1: List of Programs Used"><a href="#sec-programs-used-2-2" title="Copy heading and permalink for Table A.2.1: List of Programs Used" aria-label="Copy heading and permalink for Table A.2.1: List of Programs Used">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b2 r0 l0 t0 lines">Program Name</th>
+<th scope="col" class="l m b2 r0 l0 t0 lines">Listing</th>
+<th scope="col" class="l m b2 r0 l0 t0 lines">Download Link</th>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mybisect</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-bisection.html#prg-mybisect" class="xref" data-knowl="./knowl/xref/prg-mybisect.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.5.2: mybisect">Listing 1.5.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mybisect.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mydblsimpweights</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-rect.html#prg-mydblsimpweights" class="xref" data-knowl="./knowl/xref/prg-mydblsimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.7.2: mydblsimpweights">Listing 3.7.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mydblsimpweights.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myeuler</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-euler.html#prg-myeuler" class="xref" data-knowl="./knowl/xref/prg-myeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.2.1: myeuler">Listing 4.2.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myeuler.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myexactbeam</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myexactbeam" class="xref" data-knowl="./knowl/xref/prg-myexactbeam.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.2: myexactbeam">Listing A.2.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myexactbeam.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myexpmatrix</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-instability-explicit.html#prg-myexpmatrix" class="xref" data-knowl="./knowl/xref/prg-myexpmatrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.7.2: myexpmatrix">Listing 4.7.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myexpmatrix.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myfiniteelem</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myfiniteelem" class="xref" data-knowl="./knowl/xref/prg-myfiniteelem.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.3: myfiniteelem">Listing A.2.3</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myfiniteelem.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myheat</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-parabolic-explicit.html#prg-myheat" class="xref" data-knowl="./knowl/xref/prg-myheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.6.2: myheat">Listing 4.6.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myheat.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myheatdisk</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myheatdisk" class="xref" data-knowl="./knowl/xref/prg-myheatdisk.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.4: myheatdisk">Listing A.2.4</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download myheatdisk.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mylowerleft</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mylowerleft" class="xref" data-knowl="./knowl/xref/prg-mylowerleft.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.5: mylowerleft">Listing A.2.5</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mylowerleft.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mymodeuler</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mymodeuler" class="xref" data-knowl="./knowl/xref/prg-mymodeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.6: mymodeuler">Listing A.2.6</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mymodeuler.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mynewton</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-newton.html#prg-mynewton" class="xref" data-knowl="./knowl/xref/prg-mynewton.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.3.1: mynewton">Listing 1.3.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mynewton.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mynonlinheat</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-FD-NODE.html#prg-mynonlinheat" class="xref" data-knowl="./knowl/xref/prg-mynonlinheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.5.1: mynonlinheat">Listing 4.5.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mynonlinheat.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mypoisson</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mypoisson" class="xref" data-knowl="./knowl/xref/prg-mypoisson.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.7: mypoisson">Listing A.2.7</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mypoisson.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mysecant</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-secant.html#prg-mysecant" class="xref" data-knowl="./knowl/xref/prg-mysecant.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.6.2: mysecant">Listing 1.6.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mysecant.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mysimpweights</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-MSrules.html#prg-mysimpweights" class="xref" data-knowl="./knowl/xref/prg-mysimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.4.2: mysimpweights">Listing 3.4.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mysimpweights.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mythreecorners</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-non.html#prg-mythreecorners" class="xref" data-knowl="./knowl/xref/prg-mythreecorners.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.8.1: mythreecorners">Listing 3.8.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mythreecorners.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mytriangles</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mytriangles" class="xref" data-knowl="./knowl/xref/prg-mytriangles.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.8: mytriangles">Listing A.2.8</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mytriangles.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mywasher</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywasher" class="xref" data-knowl="./knowl/xref/prg-mywasher.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.9: mywasher">Listing A.2.9</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mywasher.m</a></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mywedge</code></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywedge" class="xref" data-knowl="./knowl/xref/prg-mywedge.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.10: mywedge">Listing A.2.10</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a class="external" href="" target="_blank">download mywedge.m</a></td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="sec-programs-used-2-3">Below are programs used in the main text, but not written out there due to their length.<div class="autopermalink" data-description="Paragraph"><a href="#sec-programs-used-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="prg-myexactbeam"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myexactbeam<div class="autopermalink" data-description="Listing A.2.2: myexactbeam"><a href="#prg-myexactbeam" title="Copy heading and permalink for Listing A.2.2: myexactbeam" aria-label="Copy heading and permalink for Listing A.2.2: myexactbeam">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Plot the deflection y of a beam of length L under tension T
+% and a uniform load w. Uses the exact analytic solution of the
+% boundary value problem. For T=0, the solution breaks down.
+% For T (e.g. T=.1) close to zero using the exact solution leads to loss
+% of precision.
+% Coefficients for a structural steel I-beam W12x22 in lb. in.
+E = 29000000
+I = 121
+L = 120
+% Load and tension
+w = 10000
+T = 10000
+% calculated coefficients
+EI = E*I
+a = T/EI
+b = w/(2*EI)
+K = exp(sqrt(a)*L)
+d5 = 2*b/(a^2)
+d2 = - d5*(1/(1+K))
+d1 = d2*K
+d3 = b/a
+d4 = - d3*L
+% grid
+xx = linspace(0,L,101);
+% deflection
+yy = d1*exp(-sqrt(a)*xx) + d2*exp(sqrt(a)*xx) + d3*xx.^2 + d4*xx + d5;
+%plot the result
+plot(xx,yy,'r')
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-myfiniteelem"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myfiniteelem<div class="autopermalink" data-description="Listing A.2.3: myfiniteelem"><a href="#prg-myfiniteelem" title="Copy heading and permalink for Listing A.2.3: myfiniteelem" aria-label="Copy heading and permalink for Listing A.2.3: myfiniteelem">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Finite elements program
+% adapted from "Applied Numerical Anaylsis" by L. Faussett, Prentice Hall.
+% Solves u_xx + u_yy = 0 
+% with fixed boundary conditions 
+% A list of vertices V and a list of triangles T must be in memory.
+% x and y must be row vectors containing coordinates of the vertices.
+% The following variable must also be in memory:
+% n is the number of vertices
+% m is the number of internal vertices
+% p is the number of triangles
+% z input values at the vertices, including boundary values.
+
+% Plot the boundary conditions and initial values of nodes
+figure
+trimesh(T,x,y,z)
+
+%Define basis function for each node
+for j = 1:n                       % for each node (finite element)  
+    for k = 1:p                   % for each triangle
+        for i = 1:3               % for each vertex of the triangle
+            aa(i,1) = 1;
+            aa(i,2) = V(T(k,i),1);
+            aa(i,3) = V(T(k,i),2);
+            if T(k,i) == j        % if the vertex goes with the  element
+                bb(i,1) = 1;      % set the value to one.
+            else
+                bb(i,1) = 0;      % otherwise set it to zero.
+            end
+        end
+        abc = aa\bb;      % solve for coefficients of function j on T_k.
+        A(j,k) = abc(1);
+        B(j,k) = abc(2);
+        C(j,k) = abc(3);
+    end
+end
+
+% Calculate the areas of the triangles
+H = ones(1,p);  
+for i = 1:p
+   H(i) = .5*abs(det([x(T(i,1)), x(T(i,2)), x(T(i,3)); y(T(i,1)), y(T(i,2)), y(T(i,3)); 1, 1, 1]));
+end
+
+% This section solves for the values at the interior vertices
+for i = 1:m
+    for j = 1:m
+        s(1:p) = B(i,1:p).*B(j,1:p) + C(i,1:p).*C(j,1:p);
+        AAA(i,j) = s*H';
+    end
+end
+for i = 1:m
+    for j = m+1:n
+        k = j - m;
+        s(1:p) = B(i,1:p).*B(j,1:p) + C(i,1:p).*C(j,1:p);
+        G(i,k) = s*H';
+    end
+end
+d(1:m) = -G*z(m+1:n)';
+z(1:m) = AAA\d';
+
+
+% Plot the solution
+figure
+trimesh(T,x,y,z)
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-myheatdisk"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myheatdisk<div class="autopermalink" data-description="Listing A.2.4: myheatdisk"><a href="#prg-myheatdisk" title="Copy heading and permalink for Listing A.2.4: myheatdisk" aria-label="Copy heading and permalink for Listing A.2.4: myheatdisk">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">%myheatdisk
+R=5;      % radius of disk
+n=100;    % number of subintervals
+h=R/n;    % step size
+hh=h^2;   % h^2 is used in each loop
+steps=500;
+d = .1;  % radiation coefficient
+ub=10;    % temperature of surroundings
+uR=10;    % temperature at the edge
+ub4=ub^4; % ub^4 is used in each loop
+r=-h/2:h:R+h/2;   % grid points
+g=(r-5).^2;       % equation of source of heat
+u=ones(1,n+2)*10; % sets initial temperatrue profile
+u(n+2) = uR;      % sets temperature at edge
+plot(r,u)         % plots initial temperature profile
+hold on; 
+for j=1:steps    
+    for i=2:n+1  
+     u(i)=-hh*d*(u(i)^4-ub4)/3 + hh*g(i)/3 + h*(u(i+1)-u(i-1))/(6*r(i)) + (u(i-1)+u(i)+u(i+1))/3;
+    end
+    u(1)=u(2); % makes u'(0) = 0
+    plot(r,u)  % plots temperature profiles
+end
+hold off;
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mylowerleft"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mylowerleft<div class="autopermalink" data-description="Listing A.2.5: mylowerleft"><a href="#prg-mylowerleft" title="Copy heading and permalink for Listing A.2.5: mylowerleft" aria-label="Copy heading and permalink for Listing A.2.5: mylowerleft">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function I = mylowerleft(f,a,b,c,d,m,n)
+    % Computes an approximate integral of a function of two variables f(x,y).
+    % Uses the lower-left corner to evaluate.
+    % Inputs:
+    %    a,b -- define the interval in x, namely a&lt;x&lt;b.
+    %    c,d -- define the interval in y, namely c&lt;y&lt;d.
+    %    m -- the number of (evenly spaced) intervals to use in x.
+    %    n -- the number of (evenly spaced) intervals to use in y.
+    % Output: The approximate value of the integral.
+    %
+    % Note: This program intentionally has a bug. Find and fix it.
+    h = (b-a)/m;                            % step size in x direction
+    k = (d-c)/n;                            % step size in y direction
+    [X,Y] = meshgrid(a:h:b,c:k:d);          % sets up a grid
+    Z=f(X,Y);
+    mesh(X,Y,Z)                             % plot, just for fun
+    S = sum(sum(Z(1:m,1:n)));
+    I = S*h*k;
+end
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mymodeuler"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mymodeuler<div class="autopermalink" data-description="Listing A.2.6: mymodeuler"><a href="#prg-mymodeuler" title="Copy heading and permalink for Listing A.2.6: mymodeuler" aria-label="Copy heading and permalink for Listing A.2.6: mymodeuler">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function [T , Y] = mymodeuler(f,tspan,y0,n)
+    % Solves dy/dt = f(t,y) with initial condition y(a) = y0
+    % on the interval [a,b] using n steps of the modified Euler's method.
+    % Inputs: f -- a function f(t,y) that returns a column vector of the same
+    %              length as y
+    %         tspan -- a vector [a,b] with the start and end times
+    %         y0 -- a column vector of the initial values, y(a) = y0
+    %         n  -- number of steps to use
+    % Outputs: T -- a n+1 column vector containing the times
+    %          Y -- a (n+1) by d matrix where d is the length of y
+    %               Y(j,i) gives the ith component of y at time T(j) 
+
+    a = tspan(1); b = tspan(2); % parse starting and ending points
+    h = (b-a)/n;        % step size
+    t = a; T = a; % t is the current time and T will record all times
+    y = y0;       % y is the current variable values, as a column vector
+    Y = y0';      % Y will record the values at all steps, each in a row
+    for i = 1:n
+        k1 = h*f(t,y);      % y increment based on current time
+        k2 = h*f(t+h,y+k1); % y increment based on next time
+        y = y + .5*(k1+k2); % update y using the average
+        t = a + i*h;        % The next time.
+        T = [T; t];         % Record t and y into T and Y.
+        Y = [Y; y'];
+    end
+end
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mypoisson"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mypoisson<div class="autopermalink" data-description="Listing A.2.7: mypoisson"><a href="#prg-mypoisson" title="Copy heading and permalink for Listing A.2.7: mypoisson" aria-label="Copy heading and permalink for Listing A.2.7: mypoisson">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% mypoisson
+% Poisson on a Rectangle
+% Solves u_xx + u_yy = f(x,y)
+% with boundary conditions:
+% u(a,y) = u(x,c) = 1
+% u(b,y) = 1 + 5/8 y
+% u(x,d) = 1 + 1/2 x
+% with f(x,y) = .5 sin(x)sin(y)
+
+% Define the rectangle and nodes
+a = 0;
+b = 10;
+c = 0;
+d = 8;
+m = 15;
+n = 10;
+h = (b-a)/m;
+k = (d-c)/n;
+x = a:h:b;
+y = c:k:d;
+
+% Assign number of iterations and calculate constants
+maxit = 0;
+c1 = h^2/(2*(h^2 + k^2));
+c2 = k^2/(2*(h^2 + k^2));
+c3 = k^2*c1;
+
+% Assign initial values and boundary conditions
+u = zeros(m+1,n+1);
+u(1,:) = 1;
+u(:,1) = 1;
+u(:,n+1) = 1 + 5*sin(x(:)*pi/b/2);
+u(m+1,:) = 1 + (5/8)*y(:);
+
+% Assign values of f(x,y) in the interior
+f = zeros(m+1,n+1);
+for i = 2:m
+f(i,:) = .5*sin(x(i)).*sin(y(:));
+end
+
+% Iterate values of u in the interior
+for j = 1:maxit
+u(2:m,2:n) = c1*(u(2:m,3:n+1)+u(2:m,1:n-1)) + c2*(u(3:m+1,2:n)+u(1:m-1,2:n)) - c3*f(2:m,2:n);
+end
+
+% Plot the result
+mesh(x,y,u')
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mytriangles"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mytriangles<div class="autopermalink" data-description="Listing A.2.8: mytriangles"><a href="#prg-mytriangles" title="Copy heading and permalink for Listing A.2.8: mytriangles" aria-label="Copy heading and permalink for Listing A.2.8: mytriangles">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Program to produce the triangulation,
+% boundary conditions and initial values
+% at the interior nodes.
+
+% V contains vertices
+V = [ 1/2 1/2  
+       1    1 
+      3/2 1/2 
+      .5  1.5 
+       0    0  
+       1    0  
+       2    0   
+       2    1 
+       1.5 1.5 
+       1    2  
+       0    2  
+       0    1];
+   
+% T assigns the traingles
+T = [ 1 5 12
+      1 5 6
+      1 2 6
+      1 2 12
+      3 2 6
+      3 6 7
+      3 7 8
+      3 8 2
+      2 8 9
+      2 9 10
+      4 11 12
+      4 12 2
+      4 2 10
+      4 10 11];
+% x, y are row vectors containing coordinates of vertices
+x = V(:,1)';
+y = V(:,2)';
+% n is the number of vertices
+n = 12;
+% m is the number of internal vertices
+m = 4;
+% p is the number of triangles
+p = 14;
+
+% Set the coefficients c_1, ..., c_m equal to zero at interior
+% vertices and equal to the boundary values on the boundary.
+% The first 4 entries are interior vertices, the final 8 are
+% boundary vertices.
+c = [ 0 0 0 0 0 0 0 1 1 1 0 0 ];
+
+% Plot the initial mesh
+trimesh(T,x,y,c)
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mywasher"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywasher<div class="autopermalink" data-description="Listing A.2.9: mywasher"><a href="#prg-mywasher" title="Copy heading and permalink for Listing A.2.9: mywasher" aria-label="Copy heading and permalink for Listing A.2.9: mywasher">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Program to produce the triangulation,
+% boundary condition and initial values
+% at the interior nodes for a Washer.
+
+clear all
+
+% V contains vertices
+V = [% interior points
+    1.4712    0.2926
+    1.2472    0.8334
+    0.8334    1.2472
+    0.2926    1.4712
+   -0.2926    1.4712
+   -0.8334    1.2472
+   -1.2472    0.8334
+   -1.4712    0.2926
+   -1.4712   -0.2926
+   -1.2472   -0.8334
+   -0.8334   -1.2472
+   -0.2926   -1.4712
+    0.2926   -1.4712
+    0.8334   -1.2472
+    2.0000         0
+    1.8478    0.7654
+    1.4142    1.4142
+    0.7654    1.8478
+    0.0000    2.0000
+   -0.7654    1.8478
+   -1.4142    1.4142
+   -1.8478    0.7654
+   -2.0000    0.0000
+   -1.8478   -0.7654
+   -1.4142   -1.4142
+   -0.7654   -1.8478
+   -0.0000   -2.0000
+    0.7654   -1.8478
+    1.4142   -1.4142
+    1.8478   -0.7654
+    1.2472   -0.8334
+    1.4712   -0.2926
+    % outerboundary
+    2.4520    0.4877
+    2.0787    1.3889
+    1.3889    2.0787
+    0.4877    2.4520
+   -0.4877    2.4520
+   -1.3889    2.0787
+   -2.0787    1.3889
+   -2.4520    0.4877
+   -2.4520   -0.4877
+   -2.0787   -1.3889
+   -1.3889   -2.0787
+   -0.4877   -2.4520
+    0.4877   -2.4520
+    1.3889   -2.0787
+    2.0787   -1.3889
+    2.4520   -0.4877
+    % inner boundary
+    1.0000      0
+    0.9239    0.3827
+    0.7071    0.7071
+    0.3827    0.9239
+    0.0000    1.0000
+   -0.3827    0.9239
+   -0.7071    0.7071
+   -0.9239    0.3827
+   -1.0000    0.0000
+   -0.9239   -0.3827
+   -0.7071   -0.7071
+   -0.3827   -0.9239
+   -0.0000   -1.0000
+    0.3827   -0.9239
+    0.7071   -0.7071
+    0.9239   -0.3827];
+   
+% T assigns the traingles
+T = [43    42    25
+    11    10    59
+    11    10    25
+    23    40    41
+    22    40    39
+    22    23    40
+    21    38    39
+    21    22     7
+    21    22    39
+    24    10     9
+    24    42    41
+    24    42    25
+    24    10    25
+    24    23    41
+    24    23     9
+    27    45    44
+    28    45    46
+    28    27    45
+    30    47    48
+    29    47    46
+    29    28    14
+    29    28    46
+    29    30    47
+    26    11    12
+    26    43    44
+    26    43    25
+    26    11    25
+    26    27    44
+    26    27    12
+    20    38    37
+    20    21    38
+    58    57     9
+    58    10    59
+    58    10     9
+     8    57    56
+     8    22    23
+     8    23     9
+     8    57     9
+     8    56     7
+     8    22     7
+    63    62    14
+    60    61    12
+    60    11    59
+    60    11    12
+    13    61    62
+    13    28    27
+    13    27    12
+    13    61    12
+    13    62    14
+    13    28    14
+    19    36    37
+    19    20    37
+    19    20     5
+    17    34    35
+    55    56     7
+    53    54     5
+    18    36    35
+    18    19    36
+    18    17    35
+    16    33    34
+    16    17    34
+     6    55    54
+     6    20    21
+     6    21     7
+     6    55     7
+     6    20     5
+     6    54     5
+     4    19     5
+     4    53     5
+     4    53    52
+     4    18    19
+     3    18    17
+     3     4    52
+     3     4    18
+     2    16    17
+     2     3    17
+    31    29    30
+    31    32    30
+    31    32    64
+    31    64    63
+    31    29    14
+    31    63    14
+    15    30    48
+    15    32    30
+    15    33    48
+    15    16    33
+     1     2    16
+     1    15    16
+     1    15    32
+    51     3    52
+    51     2     3
+    50     1     2
+    50    51     2
+    49     1    32
+    49    32    64
+    49    50     1];
+
+
+% x, y are row vectors containing coordinates of vertices
+x = V(:,1)';
+y = V(:,2)';
+% n is the number of vertices
+n= size(V,1);
+% m is the number of interior vertices
+m = 32;
+% p is the number of triangles
+p= size(T,1);
+
+
+% Plot the mesh
+figure
+trimesh(T,x,y)
+
+% Set values at nodes
+% The first 32 entries are interior vertices, the final 32 are
+% boundary vertices.
+
+z = x+2.5;    % Set node values to a linear funtion.
+z(49:64) = 0; % Set inner boundary nodes to zero.
+z(1:32) = 0;  % Set interior nodes to zero.
+
+% Plot the mesh with node values specified.
+figure
+trimesh(T,x,y,z)
+</code></pre></div></div>
+</figure>
+<figure class="listing figure-like" id="prg-mywedge"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywedge<div class="autopermalink" data-description="Listing A.2.10: mywedge"><a href="#prg-mywedge" title="Copy heading and permalink for Listing A.2.10: mywedge" aria-label="Copy heading and permalink for Listing A.2.10: mywedge">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Construct a Wedge-shaped region and its triangulation
+
+clear all
+
+% Set up internal nodes (manually):
+V = [ .89*cos(pi/8) .89*sin(pi/8);
+	 1.9*cos(pi/8) 1.9*sin(pi/8);
+	 3*cos(pi/12) 3*sin(pi/12);
+	 3*cos(pi/6) 3*sin(pi/6) ;
+	 4*cos(pi/16) 4*sin(pi/16);
+	 4*cos(pi/8) 4*sin(pi/8);
+	 4*cos(3*pi/16) 4*sin(3*pi/16) 
+	 4.6*cos(.03*pi) 4.6*sin(.028*pi);
+	 4.6*cos(.22*pi) 4.6*sin(.222*pi) ];
+m= size(V,1); % m = number internal nodes
+
+% Set up boundary nodes (manually) and append:
+a = cos(pi/4);
+V = [ V;  0 0 ; 1 0 ; 2 0 ; 3 0 ; 4 0 ; 5 0 ;
+       a a ; 2*a 2*a; 3*a 3*a; 4*a 4*a; 5*a 5*a]; 
+for i = 1:4
+  x = 5*cos(pi*i/20);
+  y = 5*sin(pi*i/20);
+  V = [ V; x y];
+end
+n = size(V,1);  % n = total number nodes
+
+% extract x and y coordinates of all nodes
+x = V(:,1)';
+y = V(:,2)';
+% make triangulation
+T = delaunay(x,y); 
+p = size(T,1); % p = number of triangles
+
+% Plot the mesh
+figure
+trimesh(T,x,y)
+
+% Set node values to a function
+z = sin(x/2)+(y/3).^2;
+z(1:9) = 0;
+
+% Plot the mesh with node values specified.
+figure
+trimesh(T,x,y,z)
+</code></pre></div></div>
+</figure></section><div class="autopermalink" data-description="Section A.2: Programs Used"><a href="#sec-programs-used" title="Copy heading and permalink for Section A.2: Programs Used" aria-label="Copy heading and permalink for Section A.2: Programs Used">🔗</a></div>
+</section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="sec-appendix-matlab.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="backmatter-3.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

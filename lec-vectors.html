@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Vectors, Functions, and Plots in MATLAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script type="module">import { startMathJax } from './_static/pretext/js/mathjax_startup.js';
+startMathJax({
+hasWebworkReps: false,
+hasSage: false,
+isReact: false,
+htmlPresentation: false,
+});
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Introduction to Numerical Methods and Matlab Programming for Engineers">
+<meta property="book:author" content="Todd Young">
+<meta property="book:author" content="Martin J. Mohlenkamp">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.0.0';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.ce7e0a2163cb330f.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.f4a2ffb04bb978bb.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="intro-numerical-methods" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="intro-numerical-methods.html"><span class="title">Introduction to Numerical Methods and Matlab Programming for Engineers</span></a></h1>
+<p class="byline">Todd Young, Martin J. Mohlenkamp</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="chapter-equations.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-equations.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="lec-programs.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="frontmatter-4.html" class="internal"><span class="title">Preface</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-equations.html" class="internal"><span class="codenumber">1</span> <span class="title">MATLAB and Solving Equations</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="lec-vectors.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Functions, and Plots in MATLAB</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-2" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Entering vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-3" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Basic Formatting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-4" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Plotting Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-5" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Data as a Representation of a Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-6" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Built-in Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-7" class="internal"><span class="codenumber">1.1.6</span> <span class="title">User-Defined Anonymous Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="lec-vectors.html#lec-vectors-8" class="internal"><span class="codenumber">1.1.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lec-programs.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matlab Programs</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="chapter-linear.html" class="internal"><span class="codenumber">2</span> <span class="title">Linear Algebra</span></a></div></li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="chapter-functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions and Data</span></a></div></li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="chapter-differential.html" class="internal"><span class="codenumber">4</span> <span class="title">Differential Equations</span></a></div></li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="lec-vectors">
+<h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Vectors, Functions, and Plots in MATLAB</span>
+</h2>
+<section class="subsection" id="lec-vectors-2">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Entering vectors</span>
+</h3>
+<div class="para" id="lec-vectors-2-2">In MATLAB, the basic objects are matrices, i.e. arrays of numbers. Vectors can be thought of as special matrices. A row vector is recorded as a <span class="process-math">\(1 \times n\)</span> matrix and a column vector is recorded as a <span class="process-math">\(m \times 1\)</span> matrix. To enter a row vector in MATLAB, type the following in the command window: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>v = [0 1 2 3]
+</b></pre></div> and press enter. MATLAB will print out the row vector. To enter a column vector type <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>u = [9; 10; 11; 12; 13]
+</b></pre></div> You can access an entry in a vector with <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>u(2)
+</b></pre></div> and change the value of that entry with <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>u(2)=47
+</b></pre></div> You can extract a  slice out of a vector with <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>u(2:4)
+</b></pre></div> You can change a row vector into a column vector, and vice versa, easily in MATLAB using <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>w = v'
+</b></pre></div> (This is called  transposing the vector and we call <code class="code-inline tex2jax_ignore">'</code> the transpose operator.) There are also useful shortcuts to make vectors such as <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>x = -1:.1:1
+</b><span class="prompt unselectable">&gt;&gt; </span><b>y = linspace(0,1,11)
+</b></pre></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.1: Entering vectors"><a href="#lec-vectors-2" title="Copy heading and permalink for Subsection 1.1.1: Entering vectors" aria-label="Copy heading and permalink for Subsection 1.1.1: Entering vectors">🔗</a></div>
+</section>
+<section class="subsection" id="lec-vectors-3">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Basic Formatting</span>
+</h3>
+<div class="para" id="lec-vectors-3-2">To make MATLAB put fewer blank lines in its output, enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>format compact
+</b><span class="prompt unselectable">&gt;&gt; </span><b>pi
+</b><span class="prompt unselectable">&gt;&gt; </span><b>x
+</b></pre></div> To make MATLAB display more digits, enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>format long
+</b><span class="prompt unselectable">&gt;&gt; </span><b>pi
+</b></pre></div> Note that this does not change the number of digits MATLAB is using in its calculations; it only changes what is displayed.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.2: Basic Formatting"><a href="#lec-vectors-3" title="Copy heading and permalink for Subsection 1.1.2: Basic Formatting" aria-label="Copy heading and permalink for Subsection 1.1.2: Basic Formatting">🔗</a></div>
+</section>
+<section class="subsection" id="lec-vectors-4">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Plotting Data</span>
+</h3>
+<div class="para" id="lec-vectors-4-2">Consider the data in Table <a href="lec-vectors.html#tab-viscosity" class="xref" data-knowl="./knowl/xref/tab-viscosity.html" data-reveal-label="Reveal" data-close-label="Close" title="Table 1.1.1: Viscosity of a liquid as a function of temperature.">Table 1.1.1</a> (Adapted from Ayyup &amp;McCuen 1996, p.174.)<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="tab-viscosity"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Viscosity of a liquid as a function of temperature.<div class="autopermalink" data-description="Table 1.1.1: Viscosity of a liquid as a function of temperature."><a href="#tab-viscosity" title="Copy heading and permalink for Table 1.1.1: Viscosity of a liquid as a function of temperature." aria-label="Copy heading and permalink for Table 1.1.1: Viscosity of a liquid as a function of temperature.">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr></tr>
+<tr>
+<td class="c m b1 r1 l0 t0 lines">T (C°)</td>
+<td class="c m b1 r0 l0 t0 lines">5</td>
+<td class="c m b1 r0 l0 t0 lines">20</td>
+<td class="c m b1 r0 l0 t0 lines">30</td>
+<td class="c m b1 r0 l0 t0 lines">50</td>
+<td class="c m b1 r0 l0 t0 lines">55</td>
+</tr>
+<tr>
+<td class="c m b0 r1 l0 t0 lines"><span class="process-math">\(\mu\)</span></td>
+<td class="c m b0 r0 l0 t0 lines">0.08</td>
+<td class="c m b0 r0 l0 t0 lines">0.015</td>
+<td class="c m b0 r0 l0 t0 lines">0.009</td>
+<td class="c m b0 r0 l0 t0 lines">0.006</td>
+<td class="c m b0 r0 l0 t0 lines">0.0055</td>
+</tr>
+<tr>
+<td class="c m b0 r1 l0 t0 lines"></td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="lec-vectors-4-4">We can enter this data into Matlab with the following commands entered in the command window: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>x = [ 5  20  30  50  55 ]
+</b><span class="prompt unselectable">&gt;&gt; </span><b>y = [ 0.08  0.015  0.009  0.006  0.0055]
+</b></pre></div> Entering the name of the variable retrieves its current values. For instance <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>x
+</b><span class="prompt unselectable">&gt;&gt; </span><b>y
+</b></pre></div> We can plot data in the form of vectors using the plot command: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y)
+</b></pre></div> This will produce a graph with the data points connected by lines. If you would prefer that the data points be represented by symbols you can do so. For instance <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y,'*')
+</b><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y,'o')
+</b><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y,'.')
+</b></pre></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-4-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.3: Plotting Data"><a href="#lec-vectors-4" title="Copy heading and permalink for Subsection 1.1.3: Plotting Data" aria-label="Copy heading and permalink for Subsection 1.1.3: Plotting Data">🔗</a></div>
+</section>
+<section class="subsection" id="lec-vectors-5">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Data as a Representation of a Function</span>
+</h3>
+<div class="para" id="lec-vectors-5-2">A major theme in this course is that often we are interested in a certain function <span class="process-math">\(y = f(x)\text{,}\)</span> but the only information we have about this function is a discrete set of data <span class="process-math">\(\{(x_{i},y_{i})\}\text{.}\)</span> Plotting the data, as we did above, can be thought of envisioning the function using just the data. We will find later that we can also do other things with the function, like differentiating and integrating, just using the available data. Numerical methods, the topic of this course, means doing mathematics by computer. Since a computer can only store a finite amount of information, we will almost always be working with a finite, discrete set of values of the function (data), rather than a formula for the function.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.4: Data as a Representation of a Function"><a href="#lec-vectors-5" title="Copy heading and permalink for Subsection 1.1.4: Data as a Representation of a Function" aria-label="Copy heading and permalink for Subsection 1.1.4: Data as a Representation of a Function">🔗</a></div>
+</section>
+<section class="subsection" id="lec-vectors-6">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Built-in Functions</span>
+</h3>
+<div class="para" id="lec-vectors-6-2">If we wish to deal with formulas for functions, Matlab contains a number of built-in functions, including all the usual functions, such as <code class="code-inline tex2jax_ignore">sin( )</code>, <code class="code-inline tex2jax_ignore">exp( )</code>, etc.. The meaning of most of these is clear. The dependent variable (input) always goes in parentheses in MATLAB. For instance <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>sin(pi)
+</b></pre></div> should return the value of <span class="process-math">\(\sin \pi\text{,}\)</span> which is of course <span class="process-math">\(0\)</span> and <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>exp(0)
+</b></pre></div> will return <span class="process-math">\(e^{0}\text{,}\)</span> which is <span class="process-math">\(1\text{.}\)</span> More importantly, the built-in functions can operate not only on single numbers but on vectors. For example <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>x = linspace(0,2*pi,41)
+</b><span class="prompt unselectable">&gt;&gt; </span><b>y = sin(x)
+</b><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y)
+</b></pre></div> will return a plot of <span class="process-math">\(\sin x\)</span> on the interval <span class="process-math">\([0,2 \pi]\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="lec-vectors-6-3">Some of the built-in functions in MATLAB include: <code class="code-inline tex2jax_ignore">cos( )</code>, <code class="code-inline tex2jax_ignore">tan( )</code>, <code class="code-inline tex2jax_ignore">sinh( )</code>, <code class="code-inline tex2jax_ignore">cosh( )</code>, <code class="code-inline tex2jax_ignore">log( )</code> (natural logarithm), <code class="code-inline tex2jax_ignore">log10( )</code> (log base 10), <code class="code-inline tex2jax_ignore">asin( )</code> (inverse sine), <code class="code-inline tex2jax_ignore">acos( )</code>, <code class="code-inline tex2jax_ignore">atan( )</code>. To find out more about a function, use the <code class="code-inline tex2jax_ignore">help</code> command; try <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>help plot
+</b></pre></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-6-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.5: Built-in Functions"><a href="#lec-vectors-6" title="Copy heading and permalink for Subsection 1.1.5: Built-in Functions" aria-label="Copy heading and permalink for Subsection 1.1.5: Built-in Functions">🔗</a></div>
+</section>
+<section class="subsection" id="lec-vectors-7">
+<h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">User-Defined Anonymous Functions</span>
+</h3>
+<div class="para" id="lec-vectors-7-2">If we wish to deal with a function that is a combination of the built-in functions, Matlab has a couple of ways for the user to define functions. One that we will use a lot is the anonymous function, which is a way to define a function in the command window. The following is a typical anonymous function: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>f = @(x) 2*x.^2 - 3*x + 1
+</b></pre></div> This produces the function <span class="process-math">\(f(x) = 2 x^{2} -3x+1\text{.}\)</span> To obtain a single value of this function enter <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>y = f(2.23572)
+</b></pre></div> Just as for built-in functions, the function <span class="process-math">\(f\)</span> as we defined it can operate not only on single numbers but on vectors. Try the following: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>x = -2:.2:2
+</b><span class="prompt unselectable">&gt;&gt; </span><b>y = f(x)
+</b></pre></div> This is an example of  vectorization, i.e. putting several numbers into a vector and treating the vector all at once, rather than one component at a time, and is one of the strengths of MATLAB. The reason <span class="process-math">\(f(x)\)</span> works when <span class="process-math">\(x\)</span> is a vector is because we represented <span class="process-math">\(x^{2}\)</span> by <code class="code-inline tex2jax_ignore">x.^2</code>. The <code class="code-inline tex2jax_ignore">.</code> turns the exponent operator <code class="code-inline tex2jax_ignore">^</code> into entry-wise exponentiation, so that <code class="code-inline tex2jax_ignore">[-2 -1.8 -1.6].^2</code> means <span class="process-math">\([(-2)^{2}, (-1.8)^{2}, (-1.6)^{2}]\)</span> and yields <code class="code-inline tex2jax_ignore">[4 3.24 2.56]</code>. In contrast, <code class="code-inline tex2jax_ignore">[-2 -1.8 -1.6]^2</code> means the matrix product <span class="process-math">\([-2, -1.8,-1.6][-2, -1.8,-1.6]\)</span> and yields only an error. The <code class="code-inline tex2jax_ignore">.</code> is needed in <code class="code-inline tex2jax_ignore">.^</code>, <code class="code-inline tex2jax_ignore">.*</code>, and <code class="code-inline tex2jax_ignore">./</code>. It is not needed when you <code class="code-inline tex2jax_ignore">*</code> or <code class="code-inline tex2jax_ignore">/</code> by a scalar or for <code class="code-inline tex2jax_ignore">+</code>.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="lec-vectors-7-3">The results can be plotted using the <code class="code-inline tex2jax_ignore">plot</code> command, just as for data: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>plot(x,y)
+</b></pre></div> Notice that before plotting the function, we in effect converted it into data. Plotting on any machine always requires this step.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-7-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.1.6: User-Defined Anonymous Functions"><a href="#lec-vectors-7" title="Copy heading and permalink for Subsection 1.1.6: User-Defined Anonymous Functions" aria-label="Copy heading and permalink for Subsection 1.1.6: User-Defined Anonymous Functions">🔗</a></div>
+</section>
+<section class="exercises" id="lec-vectors-8">
+<h3 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="lec-vectors-8-1"><h4 class="heading"><span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para logical" id="lec-vectors-8-1-1">
+<div class="para">Recall that <code class="code-inline tex2jax_ignore">.*</code>, <code class="code-inline tex2jax_ignore">./</code>, <code class="code-inline tex2jax_ignore">.^</code> are component-wise operations. Make row vectors <code class="code-inline tex2jax_ignore">a= 0:1:3</code> and <code class="code-inline tex2jax_ignore">b= [-1  0  1  2]</code>. Try the following commands and report the answer (or error) they produce. Are any of the results surprising?</div>
+<ol class="lower-alpha lower-alpha-level-1 cols4 multicolumn" id="lec-vectors-8-1-1-6">
+<li id="lec-vectors-8-1-1-6-1">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-1"><code class="code-inline tex2jax_ignore">a.*b</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.a"><a href="#lec-vectors-8-1-1-6-1" title="Copy heading and permalink for Item 1.1.7.1.a" aria-label="Copy heading and permalink for Item 1.1.7.1.a">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-2">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-2"><code class="code-inline tex2jax_ignore">a*b</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.b"><a href="#lec-vectors-8-1-1-6-2" title="Copy heading and permalink for Item 1.1.7.1.b" aria-label="Copy heading and permalink for Item 1.1.7.1.b">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-3">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-3"><code class="code-inline tex2jax_ignore">a*b'</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.c"><a href="#lec-vectors-8-1-1-6-3" title="Copy heading and permalink for Item 1.1.7.1.c" aria-label="Copy heading and permalink for Item 1.1.7.1.c">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-4">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-4"><code class="code-inline tex2jax_ignore">a+3*b</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.d"><a href="#lec-vectors-8-1-1-6-4" title="Copy heading and permalink for Item 1.1.7.1.d" aria-label="Copy heading and permalink for Item 1.1.7.1.d">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-5">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-5"><code class="code-inline tex2jax_ignore">a./b</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.e"><a href="#lec-vectors-8-1-1-6-5" title="Copy heading and permalink for Item 1.1.7.1.e" aria-label="Copy heading and permalink for Item 1.1.7.1.e">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-6">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-6"><code class="code-inline tex2jax_ignore">2*b./a</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.f"><a href="#lec-vectors-8-1-1-6-6" title="Copy heading and permalink for Item 1.1.7.1.f" aria-label="Copy heading and permalink for Item 1.1.7.1.f">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-7">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-7"><code class="code-inline tex2jax_ignore">a.^3</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.g"><a href="#lec-vectors-8-1-1-6-7" title="Copy heading and permalink for Item 1.1.7.1.g" aria-label="Copy heading and permalink for Item 1.1.7.1.g">🔗</a></div>
+</li>
+<li id="lec-vectors-8-1-1-6-8">
+<div class="para" id="p-derived-lec-vectors-8-1-1-6-8"><code class="code-inline tex2jax_ignore">a.^b</code></div>
+<div class="autopermalink" data-description="Item 1.1.7.1.h"><a href="#lec-vectors-8-1-1-6-8" title="Copy heading and permalink for Item 1.1.7.1.h" aria-label="Copy heading and permalink for Item 1.1.7.1.h">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 1.1.7.1"><a href="#lec-vectors-8-1" title="Copy heading and permalink for Exercise 1.1.7.1" aria-label="Copy heading and permalink for Exercise 1.1.7.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="lec-vectors-8-2"><h4 class="heading"><span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para" id="lec-vectors-8-2-1">Find a table of data in an engineering or science textbook or website. Input it as vectors and plot it, <em class="emphasis">using symbols at the data points</em>. Use the insert icon to label the axes and add a title to your graph. Turn in the graph. Indicate what the data is and properly reference where it came from.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-8-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 1.1.7.2"><a href="#lec-vectors-8-2" title="Copy heading and permalink for Exercise 1.1.7.2" aria-label="Copy heading and permalink for Exercise 1.1.7.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="lec-vectors-8-3"><h4 class="heading"><span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4>
+<div class="para" id="lec-vectors-8-3-1">Find a <em class="emphasis">non-linear</em> function formula in an engineering or science textbook or website. Make an anonymous function that produces that function. Plot it with a <em class="emphasis">smooth curve</em> on a physically relevant domain.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-8-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="lec-vectors-8-3-2">Label the axes and add a title to your graph. Turn in the graph and include the MATLAB command for the anonymous function. Indicate what the function means and properly reference where it came from.<div class="autopermalink" data-description="Paragraph"><a href="#lec-vectors-8-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Exercise 1.1.7.3"><a href="#lec-vectors-8-3" title="Copy heading and permalink for Exercise 1.1.7.3" aria-label="Copy heading and permalink for Exercise 1.1.7.3">🔗</a></div>
+</article><div class="autopermalink" data-description="Exercises 1.1.7"><a href="#lec-vectors-8" title="Copy heading and permalink for Exercises 1.1.7" aria-label="Copy heading and permalink for Exercises 1.1.7">🔗</a></div>
+</section><div class="autopermalink" data-description="Section 1.1: Vectors, Functions, and Plots in MATLAB"><a href="#lec-vectors" title="Copy heading and permalink for Section 1.1: Vectors, Functions, and Plots in MATLAB" aria-label="Copy heading and permalink for Section 1.1: Vectors, Functions, and Plots in MATLAB">🔗</a></div>
+</section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="chapter-equations.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="lec-programs.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
