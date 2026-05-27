@@ -258,10 +258,9 @@
         where <m>T_{i}</m> represents the tension in the <m>i</m>-th member of the truss.
       </p>
       <figure xml:id="fig-equilateral_truss">
-        \unitlength1 mm FILL
-        <blockquote>
-          (0,0)*2 (32,0)*1 (64,0)*2 (16,27.7)*1 (48,27.7)*1 (3,1)A (14,21)B (31,4)C (47,22)D (59,1)E(0,0)(1,0)64 (16,27.7)(1,0)32 (0,0)(8,13.85)(16,27.7) (32,0)(40,13.85)(48,27.7) (16,27.7)(24,13.85)(32,0) (48,27.7)(56,13.85)(64,0) (4,12)1 (15,1)2 (26,12)3 (31,24)4 (41,12)5 (47,1)6 (57,13)7(6,27.7)(1,0)6 (2,27)<m>f_{1}</m> (32,-1)(0,-1)6 (31,-10)<m>f_{2}</m> (0,-7)(0,1)5 (-1,-10)<m>R_{2}</m> (64,-7)(0,1)5 (62,-10)<m>R_{3}</m> (-2,0)(-1,0)6 (-13,-1)<m>R_{1}</m>
-        </blockquote>
+        <image width="100%" source="images/fig-equilateral_truss.png">
+          <shortdescription><p>Diagram of an equilateral truss.</p></shortdescription>
+        </image>
         <caption>An equilateral truss. Joints or nodes are labeled alphabetically, <m>A</m>, <m>B</m>, <ellipsis />
         and Members (edges) are labeled numerically: <m>1</m>, <m>2</m>, <ellipsis />. The forces <m>f_{1}</m> and <m>f_{2}</m> are applied loads and <m>R_{1}</m>, <m>R_{2}</m> and <m>R_{3}</m> are reaction forces applied by the supports.</caption>
       </figure>
@@ -950,8 +949,10 @@
         You can easily check that <m>(x,y) = (1,0)</m> is a solution of this system. By graphing both of the equations you can also see that <m>(1,0)</m> is the only solution <xref ref="fig-nlsys" />.
       </p>
       <figure xml:id="fig-nlsys">
-        <image source="images/nlsys" />
-          <caption>Graphs of the equations <m>x^{3} + y = 1</m> and <m>y^{3} - x = -1</m>. There is one and only one intersection; at <m>(x,y) = (1,0)</m>.</caption>
+        <image source="images/nlsys.png">
+          <shortdescription><p>Solution curves of two nonlinear equations.</p></shortdescription>
+        </image>
+        <caption>Graphs of the equations <m>x^{3} + y = 1</m> and <m>y^{3} - x = -1</m>. There is one and only one intersection; at <m>(x,y) = (1,0)</m>.</caption>
       </figure>
       <p>
         We can put these equations into vector-function form <xref ref="eqn-nlsys" /> by letting <m>x_{1} = x</m>, <m>x_{2} = y</m> and
@@ -1182,10 +1183,9 @@
         One application of eigenvalues and eigenvectors is in the analysis of vibration problems. A simple nontrivial vibration problem is the motion of two objects with equal masses <m>m</m> attached to each other and fixed outer walls by equal springs with spring constants <m>k</m>, as shown in <xref ref="fig-twosprings" />.
       </p>
       <figure xml:id="fig-twosprings">
-        \unitlength1 mm FILL
-        <blockquote>
-          (0,-5)(1,0)2 (0,5)(1,0)2 (2,-5)(0,1)10 (2,0)(1,0)3 (5,0)(9,5)(9,-1) (9,-1)(9,-3)(8,-3) (8,-3)(7,-3)(8,0) (8,0)(12,5)(12,-1) (12,-1)(12,-3)(11,-3) (11,-3)(10,-3)(11,0) (11,0)(15,5)(15,-1) (15,-1)(15,-3)(14,-3) (14,-3)(13,-3)(14,0) (14,0)(18,5)(18,-1) (18,-1)(18,-3)(17,-3) (17,-3)(16,-3)(17,0) (17,0)(19,4)(19,0) (19,0)(1,0)6 (22,0)*2 (25,0)(29,5)(29,-1) (29,-1)(29,-3)(28,-3) (28,-3)(27,-3)(28,0) (28,0)(32,5)(32,-1) (32,-1)(32,-3)(31,-3) (31,-3)(30,-3)(31,0) (31,0)(35,5)(35,-1) (35,-1)(35,-3)(34,-3) (34,-3)(33,-3)(34,0) (34,0)(38,5)(38,-1) (38,-1)(38,-3)(37,-3) (37,-3)(36,-3)(37,0) (37,0)(39,4)(39,0) (39,0)(1,0)6 (42,0)*2 (45,0)(49,5)(49,-1) (49,-1)(49,-3)(48,-3) (48,-3)(47,-3)(48,0) (48,0)(52,5)(52,-1) (52,-1)(52,-3)(51,-3) (51,-3)(50,-3)(51,0) (51,0)(55,5)(55,-1) (55,-1)(55,-3)(54,-3) (54,-3)(53,-3)(54,0) (54,0)(58,5)(58,-1) (58,-1)(58,-3)(57,-3) (57,-3)(56,-3)(57,0) (57,0)(59,4)(59,0) (59,0)(1,0)3 (62,-5)(0,1)10 (62,-5)(1,0)2 (62,5)(1,0)2 (22,-5)(0,1)2 (22,-4)(1,0)4 (23,-7) (42,-5)(0,1)2 (42,-4)(1,0)4 (43,-7)
-        </blockquote>
+        <image width="100%" source="images/fig-twosprings.png">
+          <shortdescription><p>Diagram with wall - spring - mass - spring - mass - spring - wall.</p></shortdescription>
+        </image>
         <caption>Two equal masses attached to each other and fixed walls by equal springs.</caption>
       </figure>
       <p>
@@ -1218,7 +1218,9 @@
         This should produce a matrix <c>v</c> whose columns are the eigenvectors of <m>A</m> and a diagonal matrix <m>e</m> whose entries are the eigenvalues of <m>A</m>. In the first eigenvector, <m>\vb_{1}</m>, the two entries are equal. This represents the mode of oscillation where the two masses move in sync with each other. The second eigenvector, <m>\vb_{2}</m>, has the same entries but opposite signs. This represents the mode where the two masses oscillate in anti-synchronization. See <xref ref="fig-twospringvectors" />. Notice that the frequency for anti-sync motion is <m>\sqrt{3}</m> times that of synchronous motion.
       </p>
       <figure xml:id="fig-twospringvectors">
-        \unitlength1 mm (0,-5)(1,0)2 (0,5)(1,0)2 (2,-5)(0,1)10 (2,0)(1,0)3 (19,0)(1,0)6 (22,0)*2  (39,0)(1,0)6 (42,0)*2 (59,0)(1,0)3 (62,-5)(0,1)10 (62,-5)(1,0)2 (62,5)(1,0)2 (0,10)(1,0)2 (0,20)(1,0)2 (2,10)(0,1)10 (2,15)(1,0)3 (23,15)(1,0)6 (26,15)*2  (43,15)(1,0)6 (46,15)*2 (59,15)(1,0)3 (62,10)(0,1)10 (62,10)(1,0)2 (62,20)(1,0)2 (0,25)(1,0)2 (0,35)(1,0)2 (2,25)(0,1)10 (2,30)(1,0)3 (19,30)(1,0)6 (22,30)*2  (39,30)(1,0)6 (42,30)*2 (59,30)(1,0)3 (62,25)(0,1)10 (62,25)(1,0)2 (62,35)(1,0)2 (0,40)(1,0)2 (0,50)(1,0)2 (2,40)(0,1)10 (2,45)(1,0)3 (15,45)(1,0)6 (18,45)*2  (35,45)(1,0)6 (38,45)*2 (59,45)(1,0)3 (62,40)(0,1)10 (62,40)(1,0)2 (62,50)(1,0)2 (0,55)(1,0)2 (0,65)(1,0)2 (2,55)(0,1)10 (2,60)(1,0)3 (19,60)(1,0)6 (22,60)*2  (39,60)(1,0)6 (42,60)*2 (59,60)(1,0)3 (62,55)(0,1)10 (62,55)(1,0)2 (62,65)(1,0)2  (0,-5)(1,0)2 (0,5)(1,0)2 (2,-5)(0,1)10 (2,0)(1,0)3 (19,0)(1,0)6 (22,0)*2  (39,0)(1,0)6 (42,0)*2 (59,0)(1,0)3 (62,-5)(0,1)10 (62,-5)(1,0)2 (62,5)(1,0)2 (0,10)(1,0)2 (0,20)(1,0)2 (2,10)(0,1)10 (2,15)(1,0)3 (23,15)(1,0)6 (26,15)*2  (35,15)(1,0)6 (38,15)*2 (59,15)(1,0)3 (62,10)(0,1)10 (62,10)(1,0)2 (62,20)(1,0)2 (0,25)(1,0)2 (0,35)(1,0)2 (2,25)(0,1)10 (2,30)(1,0)3 (19,30)(1,0)6 (22,30)*2  (39,30)(1,0)6 (42,30)*2 (59,30)(1,0)3 (62,25)(0,1)10 (62,25)(1,0)2 (62,35)(1,0)2 (0,40)(1,0)2 (0,50)(1,0)2 (2,40)(0,1)10 (2,45)(1,0)3 (15,45)(1,0)6 (18,45)*2  (43,45)(1,0)6 (46,45)*2 (59,45)(1,0)3 (62,40)(0,1)10 (62,40)(1,0)2 (62,50)(1,0)2 (0,55)(1,0)2 (0,65)(1,0)2 (2,55)(0,1)10 (2,60)(1,0)3 (19,60)(1,0)6 (22,60)*2  (39,60)(1,0)6 (42,60)*2 (59,60)(1,0)3 (62,55)(0,1)10 (62,55)(1,0)2 (62,65)(1,0)2
+        <image width="100%" source="images/fig-twospringvectors.png">
+          <shortdescription><p>Diagram with vibrational modes for wall - spring - mass - spring - mass - spring - wall.</p></shortdescription>
+        </image>
         <caption> Two vibrational modes of a simple oscillating system. In the left mode the weights move together and in the right mode they move opposite. Note that the two modes actually move at different speeds.</caption>
       </figure>
       <p>

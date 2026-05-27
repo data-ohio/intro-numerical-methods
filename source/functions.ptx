@@ -383,9 +383,9 @@
         The foolishness of choosing left or right endpoints is illustrated in <xref ref="fig-LnRn" />. As you can see, for a very simple function like <m>f(x) = 1 + .5 x</m>, each rectangle of <m>L_{n}</m> is too short, while each rectangle of <m>R_{n}</m> is too tall. This will hold for any increasing function. For decreasing functions <m>L_{n}</m> will always be too large while <m>R_{n}</m> will always be too small.
       </p>
       <figure xml:id="fig-LnRn">
-          <p>
-            FILL
-          </p>
+        <image width="100%" source="images/fig-LnRn.png">
+          <shortdescription><p>Diagram with the left and right sums.</p></shortdescription>
+        </image>
         <caption>The left and right sums, <m>L_{n}</m> and <m>R_{n}</m>.</caption>
       </figure>
     </subsection>
@@ -403,11 +403,9 @@
         which is exactly the area of the  trapezoid with sides <m>f(x_{i-1})</m> and <m>f(x_{i})</m>. We thus call the method the trapezoid method. See <xref ref="fig-trap" />.
       </p>
       <figure xml:id="fig-trap">
-        <blockquote>
-          <p>
-            FILL
-          </p>
-        </blockquote>
+        <image width="100%" source="images/fig-trap.png">
+          <shortdescription><p>Diagram with the trapezoid rule sum.</p></shortdescription>
+        </image>
         <caption>The trapezoid rule, <m>T_{n}</m>.</caption>
       </figure>
       <p>
@@ -566,15 +564,12 @@
     <subsection>
       <title>Simpson's rule</title>
       <p>
-        Consider <xref ref="fig-trapsim" />.
+        Consider <xref ref="fig-trapmid" />.
       </p>
-      <figure xml:id="fig-trapsim">
-        <blockquote>
-          <p>
-            FILL
-          </p>
-          (0,0)(1,0)70 (0,0)(0,1)49 (-1,10)(40,10)(65,43.5)(32,-1)(0,1)2 (32,16.5)*2 (64,0)(0,1)42 (0,10)(2,1)64 (0,16.5)(1,0)64
-        </blockquote>
+      <figure xml:id="fig-trapmid">
+        <image width="100%" source="images/fig-trapmid.png">
+          <shortdescription><p>Diagram with the trapezoid rule and midpoint rule.</p></shortdescription>
+        </image>
         <caption>Comparing the trapezoid and midpoint method on a single subinterval. The function is concave up, in which case <m>T_{n}</m> is too high, while <m>M_{n}</m> is too low.</caption>
       </figure>
       <p>
@@ -789,17 +784,22 @@
     <exercises xml:id="exercises-plotting-two">
       <exercise>
         <p>
-            Plot the function <m>f(x,y) = \sin(x) \ e^{-x^2 - y^2}</m> on the rectangle <m>-3 \le x \le 3</m>, <m>-2 \le y \le 2</m> using <c>meshgrid</c> and <c>mesh</c>. Make an appropriate choice of <m>m</m> and <m>n</m> and if necessary a rotation to produce a good plot. Calculate the <m>h</m> and <m>k</m> corresponding to your <m>m</m> and <m>n</m>. Turn in your plot and the calculation of <m>h</m> and <m>k</m>.
+          Plot the function <m>f(x,y) = \sin(x) \ e^{-x^2 - y^2}</m> on the rectangle <m>-3 \le x \le 3</m>, <m>-2 \le y \le 2</m> using <c>meshgrid</c> and <c>mesh</c>. Make an appropriate choice of <m>m</m> and <m>n</m> and if necessary a rotation to produce a good plot. Calculate the <m>h</m> and <m>k</m> corresponding to your <m>m</m> and <m>n</m>. Turn in your plot and the calculation of <m>h</m> and <m>k</m>.
         </p>
       </exercise>
       <exercise>
         <p>
-              Modeling after <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), produce \unitlength1 mm ****************
-            </p>
-            (0,0)(1,0)30 (0,10)(1,0)20 (0,0)(0,1)10 (10,0)(0,1)10 (0,10)(1,-1)10 (20,10)(1,-1)10 (10,10)(2,-1)20
-            <p>
-              using integer coordinates for the vertices. Use the <c>axis</c> command to zoom out so the outside edges are clearly visible. Compute <m>z = 3x +y^{2}</m> and plot the graph. Turn in your program and the plots.
-            </p>
+          Modeling after <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), produce 
+          <image>
+            <shortdescription><p>A simple figure composed of 4 triangles.</p></shortdescription>
+            <latex-image>
+            \begin{tikzpicture}
+              \path[draw] (0,1)--(0,0)--(1,0)--(0,1)--(1,1)--(1,0)--(3,0)--(1,1)--(2,1)--(3,0);
+            \end{tikzpicture}
+          </latex-image>  
+          </image>
+          using integer coordinates for the vertices. Use the <c>axis</c> command to zoom out so the outside edges are clearly visible. Compute <m>z = 3x +y^{2}</m> and plot the graph. Turn in your program and the plots.
+        </p>
       </exercise>
     </exercises>
   </section>
@@ -916,7 +916,7 @@
       </exercise>
       <exercise>
         <p>
-          Write a well-commented <alert>script</alert> program that uses the gradient descent method to find a minimum point for the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>, starting from <m>\mathbf{x}_{0} = [-1;-2]</m>. Compare with the plot in <xref ref="exr-plotquiver" /> to check that it worked. (Hint: Review the program <c>mymultnewton</c> ***********in <xref ref="sec-multnewton" /> for examples of making functions of vectors.)
+          Write a well-commented <alert>script</alert> program that uses the gradient descent method to find a minimum point for the function <m>f(x_{1},x_{2}) = \sin(x_{1}) \ e^{-x_1^2 - x_2^2}</m>, starting from <m>\mathbf{x}_{0} = [-1;-2]</m>. Compare with the plot in <xref ref="exr-plotquiver" /> to check that it worked. (Hint: Review the program <c>mymultnewton.m</c> in <xref ref="sec-multnewton" /> for examples of making functions of vectors.)
         </p>
       </exercise>
     </exercises>
@@ -944,12 +944,9 @@
         For a rectangle <m>R</m>, we begin by subdividing into smaller subrectangles <m>\{R_{ij}\}</m>, in a systematic way. We will divide <m>[a,b]</m> into <m>m</m> subintervals and <m>[c,d]</m> into <m>n</m> subintervals. Then <m>R_{ij}</m> will be the <q>intersection</q> of the <m>i</m>-th subinterval in <m>[a,b]</m> with the <m>j</m>-th subinterval of <m>[c,d]</m>. In this way the entire rectangle is subdivided into <m>mn</m> subrectangles, numbered as in Figure<nbsp /><xref ref="fig-rects" />.
       </p>
       <figure xml:id="fig-rects">
-        <blockquote>
-          <p>
-            \unitlength0.9 mm FILL
-          </p>
-          (0,0)(1,0)80 (0,10)(1,0)80 (0,20)(1,0)80 (0,30)(1,0)80 (0,40)(1,0)80 (0,50)(1,0)80 (0,0)(0,1)50 (20,0)(0,1)50 (40,0)(0,1)50 (60,0)(0,1)50 (80,0)(0,1)50(0,-3) (79,-4) (-3,0) (-3,49)(5,5) (25,5) (45,5) (65,5) (5,15) (5,25) (5,35) (5,45) (25,15) (25,25) (25,35) (25,45) (45,15) (45,25) (45,35) (45,45) (65,15) (65,25) (65,35) (65,45)
-        </blockquote>
+        <image width="100%" source="images/fig-rects.png">
+          <shortdescription><p>Diagram of a rectangle subdivided into 5 x 4 rectangles.</p></shortdescription>
+        </image>
         <caption>Subdivision of the rectangle <m>R = [a,b] \times [c,d]</m> into subrectangles <m>R_{ij}</m>. Note that the arrangement in the <m>x</m>-<m>y</m> plane is completely different from the convention in a matrix.</caption>
       </figure>
       <p>
@@ -1172,8 +1169,8 @@
         See <xref ref="fig-FBCdifferences" /> for an illustration of these three differences.
       </p>
       <figure xml:id="fig-FBCdifferences">
-        <image source="images/differences">
-          <shortdescription>**************************Line segments for three difference approximations.</shortdescription>
+        <image source="images/differences.png">
+          <shortdescription>Line segments for three difference approximations.</shortdescription>
         </image>
         <caption>The three difference approximations of <m>y'_{i}</m>.</caption>
       </figure>

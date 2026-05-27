@@ -207,79 +207,79 @@
           </row>
           <row>
             <cell><c>mybisect</c></cell><cell><xref ref="prg-mybisect"/></cell>
-            <cell><url href="">download mybisect.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mybisect.m">download mybisect.m</url></cell>
           </row>
           <row>
             <cell><c>mydblsimpweights</c></cell><cell><xref ref="prg-mydblsimpweights"/></cell>
-            <cell><url href="">download mydblsimpweights.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mydblsimpweights.m">download mydblsimpweights.m</url></cell>
           </row>
           <row>
             <cell><c>myeuler</c></cell><cell><xref ref="prg-myeuler"/></cell>
-            <cell><url href="">download myeuler.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myeuler.m">download myeuler.m</url></cell>
           </row>
           <row>
             <cell><c>myexactbeam</c></cell><cell><xref ref="prg-myexactbeam"/></cell>
-            <cell><url href="">download myexactbeam.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myexactbeam.m">download myexactbeam.m</url></cell>
           </row>
           <row>
             <cell><c>myexpmatrix</c></cell><cell><xref ref="prg-myexpmatrix"/></cell>
-            <cell><url href="">download myexpmatrix.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myexpmatrix.m">download myexpmatrix.m</url></cell>
           </row>
           <row>
             <cell><c>myfiniteelem</c></cell><cell><xref ref="prg-myfiniteelem"/></cell>
-            <cell><url href="">download myfiniteelem.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myfiniteelem.m">download myfiniteelem.m</url></cell>
           </row>
           <row>
             <cell><c>myheat</c></cell><cell><xref ref="prg-myheat"/></cell>
-            <cell><url href="">download myheat.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myheat.m">download myheat.m</url></cell>
           </row>
           <row>
             <cell><c>myheatdisk</c></cell><cell><xref ref="prg-myheatdisk"/></cell>
-            <cell><url href="">download myheatdisk.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myheatdisk.m">download myheatdisk.m</url></cell>
           </row>
           <row>
             <cell><c>mylowerleft</c></cell><cell><xref ref="prg-mylowerleft"/></cell>
-            <cell><url href="">download mylowerleft.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mylowerleft.m">download mylowerleft.m</url></cell>
           </row>
           <row>
             <cell><c>mymodeuler</c></cell><cell><xref ref="prg-mymodeuler"/></cell>
-            <cell><url href="">download mymodeuler.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mymodeuler.m">download mymodeuler.m</url></cell>
           </row>
           <row>
             <cell><c>mynewton</c></cell><cell><xref ref="prg-mynewton"/></cell>
-            <cell><url href="">download mynewton.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mynewton.m">download mynewton.m</url></cell>
           </row>
           <row>
             <cell><c>mynonlinheat</c></cell><cell><xref ref="prg-mynonlinheat"/></cell>
-            <cell><url href="">download mynonlinheat.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mynonlinheat.m">download mynonlinheat.m</url></cell>
           </row>
           <row>
             <cell><c>mypoisson</c></cell><cell><xref ref="prg-mypoisson"/></cell>
-            <cell><url href="">download mypoisson.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mypoisson.m">download mypoisson.m</url></cell>
           </row>
           <row>
             <cell><c>mysecant</c></cell><cell><xref ref="prg-mysecant"/></cell>
-            <cell><url href="">download mysecant.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mysecant.m">download mysecant.m</url></cell>
           </row>
           <row>
             <cell><c>mysimpweights</c></cell><cell><xref ref="prg-mysimpweights"/></cell>
-            <cell><url href="">download mysimpweights.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mysimpweights.m">download mysimpweights.m</url></cell>
           </row>
           <row>
             <cell><c>mythreecorners</c></cell><cell><xref ref="prg-mythreecorners"/></cell>
-            <cell><url href="">download mythreecorners.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mythreecorners.m">download mythreecorners.m</url></cell>
           </row>
           <row>
             <cell><c>mytriangles</c></cell><cell><xref ref="prg-mytriangles"/></cell>
-            <cell><url href="">download mytriangles.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mytriangles.m">download mytriangles.m</url></cell>
           </row>
           <row>
             <cell><c>mywasher</c></cell><cell><xref ref="prg-mywasher"/></cell>
-            <cell><url href="">download mywasher.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mywasher.m">download mywasher.m</url></cell>
           </row>
           <row>
             <cell><c>mywedge</c></cell><cell><xref ref="prg-mywedge"/></cell>
-            <cell><url href="">download mywedge.m</url></cell>
+            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mywedge.m">download mywedge.m</url></cell>
           </row>
         </tabular>
       </table>

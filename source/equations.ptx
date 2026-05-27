@@ -837,14 +837,11 @@
     <subsection>
       <title>Bisecting and the <c>if ... else ... end</c> statement</title>
       <p>
-        Recall the bisection method. Suppose that <m>c = f(a) &#x3C; 0</m> and <m>d = f(b) > 0</m>. If <m>f</m> is continuous, then obviously it must be zero at some <m>x^{*}</m> between <m>a</m> and <m>b</m>. The bisection method then consists of looking half way between <m>a</m> and <m>b</m> for the zero of <m>f</m>, i.e. let <m>x = (a+b)/2</m> and evaluate <m>y = f(x)</m>. Unless this is zero, then from the signs of <m>c</m>, <m>d</m> and <m>y</m> we can decide which new interval to subdivide. In particular, if <m>c</m> and <m>y</m> have the same sign, then <m>[x,b]</m> should be the new interval, but if <m>c</m> and <m>y</m> have different signs, then <m>[a,x]</m> should be the new interval. (See Figure<nbsp /><xref ref="fig-bisecfig" />.)
+        Recall the bisection method. Suppose that <m>c = f(a) &#x3C; 0</m> and <m>d = f(b) > 0</m>. If <m>f</m> is continuous, then obviously it must be zero at some <m>x^{*}</m> between <m>a</m> and <m>b</m>. The bisection method then consists of looking half way between <m>a</m> and <m>b</m> for the zero of <m>f</m>, i.e. let <m>x = (a+b)/2</m> and evaluate <m>y = f(x)</m>. Unless this is zero, then from the signs of <m>c</m>, <m>d</m> and <m>y</m> we can decide which new interval to subdivide. In particular, if <m>c</m> and <m>y</m> have the same sign, then <m>[x,b]</m> should be the new interval, but if <m>c</m> and <m>y</m> have different signs, then <m>[a,x]</m> should be the new interval. (See <xref ref="fig-bisecfig" />.)
       </p>
       <figure xml:id="fig-bisecfig">
-        <image width="100%">
-          <description><p>Schematic of the bisection method.</p></description>
-          <latex-image>
-           FILL
-          </latex-image>
+        <image width="100%" source="images/fig-bisecfig.png">
+          <shortdescription><p>Schematic of the bisection method.</p></shortdescription>
         </image>
         <caption>The bisection method.</caption>
       </figure>
@@ -961,11 +958,8 @@
         with <m>y_{i}=f(x_{i})</m>. See <xref ref="fig-secant" /> for an illustration.
       </p>
       <figure xml:id="fig-secant">
-        <image width="100%">
-          <description><p>Schematic of the secant method.</p></description>
-          <latex-image>
-           FILL
-          </latex-image>
+        <image width="100%" source="images/fig-secant.png">
+          <shortdescription><p>Schematic of the secant method.</p></shortdescription>
         </image>
         <caption>The secant method in the case where the root is bracketed.</caption>
       </figure>
