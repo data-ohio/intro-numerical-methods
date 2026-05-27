@@ -266,7 +266,7 @@
         and Members (edges) are labeled numerically: <m>1</m>, <m>2</m>, <ellipsis />. The forces <m>f_{1}</m> and <m>f_{2}</m> are applied loads and <m>R_{1}</m>, <m>R_{2}</m> and <m>R_{3}</m> are reaction forces applied by the supports.</caption>
       </figure>
       <p>
-        You could solve this system by hand with a little time and patience; systematically eliminating variables and substituting. Obviously, it would be a lot better to put the equations on a computer and let the computer solve it. In the next few lectures we will learn how to use a computer effectively to solve linear systems. The first key to dealing with linear systems is to realize that they are equivalent to matrices, which contain numbers, not variables.
+        You could solve this system by hand with a little time and patience; systematically eliminating variables and substituting. Obviously, it would be a lot better to put the equations on a computer and let the computer solve it. In the next few sections we will learn how to use a computer effectively to solve linear systems. The first key to dealing with linear systems is to realize that they are equivalent to matrices, which contain numbers, not variables.
       </p>
       <p>
         As we discuss various aspects of matrices, we wish to keep in mind that the matrices that come up in engineering systems are  really large. It is not unusual in real engineering to use matrices whose dimensions are in the thousands! It is frequently the case that a method that is fine for a <m>2 \times 2</m> or <m>3 \times 3</m> matrix is totally inappropriate for a <m>2000 \times 2000</m> matrix. We thus want to emphasize methods that work for large matrices.
@@ -385,7 +385,7 @@
     <subsection>
       <title>Some inconvenient truths</title>
       <p>
-        In the last lecture we learned how to solve a linear system using MATLAB. Input the following: 
+        In the last section we learned how to solve a linear system using MATLAB. Input the following: 
         <console prompt=">> " lang="matlab">
           <input> A = ones(4,4) </input>
           <input>b = randn(4,1) </input>
@@ -584,7 +584,7 @@
     <title>Accuracy, Condition Numbers and Pivoting</title>
     <introduction>
       <p>
-        In this lecture we will discuss two separate issues of accuracy in solving linear systems. The first,  pivoting, is a method that ensures that Gaussian elimination proceeds as accurately as possible. The second,  condition number, is a measure of how bad a matrix is. We will see that if a matrix has a bad condition number, the solutions are unstable with respect to small changes in data.
+        In this section we will discuss two separate issues of accuracy in solving linear systems. The first,  pivoting, is a method that ensures that Gaussian elimination proceeds as accurately as possible. The second,  condition number, is a measure of how bad a matrix is. We will see that if a matrix has a bad condition number, the solutions are unstable with respect to small changes in data.
       </p>
     </introduction>
     <subsection>

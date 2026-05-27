@@ -7,15 +7,348 @@
 <!-- with all notation generated, and finally the index. -->
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
   <title>Backmatter</title>
+  <appendix>
+  <title>Programs Used and MATLAB Reference</title>
+    <section xml:id="sec-appendix-matlab">
+    <title>Glossary of Select MATLAB Commands</title>
+    <subsection>
+      <title>Mathematical Operations</title>
+      <tabular>
+        <row><cell><c>+</c></cell><cell> Addition. Type <c>help plus</c> for information.</cell></row>
+        <row><cell><c>-</c></cell><cell> Subtraction. Type <c>help minus</c> for information.</cell></row>
+        <row><cell><c>*</c></cell><cell> Scalar or matrix multiplication. Type <c>help mtimes</c> for information.</cell></row>
+        <row><cell><c>/</c></cell><cell> Scalar or right matrix division. Type <c>help slash</c> for information. For matrices, the command <c>A/B</c> is equivalent to <c>A*inv(B)</c>.</cell></row>
+        <row><cell><c>^</c></cell><cell> Scalar or matrix powers. Type <c>help mpower</c> for information.</cell></row>
+        <row><cell><c>.*</c></cell><cell> Element by element multiplication. Type <c>help times</c> for information.</cell></row>
+        <row><cell><c>.^</c></cell><cell> Element by element exponentiation. Type <c>help power</c> for information.</cell></row>
+        <row><cell><c>./</c></cell><cell> Element by element division.</cell></row>
+      </tabular>  
+    </subsection>
+    <subsection>
+      <title>Built-in Mathematical Constants</title>
+      <tabular>
+        <row><cell><c>eps</c></cell><cell> Machine epsilon, i.e. approximately the computer's floating point roundoff error.</cell></row>
+        <row><cell><c>i</c></cell><cell> <m>\sqrt{-1}</m>.</cell></row>
+        <row><cell><c>Inf</c></cell><cell> <m>\infty</m>.</cell></row>
+        <row><cell><c>NaN</c></cell><cell> Not a number. Indicates an invalid operation such as <m>0/0</m>.</cell></row>
+        <row><cell><c>pi</c></cell><cell> <m>\pi = 3.14159 \ldots</m>.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Built-in Mathematical Functions</title>
+      <tabular>
+        <row><cell><c>abs(x)</c></cell><cell> Absolute value <m>|x|</m>.</cell></row>
+        <row><cell><c>acos(x)</c></cell><cell> Inverse cosine <m>\arccos{x}</m>.</cell></row>
+        <row><cell><c>asin(x)</c></cell><cell> Inverse sine <m>\arcsin{x}</m>.</cell></row>
+        <row><cell><c>atan(x)</c></cell><cell> Inverse tangent <m>\arctan{x}</m>.</cell></row>
+        <row><cell><c>cos(x)</c></cell><cell> Cosine <m>\cos{x}</m>.</cell></row>
+        <row><cell><c>cosh(x)</c></cell><cell> Hyperbolic cosine <m>\cosh{x}</m>.</cell></row>
+        <row><cell><c>cot(x)</c></cell><cell> Cotangent <m>\cot{x}</m>.</cell></row>
+        <row><cell><c>exp(x)</c></cell><cell> Exponential function <m>e^{x} = \exp{x}</m>.</cell></row>
+        <row><cell><c>log(x)</c></cell><cell> Natural logarithm <m>\ln{x}= \log_{e}{x}</m>.</cell></row>
+        <row><cell><c>sec(x)</c></cell><cell> Secant <m>\sec{x}</m>.</cell></row>
+        <row><cell><c>sin(x)</c></cell><cell> Sine <m>\sin{x}</m>.</cell></row>
+        <row><cell><c>sinh(x)</c></cell><cell> Hyperbolic sine <m>\sinh{x}</m>.</cell></row>
+        <row><cell><c>sqrt(x)</c></cell><cell> Square root <m>\sqrt{x}</m>.</cell></row>
+        <row><cell><c>tan(x)</c></cell><cell> Tangent <m>\tan{x}</m>.</cell></row>
+        <row><cell><c>tanh(x)</c></cell><cell> Hyperbolic tangent <m>\tanh{x}</m>.</cell></row>
+        <row><cell><c>max</c></cell><cell> Computes maximum of the rows of a matrix.</cell></row>
+        <row><cell><c>mean</c></cell><cell> Computes the average of the rows of a matrix.</cell></row>
+        <row><cell><c>min</c></cell><cell> Computes the minimum of the rows of a matrix.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Built-in Numerical Mathematical Operations</title>
+      <tabular>
+        <row><cell><c>fzero  </c></cell><cell> Tries to find a zero of the specified function near a starting point or on a specified interval.</cell></row>
+        <row><cell><c>inline </c></cell><cell> Define a function in the command window.</cell></row>
+        <row><cell><c>ode113 </c></cell><cell> Numerical multiple step ODE solver.</cell></row>
+        <row><cell><c>ode45  </c></cell><cell> Runga-Kutta 45 numerical ODE solver.</cell></row>
+        <row><cell><c>quad   </c></cell><cell> Numerical integration using an adaptive Simpson's rule.</cell></row>
+        <row><cell><c>dblquad </c></cell><cell> Double integration. </cell></row>
+        <row><cell><c>triplequad </c></cell><cell> Triple integration.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Built-in Symbolic Mathematical Operations</title>
+      <tabular>
+        <row><cell><c>collect</c></cell><cell> Collects powers of the specified variable is a given symbolic expression.</cell></row>
+        <row><cell><c>compose</c></cell><cell> Composition of symbolic functions. </cell></row>
+        <row><cell><c>diff</c></cell><cell> Symbolic differentiation.</cell></row>
+        <row><cell><c>double</c></cell><cell> Displays double-precision representation of a symbolic expression.</cell></row>
+        <row><cell><c>dsolve</c></cell><cell> Symbolic ODE solver.</cell></row>
+        <row><cell><c>expand</c></cell><cell> Expands an algebraic expression.</cell></row>
+        <row><cell><c>factor</c></cell><cell> Factor a polynomial.</cell></row>
+        <row><cell><c>int</c></cell><cell> Symbolic integration; either definite or indefinite.</cell></row>
+        <row><cell><c>limit</c></cell><cell> Finds two-sided limit, if it exists.</cell></row>
+        <row><cell><c>pretty</c></cell><cell> Displays a symbolic expression in a nice format.</cell></row>
+        <row><cell><c>simple</c></cell><cell> Simplifies a symbolic expression.</cell></row>
+        <row><cell><c>subs</c></cell><cell> Substitutes for parts a a symbolic expression.</cell></row>
+        <row><cell><c>sym</c> or <c>syms</c></cell><cell> Create symbolic variables. </cell></row>
+        <row><cell><c>symsum</c></cell><cell> Performs a symbolic summation, possibly with infinitely many entries. </cell></row>
+        <row><cell><c>taylor</c></cell><cell> Gives a Taylor polynomial approximation of a given order at a specified point.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Graphics Commands</title>
+      <tabular>
+        <row><cell><c>contour</c></cell><cell> Plots level curves of a function of two variables.</cell></row>
+        <row><cell><c>contourf</c></cell><cell> Filled contour plot.</cell></row>
+        <row><cell><c>ezcontour</c></cell><cell> Easy contour plot.</cell></row>
+        <row><cell><c>loglog</c></cell><cell> Creates a log-log plot. </cell></row>
+        <row><cell><c>mesh</c></cell><cell> Draws a mesh surface.</cell></row>
+        <row><cell><c>meshgrid</c></cell><cell> Creates arrays that can be used as inputs in graphics commands such as <c>contour</c>, <c>mesh</c>, <c>quiver</c>, and <c>surf</c>.</cell></row>
+        <row><cell><c>ezmesh</c></cell><cell> Easy mesh surface plot.</cell></row>
+        <row><cell><c>plot</c></cell><cell> Plots data vectors.</cell></row>
+        <row><cell><c>ezplot</c></cell><cell> Easy plot for symbolic functions.</cell></row>
+        <row><cell><c>plot3</c></cell><cell> Plots curves in 3-D.</cell></row>
+        <row><cell><c>polar</c></cell><cell> Plots in polar coordinates. </cell></row>
+        <row><cell><c>quiver</c></cell><cell> Plots a vector field.</cell></row>
+        <row><cell><c>semilogy</c></cell><cell> Semilog plot, with logarithmic scale along the vertical direction.</cell></row>
+        <row><cell><c>surf</c></cell><cell> Solid surface plot. </cell></row>
+        <row><cell><c>trimesh</c></cell><cell> Plot based on a triangulation</cell></row>
+        <row><cell><c>trisurf</c></cell><cell> Surface plot based on a triangulation</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Special MATLAB Commands</title>
+      <tabular>
+        <row><cell><c>:</c></cell><cell> Range operator, used for defining vectors and in loops. Type <c> help colon</c> for information.</cell></row>
+        <row><cell><c>;</c></cell><cell> Suppresses output. Also separates rows of a matrix.</cell></row>
+        <row><cell><c>=</c></cell><cell> Assigns the variable on the left hand side the value of the right hand side.</cell></row>
+        <row><cell><c>ans</c></cell><cell> The value of the most recent unassigned.</cell></row>
+        <row><cell><c>cd</c></cell><cell> Change directory.</cell></row>
+        <row><cell><c>clear</c></cell><cell> Clears all values and definitions of variables and functions. You may also use to clear only specified variables.</cell></row>
+        <row><cell><c>diary</c></cell><cell> Writes a transcript of a MATLAB session to a file. </cell></row>
+        <row><cell><c>dir</c></cell><cell> Lists the contents in the current working directory. Same as <c>ls</c>.</cell></row>
+        <row><cell><c>help</c></cell></row>
+        <row><cell><c>inline</c></cell><cell> Define an inline function.</cell></row>
+        <row><cell><c>format</c></cell><cell> Specifies output format, e.g. <c>format long</c>.</cell></row>
+        <row><cell><c>load</c></cell><cell> Load variables from a file.</cell></row>
+        <row><cell><c>save</c></cell><cell> Saves workspace variables to a file.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>MATLAB Programming</title>
+      <tabular>
+        <row><cell><c>==</c></cell><cell> Is equal?</cell></row>
+        <row><cell><c>~=</c></cell><cell> Is not equal?</cell></row>
+        <row><cell><c>&#x3C;</c></cell><cell> Less than?</cell></row>
+        <row><cell><c>></c></cell><cell> Greater than? </cell></row>
+        <row><cell><c>&#x3C;=</c></cell><cell> Less than or equal?</cell></row>
+        <row><cell><c>break</c></cell><cell> Breaks out of a <c>for</c> or <c>while</c> loop.</cell></row>
+        <row><cell><c>end</c></cell><cell> Terminates an <c>if</c>, <c>for</c> or <c>while</c> statement.</cell></row>
+        <row><cell><c>else</c></cell><cell> Alternative in an <c>if</c> statement. </cell></row>
+        <row><cell><c>error</c></cell><cell> Displays and error message and ends execution of a program.</cell></row>
+        <row><cell><c>for</c></cell><cell> Repeats a block of commands a specified number of times.</cell></row>
+        <row><cell><c>function</c></cell><cell> First word in a function program.</cell></row>
+        <row><cell><c>if</c></cell><cell> Checks a condition before executing a block of statements.</cell></row>
+        <row><cell><c>return</c></cell><cell> Terminates execution of a program.</cell></row>
+        <row><cell><c>warning</c></cell><cell> Displays a warning message.</cell></row>
+        <row><cell><c>while</c></cell><cell> Repeats a block of commands as long as a condition is true.</cell></row>
+      </tabular>
+    </subsection>
+    <subsection>
+      <title>Commands for Matrices and Linear Algebra</title>
+      <p>Matrix arithmetic:</p>
+      <tabular>
+        <row><cell><c>A = [ 1  3 -2 5 ;  -1  -1 5 4 ; 0 1 -9  0]</c></cell><cell>  Manually enter a matrix.</cell></row>
+        <row><cell><c>u = [ 1  2  3  4]'</c></cell></row>
+        <row><cell><c>A*u</c></cell></row>
+        <row><cell><c>B = [3 2 1; 7 6 5; 4 3 2]</c></cell></row>
+        <row><cell><c>B*A</c></cell><cell>  multiply <m>B</m> times <m>A</m>.</cell></row>
+        <row><cell><c>2*A</c></cell><cell>  multiply a matrix by a scalar.</cell></row>
+        <row><cell><c>A + A</c></cell><cell>  add matrices. </cell></row>
+        <row><cell><c>A + 3</c></cell><cell>  add a number to every entry of a matrix. </cell></row>
+        <row><cell><c>B.*B</c></cell><cell>  component-wise multiplication.</cell></row>
+        <row><cell><c>B.^3</c></cell><cell>  component-wise exponentiation.</cell></row>
+      </tabular>
+      <p>Special matrices:</p>
+      <tabular>
+        <row><cell><c>I = eye(3)</c></cell><cell>  identity matrix</cell></row>
+        <row><cell><c>D = ones(5,5)</c></cell></row>
+        <row><cell><c>O = zeros(10,10)</c></cell></row>
+        <row><cell><c>C = rand(5,5)</c></cell><cell>  random matrix with uniform distribution in <m>[0,1]</m>.</cell></row>
+        <row><cell><c>C = randn(5,5)</c></cell><cell>  random matrix with normal distribution.</cell></row>
+        <row><cell><c>hilb(6)</c></cell></row>
+        <row><cell><c>pascal(5)</c></cell></row>
+      </tabular>
+      <p>General matrix commands:</p>
+      <tabular>
+        <row><cell><c>size(C)</c></cell><cell>  gives the dimensions (<m>m \times n</m>) of <m>A</m>.</cell></row>
+        <row><cell><c>norm(C)</c></cell><cell>  gives the norm of the matrix.</cell></row>
+        <row><cell><c>det(C)</c></cell><cell>  the determinant of the matrix.</cell></row>
+        <row><cell><c>max(C)</c></cell><cell>  the maximum of each row.</cell></row>
+        <row><cell><c>min(C)</c></cell><cell>  the minimum in each row.</cell></row>
+        <row><cell><c>sum(C)</c></cell><cell>  sums each row.</cell></row>
+        <row><cell><c>mean(C)</c></cell><cell>  the average of each row.</cell></row>
+        <row><cell><c>diag(C)</c></cell><cell>  just the diagonal elements.</cell></row>
+        <row><cell><c>inv(C)</c></cell><cell>  inverse of the matrix.</cell></row>
+      </tabular>
+      <p>Matrix decompositions:</p>
+      <tabular>
+        <row><cell><c>[L U P] = lu(C)</c></cell></row>
+        <row><cell><c>[Q R] = qr(C)</c></cell></row>
+        <row><cell><c>[U S V] = svd(C)</c></cell><cell>  singular value decomposition.</cell></row>
+      </tabular>
+    </subsection>
+  </section>
+  <section xml:id="sec-programs-used">
+    <title>Programs Used</title>
+    <introduction>
+      <p>
+        
+      </p>
+      <table>
+        <title>List of Programs Used</title>
+        <tabular>
+          <row header="yes" bottom="medium">
+            <cell>Program Name</cell><cell>Listing</cell><cell>Download Link</cell>
+          </row>
+          <row>
+            <cell><c>mybisect</c></cell><cell><xref ref="prg-mybisect"/></cell>
+            <cell><url href="">download mybisect.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mydblsimpweights</c></cell><cell><xref ref="prg-mydblsimpweights"/></cell>
+            <cell><url href="">download mydblsimpweights.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myeuler</c></cell><cell><xref ref="prg-myeuler"/></cell>
+            <cell><url href="">download myeuler.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myexactbeam</c></cell><cell><xref ref="prg-myexactbeam"/></cell>
+            <cell><url href="">download myexactbeam.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myexpmatrix</c></cell><cell><xref ref="prg-myexpmatrix"/></cell>
+            <cell><url href="">download myexpmatrix.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myfiniteelem</c></cell><cell><xref ref="prg-myfiniteelem"/></cell>
+            <cell><url href="">download myfiniteelem.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myheat</c></cell><cell><xref ref="prg-myheat"/></cell>
+            <cell><url href="">download myheat.m</url></cell>
+          </row>
+          <row>
+            <cell><c>myheatdisk</c></cell><cell><xref ref="prg-myheatdisk"/></cell>
+            <cell><url href="">download myheatdisk.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mylowerleft</c></cell><cell><xref ref="prg-mylowerleft"/></cell>
+            <cell><url href="">download mylowerleft.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mymodeuler</c></cell><cell><xref ref="prg-mymodeuler"/></cell>
+            <cell><url href="">download mymodeuler.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mynewton</c></cell><cell><xref ref="prg-mynewton"/></cell>
+            <cell><url href="">download mynewton.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mynonlinheat</c></cell><cell><xref ref="prg-mynonlinheat"/></cell>
+            <cell><url href="">download mynonlinheat.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mypoisson</c></cell><cell><xref ref="prg-mypoisson"/></cell>
+            <cell><url href="">download mypoisson.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mysecant</c></cell><cell><xref ref="prg-mysecant"/></cell>
+            <cell><url href="">download mysecant.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mysimpweights</c></cell><cell><xref ref="prg-mysimpweights"/></cell>
+            <cell><url href="">download mysimpweights.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mythreecorners</c></cell><cell><xref ref="prg-mythreecorners"/></cell>
+            <cell><url href="">download mythreecorners.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mytriangles</c></cell><cell><xref ref="prg-mytriangles"/></cell>
+            <cell><url href="">download mytriangles.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mywasher</c></cell><cell><xref ref="prg-mywasher"/></cell>
+            <cell><url href="">download mywasher.m</url></cell>
+          </row>
+          <row>
+            <cell><c>mywedge</c></cell><cell><xref ref="prg-mywedge"/></cell>
+            <cell><url href="">download mywedge.m</url></cell>
+          </row>
+        </tabular>
+      </table>
+      <p>
+        Below are programs used in the main text, but not written out there due to their length.
+      </p>
+      <listing xml:id="prg-myexactbeam">
+        <title>myexactbeam</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myexactbeam.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-myfiniteelem">
+        <title>myfiniteelem</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myfiniteelem.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-myheatdisk">
+        <title>myheatdisk</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myheatdisk.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mylowerleft">
+        <title>mylowerleft</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mylowerleft.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mymodeuler">
+        <title>mymodeuler</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mymodeuler.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mypoisson">
+        <title>mypoisson</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mypoisson.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mytriangles">
+        <title>mytriangles</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mytriangles.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mywasher">
+        <title>mywasher</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mywasher.m"/></code>
+        </program>
+      </listing>
+      <listing xml:id="prg-mywedge">
+        <title>mywedge</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mywedge.m"/></code>
+        </program>
+      </listing>
+    </introduction>
+  </section>
+ </appendix>
+
 
   <!-- <solutions divisional="hint"> <title>Selected Hints</title> </solutions> -->
-
   <!-- <solutions divisional="solution"> <title>Selected Solutions</title> </solutions> -->
-
   <!-- <appendix> <title>List of Symbols</title> <notation-list/> </appendix> -->
-
   <!-- <index> <title>Index</title> <index-list/> </index> -->
-
   <colophon>
     <p> This book was authored in <pretext />. </p>
   </colophon>

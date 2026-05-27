@@ -538,7 +538,7 @@
     <subsection>
       <title>Solving equations numerically</title>
       <p>
-        For the next few lectures we will focus on the problem of solving an equation:
+        For the next few sections we will focus on the problem of solving an equation:
         <md xml:id="eqn-fzero" number="yes">
           f(x) = 0
         </md>.
@@ -594,13 +594,13 @@
       </p>
       <p>
         Now let's do a program that does n steps (iterations) of Newton's method. We will need to input the function, its derivative, the initial guess, and the number of steps. The output will be the final value of <m>x</m>, i.e.<nbsp /><m>x_{n}</m>. If we are only interested in the final approximation, not the intermediate steps, which is usually the case in the real world, then we can use a single variable <c>x</c> in the program <c>mynewton.m</c> and change it at each step:
-        <listing xml:id="prg-mynewton">
-          <title>mynewton</title>          
-          <program language="matlab">
-            <code><xi:include parse="text" href="../assets/programs/mynewton.m"/></code>
-          </program>
-        </listing>
       </p>
+      <listing xml:id="prg-mynewton">
+        <title>mynewton</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mynewton.m"/></code>
+        </program>
+      </listing>
       <p>
         In the command window set to print more digits via
         <console prompt=">> " lang="matlab">
@@ -618,7 +618,7 @@
         <console prompt=">> " lang="matlab">
           <input>f1 = @(x) 3*x^2</input>
         </console>
-        Then run <c>mynewton</c> on this function. By trial and error, what is the lowest value of <c>n</c> for which the program converges (stops changing). By simple algebra, the true root of this function is <m>\sqrt[3]{5}</m>. How close is the program's answer to the true value?
+        Then run <c>mynewton</c> (<xref ref="prg-mynewton"/>) on this function. By trial and error, what is the lowest value of <c>n</c> for which the program converges (stops changing). By simple algebra, the true root of this function is <m>\sqrt[3]{5}</m>. How close is the program's answer to the true value?
       </p>
     </subsection>
     <subsection>
@@ -944,7 +944,7 @@
     <title>Secant Methods</title>
     <introduction>
       <p>
-        In this lecture we introduce two additional methods to find numerical solutions of the equation <m>f(x) = 0</m>. Both of these methods are based on approximating the function by secant lines just as Newton's method was based on approximating the function by tangent lines.
+        In this section we introduce two additional methods to find numerical solutions of the equation <m>f(x) = 0</m>. Both of these methods are based on approximating the function by secant lines just as Newton's method was based on approximating the function by tangent lines.
       </p>
     </introduction>
     <subsection>

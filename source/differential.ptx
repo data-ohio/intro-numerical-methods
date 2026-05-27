@@ -177,8 +177,14 @@
         <md>
           \yb_{i+1}= \yb_{i} + h \fb(t_{i},\yb_{i})
         </md>.
-        With this formula, we can start from <m>(t_{0},\yb_{0})</m> and compute all the subsequent approximations <m>(t_{i},\yb_{i})</m>. This is very easy to implement, as you can see from the following program (which can be downloaded as myeuler.m). ../programs/myeuler.m ********************
+        With this formula, we can start from <m>(t_{0},\yb_{0})</m> and compute all the subsequent approximations <m>(t_{i},\yb_{i})</m>. This is very easy to implement, as you can see from the following program.
       </p>
+      <listing xml:id="prg-myeuler">
+        <title>myeuler</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myeuler.m"/></code>
+        </program>
+      </listing>
       <p>
         To use this program we need a function, such as the vector function for the pendulum: 
         <console prompt=">> " lang="matlab"><input> dy = @(t,y)[y(2);-.1*y(2)-sin(y(1))+sin(t)] </input></console> 
@@ -244,7 +250,7 @@
         Here <m>\mathbf{k}_{1}</m> captures the information at the beginning of the time step (same as Euler), while <m>\mathbf{k}_{2}</m> is the information at the end of the time step.
       </p>
       <p>
-        A program that implements the Modified method can be downloaded as mymodeuler.m.****************
+        A program that implements the Modified method can be downloaded as <c>mymodeuler.m</c> (<xref ref="prg-mymodeuler"/>).
       </p>
       <p>
         Test this program on the IVP above: 
@@ -260,7 +266,7 @@
     <exercises xml:id="exercises-euler">
       <exercise>
         <p>
-          Download myeuler.m and mymodeuler.m. ************
+          Download <c>myeuler.m</c> (<xref ref="prg-myeuler"/>) and <c>mymodeuler.m</c> (<xref ref="prg-mymodeuler"/>).
           <ol>
             <li>
               <p>
@@ -281,7 +287,7 @@
             </li>
             <li>
               <p>
-                Follow the same procedure using <c>mymodeuler.m</c>.
+                Follow the same procedure using <c>mymodeuler.m</c> (<xref ref="prg-mymodeuler"/>).
               </p>
             </li>
             <li>
@@ -394,12 +400,12 @@
           <ol>
             <li>
               <p>
-                Modify the program <c>mymodeuler</c> into a program <c>myRK2</c> that does the RK2 method.
+                Modify the program <c>mymodeuler</c> (<xref ref="prg-mymodeuler"/>) into a program <c>myRK2</c> that does the RK2 method.
               </p>
             </li>
             <li>
               <p>
-                Test <c>myRK2</c> and <c>mymodeuler</c> on the following IVP with time span <m>[0, 4\pi]</m>:
+                Test <c>myRK2</c> and <c>mymodeuler</c> (<xref ref="prg-mymodeuler"/>) on the following IVP with time span <m>[0, 4\pi]</m>:
                 <md>
                   \ddot{x}+ x = 0 \quad\text{with}\quad x(0) = 1\quad\text{and}\quad \dot{x}(0) = 0
                 </md>.
@@ -563,7 +569,7 @@
         Adding a spline will result in an excellent graph.
       </p>
       <p>
-        The exact solution of this BVP is given in <xref ref="eqn-beam-exact" />. That equation, with the parameter values for the W12x22 I-beam as in the example, is in the program myexactbeam.m. We can plot the true solution on the same graph: 
+        The exact solution of this BVP is given in <xref ref="eqn-beam-exact" />. That equation, with the parameter values for the W12x22 I-beam as in the example, is in the program <c>myexactbeam.m</c> (<xref ref="prg-myexactbeam"/>). We can plot the true solution on the same graph: 
         <console prompt=">> " lang="matlab">
           <input> hold on </input>
           <input>myexactbeam </input>
@@ -571,13 +577,13 @@
         Thus our numerical solution is extremely good considering how few subintervals we used and how very large the deflection is.
       </p>
       <p>
-        An amusing exercise is to set <m>T=0</m> in the program <c>myexactbeam.m</c>; the program fails because the exact solution is no longer valid. Also try <m>T=.1</m> for which you will observe loss of precision. On the other hand the finite difference method still works when we set <m>T=0</m>.
+        An amusing exercise is to set <m>T=0</m> in the program <c>myexactbeam.m</c> (<xref ref="prg-myexactbeam"/>); the program fails because the exact solution is no longer valid. Also try <m>T=.1</m> for which you will observe loss of precision. On the other hand the finite difference method still works when we set <m>T=0</m>.
       </p>
     </subsection>
     <exercises xml:id="exercises-ODE-BVP">
       <exercise>
         <p>
-          Derive the finite difference equations for the BVP <xref ref="eqn-beam-sim" /> on the same domain (<m>[0,120]</m>), but with eight subintervals and solve (using MATLAB) as in the example. Plot your result, together on the same plot with the exact solution <xref ref="eqn-beam-exact" /> from the program myexactbeam.m.
+          Derive the finite difference equations for the BVP <xref ref="eqn-beam-sim" /> on the same domain (<m>[0,120]</m>), but with eight subintervals and solve (using MATLAB) as in the example. Plot your result, together on the same plot with the exact solution <xref ref="eqn-beam-exact" /> from the program <c>myexactbeam.m</c> (<xref ref="prg-myexactbeam"/>).
         </p>
       </exercise>
       <exercise>
@@ -648,7 +654,15 @@
     <subsection>
       <title>Implementing the Relaxation Method</title>
       <p>
-        In the following program we solve the finite difference equations (<xref ref="eqn-condrad" />) with the boundary conditions <m>u(0) = 0</m> and <m>u(L) = 0</m>. We let <m>L = 4</m>, <m>n=4</m>, <m>d = 1</m>, and <m>g(x) = \sin(\pi x/4)</m>. Notice that the vector <c>u</c> always contains the current estimate of the values of <m>\ub</m>. ../programs/mynonlinheat.m ***************
+        In the following program we solve the finite difference equations (<xref ref="eqn-condrad" />) with the boundary conditions <m>u(0) = 0</m> and <m>u(L) = 0</m>. We let <m>L = 4</m>, <m>n=4</m>, <m>d = 1</m>, and <m>g(x) = \sin(\pi x/4)</m>. Notice that the vector <c>u</c> always contains the current estimate of the values of <m>\ub</m>. 
+      </p>
+      <listing xml:id="prg-mynonlinheat">
+        <title>mynonlinheat</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/mynonlinheat.m"/></code>
+        </program>
+      </listing>
+      <p>  
         If you run this program with the given <c>n</c> and <c>steps</c> the result will not seem reasonable.
       </p>
       <p>
@@ -658,7 +672,7 @@
     <exercises xml:id="exercises-FD-NODE">
       <exercise>
         <p>
-          Modify the script program <c>mynonlinheat</c> to plot the initial guess and all intermediate approximations. Add complete comments to the program. Print the program and a plot using <m>n = 12</m> and <c>steps</c> large enough to see convergence.
+          Modify the script program <c>mynonlinheat</c> (<xref ref="prg-mynonlinheat"/>) to plot the initial guess and all intermediate approximations. Add complete comments to the program. Print the program and a plot using <m>n = 12</m> and <c>steps</c> large enough to see convergence.
         </p>
       </exercise>
       <exercise>
@@ -798,21 +812,27 @@
     <subsection>
       <title>Implementation</title>
       <p>
-        The following program (available to download **********as myheat.m) implements the explicit method. It incorporates variable boundary conditions at both ends. To run it you must define functions <m>f</m>, <m>g_{1}</m> and <m>g_{2}</m>. Notice that the main loop has only one line. The values of <m>u</m> are kept as a matrix. It is often convenient to define a matrix of the right dimension containing all zeros, and then fill in the calculated values as the program runs.
+        The following program implements the explicit method. It incorporates variable boundary conditions at both ends. To run it you must define functions <m>f</m>, <m>g_{1}</m> and <m>g_{2}</m>. Notice that the main loop has only one line. The values of <m>u</m> are kept as a matrix. It is often convenient to define a matrix of the right dimension containing all zeros, and then fill in the calculated values as the program runs.
       </p>
+      <listing xml:id="prg-myheat">
+        <title>myheat</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myheat.m"/></code>
+        </program>
+      </listing>
       <p>
-        Run the following program using <m>L = 2</m>, <m>T=20</m>, <m>f(x) = .5 x</m>, <m>g_{1}(t) = 0</m>, and <m>g_{2}(t) = \cos(t)</m>. You will find that simply <c>g1 = @(t) 0</c> will not work, because it will only produce a single number <m>0</m>. Instead use <c>g1 = @(t) 0*t</c>, which will produce the needed vector of zeros.  ../programs/myheat.m **********
+        Run the following program using <m>L = 2</m>, <m>T=20</m>, <m>f(x) = .5 x</m>, <m>g_{1}(t) = 0</m>, and <m>g_{2}(t) = \cos(t)</m>. You will find that simply <c>g1 = @(t) 0</c> will not work, because it will only produce a single number <m>0</m>. Instead use <c>g1 = @(t) 0*t</c>, which will produce the needed vector of zeros.
       </p>
     </subsection>
     <exercises xml:id="exercises-parabolic-explicit">
       <exercise>
         <p>
-          Run the program <c>myheat.m</c> with <m>L = 2\pi</m>, <m>T=20</m>, <m>c = .5</m>, <m>g_{1}(t) = \sin(t)</m>, <m>g_{2}(t) =0</m> and <m>f(x) = -\sin(x/4)</m>. Set <m>m=20</m> and experiment with <m>n</m>. Get a plot when the program is stable and one when it isn't. Turn in the plots. Hint: The function <m>g_{2}(t)</m> will need to be input using the formula <c>g2 = @(t) 0*t</c>.
+          Run the program <c>myheat.m</c> (<xref ref="prg-myheat"/>) with <m>L = 2\pi</m>, <m>T=20</m>, <m>c = .5</m>, <m>g_{1}(t) = \sin(t)</m>, <m>g_{2}(t) =0</m> and <m>f(x) = -\sin(x/4)</m>. Set <m>m=20</m> and experiment with <m>n</m>. Get a plot when the program is stable and one when it isn't. Turn in the plots. Hint: The function <m>g_{2}(t)</m> will need to be input using the formula <c>g2 = @(t) 0*t</c>.
         </p>
       </exercise>
       <exercise>
         <p>
-          Make a version of the program <c>myheat.m</c> that does not input <m>n</m> or <m>T</m> but instead has inputs: <program language="matlab">
+          Make a version of the program <c>myheat.m</c> (<xref ref="prg-myheat"/>) that does not input <m>n</m> or <m>T</m> but instead has inputs: <program language="matlab">
             <code>
               %   k -- size of the time steps
               %   temp -- keeps stepping in time until the maximum current 
@@ -828,7 +848,7 @@
     <title>Solution Instability for the Explicit Method</title>
     <introduction>
       <p>
-        As we saw in experiments using <c>myheat.m</c>, the solution can become unbounded unless the time steps are small. In this lecture we consider why.
+        As we saw in experiments using <c>myheat.m</c> (<xref ref="prg-myheat"/>), the solution can become unbounded unless the time steps are small. In this section we consider why.
       </p>
     </introduction>
     <subsection>
@@ -890,7 +910,14 @@
       </p>
       <p>
         We can write a function program <c>myexpmatrix.m</c> that produces the matrix <m>A</m> in <xref ref="eqn-heatmat" />, for given inputs <m>m</m> and <m>r</m>. Without using loops we can use the <c>diag</c> command to set up the matrix: 
-        *******../programs/myexpmatrix.m 
+      </p>
+      <listing xml:id="prg-myexpmatrix">
+        <title>myexpmatrix</title>          
+        <program language="matlab">
+          <code><xi:include parse="text" href="../assets/programs/myexpmatrix.m"/></code>
+        </program>
+      </listing>
+      <p> 
         Test this using <m>m=6</m> and <m>r=.4, .6</m>. Check the eigenvalues and eigenvectors of the resulting matirices: 
         <console prompt=">> " lang="matlab">
           <input> A = myexpmatrix(6,.6) </input>
@@ -902,7 +929,7 @@
     <exercises xml:id="exercises-instability-explicit">
       <exercise>
         <p>
-          Let <m>L=\pi</m>, <m>T = 20</m>, <m>f(x) = .1\sin(x)</m>, <m>g_{1}(t) = 0</m>, <m>g_{2}(t) = 0</m>, <m>c = .5</m>, and <m>m = 20</m>, as used in the program <c>myheat.m</c>. What value of <m>n</m> corresponds to <m>r = 1/2</m>? Try different <m>n</m> in myheat.m to find precisely when the method works and when it fails. Is <m>r = 1/2</m> the boundary between failure and success? Hand in a plot of the last success and the first failure. Include the values of <m>n</m> and <m>r</m> in each.
+          Let <m>L=\pi</m>, <m>T = 20</m>, <m>f(x) = .1\sin(x)</m>, <m>g_{1}(t) = 0</m>, <m>g_{2}(t) = 0</m>, <m>c = .5</m>, and <m>m = 20</m>, as used in the program <c>myheat.m</c> (<xref ref="prg-myheat"/>). What value of <m>n</m> corresponds to <m>r = 1/2</m>? Try different <m>n</m> in <c>myheat.m</c> to find precisely when the method works and when it fails. Is <m>r = 1/2</m> the boundary between failure and success? Hand in a plot of the last success and the first failure. Include the values of <m>n</m> and <m>r</m> in each.
         </p>
       </exercise>
       <exercise xml:id="exr-myexpmatrix">
@@ -920,7 +947,7 @@
                   <ul>
                     <li>
                       <p>
-                        create the matrix <m>A</m> by calling <c>myexpmatrix</c>,
+                        create the matrix <m>A</m> by calling <c>myexpmatrix</c> (<xref ref="prg-myexpmatrix"/>),
                       </p>
                     </li>
                     <li>
@@ -997,7 +1024,7 @@
         Notice that this absolute maximum is always less than <m>1</m>. Thus errors are always diminished over time and so this method is always stable. For the same reason it is also always as accurate as the individual steps.
       </p>
       <p>
-        Both this implicit method and the explicit method in the previous lecture make <m>O(h^{2})</m> error in approximating <m>u_{xx}</m> and <m>O(k)</m> error in approximating <m>u_{t}</m>, so they have total error <m>O(h^{2}+k)</m>. Thus although the stability condition allows the implicit method to use arbitrarily large <m>k</m>, to maintain accuracy we still need <m>k\sim h^{2}</m>.
+        Both this implicit method and the explicit method in the previous section make <m>O(h^{2})</m> error in approximating <m>u_{xx}</m> and <m>O(k)</m> error in approximating <m>u_{t}</m>, so they have total error <m>O(h^{2}+k)</m>. Thus although the stability condition allows the implicit method to use arbitrarily large <m>k</m>, to maintain accuracy we still need <m>k\sim h^{2}</m>.
       </p>
     </subsection>
     <subsection>
@@ -1057,12 +1084,12 @@
     <exercises xml:id="exercises-implicit-methods">
       <exercise>
         <p>
-          Modify the program <c>myexpmatrix.m</c> from <xref ref="exr-myexpmatrix"/> into a function program <c>myimpmatrix.m</c> that produces the matrix <m>B</m> in <xref ref="eqn-impheatmat" /> for given inputs <m>m</m> and <m>r</m>. Modify your script from <xref ref="exr-myexpmatrix"/> to use <m>B^{-1}</m> and to plot for <m>r\in[0,2]</m>; keep <m>m = 4</m>. It should produce a graph similar to that in <xref ref="fig-impheatspec" /> for <m>m = 4</m>. Turn in the programs and the plot.
+          Modify the program <c>myexpmatrix.m</c> (<xref ref="prg-myexpmatrix"/>) into a function program <c>myimpmatrix.m</c> that produces the matrix <m>B</m> in <xref ref="eqn-impheatmat" /> for given inputs <m>m</m> and <m>r</m>. Modify your script from <xref ref="exr-myexpmatrix"/> to use <m>B^{-1}</m> and to plot for <m>r\in[0,2]</m>; keep <m>m = 4</m>. It should produce a graph similar to that in <xref ref="fig-impheatspec" /> for <m>m = 4</m>. Turn in the programs and the plot.
         </p>
       </exercise>
       <exercise>
         <p>
-          Modify the program <c>myheat</c> into a new program <c>myimplicitheat</c> that uses the implicit method to solve the boundary value problem
+          Modify the program <c>myheat</c> (<xref ref="prg-myheat"/>) into a new program <c>myimplicitheat</c> that uses the implicit method to solve the boundary value problem
           <md>
             u_{t} = c u_{xx}, \quad u(t,0) = u(t,L) = 0, \quad u(0,x) = f(x)
           </md>
@@ -1230,18 +1257,18 @@
         Here <m>u_{b}</m> is the (fixed) background temperature and <m>u_{R}</m> is the (fixed) temperature at the rim of the disk.
       </p>
       <p>
-        The program <c>myheatdisk.m</c> ***** implements these equations for parameter values <m>R = 5</m>, <m>d = .1</m>, <m>u_{R} = u_{b} = 10</m> and <m>g(r) = (r-5)^{2}</m>. Notice that the equations have a singularity (discontinuity) at <m>r=0</m>. How does the program avoid this problem? How does the program implement <m>u_{R}=10</m> and <m>u'(0) = 0</m>? Run the program.
+        The program <c>myheatdisk.m</c> (<xref ref="prg-myheatdisk"/>) implements these equations for parameter values <m>R = 5</m>, <m>d = .1</m>, <m>u_{R} = u_{b} = 10</m> and <m>g(r) = (r-5)^{2}</m>. Notice that the equations have a singularity (discontinuity) at <m>r=0</m>. How does the program avoid this problem? How does the program implement <m>u_{R}=10</m> and <m>u'(0) = 0</m>? Run the program.
       </p>
     </subsection>
     <exercises xml:id="exercises-insulated-BC">
       <exercise>
         <p>
-          Redo the calculations for the BVP <xref ref="eqn-linear-insulated" /> except do not include the fictional point <m>x_{5}</m>. Instead, let <m>x_{4}</m> be the last point and impose the insulated boundary by requiring <m>u_{4} = u_{3}</m>. (Keep <m>m=4</m> and <m>h=1/4</m>. Your system of equations should be <m>3 \times 3</m>.) Compare this solution with the true solution and the better approximation in the lecture. Illustrate this comparison on a single plot.
+          Redo the calculations for the BVP <xref ref="eqn-linear-insulated" /> except do not include the fictional point <m>x_{5}</m>. Instead, let <m>x_{4}</m> be the last point and impose the insulated boundary by requiring <m>u_{4} = u_{3}</m>. (Keep <m>m=4</m> and <m>h=1/4</m>. Your system of equations should be <m>3 \times 3</m>.) Compare this solution with the true solution and the better approximation in the section. Illustrate this comparison on a single plot.
         </p>
       </exercise>
       <exercise>
         <p>
-          Modify the program <c>myheat.m</c> to have an insulated boundary at <m>x=L</m> (rather than <m>u(L,t) = g_{2}(t)</m>). You will need to change the domain to: <c>x = 0:h:L+h</c>, change the dimensions of all the other objects to fit this domain and implement the insulation (copy) step inside the loop (see <xref ref="sec-insulated-BC-time"/> and <xref ref="fig-expheatinsulation"/>).
+          Modify the program <c>myheat.m</c> (<xref ref="prg-myheat"/>) to have an insulated boundary at <m>x=L</m> (rather than <m>u(L,t) = g_{2}(t)</m>). You will need to change the domain to: <c>x = 0:h:L+h</c>, change the dimensions of all the other objects to fit this domain and implement the insulation (copy) step inside the loop (see <xref ref="sec-insulated-BC-time"/> and <xref ref="fig-expheatinsulation"/>).
         </p>
         <p>
           Run the program with <m>L = 2\pi</m>, <m>T=20</m>, <m>c = .6</m>, <m>g_{1}(t) = \sin(t)</m> and <m>f(x) = -\sin(x/4)</m>. Set <m>m=20</m> and experiment with <m>n</m>. Get a plot when the program is stable. Turn in your program and plot.
@@ -1288,8 +1315,11 @@
           \frac{u_{i+1,j}- 2u_{ij}+ u_{i-1,j}}{h^{2}}+ \frac{u_{i,j+1}- 2u_{ij}+ u_{i,j-1}}{k^{2}}= f(x_{i},y_{j}) = f_{ij}
         </md>
         for <m>1 \le i \le m-1</m> and <m>1 \le j \le n-1</m>. See <xref ref="fig-elliptic" /> for an illustration. The boundary conditions are introduced by
-        <md xml:id="eqn-poissonbv" number="yes">
-          u_{0,j}= g(a,y_{j}), \quad u_{m,j}= g(b,y_{j}), \quad u_{i,0}= g(x_{i},c), \quad\text{and}\quad u_{i,n}= g(x_{i},d)
+        <md>
+          <mrow xml:id="eqn-poissonbv" number="yes">u_{0,j} \amp = g(a,y_{j}),</mrow>
+          <mrow>u_{m,j} \amp = g(b,y_{j}),</mrow>
+          <mrow>u_{i,0} \amp = g(x_{i},c), \quad\text{and}</mrow>
+          <mrow>u_{i,n} \amp = g(x_{i},d)</mrow>
         </md>.
       </p>
       <figure xml:id="fig-elliptic">
@@ -1326,13 +1356,13 @@
         This method is another example of a  relaxation method. Using this formula, along with <xref ref="eqn-poissonbv" />, we can update <m>u_{ij}</m> from its neighbors, just as we did in the relaxation method for the nonlinear boundary value problem. If this method converges, then the result is an approximate solution.
       </p>
       <p>
-        Download and read the script <c>mypoisson.m</c>, ************* which implements the iterative solution. You will notice that <c>maxit</c> is set to <m>0</m>. Thus the program will not do any iteration, but will plot the initial guess. The initial guess in this case consists of the proper boundary values at the edges, and zero everywhere in the interior. To see the solution evolve, gradually increase <c>maxit</c>.
+        Download and read the script <c>mypoisson.m</c> (<xref ref="prg-mypoisson"/>), which implements the iterative solution. You will notice that <c>maxit</c> is set to <m>0</m>. Thus the program will not do any iteration, but will plot the initial guess. The initial guess in this case consists of the proper boundary values at the edges, and zero everywhere in the interior. To see the solution evolve, gradually increase <c>maxit</c>.
       </p>
     </subsection>
     <exercises xml:id="exercises-FD-elliptic">
       <exercise>
          <p>
-            Modify the script <c>mypoisson.m</c> to change the force <m>f(x,y)</m> to a negative constant <m>-p</m>.
+            Modify the script <c>mypoisson.m</c> (<xref ref="prg-mypoisson"/>) to change the force <m>f(x,y)</m> to a negative constant <m>-p</m>.
           </p>
           <p>
             Obtain plots for <m>p=5</m> and <m>p=50</m>. You will need to adjust <c>maxit</c> to obtain convergence. Tell how many iterations are needed for convergence in each. Turn in your plots and the modified program.
@@ -1340,7 +1370,7 @@
       </exercise>
       <exercise>
          <p>
-            Further modify <c>mypoisson.m</c> to change the edge of the rectangle at <m>x = b \ (= 10)</m> to be an insulated boundary, i.e. <m>u_{x}(b,y) =0</m>.
+            Further modify <c>mypoisson.m</c> (<xref ref="prg-mypoisson"/>) to change the edge of the rectangle at <m>x = b \ (= 10)</m> to be an insulated boundary, i.e. <m>u_{x}(b,y) =0</m>.
           </p>
           <p>
             You will need to expand both the grid and the matrix <c>u</c> to include a row of fictional points. Then you will need to adjust a lot of indices and enforce insulation inside the loop. Run it with <m>p = 20</m>. If it is working correctly, the plot will be smooth and the derivative <m>u_{x}</m> on the edge <m>x = 10</m> will appear to be zero. Turn in your plots and the modified program.
@@ -1358,7 +1388,7 @@
     <subsection xml:id="subsec-">
       <title>Triangulating a Region</title>
       <p>
-        A disadvantage of finite difference methods is that they require a very regular grid, and thus a very regular region, either rectangular or a regular part of a rectangle. Finite elements is a method that works for any shape region because it is not built on a grid, but on triangulation of the region, i.e.<nbsp />cutting the region up into triangles as we did in a previous lecture. The following figure shows a triangularization of a region.
+        A disadvantage of finite difference methods is that they require a very regular grid, and thus a very regular region, either rectangular or a regular part of a rectangle. Finite elements is a method that works for any shape region because it is not built on a grid, but on triangulation of the region, i.e.<nbsp />cutting the region up into triangles as we did in a previous section. The following figure shows a triangularization of a region.
       </p>
       <figure xml:id="fig-whasher">
         <image source="washer" />
@@ -1366,10 +1396,10 @@
           </caption>
       </figure>
       <p>
-        This figure was produced by the script program <c>mywasher.m</c>. Notice that the nodes are evenly distributed. This is good for the finite element process where we will use it.
+        This figure was produced by the script program <c>mywasher.m</c> (<xref ref="prg-mywasher"/>). Notice that the nodes are evenly distributed. This is good for the finite element process where we will use it.
       </p>
       <p>
-        Open the program <c>mywasher.m</c> *****. This program defines a triangulation by defining the vertices in a matrix <c>V</c> in which each row contains the <m>x</m> and <m>y</m> coordinates of a vertex. Notice that we list the interior nodes first, then the boundary nodes.
+        Open the program <c>mywasher.m</c> (<xref ref="prg-mywasher"/>). This program defines a triangulation by defining the vertices in a matrix <c>V</c> in which each row contains the <m>x</m> and <m>y</m> coordinates of a vertex. Notice that we list the interior nodes first, then the boundary nodes.
       </p>
       <p>
         Triangles are defined in the matrix <c>T</c>. Each row of <c>T</c> has three integer numbers indicating the indices of the nodes that form a triangle. For instance the first row is <c>43 42 25</c>, so <m>T_{1}</m> is the triangle with vertices <m>\vb_{43}</m>, <m>\vb_{42}</m> and <m>\vb_{25}</m>. The matrix <m>T</m> in this case was produced by the MATLAB command <c>delaunay</c>. The command produced more triangles than desired and the unwanted ones were deleted.
@@ -1415,7 +1445,7 @@
         Thus finding a finite element solution amounts to finding the best values for the constants <m>\{ C_{j} \}_{j=1}^{n}</m>.
       </p>
       <p>
-        In the program <c>mywasher.m</c>, the vector <c>z</c> contains the node values <m>C_{j}</m>. These values give the height at each node in the graph. For instance if we set all equal to <m>0</m> except one equal to <m>1</m>, then the function is a finite element. Do this for one boundary node, then for one interior node.
+        In the program <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), the vector <c>z</c> contains the node values <m>C_{j}</m>. These values give the height at each node in the graph. For instance if we set all equal to <m>0</m> except one equal to <m>1</m>, then the function is a finite element. Do this for one boundary node, then for one interior node.
       </p>
       <p>
         Notice that a sum of linear functions is a linear function. Thus the solution using linear elements is a piecewise linear function. Also notice that if we denote the <m>j</m>-th vertex by <m>\vb_{j}</m>, then
@@ -1473,7 +1503,7 @@
         </md>.
       </p>
       <p>
-        In the program <c>mywasher.m</c> the first 32 vertices correspond to interior nodes and the last 32 correspond to boundary nodes. By setting the last 32 values of <c>z</c>, we achieve the boundary conditions. We could do this by adding the following commands to the program: 
+        In the program <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), the first 32 vertices correspond to interior nodes and the last 32 correspond to boundary nodes. By setting the last 32 values of <c>z</c>, we achieve the boundary conditions. We could do this by adding the following commands to the program: 
         <program language="matlab"><code> z(33:64) = .5; </code></program> 
         or more elaborately we might use functions: 
         <program language="matlab">
@@ -1645,11 +1675,11 @@
     <subsection>
       <title>Experiment</title>
       <p>
-        Download ***** the program <c>myfiniteelem.m</c>. This program produces a finite element solution for the steady state heat equation without source term:
+        Download the program <c>myfiniteelem.m</c> (<xref ref="prg-myfiniteelem"/>). This program produces a finite element solution for the steady state heat equation without source term:
         <md>
           u_{xx}+ u_{yy}= 0
         </md>.
-        To use it, you first need to set up the region and boundary values by running a script such as <c>mywasher.m</c> or <c>mywedge.m</c>. Try different settings for the boundary values <c>z</c>. You will see that the program works no matter what you choose.
+        To use it, you first need to set up the region and boundary values by running a script such as <c>mywasher.m</c> (<xref ref="prg-mywasher"/>) or <c>mywedge.m</c> (<xref ref="prg-mywedge"/>). Try different settings for the boundary values <c>z</c>. You will see that the program works no matter what you choose.
       </p>
     </subsection>
     <exercises xml:id="exercises-determining-internal">
@@ -1663,7 +1693,7 @@
           </li>
           <li>
             <p>
-              Then run <c>myfiniteelem.m</c> and plot.
+              Then run <c>myfiniteelem.m</c> (<xref ref="prg-myfiniteelem"/>) and plot.
             </p>
           </li>
         </ul>
@@ -1714,7 +1744,7 @@
       <subsubsection>
         <title>Finite Differences:</title>
         <p>
-          Replace the Differential Equation by Difference Equations on a grid. Review the lecture on Numerical Differentiation.
+          Replace the Differential Equation by Difference Equations on a grid. Review the section on Numerical Differentiation.
         </p>
       </subsubsection>
       <subsubsection>

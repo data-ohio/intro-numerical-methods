@@ -61,7 +61,7 @@
       </p>
 
       <p>
-        If the data <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m> has repeated <m>x</m>-values with distinct <m>y</m>-values, then the system of equations is inconsistent and there will be no solution.If <m>n > d+1</m> then the system has more equations than unknowns, so it is overdetermined and in general will have no solution.In these cases MATLAB does produce a function, but it does not satisfy <m>p(x_{i})=y_{i}</m> for <m>i=1,\dots,n</m> and so is not an interpolant. Instead it is a least-squares fit, which we will study in Lecture<nbsp /><xref ref="sec-leastsquares" />.
+        If the data <m>\{(x_{i},y_{i})\}_{i=1}^{n}</m> has repeated <m>x</m>-values with distinct <m>y</m>-values, then the system of equations is inconsistent and there will be no solution.If <m>n > d+1</m> then the system has more equations than unknowns, so it is overdetermined and in general will have no solution.In these cases MATLAB does produce a function, but it does not satisfy <m>p(x_{i})=y_{i}</m> for <m>i=1,\dots,n</m> and so is not an interpolant. Instead it is a least-squares fit, which we will study in <xref ref="sec-leastsquares" />.
       </p>
     </subsection>
     <subsection>
@@ -103,7 +103,7 @@
     <subsection>
       <title>The idea of a spline</title>
       <p>
-        The general idea of a spline is this: on each interval between data points, represent the graph with a simple function. The simplest spline is something very familiar to you; it is obtained by connecting the data with lines. Since linear is the most simple function of all, linear interpolation is the simplest form of spline. The next simplest function is quadratic. If we put a quadratic function on each interval then we should be able to make the graph a lot smoother. If we were really careful then we should be able to make the curve smooth at the data points themselves by matching up the derivatives. This can be done and the result is called a quadratic spline. Using cubic functions or 4th degree functions should be smoother still. So, where should we stop? There is an almost universal consensus that  cubic is the optimal degree for splines and so we focus the rest of the lecture on cubic splines.
+        The general idea of a spline is this: on each interval between data points, represent the graph with a simple function. The simplest spline is something very familiar to you; it is obtained by connecting the data with lines. Since linear is the most simple function of all, linear interpolation is the simplest form of spline. The next simplest function is quadratic. If we put a quadratic function on each interval then we should be able to make the graph a lot smoother. If we were really careful then we should be able to make the curve smooth at the data points themselves by matching up the derivatives. This can be done and the result is called a quadratic spline. Using cubic functions or 4th degree functions should be smoother still. So, where should we stop? There is an almost universal consensus that  cubic is the optimal degree for splines and so we focus the rest of the section on cubic splines.
       </p>
     </subsection>
     <subsection>
@@ -774,7 +774,7 @@
         <console prompt=">> " lang="matlab"><input> y(T(5,2)) </input></console>
       </p>
       <p>
-        To see other examples of regions defined by triangles, download **************************mywedge.m and mywasher.m and run them. Each of these programs defines vectors <c>x</c> and <c>y</c> of <m>x</m> and <m>y</m> values of vertices and a matrix <c>T</c>. As before <c>T</c> is a list of sets of three integers. Each triple of integers indicates which vertices to connect in a triangle.
+        To see other examples of regions defined by triangles, download <c>mywedge.m</c> (<xref ref="prg-mywedge"/>) and <c>mywasher.m</c> (<xref ref="prg-mywasher"/>) and run them. Each of these programs defines vectors <c>x</c> and <c>y</c> of <m>x</m> and <m>y</m> values of vertices and a matrix <c>T</c>. As before <c>T</c> is a list of sets of three integers. Each triple of integers indicates which vertices to connect in a triangle.
       </p>
       <p>
         To plot a function, say <m>f(x,y) = x^{2} - y^{2}</m> on the washer figure try 
@@ -794,7 +794,7 @@
       </exercise>
       <exercise>
         <p>
-              Modeling after mywasher.m, produce \unitlength1 mm ****************
+              Modeling after <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), produce \unitlength1 mm ****************
             </p>
             (0,0)(1,0)30 (0,10)(1,0)20 (0,0)(0,1)10 (10,0)(0,1)10 (0,10)(1,-1)10 (20,10)(1,-1)10 (10,10)(2,-1)20
             <p>
@@ -866,7 +866,7 @@
         <md>
           \nabla f(\mathbf{x}^{*}) = \mathbf{0}\quad \text{ (the zero vector)}
         </md>.
-        Thus one way to locate max or min points for a specific function is to solve <m>\nabla f(\mathbf{x}^{*}) = \mathbf{0}</m>. This will often lead to systems of non-linear equations as we encountered in Lecture<nbsp /><xref ref="sec-multnewton" />. For example, for <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>,to attempt to find critical point we would need to try to solve:
+        Thus one way to locate max or min points for a specific function is to solve <m>\nabla f(\mathbf{x}^{*}) = \mathbf{0}</m>. This will often lead to systems of non-linear equations as we encountered in <xref ref="sec-multnewton" />. For example, for <m>f(x_{1},x_{2}) = x_{1}e^{-x_1^2-x_.^2+\sin(x_1x_2)}</m>,to attempt to find critical point we would need to try to solve:
         <md>
           (1+x_{1}(-2x_{1}+\cos(x_{1}x_{2})x_{2})) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
         </md> 
@@ -874,7 +874,7 @@
         <md>
           x_{1}(-2x_{2}+\cos(x_{1}x_{2})x_{1}) e^{-x_1^2-x_.^2+\sin(x_1x_2)}=0
         </md>.
-        That, obviously, is going to be very hard and in fact is impossible using algebra. Thus we will have to use numerical methods to find any maximum or minimum points. The multiple variable Newton's method that we learned in Lecture<nbsp /><xref ref="sec-multnewton" /> would be one option. In the next section we introduce another common algorithm.
+        That, obviously, is going to be very hard and in fact is impossible using algebra. Thus we will have to use numerical methods to find any maximum or minimum points. The multiple variable Newton's method that we learned in section<nbsp /><xref ref="sec-multnewton" /> would be one option. In the next section we introduce another common algorithm.
       </p>
     </subsection>
     <subsection>
@@ -1014,7 +1014,7 @@
         Note that here, as usual, operations are component-wise.
       </p>
       <p>
-        Below is a MATLAB function which will produce the matrix of weights needed for Simpson's rule for double integrals. It uses the function <c>mysimpweights</c> from Lecture<nbsp />22.
+        Below is a MATLAB function which will produce the matrix of weights needed for Simpson's rule for double integrals. It uses the function <c>mysimpweights</c> (<xref ref="prg-mysimpweights"/>).
       </p>
       <listing xml:id="prg-mydblsimpweights">
         <title>mydblsimpweights</title>
@@ -1026,7 +1026,7 @@
     <exercises xml:id="exercises-double-int-rect">
       <exercise>
         <p>
-          Download the program ****************mylowerleft.m and test it. Find and fix the bug in it. Modify it to make a new program <c>mycenter</c> that does the center point method. Implement the change by changing the <q>meshgrid</q> to put the grid points at the centers of the subrectangles. Look at the mesh plot produced to make sure the program is putting the grid where you want it. Use both programs to approximate the integral
+          Download the program <c>mylowerleft.m</c> (<xref ref="prg-mylowerleft"/>) and test it. Find and fix the bug in it. Modify it to make a new program <c>mycenter</c> that does the center point method. Implement the change by changing the <q>meshgrid</q> to put the grid points at the centers of the subrectangles. Look at the mesh plot produced to make sure the program is putting the grid where you want it. Use both programs to approximate the integral
           <md>
             \int_{0}^{2} \int_{1}^{5} \sqrt{xy}\, dy \, dx
           </md>,
@@ -1049,7 +1049,7 @@
     <title>Double Integrals for Non-rectangles</title>
     <introduction>
       <p>
-        In the previous lecture we considered only integrals over rectangular regions. In practice, regions of interest are rarely rectangles and so in this lecture we consider two strategies for evaluating integrals over other regions.
+        In the previous section we considered only integrals over rectangular regions. In practice, regions of interest are rarely rectangles and so in this section we consider two strategies for evaluating integrals over other regions.
       </p>
       <p>
         Calculus tells us that if the region can be described by simple functions, then we might be able to use iterated integrals. For instance, suppose that <m>R</m> is the region inside of a circle of radius <m>2</m>. Since the boundary of that circle is given by <m>x^{2} + y^{2} = 2^{2}</m>, we could express the integral of <m>f(x,y)</m> on this region by:
@@ -1128,12 +1128,12 @@
           <ol>
             <li>
               <p>
-                Download ****** the program mywasher.m. Plot <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> on the region produced by mywasher.m and use the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to calculate the integral of <m>f</m> on the washer. Is this accurate? How do you know?
+                Download the program <c>mywasher.m</c> (<xref ref="prg-mywasher"/>). Plot <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> on the region produced by <c>mywasher.m</c> and use the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to calculate the integral of <m>f</m> on the washer. Is this accurate? How do you know?
               </p>
             </li>
             <li>
               <p>
-                Download **********the program mywedge.m. Plot <m>g(x,y) = \sin(x) + \sqrt{y}</m> on the region produced by mywedge.m use <c>mythreecorners.m</c> to calculate the integral of <m>g</m> on this wedge.
+                Download the program <c>mywedge.m</c> (<xref ref="prg-mywedge"/>). Plot <m>g(x,y) = \sin(x) + \sqrt{y}</m> on the region produced by <c>mywedge.m</c>. Use <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to calculate the integral of <m>g</m> on this wedge.
               </p>
             </li>
           </ol>
@@ -1141,7 +1141,7 @@
       </exercise>
       <exercise>
         <p>
-          Modify the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to a new program <c>mycenters.m</c> that does the centerpoint method for triangles. Run the program on the region produced by mywasher.m with the function <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> and on the region produced by mywedge.m with the function <m>g(x,y) = \sin(x) + \sqrt{y}</m>.
+          Modify the program <c>mythreecorners.m</c> (<xref ref="prg-mythreecorners"/>) to a new program <c>mycenters.m</c> that does the centerpoint method for triangles. Run the program on the region produced by <c>mywasher.m</c> (<xref ref="prg-mywasher"/>) with the function <m>f(x,y) = \frac{x+y}{x^{2}+y^{2}}</m> and on the region produced by <c>mywedge.m</c> (<xref ref="prg-mywedge"/>) with the function <m>g(x,y) = \sin(x) + \sqrt{y}</m>.
         </p>
       </exercise>
     </exercises>
@@ -1233,7 +1233,7 @@
         <md>
           u_{i,j}= u(x_{i},y_{j})
         </md>
-        frequently throughout the rest of the lectures. We can suppose that the grid points are evenly spaced, with an increment of <m>h</m> in the <m>x</m> direction and <m>k</m> in the <m>y</m> direction. The central difference formulas for the partial derivatives would be
+        frequently throughout the rest of the sections. We can suppose that the grid points are evenly spaced, with an increment of <m>h</m> in the <m>x</m> direction and <m>k</m> in the <m>y</m> direction. The central difference formulas for the partial derivatives would be
         <md>
           <mrow>u_{x}(x_{i},y_{j}) \amp \approx \frac{1}{2h}\left( u_{i+1,j}- u_{i-1,j}\right) \quad\text{and}</mrow>
           <mrow>u_{y}(x_{i},y_{j}) \amp \approx \frac{1}{2k}\left( u_{i,j+1}- u_{i,j-1}\right)</mrow>
@@ -1510,7 +1510,7 @@
             </li>
             <li>
               <p>
-                Since it is a quarter of a circle of radius 2, we should have <m>\int_{0}^{2} \sqrt{4-x^{2}}dx=\frac{1}{4}\pi2^{2}=\pi</m>. We try to use <c>mytrap</c> from Lecture<nbsp /><xref ref="sec-LRTrules" /> and do 
+                Since it is a quarter of a circle of radius 2, we should have <m>\int_{0}^{2} \sqrt{4-x^{2}}dx=\frac{1}{4}\pi2^{2}=\pi</m>. We try to use <c>mytrap</c> from <xref ref="sec-LRTrules" /> and do 
                 <console prompt=">> " lang="matlab">
                   <input> x = 0:.2:2; </input>
                   <input>y = sqrt(4-x.^2); </input>
