@@ -658,7 +658,8 @@ eBookConfig.enable_chatcodes =  false;
 </h3>
 <div class="para" id="subsec--2">A disadvantage of finite difference methods is that they require a very regular grid, and thus a very regular region, either rectangular or a regular part of a rectangle. Finite elements is a method that works for any shape region because it is not built on a grid, but on triangulation of the region, i.e. cutting the region up into triangles as we did in a previous section. The following figure shows a triangularization of a region.<div class="autopermalink" data-description="Paragraph"><a href="#subsec--2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="figure figure-like" id="fig-whasher"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/washer.svg" role="img" class="contained"></div>
+<figure class="figure figure-like" id="fig-whasher"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/images/washer.png" class="contained" alt="
+Plot of a washer made of triangles.🔗"></div>
 <figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.11.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>An annular region with a triangulation. Notice that the nodes and triangles are very evenly spaced.<div class="autopermalink" data-description="Figure 4.11.1"><a href="#fig-whasher" title="Copy heading and permalink for Figure 4.11.1" aria-label="Copy heading and permalink for Figure 4.11.1">🔗</a></div></figcaption>
 </figure>
 <div class="para" id="subsec--4">This figure was produced by the script program <code class="code-inline tex2jax_ignore">mywasher.m</code> (<a href="sec-programs-used.html#prg-mywasher" class="xref" data-knowl="./knowl/xref/prg-mywasher.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.9: mywasher">Listing A.2.9</a>). Notice that the nodes are evenly distributed. This is good for the finite element process where we will use it.<div class="autopermalink" data-description="Paragraph"><a href="#subsec--4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -679,12 +680,8 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para" id="sec-finiteelements-3-3">If we consider one dimension, then a triangulation is just a subdivision into subintervals. In <a href="sec-finiteelements.html#fig-1dfe" class="xref" data-knowl="./knowl/xref/fig-1dfe.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.11.2">Figure 4.11.2</a> we show an uneven subdivision of an interval and the finite elements corresponding to each node.<div class="autopermalink" data-description="Paragraph"><a href="#sec-finiteelements-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="figure figure-like" id="fig-1dfe">
-<blockquote class="blockquote" id="fig-1dfe-1">
-<div class="para" id="fig-1dfe-1-1">\unitlength0.9 mm<div class="autopermalink" data-description="Paragraph"><a href="#fig-1dfe-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Quotation"><a href="#fig-1dfe-1" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
+<figure class="figure figure-like" id="fig-1dfe"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/images/fig-1dfe.png" class="contained" alt="
+Schematic of 1D finite elements.🔗"></div>
 <figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.11.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The finite elements for the “triangulation” of a one dimensional object.<div class="autopermalink" data-description="Figure 4.11.2"><a href="#fig-1dfe" title="Copy heading and permalink for Figure 4.11.2" aria-label="Copy heading and permalink for Figure 4.11.2">🔗</a></div></figcaption>
 </figure>
 <div class="para" id="sec-finiteelements-3-5">In two dimensions, <span class="process-math">\(\Phi_{j}\)</span> is composed of triangular piece of planes. Thus <span class="process-math">\(\Phi_{j}\)</span> is a function whose graph is a pyramid with its peak over node <span class="process-math">\(\vb_{j}\text{.}\)</span> For an example, try: <div class="code-box"><pre class="console clipboardable"><span class="prompt unselectable">&gt;&gt; </span><b>mywasher
@@ -726,12 +723,8 @@ U(\vb_{j}) = C_{j}\text{.}
 </div>
 <div class="para" id="sec-finiteelements-4-5">Take the one-dimensional case. Since we know that the solution is linear on each subinterval, knowing the values at the endpoints of the subintervals, i.e. the nodes, gives us complete knowledge of the solution. <a href="sec-finiteelements.html#fig-1dfesol" class="xref" data-knowl="./knowl/xref/fig-1dfesol.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 4.11.3">Figure 4.11.3</a> could be a finite element solution since it is piecewise linear.<div class="autopermalink" data-description="Paragraph"><a href="#sec-finiteelements-4-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="figure figure-like" id="fig-1dfesol">
-<blockquote class="blockquote" id="fig-1dfesol-1">
-<div class="para" id="fig-1dfesol-1-1">\unitlength0.9 mm<div class="autopermalink" data-description="Paragraph"><a href="#fig-1dfesol-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Quotation"><a href="#fig-1dfesol-1" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
+<figure class="figure figure-like" id="fig-1dfesol"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/images/fig-1dfesol.png" class="contained" alt="
+Schematic of 1D finite element solution.🔗"></div>
 <figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.11.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>A possible finite element solution for a one dimensional object. Values are assigned at each node and a linear interpolant is used in between.<div class="autopermalink" data-description="Figure 4.11.3"><a href="#fig-1dfesol" title="Copy heading and permalink for Figure 4.11.3" aria-label="Copy heading and permalink for Figure 4.11.3">🔗</a></div></figcaption>
 </figure>
 <div class="para" id="sec-finiteelements-4-7">In the two-dimensional case, the solution is linear on each triangle, and so again, if we know the values <span class="process-math">\(\{C_{j}\}_{j=1}^{n}\)</span> at the nodes then we know everything.<div class="autopermalink" data-description="Paragraph"><a href="#sec-finiteelements-4-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
