@@ -41,52 +41,113 @@
     <colophon-items/>
   </colophon>
 
-  <preface>
-       <p>
-        These notes were developed by the first author in the process of teaching a course on applied numerical methods for Civil Engineering majors during 2002-2004 and was modified to include Mechanical Engineering in 2005. The materials have been periodically updated since then and underwent a major revision by the second author in 2006-2007.
-      </p>
-
-      <p>
-        The main goals of these lectures are to introduce concepts of numerical methods and introduce MATLAB in an Engineering framework. By this we do not mean that every problem is a <q>real life</q> engineering application, but more that the engineering way of thinking is emphasized throughout the discussion.
-      </p>
-
-      <p>
-        The philosophy of this book was formed over the course of many years. My father was a Civil Engineer and surveyor, and he introduced me to engineering ideas from an early age. At the University of Kentucky I took most of the basic Engineering courses while getting a Bachelor's degree in Mathematics. Immediately afterward, I completed a M.S.<nbsp />degree in Engineering Mechanics at Kentucky.
-      </p>
-
-      <p>
-        While working on my Ph.D.<nbsp />in Mathematics at Georgia Tech I taught all of the introductory math courses for engineers. During my education, I observed that incorporation of computation in coursework had been extremely unfocused and poor. For instance during my college career I had to learn 8 different programming and markup languages on 4 different platforms plus numerous other software applications. There was almost no technical help provided in the courses and I wasted innumerable hours figuring out software on my own. A typical, but useless, inclusion of software has been (and still is in most calculus books) to set up a difficult <sq>applied</sq> problem and then add the line ``write a program to solve'' or ``use a computer algebra system to solve''.
-      </p>
-
-      <p>
-        At Ohio University we have tried to take a much more disciplined and focused approach. The Russ College of Engineering and Technology decided that MATLAB should be the primary computational software for undergraduates. At about the same time members of the Department of Mathematics proposed an 1804 project to bring MATLAB into the calculus sequence and provide access to the program at nearly all computers on campus, including in the dorm rooms. The stated goal of this project was to make MATLAB the universal language for computation on campus. That project was approved and implemented in the 2001-2002 academic year.
-      </p>
-
-      <p>
-        In these lecture notes, instruction on using MATLAB is dispersed through the material on numerical methods. In these lectures details about how to use MATLAB are detailed (but not verbose) and explicit. To teach programming, students are usually given examples of working programs and are asked to make modifications.
-      </p>
-
-      <p>
-        The lectures are designed to be used in a computer classroom with students working MATLAB examples during the lecture or with students reading the notes and working the examples after a brief introduction. At Ohio University we have had good success with this Lecture/Lab format.
-      </p>
-
-      <p>
-        The lectures are divided into four chapters with a summary provided at the end of each chapter. Typically we will given an exam covering each of the first three parts and a comprehensive final exam.
-      </p>
-
-      <p>
-        The exercises grow in complexity as the students build their programming skills. At Ohio University we ask students to complete the exercises in groups of 2-3 students and this accounts for a significant portion of the grade (e.g. 30%.).
-      </p>
-
-      <p>
-      Thanks go to many students who have pointed out typos and mistakes. Thank you to Dr.<nbsp />Yaqin Feng for suggestions to improve the exercises.
+  <preface> 
+    <p>
+      These notes were developed by the first author in the process of teaching a course on applied numerical methods for Civil Engineering majors during 2002-2004. The course was modified to include Mechanical Engineering majors in 2005. The materials underwent a major revision by the second author in 2006-2007 and have been periodically updated since then. We are grateful to Yaqin Feng and Erik Boczko who have taught the course several times and made many suggestions that improved the notes. Thanks also go to numerous students who have pointed out typos and mistakes.
     </p>
+    <p>
+      The goal of these lectures is to introduce concepts of numerical methods while simulataneously introducing programming principles using MATLAB.
+    </p>
+    <p>
+      In these lecture notes, MATLAB programming is interspersed with material on numerical methods. We have strived to make MATLAB instructions detailed and explicit, but not verbose. Often students are asked to write new programs based on working examples. The exercises grow in complexity as the students build their programming skills.
+    </p>
+    <p>
+      The material assumes only the topics covered in a typical Calculus I and II sequence, plus an understanding of differential equations at the level sometimes taught in Calculus II.  The material on Linear Algebra starts from the beginning and was designed to be a quick introduction to the topic. The material on differential equations starts with Euler's method culminates with an intro to Finite Elements. Overall, the student should leave the course with a very broad understanding of numerical methods.
+    </p>
+    <p>
+    The lectures are intended to be used in a computer classroom with students working MATLAB examples during the lecture or with students reading the notes and working the examples after a brief introduction. At Ohio University we have had good success with this Lecture/Lab format. We ask students to complete all of the exercises in groups of 2-3 students and this accounts for a significant portion of the grade (e.g. 30%.). Typically we will give an exam covering each of the first three chapters and a comprehensive final exam. We have sometimes employed student projects in addition to or instead of exams. We typically cover all sections except 2.10, covering one section per class meeting. For those who want or need to eliminate some sections, we show the dependencies between sections below.
+    </p>
+    <p>
+    <image>
+      <shortdescription><p>Section dependencies graph.</p></shortdescription>
+      <latex-image>
+        \begin{tikzpicture}
+          \graph[grow down, branch right] {"1.1" -> "1.2" -> "1.3" -> "1.4" -> {
+            "1.5"->"1.6",
+            "1.7",
+            "2.1"-> "2.2" -> {"2.5", "2.6","2.3" -> {"2.7"-> {"2.8","2.9"->"2.10"},"2.4"-> {"3.1" -> "3.2","3.10"},}},
+            "" -- {
+            "3.3" -> {"3.4" -> "3.7" -> "3.8","3.10"},
+            "3.5" -> {"3.6","3.8"},
+            "3.9" -> {"4.1" -> "4.2" -> "4.3", "4.4" -> {"4.5", "4.9" -> "4.10"}, "4.6" -> {"4.7"->"4.8", "4.9"}, "4.11" -> "4.12"}}
+              }
+          };
+        \end{tikzpicture}
+      </latex-image>  
+    </image>
+    </p>
+    <p>Todd Young and Martin Mohlenkamp</p>
+    <p>June 2026</p>
 
-      <p>
-        Todd Young
-      </p>
-
-      <!-- TODO: add section dependencies graph-->
+       
+    <!--
+    <p>
+      Section Dependencies for Chapter 1 MATLAB and Solving Equations:
+      <image width="100%">
+        <shortdescription><p>Chapter 1 section dependencies graph.</p></shortdescription>
+        <latex-image>
+          \begin{tikzpicture}
+            \graph { "1.1" -> "1.2" -> "1.3" -> "1.4" -> {{"1.5"->"1.6"},"1.7"} };
+          \end{tikzpicture}
+        </latex-image>  
+      </image>
+    </p>
+    <p>
+      <image>
+        <shortdescription><p>Chapter 2 section dependencies graph.</p></shortdescription>
+        <latex-image>
+          \begin{tikzpicture}
+            \graph { "1.4" -> "2.1" -> "2.2" -> {"2.3" -> {"2.4","2.7"-> {"2.8","2.9"->"2.10"}}, "2.5", "2.6"} };
+          \end{tikzpicture}
+        </latex-image>  
+      </image>
+    </p>
+    <p>
+      <image>
+        <shortdescription><p>Chapter 3 section dependencies graph.</p></shortdescription>
+        <latex-image>
+          \begin{tikzpicture}
+            \graph {"2.4" -> {"3.1" -> "3.2","3.10"},
+             "1.4" -> {"3.3" -> {"3.4" -> "3.7" -> "3.8","3.10"},
+            "3.5" -> {"3.6","3.8"},"3.9"},
+           };
+          \end{tikzpicture}
+        </latex-image>  
+      </image>
+    </p>
+    <p>
+      <image>
+        <shortdescription><p>Chapter 4 section dependencies graph.</p></shortdescription>
+        <latex-image>
+          \begin{tikzpicture}
+            \graph {"3.9" -> {"4.1" -> "4.2" -> "4.3", "4.4" -> {"4.5", "4.9" -> "4.10"}, "4.6" -> {"4.7"->"4.8", "4.9"}, "4.11" -> "4.12"}
+           };
+          \end{tikzpicture}
+        </latex-image>  
+      </image>
+    </p>
+    -->
+    <!--
+    <p>
+      <image>
+        <shortdescription><p>Section dependencies graph.</p></shortdescription>
+        <latex-image>
+          \begin{tikzpicture}
+            \graph[grow down, branch right] {"1.1" -> "1.2" -> "1.3" -> "1.4" -> {
+              "1.5"->"1.6",
+              "1.7",
+              "2.1"-> "2.2" -> {"2.5", "2.6","2.3" -> {"2.7"-> {"2.8","2.9"->"2.10"},"2.4"-> {"3.1" -> "3.2","3.10"},}},
+              "" -> {
+              "3.3" -> {"3.4" -> "3.7" -> "3.8","3.10"},
+              "3.5" -> {"3.6","3.8"},
+              "3.9" -> {"4.1" -> "4.2" -> "4.3", "4.4" -> {"4.5", "4.9" -> "4.10"}, "4.6" -> {"4.7"->"4.8", "4.9"}, "4.11" -> "4.12"}}
+               }
+           };
+          \end{tikzpicture}
+        </latex-image>  
+      </image>
+    </p>
+    -->
   </preface>
 </frontmatter>
 

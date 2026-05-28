@@ -2,27 +2,23 @@
 
 <chapter xml:id="chapter-equations" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>MATLAB and Solving Equations</title>
-
-  <introduction>
-    <p> In these notes 
-    <console prompt=">> " lang="matlab">
-    <input>
-    
-    </input>
-    </console>
-    will indicate commands to be entered at the <url href="https://www.mathworks.com/products/matlab.html">MATLAB</url> prompt &gt;&gt; in the command window.
-    You do not type the symbol &gt;&gt;.
-    </p>
-  </introduction>
-
   <!-- include sections 
   <xi:include href="sec-section-name.ptx" /> -->
   <section xml:id="sec-vectors">
     <title>Vectors, Functions, and Plots in MATLAB</title>
-
+    <introduction>
+      <p> In these notes 
+        <console prompt=">> " lang="matlab">
+          <input>
+          
+          </input>
+        </console>
+        will indicate commands to be entered at the <url href="https://www.mathworks.com/products/matlab.html">MATLAB</url> prompt &gt;&gt; in the command window.
+        You do not type the symbol &gt;&gt;.
+      </p>
+    </introduction>
     <subsection>
       <title>Entering vectors</title>
-
       <p>
         In MATLAB, the basic objects are matrices, i.e.<nbsp />arrays of numbers. Vectors can be thought of as special matrices. A row vector is recorded as a <m>1 \times n</m> matrix and a column vector is recorded as a <m>m \times 1</m> matrix. To enter a row vector in MATLAB, type the following in the command window:
         <console prompt=">> " lang="matlab">
@@ -36,8 +32,8 @@
             u = [9; 10; 11; 12; 13]
           </input>
         </console>
-         You can access an entry in a vector with
-         <console prompt=">> " lang="matlab">
+        You can access an entry in a vector with
+        <console prompt=">> " lang="matlab">
           <input>
             u(2)
           </input>
@@ -70,11 +66,9 @@
           </input>
         </console>
       </p>
-    
     </subsection>
     <subsection>
       <title>Basic Formatting</title>
-
       <p>
         To make MATLAB put fewer blank lines in its output, enter
         <console prompt=">> " lang="matlab">
@@ -205,7 +199,6 @@
         </console>
         will return a plot of <m>\sin x</m> on the interval <m>[0,2 \pi]</m>.
       </p>
-
       <p>
         Some of the built-in functions in MATLAB include: <c>cos( )</c>, <c>tan( )</c>, <c>sinh( )</c>, <c>cosh( )</c>, <c>log( )</c> (natural logarithm), <c>log10( )</c> (log base 10), <c>asin( )</c> (inverse sine), <c>acos( )</c>, <c>atan( )</c>. To find out more about a function, use the <c>help</c> command; try
         <console prompt=">> " lang="matlab">
@@ -215,11 +208,8 @@
         </console>
       </p>
     </subsection>
-
-
     <subsection>
       <title>User-Defined Anonymous Functions</title>
-
       <p>
         If we wish to deal with a function that is a combination of the built-in functions, Matlab has a couple of ways for the user to define functions. One that we will use a lot is the anonymous function, which is a way to define a function in the command window. The following is a typical anonymous function:
         <console prompt=">> " lang="matlab">
@@ -1455,70 +1445,28 @@
       </subsubsection>
       <subsubsection>
         <title>Symbolic:</title>
-        <p>
-          <dl width="wide">
-            <li>
-              <title><c>syms x y</c></title>
-            </li>
-            <li>
-              <title><c>f = 2*x^2 - sqrt(3*x)</c></title>
-            </li>
-            <li>
-              <title><c>subs(f,sym(pi)) </c></title>
-            </li>
-            <li>
-              <title><c>double(ans)</c></title>
-            </li>
-            <li>
-              <title><c>g = log(abs(y))</c>   </title>
-              <p>MATLAB uses <c>log</c> for natural logarithm.</p>
-            </li>
-            <li>
-              <title><c>h(x) = compose(g,f)</c></title>
-            </li>
-            <li>
-              <title><c>k(x,y) = f*g </c></title>
-            </li>
-            <li>
-              <title><c>fplot(f)</c></title>
-            </li>
-            <li>
-              <title><c>fplot(g,-10,10)</c></title>
-            </li>
-            <li>
-              <title><c>ezsurf(k)</c></title>
-            </li>
-            <li>
-              <title><c>f1 = diff(f,'x')</c></title>
-            </li>
-            <li>
-              <title><c>F = int(f,'x')</c>   </title>
-              <p>indefinite integral (antiderivative)</p>
-            </li>
-            <li>
-              <title><c>int(f,0,2*pi)</c>  </title>
-              <p>definite integral</p>
-            </li>
-            <li>
-              <title><c>poly = x*(x - 3)*(x-2)*(x-1)*(x+1)</c></title>
-            </li>
-            <li>
-              <title><c>polyex = expand(poly)</c></title>
-            </li>
-            <li>
-              <title><c>polysi = simple(polyex)</c></title>
-            </li>
-            <li>
-              <title><c>solve(f)</c></title>
-            </li>
-            <li>
-              <title><c>solve(g)</c></title>
-            </li>
-            <li>
-              <title><c>solve(polyex)</c></title>
-            </li>
-          </dl>
-        </p>
+        <tabular>
+          <row><cell></cell></row>
+          <row><cell><c>syms x y</c></cell></row>
+          <row><cell><c>f = 2*x^2 - sqrt(3*x)</c></cell></row>
+          <row><cell><c>subs(f,sym(pi)) </c></cell></row>
+          <row><cell><c>double(ans)</c></cell></row>
+          <row><cell><c>g = log(abs(y))</c></cell><cell>MATLAB uses <c>log</c> for natural logarithm.</cell></row>
+          <row><cell><c>h(x) = compose(g,f)</c></cell></row>
+          <row><cell><c>k(x,y) = f*g </c></cell></row>
+          <row><cell><c>fplot(f)</c></cell></row>
+          <row><cell><c>fplot(g,-10,10)</c></cell></row>
+          <row><cell><c>ezsurf(k)</c></cell></row>
+          <row><cell><c>f1 = diff(f,'x')</c></cell></row>
+          <row><cell><c>F = int(f,'x')</c></cell><cell>indefinite integral (antiderivative)</cell></row>
+          <row><cell><c>int(f,0,2*pi)</c> </cell><cell>definite integral</cell></row>
+          <row><cell><c>poly = x*(x - 3)*(x-2)*(x-1)*(x+1)</c></cell></row>
+          <row><cell><c>polyex = expand(poly)</c></cell></row>
+          <row><cell><c>polysi = simple(polyex)</c></cell></row>
+          <row><cell><c>solve(f)</c></cell></row>
+          <row><cell><c>solve(g)</c></cell></row>
+          <row><cell><c>solve(polyex)</c></cell></row>
+        </tabular>
       </subsubsection>
     </subsection>
   </section>

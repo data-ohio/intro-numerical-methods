@@ -142,3 +142,6 @@ dmypy.json
 output/
 logs/
 generated-assets/
+
+## VS code
+.vscode/

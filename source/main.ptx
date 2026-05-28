@@ -5,7 +5,7 @@
   <xi:include href="./docinfo.ptx" />
 
   <book xml:id="intro-numerical-methods">
-    <title>Introduction to Numerical Methods and Matlab Programming for Engineers</title>
+    <title>Introduction to Numerical Methods and MATLAB Programming for Engineers</title>
   
 
     <!-- Include frontmatter -->

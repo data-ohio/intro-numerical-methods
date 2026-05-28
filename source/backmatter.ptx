@@ -203,7 +203,7 @@
         <title>List of Programs Used</title>
         <tabular>
           <row header="yes" bottom="medium">
-            <cell>Program Name</cell><cell>Listing</cell><cell>Download Link</cell>
+            <cell>Program Name</cell><cell>View Code</cell><cell>Download Link</cell>
           </row>
           <row>
             <cell><c>mybisect</c></cell><cell><xref ref="prg-mybisect"/></cell>
@@ -270,10 +270,6 @@
             <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mythreecorners.m">download mythreecorners.m</url></cell>
           </row>
           <row>
-            <cell><c>mytriangles</c></cell><cell><xref ref="prg-mytriangles"/></cell>
-            <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mytriangles.m">download mytriangles.m</url></cell>
-          </row>
-          <row>
             <cell><c>mywasher</c></cell><cell><xref ref="prg-mywasher"/></cell>
             <cell><url href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mywasher.m">download mywasher.m</url></cell>
           </row>
@@ -284,7 +280,7 @@
         </tabular>
       </table>
       <p>
-        Below are programs used in the main text, but not written out there due to their length.
+        Below are programs used in the main text, but not written out there.
       </p>
       <listing xml:id="prg-myexactbeam">
         <title>myexactbeam</title>          
@@ -320,12 +316,6 @@
         <title>mypoisson</title>          
         <program language="matlab">
           <code><xi:include parse="text" href="../assets/programs/mypoisson.m"/></code>
-        </program>
-      </listing>
-      <listing xml:id="prg-mytriangles">
-        <title>mytriangles</title>          
-        <program language="matlab">
-          <code><xi:include parse="text" href="../assets/programs/mytriangles.m"/></code>
         </program>
       </listing>
       <listing xml:id="prg-mywasher">

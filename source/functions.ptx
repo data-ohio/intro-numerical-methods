@@ -789,7 +789,7 @@
       </exercise>
       <exercise>
         <p>
-          Modeling after <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), produce 
+          Modeling after <c>mywasher.m</c> (<xref ref="prg-mywasher"/>), produce
           <image>
             <shortdescription><p>A simple figure composed of 4 triangles.</p></shortdescription>
             <latex-image>
