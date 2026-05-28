@@ -29,7 +29,7 @@ htmlPresentation: false,
 </script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
-<meta property="book:title" content="Introduction to Numerical Methods and Matlab Programming for Engineers">
+<meta property="book:title" content="Introduction to Numerical Methods and MATLAB Programming for Engineers">
 <meta property="book:author" content="Todd Young">
 <meta property="book:author" content="Martin J. Mohlenkamp">
 <script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
@@ -68,7 +68,7 @@ eBookConfig.enable_chatcodes =  false;
 </head>
 <body id="intro-numerical-methods" class="pretext book ignore-math">
 <a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
-<h1 class="heading"><a href="intro-numerical-methods.html"><span class="title">Introduction to Numerical Methods and Matlab Programming for Engineers</span></a></h1>
+<h1 class="heading"><a href="intro-numerical-methods.html"><span class="title">Introduction to Numerical Methods and MATLAB Programming for Engineers</span></a></h1>
 <p class="byline">Todd Young, Martin J. Mohlenkamp</p>
 </div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
 <button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
@@ -118,13 +118,13 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sec-vectors.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Functions, and Plots in MATLAB</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-2" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Entering vectors</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-3" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Basic Formatting</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-4" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Plotting Data</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-5" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Data as a Representation of a Function</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-6" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Built-in Functions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-7" class="internal"><span class="codenumber">1.1.6</span> <span class="title">User-Defined Anonymous Functions</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-8" class="internal"><span class="codenumber">1.1.7</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-3" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Entering vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-4" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Basic Formatting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-5" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Plotting Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-6" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Data as a Representation of a Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-7" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Built-in Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-8" class="internal"><span class="codenumber">1.1.6</span> <span class="title">User-Defined Anonymous Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sec-vectors.html#sec-vectors-9" class="internal"><span class="codenumber">1.1.7</span> <span class="title">Exercises</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -657,109 +657,104 @@ eBookConfig.enable_chatcodes =  false;
 <figure class="table table-like" id="sec-programs-used-2-2"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>List of Programs Used<div class="autopermalink" data-description="Table A.2.1: List of Programs Used"><a href="#sec-programs-used-2-2" title="Copy heading and permalink for Table A.2.1: List of Programs Used" aria-label="Copy heading and permalink for Table A.2.1: List of Programs Used">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="l m b2 r0 l0 t0 lines">Program Name</th>
-<th scope="col" class="l m b2 r0 l0 t0 lines">Listing</th>
+<th scope="col" class="l m b2 r0 l0 t0 lines">View Code</th>
 <th scope="col" class="l m b2 r0 l0 t0 lines">Download Link</th>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mybisect</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-bisection.html#prg-mybisect" class="xref" data-knowl="./knowl/xref/prg-mybisect.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.5.2: mybisect">Listing 1.5.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-bisection.html#prg-mybisect" class="xref" data-knowl="./knowl/xref/prg-mybisect.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 1.5.2: mybisect">Program 1.5.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mybisect.m" target="_blank">download mybisect.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mydblsimpweights</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-rect.html#prg-mydblsimpweights" class="xref" data-knowl="./knowl/xref/prg-mydblsimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.7.2: mydblsimpweights">Listing 3.7.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-rect.html#prg-mydblsimpweights" class="xref" data-knowl="./knowl/xref/prg-mydblsimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 3.7.2: mydblsimpweights">Program 3.7.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mydblsimpweights.m" target="_blank">download mydblsimpweights.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myeuler</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-euler.html#prg-myeuler" class="xref" data-knowl="./knowl/xref/prg-myeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.2.1: myeuler">Listing 4.2.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-euler.html#prg-myeuler" class="xref" data-knowl="./knowl/xref/prg-myeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 4.2.1: myeuler">Program 4.2.1</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myeuler.m" target="_blank">download myeuler.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myexactbeam</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myexactbeam" class="xref" data-knowl="./knowl/xref/prg-myexactbeam.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.2: myexactbeam">Listing A.2.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myexactbeam" class="xref" data-knowl="./knowl/xref/prg-myexactbeam.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.2: myexactbeam">Program A.2.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myexactbeam.m" target="_blank">download myexactbeam.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myexpmatrix</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-instability-explicit.html#prg-myexpmatrix" class="xref" data-knowl="./knowl/xref/prg-myexpmatrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.7.2: myexpmatrix">Listing 4.7.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-instability-explicit.html#prg-myexpmatrix" class="xref" data-knowl="./knowl/xref/prg-myexpmatrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 4.7.2: myexpmatrix">Program 4.7.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myexpmatrix.m" target="_blank">download myexpmatrix.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myfiniteelem</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myfiniteelem" class="xref" data-knowl="./knowl/xref/prg-myfiniteelem.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.3: myfiniteelem">Listing A.2.3</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myfiniteelem" class="xref" data-knowl="./knowl/xref/prg-myfiniteelem.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.3: myfiniteelem">Program A.2.3</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myfiniteelem.m" target="_blank">download myfiniteelem.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myheat</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-parabolic-explicit.html#prg-myheat" class="xref" data-knowl="./knowl/xref/prg-myheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.6.2: myheat">Listing 4.6.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-parabolic-explicit.html#prg-myheat" class="xref" data-knowl="./knowl/xref/prg-myheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 4.6.2: myheat">Program 4.6.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myheat.m" target="_blank">download myheat.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">myheatdisk</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myheatdisk" class="xref" data-knowl="./knowl/xref/prg-myheatdisk.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.4: myheatdisk">Listing A.2.4</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-myheatdisk" class="xref" data-knowl="./knowl/xref/prg-myheatdisk.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.4: myheatdisk">Program A.2.4</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/myheatdisk.m" target="_blank">download myheatdisk.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mylowerleft</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mylowerleft" class="xref" data-knowl="./knowl/xref/prg-mylowerleft.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.5: mylowerleft">Listing A.2.5</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mylowerleft" class="xref" data-knowl="./knowl/xref/prg-mylowerleft.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.5: mylowerleft">Program A.2.5</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mylowerleft.m" target="_blank">download mylowerleft.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mymodeuler</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mymodeuler" class="xref" data-knowl="./knowl/xref/prg-mymodeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.6: mymodeuler">Listing A.2.6</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mymodeuler" class="xref" data-knowl="./knowl/xref/prg-mymodeuler.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.6: mymodeuler">Program A.2.6</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mymodeuler.m" target="_blank">download mymodeuler.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mynewton</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-newton.html#prg-mynewton" class="xref" data-knowl="./knowl/xref/prg-mynewton.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.3.1: mynewton">Listing 1.3.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-newton.html#prg-mynewton" class="xref" data-knowl="./knowl/xref/prg-mynewton.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 1.3.1: mynewton">Program 1.3.1</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mynewton.m" target="_blank">download mynewton.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mynonlinheat</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-FD-NODE.html#prg-mynonlinheat" class="xref" data-knowl="./knowl/xref/prg-mynonlinheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 4.5.1: mynonlinheat">Listing 4.5.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-FD-NODE.html#prg-mynonlinheat" class="xref" data-knowl="./knowl/xref/prg-mynonlinheat.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 4.5.1: mynonlinheat">Program 4.5.1</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mynonlinheat.m" target="_blank">download mynonlinheat.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mypoisson</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mypoisson" class="xref" data-knowl="./knowl/xref/prg-mypoisson.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.7: mypoisson">Listing A.2.7</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mypoisson" class="xref" data-knowl="./knowl/xref/prg-mypoisson.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.7: mypoisson">Program A.2.7</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mypoisson.m" target="_blank">download mypoisson.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mysecant</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-secant.html#prg-mysecant" class="xref" data-knowl="./knowl/xref/prg-mysecant.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.6.2: mysecant">Listing 1.6.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-secant.html#prg-mysecant" class="xref" data-knowl="./knowl/xref/prg-mysecant.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 1.6.2: mysecant">Program 1.6.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mysecant.m" target="_blank">download mysecant.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mysimpweights</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-MSrules.html#prg-mysimpweights" class="xref" data-knowl="./knowl/xref/prg-mysimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.4.2: mysimpweights">Listing 3.4.2</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-MSrules.html#prg-mysimpweights" class="xref" data-knowl="./knowl/xref/prg-mysimpweights.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 3.4.2: mysimpweights">Program 3.4.2</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mysimpweights.m" target="_blank">download mysimpweights.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mythreecorners</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-non.html#prg-mythreecorners" class="xref" data-knowl="./knowl/xref/prg-mythreecorners.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 3.8.1: mythreecorners">Listing 3.8.1</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-double-int-non.html#prg-mythreecorners" class="xref" data-knowl="./knowl/xref/prg-mythreecorners.html" data-reveal-label="Reveal" data-close-label="Close" title="Program 3.8.1: mythreecorners">Program 3.8.1</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mythreecorners.m" target="_blank">download mythreecorners.m</a></td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mytriangles</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mytriangles" class="xref" data-knowl="./knowl/xref/prg-mytriangles.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.8: mytriangles">Listing A.2.8</a></td>
-<td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mytriangles.m" target="_blank">download mytriangles.m</a></td>
-</tr>
-<tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mywasher</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywasher" class="xref" data-knowl="./knowl/xref/prg-mywasher.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.9: mywasher">Listing A.2.9</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywasher" class="xref" data-knowl="./knowl/xref/prg-mywasher.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.8: mywasher">Program A.2.8</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mywasher.m" target="_blank">download mywasher.m</a></td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">mywedge</code></td>
-<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywedge" class="xref" data-knowl="./knowl/xref/prg-mywedge.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing A.2.10: mywedge">Listing A.2.10</a></td>
+<td class="l m b0 r0 l0 t0 lines"><a href="sec-programs-used.html#prg-mywedge" class="xref" data-knowl="./knowl/xref/prg-mywedge.html" data-reveal-label="Reveal" data-close-label="Close" title="Program A.2.9: mywedge">Program A.2.9</a></td>
 <td class="l m b0 r0 l0 t0 lines"><a class="external" href="https://raw.githubusercontent.com/data-ohio/intro-numerical-methods/refs/heads/gh-pages/external/programs/mywedge.m" target="_blank">download mywedge.m</a></td>
 </tr>
 </table></div>
 </figure>
-<div class="para" id="sec-programs-used-2-3">Below are programs used in the main text, but not written out there due to their length.<div class="autopermalink" data-description="Paragraph"><a href="#sec-programs-used-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sec-programs-used-2-3">Below are programs used in the main text, but not written out there.<div class="autopermalink" data-description="Paragraph"><a href="#sec-programs-used-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="prg-myexactbeam"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myexactbeam<div class="autopermalink" data-description="Listing A.2.2: myexactbeam"><a href="#prg-myexactbeam" title="Copy heading and permalink for Listing A.2.2: myexactbeam" aria-label="Copy heading and permalink for Listing A.2.2: myexactbeam">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Plot the deflection y of a beam of length L under tension T
+<figure class="listing figure-like" id="prg-myexactbeam"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myexactbeam<div class="autopermalink" data-description="Program A.2.2: myexactbeam"><a href="#prg-myexactbeam" title="Copy heading and permalink for Program A.2.2: myexactbeam" aria-label="Copy heading and permalink for Program A.2.2: myexactbeam">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Plot the deflection y of a beam of length L under tension T
 % and a uniform load w. Uses the exact analytic solution of the
 % boundary value problem. For T=0, the solution breaks down.
 % For T (e.g. T=.1) close to zero using the exact solution leads to loss
@@ -789,7 +784,7 @@ yy = d1*exp(-sqrt(a)*xx) + d2*exp(sqrt(a)*xx) + d3*xx.^2 + d4*xx + d5;
 plot(xx,yy,'r')
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-myfiniteelem"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myfiniteelem<div class="autopermalink" data-description="Listing A.2.3: myfiniteelem"><a href="#prg-myfiniteelem" title="Copy heading and permalink for Listing A.2.3: myfiniteelem" aria-label="Copy heading and permalink for Listing A.2.3: myfiniteelem">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Finite elements program
+<figure class="listing figure-like" id="prg-myfiniteelem"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myfiniteelem<div class="autopermalink" data-description="Program A.2.3: myfiniteelem"><a href="#prg-myfiniteelem" title="Copy heading and permalink for Program A.2.3: myfiniteelem" aria-label="Copy heading and permalink for Program A.2.3: myfiniteelem">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Finite elements program
 % adapted from "Applied Numerical Anaylsis" by L. Faussett, Prentice Hall.
 % Solves u_xx + u_yy = 0 
 % with fixed boundary conditions 
@@ -854,7 +849,7 @@ figure
 trimesh(T,x,y,z)
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-myheatdisk"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myheatdisk<div class="autopermalink" data-description="Listing A.2.4: myheatdisk"><a href="#prg-myheatdisk" title="Copy heading and permalink for Listing A.2.4: myheatdisk" aria-label="Copy heading and permalink for Listing A.2.4: myheatdisk">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">%myheatdisk
+<figure class="listing figure-like" id="prg-myheatdisk"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>myheatdisk<div class="autopermalink" data-description="Program A.2.4: myheatdisk"><a href="#prg-myheatdisk" title="Copy heading and permalink for Program A.2.4: myheatdisk" aria-label="Copy heading and permalink for Program A.2.4: myheatdisk">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">%myheatdisk
 R=5;      % radius of disk
 n=100;    % number of subintervals
 h=R/n;    % step size
@@ -880,7 +875,7 @@ end
 hold off;
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-mylowerleft"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mylowerleft<div class="autopermalink" data-description="Listing A.2.5: mylowerleft"><a href="#prg-mylowerleft" title="Copy heading and permalink for Listing A.2.5: mylowerleft" aria-label="Copy heading and permalink for Listing A.2.5: mylowerleft">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function I = mylowerleft(f,a,b,c,d,m,n)
+<figure class="listing figure-like" id="prg-mylowerleft"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mylowerleft<div class="autopermalink" data-description="Program A.2.5: mylowerleft"><a href="#prg-mylowerleft" title="Copy heading and permalink for Program A.2.5: mylowerleft" aria-label="Copy heading and permalink for Program A.2.5: mylowerleft">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function I = mylowerleft(f,a,b,c,d,m,n)
     % Computes an approximate integral of a function of two variables f(x,y).
     % Uses the lower-left corner to evaluate.
     % Inputs:
@@ -901,7 +896,7 @@ hold off;
 end
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-mymodeuler"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mymodeuler<div class="autopermalink" data-description="Listing A.2.6: mymodeuler"><a href="#prg-mymodeuler" title="Copy heading and permalink for Listing A.2.6: mymodeuler" aria-label="Copy heading and permalink for Listing A.2.6: mymodeuler">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function [T , Y] = mymodeuler(f,tspan,y0,n)
+<figure class="listing figure-like" id="prg-mymodeuler"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mymodeuler<div class="autopermalink" data-description="Program A.2.6: mymodeuler"><a href="#prg-mymodeuler" title="Copy heading and permalink for Program A.2.6: mymodeuler" aria-label="Copy heading and permalink for Program A.2.6: mymodeuler">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">function [T , Y] = mymodeuler(f,tspan,y0,n)
     % Solves dy/dt = f(t,y) with initial condition y(a) = y0
     % on the interval [a,b] using n steps of the modified Euler's method.
     % Inputs: f -- a function f(t,y) that returns a column vector of the same
@@ -929,7 +924,7 @@ end
 end
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-mypoisson"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mypoisson<div class="autopermalink" data-description="Listing A.2.7: mypoisson"><a href="#prg-mypoisson" title="Copy heading and permalink for Listing A.2.7: mypoisson" aria-label="Copy heading and permalink for Listing A.2.7: mypoisson">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% mypoisson
+<figure class="listing figure-like" id="prg-mypoisson"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mypoisson<div class="autopermalink" data-description="Program A.2.7: mypoisson"><a href="#prg-mypoisson" title="Copy heading and permalink for Program A.2.7: mypoisson" aria-label="Copy heading and permalink for Program A.2.7: mypoisson">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% mypoisson
 % Poisson on a Rectangle
 % Solves u_xx + u_yy = f(x,y)
 % with boundary conditions:
@@ -978,60 +973,7 @@ end
 mesh(x,y,u')
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-mytriangles"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mytriangles<div class="autopermalink" data-description="Listing A.2.8: mytriangles"><a href="#prg-mytriangles" title="Copy heading and permalink for Listing A.2.8: mytriangles" aria-label="Copy heading and permalink for Listing A.2.8: mytriangles">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Program to produce the triangulation,
-% boundary conditions and initial values
-% at the interior nodes.
-
-% V contains vertices
-V = [ 1/2 1/2  
-       1    1 
-      3/2 1/2 
-      .5  1.5 
-       0    0  
-       1    0  
-       2    0   
-       2    1 
-       1.5 1.5 
-       1    2  
-       0    2  
-       0    1];
-   
-% T assigns the traingles
-T = [ 1 5 12
-      1 5 6
-      1 2 6
-      1 2 12
-      3 2 6
-      3 6 7
-      3 7 8
-      3 8 2
-      2 8 9
-      2 9 10
-      4 11 12
-      4 12 2
-      4 2 10
-      4 10 11];
-% x, y are row vectors containing coordinates of vertices
-x = V(:,1)';
-y = V(:,2)';
-% n is the number of vertices
-n = 12;
-% m is the number of internal vertices
-m = 4;
-% p is the number of triangles
-p = 14;
-
-% Set the coefficients c_1, ..., c_m equal to zero at interior
-% vertices and equal to the boundary values on the boundary.
-% The first 4 entries are interior vertices, the final 8 are
-% boundary vertices.
-c = [ 0 0 0 0 0 0 0 1 1 1 0 0 ];
-
-% Plot the initial mesh
-trimesh(T,x,y,c)
-</code></pre></div></div>
-</figure>
-<figure class="listing figure-like" id="prg-mywasher"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywasher<div class="autopermalink" data-description="Listing A.2.9: mywasher"><a href="#prg-mywasher" title="Copy heading and permalink for Listing A.2.9: mywasher" aria-label="Copy heading and permalink for Listing A.2.9: mywasher">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Program to produce the triangulation,
+<figure class="listing figure-like" id="prg-mywasher"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywasher<div class="autopermalink" data-description="Program A.2.8: mywasher"><a href="#prg-mywasher" title="Copy heading and permalink for Program A.2.8: mywasher" aria-label="Copy heading and permalink for Program A.2.8: mywasher">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Program to produce the triangulation,
 % boundary condition and initial values
 % at the interior nodes for a Washer.
 
@@ -1233,7 +1175,7 @@ figure
 trimesh(T,x,y,z)
 </code></pre></div></div>
 </figure>
-<figure class="listing figure-like" id="prg-mywedge"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywedge<div class="autopermalink" data-description="Listing A.2.10: mywedge"><a href="#prg-mywedge" title="Copy heading and permalink for Listing A.2.10: mywedge" aria-label="Copy heading and permalink for Listing A.2.10: mywedge">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Construct a Wedge-shaped region and its triangulation
+<figure class="listing figure-like" id="prg-mywedge"><figcaption><span class="type">Program</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">A.2.9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>mywedge<div class="autopermalink" data-description="Program A.2.9: mywedge"><a href="#prg-mywedge" title="Copy heading and permalink for Program A.2.9: mywedge" aria-label="Copy heading and permalink for Program A.2.9: mywedge">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code class="language-matlab">% Construct a Wedge-shaped region and its triangulation
 
 clear all
 
